@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/phonetics_color.dart';
 
 class WaveDice extends StatelessWidget {
@@ -6,9 +7,9 @@ class WaveDice extends StatelessWidget {
   final Widget? body;
   final double? width;
   final double? height;
-  final double widthAndHeight = 120;
+  double widthAndHeight = 120.h;
 
-  const WaveDice(
+  WaveDice(
       {super.key, this.currentAlphabet, this.body, this.width, this.height});
   @override
   Widget build(BuildContext context) {
@@ -24,12 +25,12 @@ class WaveDice extends StatelessWidget {
           // ),
           border: Border.all(width: 3, color: const Color(0xFFFFFBF8))),
       alignment: Alignment.center,
-      width: width ?? widthAndHeight,
-      height: height ?? widthAndHeight,
+      width: width ?? 120.h,
+      height: height ?? 120.h,
       child: body ??
           Text(
             (currentAlphabet?.toLowerCase() ?? ''),
-            style: const TextStyle(fontSize: 40, color: Colors.white),
+            style: TextStyle(fontSize: 20.sp, color: Colors.white),
           ),
     );
   }

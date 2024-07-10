@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cubixd/cubixd.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../manager/dice_cubit.dart';
 import 'wave_dice.dart';
 
@@ -25,7 +26,7 @@ class _DiceWidget extends State<DiceWidget3> with TickerProviderStateMixin {
   late AnimationController _ycontroller;
   late Tween<double> _animation;
   late Timer timer;
-  double widthAndHeight = 120;
+  double widthAndHeight = 100;
 
   bool? getTheResult;
   List<String> alphabet = [];
@@ -137,7 +138,7 @@ class _DiceWidget extends State<DiceWidget3> with TickerProviderStateMixin {
       children: [
         if (timer.isActive == true) ...{
           AnimatedCubixD(
-            size: widthAndHeight,
+            size: widthAndHeight.h,
             advancedXYposAnim: AnimRequirements(
               controller: _xcontroller,
               xAnimation: _animation.animate(_xcontroller),

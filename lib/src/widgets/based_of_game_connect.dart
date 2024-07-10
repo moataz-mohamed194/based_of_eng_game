@@ -328,8 +328,8 @@ class BasedOfGameConnect extends StatelessWidget {
                         margin: EdgeInsets.symmetric(horizontal: 20.w),
                         child: WaveDice(
                           currentAlphabet: '${stateOfGame.currentStringOfDice}',
-                          width: 90,
-                          height: 90,
+                          width: 90.h,
+                          height: 90.h,
                         ),
                       )
                     }
