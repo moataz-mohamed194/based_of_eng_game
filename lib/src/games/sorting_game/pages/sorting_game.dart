@@ -42,7 +42,9 @@ class _SortingGameScreen extends State<SortingGameScreen> {
           return Padding(
             padding: const EdgeInsets.only(bottom: 10, left: 30),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: MediaQuery.of(context).size.height < 760
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.center,
               children: [
                 Container(
                     alignment: Alignment.center,

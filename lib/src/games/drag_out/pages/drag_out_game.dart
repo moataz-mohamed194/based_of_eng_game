@@ -55,39 +55,43 @@ class _DragOutGame extends State<DragOutGame> {
                   Container(
                       margin: const EdgeInsets.only(bottom: 15, left: 10),
                       child: Draggable<String>(
-                        maxSimultaneousDrags:1,
+                        maxSimultaneousDrags: 1,
                         data: gameState.gameData.mainLetter ?? '',
                         childWhenDragging: SizedBox(
-                          height: (MediaQuery.of(context).size.height / 2.8).h,
-                          width: 130,
+                          // height: 50.h,//(MediaQuery.of(context).size.height / 2.8).h,
+                          width: 40.w,
                         ),
                         feedback: Image.asset(
                           AppImagesPhonetics.outX,
-                          height: (MediaQuery.of(context).size.height / 2.8).h,
-                          width: 130,
+                          // height: (MediaQuery.of(context).size.height / 2.8).h,
+                          width: 40.w,
                         ),
-                        child: ((stateOfCurrentGamePhoneticsCubit
-                                    .stateOfAvatar ==
-                                BasicOfGameData.stateOfWin))
-                            ? SizedBox(
-                                height:
-                                    (MediaQuery.of(context).size.height / 2.8)
-                                        .h,
-                                width: 130,
-                              )
-                            : Image.asset(
-                                AppImagesPhonetics.X,
-                                height:
-                                    (MediaQuery.of(context).size.height / 2.8)
-                                        .h,
-                                width: 130,
-                              ),
+                        child:
+                            ((stateOfCurrentGamePhoneticsCubit.stateOfAvatar ==
+                                    BasicOfGameData.stateOfWin))
+                                ? SizedBox(
+                                    // height:
+                                    //     (MediaQuery.of(context).size.height / 2.8)
+                                    //         .h,
+                                    width: 40.w,
+                                  )
+                                : Image.asset(
+                                    AppImagesPhonetics.X,
+                                    // height:
+                                    //     (MediaQuery.of(context).size.height / 2.8)
+                                    //         .h,
+                                    width: 40.w,
+                                  ),
                       )),
                   Container(
-                    margin:  EdgeInsets.only(bottom: MediaQuery.of(context).size.height>500?250.h:(15 + 50), top: 50),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 20),
-                    width: MediaQuery.of(context).size.width - (130 + 50 + 130),
+                    margin: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).size.height > 500
+                            ? 250.h
+                            : (15 + 50),
+                        top: 50),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 30.h),
+                    width: MediaQuery.of(context).size.width - 100.w,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -117,20 +121,20 @@ class _DragOutGame extends State<DragOutGame> {
                                     : GestureDetector(
                                         onTap: () {
                                           TalkTts.startTalk(
-                                              text: gameState
-                                                      .gameImages?[index]
+                                              text: gameState.gameImages?[index]
                                                       .word ??
                                                   '');
                                         },
                                         child: CachedNetworkImage(
-                                          imageUrl: gameState.gameImages?[index].image ??
+                                          imageUrl: gameState
+                                                  .gameImages?[index].image ??
                                               '',
                                           width: (MediaQuery.of(context)
                                                       .size
                                                       .width -
                                                   (130 + 50 + 130)) /
                                               4,
-                                          height: 110.h,
+                                          height: 120.h,
                                           placeholder: (context, url) =>
                                               const Center(
                                             child: CupertinoActivityIndicator(),
@@ -144,53 +148,55 @@ class _DragOutGame extends State<DragOutGame> {
                                           // height: ,
                                         ),
                                       );
-                              },
-                              onAcceptWithDetails: (item) async {
+                              }, onAcceptWithDetails: (item) async {
                                 debugPrint(
                                     '####:${gameState.gameImages?[index].word}');
                                 debugPrint('####:${(item.data.toLowerCase())}');
-    if (context
-        .read<CurrentGamePhoneticsCubit>()
-        .ableButton()) {
-      if (gameState.gameImages?[index].correct == 0) {
-        await context
-            .read<CurrentGamePhoneticsCubit>()
-            .addSuccessAnswer(
-            questions:
-            gameState.allGameData.length,
-            correctAnswers: (gameState.index) + 1)
-            .whenComplete(() async {
-          bool isLastQuestion = context
-              .read<CurrentGamePhoneticsCubit>()
-              .checkIfIsTheLastQuestionOfGame(
-              queations:
-              gameState.allGameData.length);
-          if (isLastQuestion) {
-            Future.delayed(const Duration(seconds: 2),
-                    () async {
-                  Navigator.of(context).pop();
-                });
-          } else {
-            await context
-                .read<CurrentGamePhoneticsCubit>()
-                .updateIndexOfCurrentGame();
-            context
-                .read<DragOutCubit>()
-                .updateTheCurrentGame(
-                index: context
-                    .read<
-                    CurrentGamePhoneticsCubit>()
-                    .state
-                    .index);
-          }
-        });
-      } else {
-        await context
-            .read<CurrentGamePhoneticsCubit>()
-            .addWrongAnswer(
-            actionOfWrongAnswer: () async {});
-      }
-    }
+                                if (context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .ableButton()) {
+                                  if (gameState.gameImages?[index].correct ==
+                                      0) {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addSuccessAnswer(
+                                            questions:
+                                                gameState.allGameData.length,
+                                            correctAnswers:
+                                                (gameState.index) + 1)
+                                        .whenComplete(() async {
+                                      bool isLastQuestion = context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .checkIfIsTheLastQuestionOfGame(
+                                              queations:
+                                                  gameState.allGameData.length);
+                                      if (isLastQuestion) {
+                                        Future.delayed(
+                                            const Duration(seconds: 2),
+                                            () async {
+                                          Navigator.of(context).pop();
+                                        });
+                                      } else {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .updateIndexOfCurrentGame();
+                                        context
+                                            .read<DragOutCubit>()
+                                            .updateTheCurrentGame(
+                                                index: context
+                                                    .read<
+                                                        CurrentGamePhoneticsCubit>()
+                                                    .state
+                                                    .index);
+                                      }
+                                    });
+                                  } else {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addWrongAnswer(
+                                            actionOfWrongAnswer: () async {});
+                                  }
+                                }
                               })),
                     ),
                   )

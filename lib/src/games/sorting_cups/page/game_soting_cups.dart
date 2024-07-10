@@ -37,7 +37,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.only(right: 15.w, bottom: 10.h),
+        margin: EdgeInsets.only(right: 15.w, bottom: 10.h, top: 10.h),
         width: MediaQuery.of(context).size.width - 40.w,
         decoration: BoxDecoration(
             color: Colors.white,

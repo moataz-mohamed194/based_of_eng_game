@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../core/assets_images_phonetics.dart';
@@ -26,7 +27,7 @@ class CupWidget extends StatelessWidget {
           Text(
             image,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                fontSize: 50,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.w700,
                 color: AppColorPhonetics.darkBorderColor,
                 fontFamily: AppTheme.getFontFamily5()),

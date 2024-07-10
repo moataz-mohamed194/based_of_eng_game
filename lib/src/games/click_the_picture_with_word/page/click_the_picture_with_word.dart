@@ -34,7 +34,10 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
     return Container(
         margin: const EdgeInsets.only(bottom: (30), left: 20),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        width: MediaQuery.of(context).size.width - (130 + 40),
+        width: MediaQuery.of(context).size.width - 100.w,
+        height: MediaQuery.of(context).size.width < 760
+            ? MediaQuery.of(context).size.height * 0.7
+            : MediaQuery.of(context).size.height * 0.65,
         alignment: Alignment.center,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -48,19 +51,21 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
               stateOfStringWillSay: state.chooseWord?.word ?? '');
         }, builder: (context, gameState) {
           return Wrap(
-              spacing: 10,
+              spacing: 5.w,
               // runSpacing: 10,
               alignment: WrapAlignment.center,
               children: List.generate(
                   (gameState.gameImages?.length ?? 0),
                   (index) => SingleElement(
                       word: gameState.gameImages?[index].word ?? '',
-                      width: (MediaQuery.of(context).size.width - (130 + 40)) /
+                      width: (MediaQuery.of(context).size.width - 110.w) /
                           (((gameState.gameImages?.length ?? 0) / 2) + 1)
                               .round(),
                       height:
-                          (MediaQuery.of(context).size.height - (50.h + 90)) /
-                              2.2,
+                          (( MediaQuery.of(context).size.width < 760
+                              ? MediaQuery.of(context).size.height * 0.7
+                              : MediaQuery.of(context).size.height * 0.65)) /
+                              2.5,
                       //     (gameData.gameImages?.length ?? 0),
                       index: index,
                       background: gameState.backGround[index],

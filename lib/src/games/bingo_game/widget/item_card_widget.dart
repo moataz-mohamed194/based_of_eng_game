@@ -59,7 +59,10 @@ class ItemCardWidget extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: AppColorPhonetics.darkBorderColor),
                 )
-              : StrokeText(text: body, isDisabled: false, fontSize: 20.sp),
+              : StrokeText(text: body, isDisabled: false,
+            fontSize: MediaQuery.of(context).size.height < 760
+              ? 20.sp
+              : 40.sp,),
         ),
       ),
     );

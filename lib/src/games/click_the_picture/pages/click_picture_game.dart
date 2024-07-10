@@ -47,13 +47,17 @@ class _ClickPictureGame extends State<ClickPictureGame> {
       return Container(
         alignment: Alignment.center,
         child: Container(
+          width: MediaQuery.of(context).size.width - 100.w,
+          height: MediaQuery.of(context).size.width < 760
+              ? MediaQuery.of(context).size.height * 0.7
+              : MediaQuery.of(context).size.height * 0.65,
           margin: EdgeInsets.only(
               bottom: (30),
               top: 10,
               left: stateOfGameData.isArabic == true ? 0 : 20,
               right: stateOfGameData.isArabic == true ? 20 : 0),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-          width: MediaQuery.of(context).size.width - (130 + 50),
+          // width: MediaQuery.of(context).size.width - (130 + 50),
           // height: MediaQuery.of(context).size.height - (50.h + 55),
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -81,9 +85,14 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                                 .state
                                 .correctIndexes
                                 .contains(index),
-                            height: (MediaQuery.of(context).size.height -
-                                    (50.h + 75 + 20)) /
-                                2,
+                            width: (MediaQuery.of(context).size.width - 110.w) /
+                                (((stateOfGameData.gameImages?.length ?? 0) / 2) + 1)
+                                    .round(),
+                            height:
+                            (( MediaQuery.of(context).size.width < 760
+                                ? MediaQuery.of(context).size.height * 0.7
+                                : MediaQuery.of(context).size.height * 0.65)) /
+                                2.5,
                             onTap: () async {
                               if (context
                                   .read<CurrentGamePhoneticsCubit>()
@@ -149,12 +158,16 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                         )),
               ),
               Positioned(
-                  top: -60,
-                  right: -60,
+                  top: MediaQuery.of(context).size.height < 760
+                  ? -60
+                  : -150,
+                  right:  MediaQuery.of(context).size.height < 760
+                      ? -120
+                      :-350,
                   child: Container(
-                      alignment: Alignment.topCenter,
-                      height: 100,
-                      width: 100,
+                      alignment:(stateOfGameData.gameData.mainLetter ?? '')=='s'? Alignment.topCenter:Alignment.center,
+                      height: 100.h,
+                      width: 100.w,
                       decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
@@ -165,10 +178,12 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                             .textTheme
                             .displayLarge
                             ?.copyWith(
-                                fontSize: 70,
+                                fontSize: 30.sp,
                                 fontWeight: FontWeight.w700,
                                 color: AppColorPhonetics.darkBorderColor,
+
                                 fontFamily: AppTheme.getFontFamily5()),
+                        textAlign: TextAlign.center,
                       )))
             ],
           ),

@@ -68,7 +68,8 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       _subRow(firstLetters, stateOfGame),
-                      20.ph,
+                      MediaQuery.of(context).size.height>650?
+                      110.h.ph:20.ph,
                       _subRow(secondLetters, stateOfGame),
                     ],
                   );
@@ -165,7 +166,7 @@ _subRow(List<GameLettersGameFinalModel> firstLetters,ClickTheSoundInitial stateO
             onTap: onPress,
             child: Container(
               // width: 104.w,
-              height: 104.h,
+              height: MediaQuery.of(context).size.height>650?150.h:104.h,
               alignment: Alignment.center,
               decoration: BoxDecoration(
       image: DecorationImage(
@@ -176,7 +177,7 @@ _subRow(List<GameLettersGameFinalModel> firstLetters,ClickTheSoundInitial stateO
           ),
           fit: BoxFit.contain)),
               child: StrokedText(
-                fontSize: 25.sp,
+                fontSize: MediaQuery.of(context).size.height>650?35.sp:25.sp,
                 text: letter,
                 isDisabled:
         viewModel.state.correctIndexes?.contains(index) ?? false,

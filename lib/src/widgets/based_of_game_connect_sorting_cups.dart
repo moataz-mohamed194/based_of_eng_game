@@ -85,7 +85,7 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
                 )),
           ),
           Positioned(
-            bottom: 20,
+            bottom: 15.h,
             left: 20,
             child: GestureDetector(
               onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
@@ -121,7 +121,7 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
                           width: 80.w,
                         )
                       : SizedBox(
-                          height: 110.h,
+                          // height: 110.h,
                           width: 70.w,
                           child: Rive(
                             artboard: stateOfGame.avatarCurrentArtboard!,
