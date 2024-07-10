@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,10 +41,10 @@ class _XOutGameScreen extends State<XOutGameScreen> {
 
     final screenHeight = MediaQuery.of(context).size.height - 90.h;
     final screenWidth = MediaQuery.of(context).size.width - 120.w;
-    final gridItemHeight = (screenHeight - 4 - 40 - 2 * 15) /
+    final gridItemHeight = (screenHeight - (10.h) - (20.sp) - 2 * 15) /
         2; // 4 for padding, 40 for text height, 2 * 15 for border radius
-    final gridItemWidth =
-        (screenWidth - 4 - 3 * 2) / 2; // 4 for padding, 3 * 2 for border width
+    final gridItemWidth = (screenWidth - (10.h) - 3 * 2) /
+        2; // 4 for padding, 3 * 2 for border width
     return BlocConsumer<XOutCubit, XOutInitial>(
       listener: (context, state) {
         context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
@@ -56,7 +57,7 @@ class _XOutGameScreen extends State<XOutGameScreen> {
           margin: EdgeInsets.only(right: 15.w),
           width: screenWidth,
           height: screenHeight,
-          padding: const EdgeInsets.all(4),
+          padding: EdgeInsets.only(left: 10.h, right: 10.h, bottom: 10.h),
           decoration: BoxDecoration(
             color: AppColorPhonetics.darkBorderColor,
             borderRadius: BorderRadius.circular(15),
@@ -68,14 +69,16 @@ class _XOutGameScreen extends State<XOutGameScreen> {
               Text(
                 state.gameData?.mainLetter ?? '',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontSize: 40,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
                       fontFamily: AppTheme.getFontFamily5(),
                       color: Colors.white,
                       height: 0,
                       letterSpacing: 0.50,
                     ),
+                textAlign: TextAlign.center,
               ),
+              5.ph,
               if (state.gameImages?.isNotEmpty ?? false) ...{
                 Expanded(
                   child: GridView.builder(

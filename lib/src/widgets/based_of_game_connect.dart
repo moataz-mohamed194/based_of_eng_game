@@ -45,7 +45,8 @@ class BasedOfGameConnect extends StatelessWidget {
                 top: -10,
                 start: 90.w,
                 child: GestureDetector(
-                  onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
+                  onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()
+                      ? () async {
                           await context
                               .read<CurrentGamePhoneticsCubit>()
                               .beeTalkingTrue();
@@ -69,7 +70,8 @@ class BasedOfGameConnect extends StatelessWidget {
                           await context
                               .read<CurrentGamePhoneticsCubit>()
                               .beeTalkingFalse();
-                        }:null,
+                        }
+                      : null,
                   child: Container(
                       alignment: Alignment.center,
                       child: stateOfGame.avatarCurrentArtboard == null
@@ -82,7 +84,7 @@ class BasedOfGameConnect extends StatelessWidget {
                             )
                           : SizedBox(
                               height: 110.h,
-                              width: 70.w,
+                              // width: 70.w,
                               child: Rive(
                                 artboard: stateOfGame.avatarCurrentArtboard!,
                                 fit: BoxFit.fill,
@@ -206,7 +208,10 @@ class BasedOfGameConnect extends StatelessWidget {
                                 Positioned(
                                   top: 0,
                                   child: GestureDetector(
-                                    onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
+                                    onTap: context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .ableButton()
+                                        ? () async {
                                             await context
                                                 .read<
                                                     CurrentGamePhoneticsCubit>()
@@ -240,7 +245,8 @@ class BasedOfGameConnect extends StatelessWidget {
                                                 .read<
                                                     CurrentGamePhoneticsCubit>()
                                                 .beeTalkingFalse();
-                                          }:null,
+                                          }
+                                        : null,
                                     child: Container(
                                         alignment: Alignment.center,
                                         child: stateOfGame
@@ -254,11 +260,13 @@ class BasedOfGameConnect extends StatelessWidget {
                                                 width: 80.w,
                                               )
                                             : Container(
+                                                width: 75.w,
+                                                alignment: Alignment.center,
                                                 margin:
                                                     EdgeInsets.only(left: 7.w),
                                                 child: SizedBox(
-                                                    height: 90.h,
-                                                    width: 65.w,
+                                                    height: 120.h,
+                                                    // width: 65.w,
                                                     child: Rive(
                                                       artboard: stateOfGame
                                                           .avatarCurrentArtboard!,
@@ -271,7 +279,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                   ),
                                 ),
                                 PositionedDirectional(
-                                  top: 60.h,
+                                  top: 70.h,
                                   child: GestureDetector(
                                     onTap: stateOfGame.beeTalking == true
                                         ? null

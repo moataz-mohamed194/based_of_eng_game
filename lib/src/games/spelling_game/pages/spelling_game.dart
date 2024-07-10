@@ -57,9 +57,9 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
 
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(gameState.woodenBackground ?? ''),
-                            fit: BoxFit.fill,
-                          )),
+                        image: AssetImage(gameState.woodenBackground ?? ''),
+                        fit: BoxFit.fill,
+                      )),
                       child: Column(
                         children: [
                           25.ph,
@@ -68,13 +68,14 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                               onTap: TalkTts.data == StateOfTalk.talking
                                   ? null
                                   : () {
-                                TalkTts.startTalk(
-                                    text: gameState.gameData?.correctAns ??
-                                        '');
-                              },
+                                      TalkTts.startTalk(
+                                          text:
+                                              gameState.gameData?.correctAns ??
+                                                  '');
+                                    },
                               child: CachedNetworkImage(
-                                imageUrl:
-                                gameState.gameData?.gameImages?.first.image ??
+                                imageUrl: gameState
+                                        .gameData?.gameImages?.first.image ??
                                     '',
                                 // height: 110.h,
                                 placeholder: (context, url) => const Center(
@@ -94,91 +95,90 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: List.generate(
                                   gameState.correctAnswers.length,
-                                      (index) => DragTarget<String>(
-
-                                    builder: (
-                                        BuildContext context,
-                                        List<dynamic> accepted,
-                                        List<dynamic> rejected,
+                                  (index) => DragTarget<String>(
+                                        builder: (
+                                          BuildContext context,
+                                          List<dynamic> accepted,
+                                          List<dynamic> rejected,
                                         ) {
-                                      return DragTargetWidget(
-                                          title: gameState
-                                              .correctAnswers[index]);
-                                    },
-                                    onAcceptWithDetails:
-                                        (DragTargetDetails<String>
-                                    details) async {
+                                          return DragTargetWidget(
+                                              title: gameState
+                                                  .correctAnswers[index]);
+                                        },
+                                        onAcceptWithDetails:
+                                            (DragTargetDetails<String>
+                                                details) async {
                                           if (context
                                               .read<CurrentGamePhoneticsCubit>()
                                               .ableButton()) {
-                                        context
-                                            .read<SpellingCubit>()
-                                            .addTheCorrectAnswer(
-                                            index: index,
-                                            answer: details.data);
-                                        if (context
-                                            .read<SpellingCubit>()
-                                            .checkCurrentFinished()) {
-                                          if (context
-                                              .read<SpellingCubit>()
-                                              .checkIsCorrectAnswer()) {
-                                            await context
-                                                .read<
-                                                CurrentGamePhoneticsCubit>()
-                                                .addSuccessAnswer(
-                                                questions: gameState
-                                                    .allGames.length,
-                                                correctAnswers:
-                                                (gameState.index) +
-                                                    1)
-                                                .whenComplete(() async {
-                                              bool isLastQuestion = context
-                                                  .read<
-                                                  CurrentGamePhoneticsCubit>()
-                                                  .checkIfIsTheLastQuestionOfGame(
-                                                  queations: gameState
-                                                      .allGames.length);
-                                              if (isLastQuestion) {
-                                                Future.delayed(
-                                                    const Duration(
-                                                        seconds: 2),
+                                            context
+                                                .read<SpellingCubit>()
+                                                .addTheCorrectAnswer(
+                                                    index: index,
+                                                    answer: details.data);
+                                            if (context
+                                                .read<SpellingCubit>()
+                                                .checkCurrentFinished()) {
+                                              if (context
+                                                  .read<SpellingCubit>()
+                                                  .checkIsCorrectAnswer()) {
+                                                await context
+                                                    .read<
+                                                        CurrentGamePhoneticsCubit>()
+                                                    .addSuccessAnswer(
+                                                        questions: gameState
+                                                            .allGames.length,
+                                                        correctAnswers:
+                                                            (gameState.index) +
+                                                                1)
+                                                    .whenComplete(() async {
+                                                  bool isLastQuestion = context
+                                                      .read<
+                                                          CurrentGamePhoneticsCubit>()
+                                                      .checkIfIsTheLastQuestionOfGame(
+                                                          queations: gameState
+                                                              .allGames.length);
+                                                  if (isLastQuestion) {
+                                                    Future.delayed(
+                                                        const Duration(
+                                                            seconds: 2),
                                                         () async {
                                                       Navigator.of(context)
                                                           .pop();
                                                     });
+                                                  } else {
+                                                    await context
+                                                        .read<
+                                                            CurrentGamePhoneticsCubit>()
+                                                        .updateIndexOfCurrentGame();
+                                                    await context
+                                                        .read<SpellingCubit>()
+                                                        .updateTheCurrentGame(
+                                                            index: context
+                                                                .read<
+                                                                    CurrentGamePhoneticsCubit>()
+                                                                .state
+                                                                .index);
+                                                  }
+                                                });
                                               } else {
                                                 await context
                                                     .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                    .updateIndexOfCurrentGame();
+                                                        CurrentGamePhoneticsCubit>()
+                                                    .addWrongAnswer(
+                                                        actionOfWrongAnswer:
+                                                            () async {});
                                                 await context
                                                     .read<SpellingCubit>()
-                                                    .updateTheCurrentGame(
-                                                    index: context
-                                                        .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                        .state
-                                                        .index);
+                                                    .clearAnswers();
                                               }
-                                            });
-                                          } else {
-                                            await context
-                                                .read<
-                                                CurrentGamePhoneticsCubit>()
-                                                .addWrongAnswer(
-                                                actionOfWrongAnswer:
-                                                    () async {});
-                                            await context
-                                                .read<SpellingCubit>()
-                                                .clearAnswers();
+                                            }
                                           }
-                                        }
-                                      }
-                                    },
-                                  )),
+                                        },
+                                      )),
                             ),
                           ),
-                          45.ph,
+                          45.h.ph,
                         ],
                       ),
                     )),
@@ -187,12 +187,18 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                   flex: 4,
                   child: Container(
                       alignment: Alignment.center,
-                      // height: MediaQuery.of(context).size.height - (70.h),
+                      height:
+                          ((gameState.gameData)?.gameLetters?.length ?? 1) != 26
+                              ? MediaQuery.of(context).size.height / 3
+                              : null,
                       margin: EdgeInsets.only(right: 15.w),
-                      padding: EdgeInsets.symmetric(vertical: ((gameState.gameData)
-                          ?.gameLetters
-                          ?.length ??
-                          1)==26?0:20),
+                      padding: EdgeInsets.symmetric(
+                          vertical:
+                              ((gameState.gameData)?.gameLetters?.length ??
+                                          1) ==
+                                      26
+                                  ? 0
+                                  : 20),
                       // width: MediaQuery.of(context).size.width * 0.37,
                       // padding: EdgeInsets.all(1),
                       decoration: BoxDecoration(
@@ -203,34 +209,36 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                               width: 5)),
                       child: Center(
                           child: Wrap(
-                            children: List.generate(
-                                ((gameState.gameData)
-                                    ?.gameLetters
-                                    ?.length ??
-                                    1), (index) {
-                              return ItemCardWidget(
-                                id: ((gameState.gameData?.gameLetters)!
+                        children: List.generate(
+                            ((gameState.gameData)?.gameLetters?.length ?? 1),
+                            (index) {
+                          return ItemCardWidget(
+                            id: ((gameState.gameData?.gameLetters)!
                                     .map((e) => e.id)
                                     .toSet()
                                     .toList()[index]) ??
-                                    0,
-                                body: (gameState.gameData?.gameLetters)
+                                0,
+                            body: (gameState.gameData?.gameLetters)
                                     ?.map((e) => e.letter)
                                     .toSet()
                                     .toList()[index] ??
-                                    '',
-                                maxHeight: (((gameState.gameData)
-                                    ?.gameLetters
-                                    ?.length ??
-                                    1)==26?40.h:60.h),
-                                maxWidth: (((gameState.gameData)
-                                    ?.gameLetters
-                                    ?.length ??
-                                    1)==26?23.w:30.w),
-                                index: index,
-                              );
-                            }),
-                          ))),
+                                '',
+                            maxHeight:
+                                (((gameState.gameData)?.gameLetters?.length ??
+                                            1) ==
+                                        26
+                                    ? 40.h
+                                    : 60.h),
+                            maxWidth:
+                                (((gameState.gameData)?.gameLetters?.length ??
+                                            1) ==
+                                        26
+                                    ? 23.w
+                                    : 30.w),
+                            index: index,
+                          );
+                        }),
+                      ))),
                 ),
               ],
             ),
