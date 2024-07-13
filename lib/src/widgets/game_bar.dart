@@ -64,30 +64,33 @@ class GameBar extends StatelessWidget {
                 ),
               )),
           Expanded(
-              child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Image.asset(
-                AppImagesMain.stayOfStarBar,
-                width: 65.w,
-                fit: BoxFit.contain,
-              ),
-              Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ((stateOfGame.countOfStar ?? 0) == 0)
-                      ? Image.asset(
-                          AppImagesMain.barZeroStar,
-                          width: 40.w,
-                          fit: BoxFit.contain,
-                        )
-                      : ((stateOfGame.countOfStar ?? 0) == 1)
-                          ? Image.asset(AppImagesMain.barOneStar, width: 40.w)
-                          : ((stateOfGame.countOfStar ?? 0) == 2)
-                              ? Image.asset(AppImagesMain.barTwoStar,
-                                  width: 40.w)
-                              : Image.asset(AppImagesMain.barThreeStar,
-                                  width: 40.w))
-            ],
+              child: FittedBox(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(
+                  AppImagesMain.stayOfStarBar,
+                  width: 65.w,
+                  fit: BoxFit.contain,
+                ),
+                Container(
+                    width: 65.w,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ((stateOfGame.countOfStar ?? 0) == 0)
+                        ? Image.asset(
+                            AppImagesMain.barZeroStar,
+                            width: 40.w,
+                            fit: BoxFit.contain,
+                          )
+                        : ((stateOfGame.countOfStar ?? 0) == 1)
+                            ? Image.asset(AppImagesMain.barOneStar, width: 40.w)
+                            : ((stateOfGame.countOfStar ?? 0) == 2)
+                                ? Image.asset(AppImagesMain.barTwoStar,
+                                    width: 40.w)
+                                : Image.asset(AppImagesMain.barThreeStar,
+                                    width: 40.w))
+              ],
+            ),
           )),
         ],
       ),
