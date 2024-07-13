@@ -187,10 +187,10 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                   flex: 4,
                   child: Container(
                       alignment: Alignment.center,
-                      height:
-                          ((gameState.gameData)?.gameLetters?.length ?? 1) != 26
-                              ? MediaQuery.of(context).size.height / 3
-                              : null,
+                      // height:
+                      //     ((gameState.gameData)?.gameLetters?.length ?? 1) != 26
+                      //         ? MediaQuery.of(context).size.height / 3
+                      //         : null,
                       margin: EdgeInsets.only(right: 15.w),
                       padding: EdgeInsets.symmetric(
                           vertical:
