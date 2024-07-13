@@ -64,7 +64,6 @@ class GameBar extends StatelessWidget {
                 ),
               )),
           Expanded(
-              child: FittedBox(
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -91,7 +90,7 @@ class GameBar extends StatelessWidget {
                                     width: 40.w))
               ],
             ),
-          )),
+          ),
         ],
       ),
     );
