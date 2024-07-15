@@ -158,12 +158,10 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                         )),
               ),
               Positioned(
-                  top: MediaQuery.of(context).size.height < 760
-                  ? -60
-                  : -150,
-                  right:  MediaQuery.of(context).size.height < 760
-                      ? -120
-                      :-350,
+                  bottom: MediaQuery.of(context).size.height < 760
+                      ? MediaQuery.of(context).size.height * 0.4
+                      : MediaQuery.of(context).size.height * 0.5,
+                  right:  MediaQuery.of(context).size.height < 760?-130:-210,
                   child: Container(
                       alignment:(stateOfGameData.gameData.mainLetter ?? '')=='s'? Alignment.topCenter:Alignment.center,
                       height: 100.h,
@@ -178,7 +176,7 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                             .textTheme
                             .displayLarge
                             ?.copyWith(
-                                fontSize: 30.sp,
+                                fontSize: 25.spMax,
                                 fontWeight: FontWeight.w700,
                                 color: AppColorPhonetics.darkBorderColor,
 

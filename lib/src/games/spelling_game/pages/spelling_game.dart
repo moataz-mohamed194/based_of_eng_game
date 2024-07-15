@@ -62,33 +62,36 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                       )),
                       child: Column(
                         children: [
-                          25.ph,
+                          // 25.ph,
                           Expanded(
-                            child: GestureDetector(
-                              onTap: TalkTts.data == StateOfTalk.talking
-                                  ? null
-                                  : () {
-                                      TalkTts.startTalk(
-                                          text:
-                                              gameState.gameData?.correctAns ??
-                                                  '');
-                                    },
-                              child: CachedNetworkImage(
-                                imageUrl: gameState
-                                        .gameData?.gameImages?.first.image ??
-                                    '',
-                                // height: 110.h,
-                                placeholder: (context, url) => const Center(
-                                  child: CupertinoActivityIndicator(),
-                                ),
-                                errorWidget: (context, url, error) => Center(
-                                  child: Text(
-                                      '${gameState.gameData?.gameImages?.first.word}'),
+                            child: Container(
+                              margin: EdgeInsets.symmetric(vertical: .05.sh),
+                              child: GestureDetector(
+                                onTap: TalkTts.data == StateOfTalk.talking
+                                    ? null
+                                    : () {
+                                        TalkTts.startTalk(
+                                            text:
+                                                gameState.gameData?.correctAns ??
+                                                    '');
+                                      },
+                                child: CachedNetworkImage(
+                                  imageUrl: gameState
+                                          .gameData?.gameImages?.first.image ??
+                                      '',
+                                  height: 1,
+                                  placeholder: (context, url) => const Center(
+                                    child: CupertinoActivityIndicator(),
+                                  ),
+                                  errorWidget: (context, url, error) => Center(
+                                    child: Text(
+                                        '${gameState.gameData?.gameImages?.first.word}'),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          10.ph,
+                          // 10.ph,
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 25),
                             child: Row(
