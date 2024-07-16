@@ -71,8 +71,9 @@ class _ChooseTheSentenceScreen extends State<ChooseTheSentenceScreen> {
                         GestureDetector(
                           onTap: () async {
                             if (context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .ableButton()) {
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .ableButton() &&
+                                gameState.isCorrect == false) {
                               bool stateOfAnswer = context
                                   .read<ChooseTheSentenceCubit>()
                                   .addAnswer(

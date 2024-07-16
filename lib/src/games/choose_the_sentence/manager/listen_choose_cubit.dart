@@ -34,6 +34,7 @@ class ChooseTheSentenceCubit extends Cubit<ChooseTheSentenceInitial> {
   }
 
   updateTheCurrentGame({required int index}) {
+    TalkTts.reBackTheDefaultValue();
     debugPrint('updateTheCurrentGame:${state.gameData.id}, $index');
     emit(state.copyWith(gameData: state.listGameData[index], index: index));
     debugPrint('updateTheCurrentGame:${state.gameData.id}');
