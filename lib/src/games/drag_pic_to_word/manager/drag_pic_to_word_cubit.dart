@@ -14,8 +14,20 @@ class DragPicToWordCubit extends Cubit<DragPicToWordInitial> {
           gameData: gameData,
           gameImages: gameData.gameImages ?? [],
           correctedAnswers: [],
+      // gamesLetters:[]
         )){
+    reFormatGame();
    TalkTts.startTalk(text: state.gameData.inst??'');
+  }
+
+  reFormatGame(){
+    // List<GameImagesGameFinalModel> gameImages = state.gameData.gameImages??[];
+    List<GameImagesGameFinalModel> gamesLetters = state.gameData.gameImages??[];
+    // gameImages.shuffle();
+    // gamesLetters.shuffle();
+    gamesLetters.shuffle();
+    emit(state.copyWith(gamesLetters: gamesLetters));
+
   }
 
   addCorrectAnswer({required int correctAnswerId}) {

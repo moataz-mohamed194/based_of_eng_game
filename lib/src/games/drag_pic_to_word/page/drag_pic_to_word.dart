@@ -51,7 +51,7 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
             10.ph,
             Container(
                 alignment: Alignment.center,
-                width: ((30.w + 14 + 10) * stateOfGameData.gameImages.length),
+                width: ((30.w + 14 + 10) * (stateOfGameData.gameImages?.length??0)),
                 padding: const EdgeInsets.all(24),
                 decoration: ShapeDecoration(
                   color: Colors.white.withOpacity(0.8199999928474426),
@@ -77,12 +77,12 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: List.generate(
-                    stateOfGameData.gameImages.length,
+                    stateOfGameData.gameImages?.length??0,
                     (index) => stateOfGameData.correctedAnswers.contains(
-                                stateOfGameData.gameImages[index].id) ==
+                                stateOfGameData.gameImages?[index].id) ==
                             false
                         ? Draggable<GameImagesGameFinalModel>(
-                            data: stateOfGameData.gameImages[index],
+                            data: stateOfGameData.gameImages?[index],
                             maxSimultaneousDrags: 1,
                             childWhenDragging: Container(
                               width: 30.w,
@@ -92,9 +92,9 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
                                   left: 4.40, right: 3.70, bottom: 0.44),
                             ),
                             feedback: ImageInDrag(
-                                image: stateOfGameData.gameImages[index]),
+                                image: stateOfGameData.gameImages![index]),
                             child: ImageInDrag(
-                                image: stateOfGameData.gameImages[index]),
+                                image: stateOfGameData.gameImages![index]),
                           )
                         : Container(
                             width: 30.w,
@@ -110,7 +110,7 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: List.generate(
-                stateOfGameData.gameImages.length,
+                stateOfGameData.gamesLetters?.length??0,
                 (index) => Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
@@ -131,14 +131,14 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
                           ) {
                             return SizedBox(
                               height: (MediaQuery.of(context).size.width - 20) /
-                                  (stateOfGameData.gameImages.length + 5),
+                                  ((stateOfGameData.gamesLetters?.length??0) + 5),
                               width: (MediaQuery.of(context).size.width - 20) /
-                                  (stateOfGameData.gameImages.length + 5),
+                                  ((stateOfGameData.gamesLetters?.length??0) + 5),
                               child: stateOfGameData.correctedAnswers.contains(
-                                      stateOfGameData.gameImages[index].id)
+                                      stateOfGameData.gamesLetters?[index].id)
                                   ? CachedNetworkImage(
                                       imageUrl: stateOfGameData
-                                              .gameImages[index].image ??
+                                              .gamesLetters?[index].image ??
                                           '',
                                       placeholder: (context, url) =>
                                           const Center(
@@ -152,12 +152,13 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
                                     )
                                   : null,
                             );
-                          }, onAcceptWithDetails: (item) async {
+                          },
+                              onAcceptWithDetails: (item) async {
                             if (context
                                 .read<CurrentGamePhoneticsCubit>()
                                 .ableButton()) {
                             if (item.data.word?.toLowerCase() ==
-                                (stateOfGameData.gameImages[index].word
+                                (stateOfGameData.gamesLetters?[index].word
                                     ?.toLowerCase())) {
                               context
                                   .read<DragPicToWordCubit>()
@@ -167,15 +168,15 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
                                   .read<CurrentGamePhoneticsCubit>()
                                   .addSuccessAnswer(
                                       questions:
-                                          stateOfGameData.gameImages.length,
+                                          stateOfGameData.gamesLetters?.length??0,
                                       correctAnswers: stateOfGameData
                                           .correctedAnswers.length)
                                   .whenComplete(() async {
                                 bool isLastQuestion = context
                                     .read<CurrentGamePhoneticsCubit>()
-                                    .checkIfIsTheLastQuestionOfGame(
+                                    .secondWayToCheckIfIsTheLastQuestionOfGame(
                                         queations:
-                                            stateOfGameData.gameImages.length);
+                                            stateOfGameData.gamesLetters?.length??0);
                                 if (isLastQuestion) {
                                   Future.delayed(const Duration(seconds: 2),
                                       () async {
@@ -196,7 +197,7 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
                         color: AppColorPhonetics.lightBlueColor,
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Text(
-                          stateOfGameData.gameImages[index].word ?? '',
+                          stateOfGameData.gamesLetters?[index].word ?? '',
                           style: Theme.of(context)
                               .textTheme
                               .displayLarge
