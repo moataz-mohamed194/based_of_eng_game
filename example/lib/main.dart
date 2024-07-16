@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             builder: (_, child) {
               return BlocProvider<ContactLessonBloc>(
                   create: (_) => di.sl<ContactLessonBloc>()
-                    ..add(GetContactLessonRequest(lessonId: 22, gameId: 288)),
+                    ..add(GetContactLessonRequest(lessonId: 102, gameId: 1262)),
                   // ..add(GetContactLessonRequest(lessonId: 4, gameId: 168)),
 
                   // ..add(GetContactLessonRequest(lessonId: 102, gameId: 1252)),

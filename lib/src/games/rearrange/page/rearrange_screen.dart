@@ -44,7 +44,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
           return Container(
             margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            width: MediaQuery.of(context).size.width - (130 + 50 + 130),
+            width: (gameState.userAnswers.length*25.w)+0.33.sw,
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -60,6 +60,8 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                       imageUrl:
                           gameState.gameData.gameImages?.first.image ?? '',
                       height: 0.33.sh,
+                      width: 0.33.sw,
+
                       placeholder: (context, url) => const Center(
                         child: CupertinoActivityIndicator(),
                       ),
@@ -98,7 +100,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                     radius: const Radius.circular(7),
                                     // padding: const EdgeInsets.all(6),
                                     child: SizedBox(
-                                      width: 25.w,
+                                      width: 24.w,
                                       height: 30.h,
                                       child: Text(
                                         gameState.userAnswers[index],
@@ -112,7 +114,8 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                       ),
                                     ),
                                   );
-                                }, onAcceptWithDetails: (item) async {
+                                },
+                                    onAcceptWithDetails: (item) async {
                                   if (context
                                       .read<CurrentGamePhoneticsCubit>()
                                       .ableButton()) {
@@ -180,6 +183,9 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                 maxSimultaneousDrags: 1,
                                     data: gameState.correctAnswers[index] ?? '',
                                     childWhenDragging: Container(
+                                      height: 30.h,
+                                      width: 24.w,
+
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5),
                                       margin: const EdgeInsets.symmetric(
@@ -195,6 +201,9 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                       ),
                                     ),
                                     feedback: Container(
+                                      width: 24.w,
+                                      height: 30.h,
+
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5),
                                       decoration: BoxDecoration(
@@ -222,6 +231,8 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                                 .stateOfAvatar ==
                                             BasicOfGameData.stateOfWin))
                                         ? Container(
+                                      width: 24.w,
+                                      height: 30.h,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 5),
                                             margin: const EdgeInsets.symmetric(
@@ -238,6 +249,9 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                             ),
                                           )
                                         : Container(
+                                      width: 24.w,
+                                      height: 30.h,
+                                            alignment: Alignment.center,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 5),
                                             decoration: BoxDecoration(

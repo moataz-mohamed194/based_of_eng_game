@@ -18,6 +18,7 @@ GameFinalModel _$GameFinalModelFromJson(Map<String, dynamic> json) =>
       mainLetter: json['main_letter'] as String?,
       name: json['name'] as String?,
       inst: json['inst'] as String?,
+      sentence: json['sentence'] as String?,
       numOfTrials: (json['num_of_trials'] as num?)?.toInt(),
       lesson: json['lesson'] == null
           ? null
@@ -56,6 +57,7 @@ Map<String, dynamic> _$GameFinalModelToJson(GameFinalModel instance) =>
       'created_at': instance.createdAt,
       'inst': instance.inst,
       'name': instance.name,
+      'sentence': instance.sentence,
       'main_letter': instance.mainLetter,
       'updated_at': instance.updatedAt,
       'correct_ans': instance.correctAns,

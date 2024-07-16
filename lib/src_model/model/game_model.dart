@@ -18,6 +18,7 @@ class GameFinalModel extends Equatable {
   final String? createdAt;
   final String? inst;
   final String? name;
+  final String? sentence;
   final String? mainLetter;
   final String? updatedAt;
   final String? correctAns;
@@ -45,6 +46,7 @@ class GameFinalModel extends Equatable {
       this.mainLetter,
       this.name,
       this.inst,
+      this.sentence,
       this.numOfTrials,
       this.lesson,
       this.gameTypes,
@@ -74,6 +76,7 @@ class GameFinalModel extends Equatable {
         audioFlag,
         video,
         numOfLetters,
+    sentence,
         numOfLetterRepeat,
         inst,
         numOfTrials,

@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
         stateOfStringIsWord: StateOfSubWord.stopTalk,
-        stateOfStringWillSay: gameData.first.inst ?? '');
+        stateOfStringWillSay: "${gameData.first.inst ?? ''} ${gameData.first.sentence??''}");
     super.initState();
   }
 
@@ -41,7 +42,7 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
         listener: (context, state) {
       context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
           stateOfStringIsWord: StateOfSubWord.stopTalk,
-          stateOfStringWillSay: state.gameData.inst ?? '');
+          stateOfStringWillSay: "${state.gameData.inst ?? ''} ${state.gameData.sentence??''}");
     }, builder: (context, gameState) {
       return Container(
         margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
@@ -167,9 +168,10 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
                     color: Colors.red,
                   ),
                 ),
+                20.w.pw,
                 Text(
                   gameState.isCorrect
-                      ? (gameState.gameData.inst ?? '')
+                      ? (gameState.gameData.sentence ?? '')
                       : gameState.images.first.word ?? '',
                   style: TextStyle(
                       fontSize: 20,
