@@ -28,8 +28,8 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: StateOfSubWord.stopTalk,
-        stateOfStringWillSay: "${gameData.first.inst ?? ''} ${gameData.first.sentence??''}");
+        stateOfStringIsWord: StateOfSubWord.isWord,
+        stateOfStringWillSay: gameData.first.sentence ?? '');
     super.initState();
   }
 
@@ -41,8 +41,8 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
     return BlocConsumer<ListenChooseCubit, ListenChooseInitial>(
         listener: (context, state) {
       context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-          stateOfStringIsWord: StateOfSubWord.stopTalk,
-          stateOfStringWillSay: "${state.gameData.inst ?? ''} ${state.gameData.sentence??''}");
+          stateOfStringIsWord: StateOfSubWord.isWord,
+          stateOfStringWillSay: state.gameData.sentence ?? '');
     }, builder: (context, gameState) {
       return Container(
         margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
