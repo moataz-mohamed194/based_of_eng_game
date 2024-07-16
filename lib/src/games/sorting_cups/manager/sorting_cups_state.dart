@@ -24,6 +24,14 @@ class SortingCupsInitial extends Equatable {
         correctIndexes: correctIndexes ?? this.correctIndexes);
   }
 
+  clearCurrentChoose() {
+    return SortingCupsInitial(
+        gameData: gameData ?? this.gameData,
+        cardsLetters: cardsLetters ?? this.cardsLetters,
+        chooseWord: null,
+        correctIndexes: correctIndexes ?? this.correctIndexes);
+  }
+
   @override
   List<Object?> get props =>
       [gameData, cardsLetters, chooseWord, correctIndexes];

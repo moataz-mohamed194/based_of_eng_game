@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -180,13 +182,10 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                 if (context
                                     .read<CurrentGamePhoneticsCubit>()
                                     .ableButton()) {
-                                  debugPrint(
-                                      "##:${gameState.gameData.mainLetter?.split('')[index].toLowerCase()}");
+                                  log("##:${gameState.gameData.mainLetter?.split('')[index].toLowerCase()}");
 
-                                  debugPrint(
-                                      "##:${gameState.chooseWord?.letter?.toLowerCase().toLowerCase()}");
-                                  debugPrint(
-                                      "##:${(item.data.letter?.toLowerCase() ?? '')}");
+                                  log("##:${gameState.chooseWord?.letter?.toLowerCase().toLowerCase()}");
+                                  log("##:${(item.data.letter?.toLowerCase() ?? '')}");
                                   if (gameState.chooseWord?.letter
                                               ?.toLowerCase() ==
                                           (item.data.letter?.toLowerCase() ??

@@ -28,6 +28,7 @@ class SortingCupsCubit extends Cubit<SortingCupsInitial> {
   }
 
   addTheCorrectAnswer({required int idOfUserAnswer}) async {
+    emit(state.clearCurrentChoose());
     List<int> correctAnswer = state.correctIndexes ?? [];
     correctAnswer.add(idOfUserAnswer);
     emit(state.copyWith(correctIndexes: correctAnswer));
@@ -63,9 +64,10 @@ class SortingCupsCubit extends Cubit<SortingCupsInitial> {
       emit(state.copyWith(chooseWord: chooseWord));
     }
   }
+
   sayTheLetter() async {
     GameLettersGameFinalModel? chooseWord = state.chooseWord;
-    if(chooseWord!=null) {
+    if (chooseWord != null) {
       await AudioPlayerLetters.startPlaySound(
           soundPath: AssetsSoundLetters.getSoundOfLetter(
               mainGameLetter: chooseWord.letter?.toLowerCase() ?? ''));
