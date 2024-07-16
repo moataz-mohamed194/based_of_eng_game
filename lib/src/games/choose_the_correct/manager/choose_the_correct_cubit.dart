@@ -23,7 +23,7 @@ class ChooseTheCorrectCubit extends Cubit<ChooseTheCorrectInitial> {
     emit(state.copyWith(
         choose: state.listGameData[state.index].gameLetters,
         images: state.listGameData[state.index].gameImages,
-        isCorrect:false,
+        isCorrect: false,
         gameData: state.listGameData[state.index]));
     String choose = state.gameData.correctAns ?? '';
     emit(state.copyWith(correctAnswer: choose));
@@ -42,8 +42,9 @@ class ChooseTheCorrectCubit extends Cubit<ChooseTheCorrectInitial> {
     String choose = state.gameData.correctAns ?? '';
     print('userChoose:$userChoose , $choose');
     if (userChoose.toLowerCase() == choose.toLowerCase()) {
-      int countCorrectAnswers = state.countCorrectAnswers+1;
-      emit(state.copyWith(countCorrectAnswers: countCorrectAnswers, isCorrect:true));
+      int countCorrectAnswers = state.countCorrectAnswers + 1;
+      emit(state.copyWith(
+          countCorrectAnswers: countCorrectAnswers, isCorrect: true));
       return true;
     } else {
       return false;
@@ -51,7 +52,12 @@ class ChooseTheCorrectCubit extends Cubit<ChooseTheCorrectInitial> {
   }
 
   _sayLetter() async {
-    await TalkTts.startTalk(text: state.gameData.inst ?? '');
-
+    if (state.index == 0) {
+      await TalkTts.startTalk(
+          text:
+              "${state.gameData.inst ?? ''} ${state.gameData.sentence ?? ''}");
+    } else {
+      await TalkTts.startTalk(text: state.gameData.sentence ?? '');
+    }
   }
 }
