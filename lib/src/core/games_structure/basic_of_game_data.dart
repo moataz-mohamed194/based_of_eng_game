@@ -19,77 +19,57 @@ abstract class BasicOfGameData {
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame();
-    }
-    else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
+    } else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
       return ClickPictureOfWord();
 
       ///audio flag == 1 say the word
-    }
-    else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
+    } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPicture();
-    }
-    else if (gameType == GameTypes.clickTheSound.text()) {
+    } else if (gameType == GameTypes.clickTheSound.text()) {
       return BasicClickTheSoundGame();
-    }
-    else if (gameType == GameTypes.bingo.text()) {
+    } else if (gameType == GameTypes.bingo.text()) {
       return BingoGame();
-    }
-    else if (gameType == GameTypes.sortingCups.text()) {
+    } else if (gameType == GameTypes.sortingCups.text()) {
       return SortingCupsGame();
-    }
-    else if (gameType == GameTypes.sortingCupsUP.text()) {
+    } else if (gameType == GameTypes.sortingCupsUP.text()) {
       return SortingCupsGame();
-    }
-    else if (gameType == GameTypes.sortingPictures.text()) {
+    } else if (gameType == GameTypes.sortingPictures.text()) {
       return SortingPicturesGame();
-    }
-    else if (gameType == GameTypes.spelling.text()) {
+    } else if (gameType == GameTypes.spelling.text()) {
       return SpellingGame();
-    }
-    else if (gameType == GameTypes.xOut.text()) {
+    } else if (gameType == GameTypes.xOut.text()) {
       return XOutGame();
-    }
-    else if (gameType == GameTypes.dice.text()) {
+    } else if (gameType == GameTypes.dice.text()) {
       return DiceGame();
-    }
-    else if (gameType == GameTypes.tracing.text()) {
+    } else if (gameType == GameTypes.tracing.text()) {
       return Tracking();
-    }
-    else if (gameType == GameTypes.video.text()) {
+    } else if (gameType == GameTypes.video.text()) {
       return Video();
-    }
-    else if (gameType == GameTypes.spellingWord.text()) {
+    } else if (gameType == GameTypes.spellingWord.text()) {
       return SpellingWordGame();
-    }
-    else if (gameType == GameTypes.dragPicToWord.text()) {
+    } else if (gameType == GameTypes.dragPicToWord.text()) {
       return DragPicToWordGame();
-    }
-    else if (gameType == GameTypes.dragWordToPic.text()) {
+    } else if (gameType == GameTypes.dragWordToPic.text()) {
       return DragWordToPicGame();
-    }
-    else if (gameType == GameTypes.wordFamily.text()) {
+    } else if (gameType == GameTypes.wordFamily.text()) {
       print('WordFamilyGame');
       return WordFamilyGame();
-    }
-    else if (gameType == GameTypes.rearrange.text()) {
+    } else if (gameType == GameTypes.rearrange.text()) {
       print('WordFamilyGame');
       return RearrangeGame();
-    }
-    else if (gameType == GameTypes.match.text()) {
+    } else if (gameType == GameTypes.match.text()) {
       print('WordFamilyGame');
       return MatchGame();
-    }
-    else if (gameType == GameTypes.listenAndChoose.text()) {
+    } else if (gameType == GameTypes.listenAndChoose.text()) {
       return ListenAndChooseGame();
-    }
-    else if (gameType == GameTypes.clickTheWord.text()) {
+    } else if (gameType == GameTypes.clickTheWord.text()) {
       return ClickTheWordGame();
-    }
-    else if (gameType == GameTypes.chooseTheSentence.text()) {
+    } else if (gameType == GameTypes.chooseTheSentence.text()) {
       return ChooseTheSentenceGame();
-    }
-    else if (gameType == GameTypes.chooseTheCorrect.text()) {
+    } else if (gameType == GameTypes.chooseTheCorrect.text()) {
       return ChooseTheCorrectGame();
+    } else if (gameType == GameTypes.ninePicCards.text()) {
+      return DragWordToPicGame();
     }
   }
 
@@ -457,6 +437,7 @@ class SpellingWordGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 2;
 }
+
 class DragPicToWordGame implements BasicOfGameData {
   @override
   bool isRound = true;
@@ -476,6 +457,7 @@ class DragPicToWordGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 1;
 }
+
 class DragWordToPicGame implements BasicOfGameData {
   @override
   bool isRound = true;
@@ -495,6 +477,7 @@ class DragWordToPicGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 1;
 }
+
 class WordFamilyGame implements BasicOfGameData {
   @override
   bool isRound = false;
@@ -516,10 +499,10 @@ class WordFamilyGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 2;
 }
+
 class RearrangeGame implements BasicOfGameData {
   @override
   bool isRound = true;
-
 
   @override
   String titleImageEn = AppImagesPhonetics.rearrangeGame;
@@ -536,10 +519,10 @@ class RearrangeGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 2;
 }
+
 class MatchGame implements BasicOfGameData {
   @override
   bool isRound = true;
-
 
   @override
   String titleImageEn = AppImagesPhonetics.matchGame;
@@ -556,10 +539,10 @@ class MatchGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 1;
 }
+
 class ListenAndChooseGame implements BasicOfGameData {
   @override
   bool isRound = false;
-
 
   @override
   String titleImageEn = AppImagesPhonetics.listenAndChooseGame;
@@ -576,10 +559,10 @@ class ListenAndChooseGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 1;
 }
+
 class ClickTheWordGame implements BasicOfGameData {
   @override
   bool isRound = false;
-
 
   @override
   String titleImageEn = AppImagesPhonetics.clickTheWordGame;
@@ -596,10 +579,10 @@ class ClickTheWordGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 2;
 }
+
 class ChooseTheSentenceGame implements BasicOfGameData {
   @override
   bool isRound = false;
-
 
   @override
   String titleImageEn = AppImagesPhonetics.chooseTheSentenceGame;
@@ -616,10 +599,10 @@ class ChooseTheSentenceGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 1;
 }
+
 class ChooseTheCorrectGame implements BasicOfGameData {
   @override
   bool isRound = false;
-
 
   @override
   String titleImageEn = AppImagesPhonetics.chooseTheCorrectGame;

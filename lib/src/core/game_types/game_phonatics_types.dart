@@ -30,7 +30,9 @@ enum GameTypes {
   rearrange,
   clickTheWord,
   chooseTheSentence,
-  chooseTheCorrect,sortingCupsUP
+  chooseTheCorrect,
+  sortingCupsUP,
+  ninePicCards
 }
 
 extension TypeExtension on GameTypes {
@@ -38,6 +40,8 @@ extension TypeExtension on GameTypes {
     switch (this) {
       case GameTypes.dragOut:
         return "Drag Out".toLowerCase();
+      case GameTypes.ninePicCards:
+        return "nine pic cards".toLowerCase();
       case GameTypes.clickPicture:
         return 'Click the picture'.toLowerCase();
       case GameTypes.clickTheSound:
