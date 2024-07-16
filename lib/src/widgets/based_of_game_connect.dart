@@ -252,8 +252,8 @@ class BasedOfGameConnect extends StatelessWidget {
                                         child: stateOfGame
                                                     .avatarCurrentArtboard ==
                                                 null
-                                            ? Image.asset(
-                                                stateOfGame.currentAvatar ?? '',
+                                            ? SizedBox(
+                                                // stateOfGame.currentAvatar ?? '',
                                                 // height:
                                                 // MediaQuery.of(context).size.height - (70.h),
                                                 height: 75.h,
