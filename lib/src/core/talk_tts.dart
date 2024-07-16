@@ -55,7 +55,12 @@ abstract class TalkTts {
   static stopTalk() async {
     await flutterTts.stop();
   }
-  static reBackTheDefaultValue(){
+
+  static reBackTheDefaultValue() {
     data = StateOfTalk.talking;
+  }
+
+  static reStopTheDefaultValue() {
+    data = StateOfTalk.stopped;
   }
 }

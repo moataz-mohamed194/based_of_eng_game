@@ -25,6 +25,7 @@ class BingoCubit extends Cubit<BingoInitial> {
   }
 
   getTheRandomWord() async {
+    TalkTts.reBackTheDefaultValue();
     List<GameLettersGameFinalModel> checkLetters = [];
 
     state.cardsLetters?.forEach((element) {
@@ -51,6 +52,7 @@ class BingoCubit extends Cubit<BingoInitial> {
               mainGameLetter: chooseWord.letter?.toLowerCase() ?? ''));
       emit(state.copyWith(chooseWord: chooseWord));
     }
+    TalkTts.reStopTheDefaultValue();
   }
 
   addTheCorrectAnswer({required int idOfUserAnswer}) async {
