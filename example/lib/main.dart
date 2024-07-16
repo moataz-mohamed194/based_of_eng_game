@@ -31,17 +31,18 @@ class MyApp extends StatelessWidget {
             builder: (_, child) {
               return BlocProvider<ContactLessonBloc>(
                   create: (_) => di.sl<ContactLessonBloc>()
-                    ..add(GetContactLessonRequest(lessonId: 102, gameId: 1262)),
+                    ..add(GetContactLessonRequest(lessonId: 105, gameId: 1314)),
                   // ..add(GetContactLessonRequest(lessonId: 4, gameId: 168)),
 
                   // ..add(GetContactLessonRequest(lessonId: 102, gameId: 1252)),
                   child: BlocConsumer<ContactLessonBloc, ContactLessonState>(
                     listener: (context, state) {
                       if (state is GetContactErrorInitial) {
-                        final snackBar = SnackBar(
-                          content: Text(state.message),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        print('state.message:${state.message}');
+                        // final snackBar = SnackBar(
+                        //   content: Text(state.message),
+                        // );
+                        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       } else if (state is LogOutLoadingState) {
                         Navigator.of(context).pop();
                       } else if (state is GetContactInitial) {
