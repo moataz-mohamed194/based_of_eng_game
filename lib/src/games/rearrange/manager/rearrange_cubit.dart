@@ -19,7 +19,7 @@ class RearrangeCubit extends Cubit<RearrangeInitial> {
           finalAnswer: '',
           userAnswers: [],
         )) {
-    TalkTts.startTalk(text: state.gameData.inst??'');
+    TalkTts.startTalk(text: state.gameData.inst ?? '');
 
     reFormatAnswers();
   }
@@ -27,7 +27,9 @@ class RearrangeCubit extends Cubit<RearrangeInitial> {
   reFormatAnswers() {
     GameFinalModel data = state.gameData;
     String word = data.gameImages?.first.word ?? '';
-    List<String> wordAnswers = word.split(' ').toList() ?? [];
+    List<String> wordAnswers =
+        data.gameLetters?.map((element) => element.letter ?? '').toList() ?? [];
+    print('wordAnswers:${wordAnswers.length}, ${data.gameLetters?.length}');
     List<String> showAnswers = wordAnswers;
     showAnswers.shuffle();
     emit(state.copyWith(
