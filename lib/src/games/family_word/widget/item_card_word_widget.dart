@@ -25,7 +25,7 @@ class ItemCardWordWidget extends StatelessWidget {
     return Draggable<GameImagesGameFinalModel>(
       // Data is the value this Draggable stores.
       data: data,
-maxSimultaneousDrags: 1,
+      maxSimultaneousDrags: 1,
       feedback: Transform.translate(
           offset:
               const Offset(30, 0), // Adjust the offset to center the feedback
@@ -37,7 +37,7 @@ maxSimultaneousDrags: 1,
               dashPattern: [8, 4],
               color: AppColorPhonetics.darkBorderColor,
 
-              borderType : BorderType.RRect,
+              borderType: BorderType.RRect,
               radius: const Radius.circular(7),
               // padding: const EdgeInsets.all(6),
               child: Center(
@@ -59,7 +59,7 @@ maxSimultaneousDrags: 1,
         dashPattern: [8, 4],
         color: AppColorPhonetics.darkBorderColor,
 
-        borderType : BorderType.RRect,
+        borderType: BorderType.RRect,
         radius: const Radius.circular(7),
 
         // padding: const EdgeInsets.all(6),

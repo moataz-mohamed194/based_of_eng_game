@@ -93,7 +93,9 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                     alignment: Alignment.center,
                     child: ListView.separated(
                         shrinkWrap: true,
-                        padding: EdgeInsets.zero,
+                        padding: MediaQuery.of(context).size.height < 760
+                            ? EdgeInsets.only(top: .001.sh)
+                            : EdgeInsets.only(top: .04.sh),
                         itemCount: gameState.gameData.gameLetters?.length ?? 1,
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
@@ -135,7 +137,15 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                               shrinkWrap: true,
                                               padding: EdgeInsets.zero,
                                               itemCount: gameState
-                                                  .correctAnswersData.length,
+                                                  .correctAnswersData.where((element) =>
+                                              element
+                                                  .gameLetterId ==
+                                                  gameState
+                                                      .gameData
+                                                      .gameLetters![
+                                                  index]
+                                                      .id)
+                                                  .toList().length,
                                               gridDelegate:
                                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                                       crossAxisCount: 2,
@@ -159,7 +169,7 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                                   return Text(
                                                     image.word ?? '',
                                                     style: TextStyle(
-                                                        fontSize: 20,
+                                                        fontSize: 12.sp,
                                                         fontFamily: AppTheme
                                                             .getFontFamily5(),
                                                         color: AppColorPhonetics
