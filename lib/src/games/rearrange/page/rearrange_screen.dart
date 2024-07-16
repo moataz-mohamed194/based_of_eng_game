@@ -80,7 +80,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: List.generate(
-                            gameState.userAnswers.length,
+                            gameState.correctAnswers.length,
                             (index) => Container(
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 5),
@@ -94,24 +94,37 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                     strokeWidth: 1,
                                     dashPattern: [8, 4],
                                     color: AppColorPhonetics.darkBorderColor,
-
                                     borderType: BorderType.RRect,
                                     radius: const Radius.circular(7),
                                     // padding: const EdgeInsets.all(6),
-                                    child: SizedBox(
-                                      width: 24.w,
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      // width: 24.w,
+                                      width:
+                                          ((gameState.userAnswers[index] == ''))
+                                              ? 24.w
+                                              : (gameState.userAnswers[index])
+                                                          .split(' ')
+                                                          .length >
+                                                      1
+                                                  ? null
+                                                  : 24.w,
                                       height: 30.h,
-                                      child: FittedBox(
-                                        child: Text(
-                                          gameState.userAnswers[index],
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontFamily:
-                                                  AppTheme.getFontFamily5(),
-                                              color: AppColorPhonetics
-                                                  .darkBorderColor),
-                                          textAlign: TextAlign.center,
-                                        ),
+                                      child: Text(
+                                        (gameState.userAnswers[index] != '')
+                                            ? gameState.userAnswers[index]
+                                            : gameState.correctAnswers[index],
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily:
+                                                AppTheme.getFontFamily5(),
+                                            color:
+                                                (gameState.userAnswers[index] ==
+                                                        '')
+                                                    ? Colors.transparent
+                                                    : AppColorPhonetics
+                                                        .darkBorderColor),
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
                                   );
@@ -183,26 +196,36 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                     maxSimultaneousDrags: 1,
                                     data: gameState.correctAnswers[index] ?? '',
                                     childWhenDragging: Container(
+                                      alignment: Alignment.center,
                                       height: 30.h,
-                                      width: 24.w,
+                                      width: (gameState.correctAnswers[index]
+                                                  .split(' ')
+                                                  .length >
+                                              1)
+                                          ? null
+                                          : 24.w,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5),
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 5),
-                                      child: FittedBox(
-                                        child: Text(
-                                          gameState.correctAnswers[index],
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontFamily:
-                                                  AppTheme.getFontFamily5(),
-                                              color: AppColorPhonetics.white),
-                                          textAlign: TextAlign.center,
-                                        ),
+                                      child: Text(
+                                        gameState.correctAnswers[index],
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily:
+                                                AppTheme.getFontFamily5(),
+                                            color: AppColorPhonetics.white),
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
                                     feedback: Container(
-                                      width: 24.w,
+                                      alignment: Alignment.center,
+                                      width: (gameState.correctAnswers[index]
+                                                  .split(' ')
+                                                  .length >
+                                              1)
+                                          ? null
+                                          : 24.w,
                                       height: 30.h,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5),
@@ -213,27 +236,32 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                               BorderRadius.circular(7)),
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 5),
-                                      child: FittedBox(
-                                        child: Text(
-                                          gameState.correctAnswers[index],
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontFamily:
-                                                  AppTheme.getFontFamily5(),
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              decorationColor: AppColorPhonetics
-                                                  .darkBorderColor,
-                                              color: AppColorPhonetics.white),
-                                          textAlign: TextAlign.center,
-                                        ),
+                                      child: Text(
+                                        gameState.correctAnswers[index],
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily:
+                                                AppTheme.getFontFamily5(),
+                                            decoration:
+                                                TextDecoration.underline,
+                                            decorationColor: AppColorPhonetics
+                                                .darkBorderColor,
+                                            color: AppColorPhonetics.white),
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
                                     child: ((stateOfCurrentGamePhoneticsCubit
                                                 .stateOfAvatar ==
                                             BasicOfGameData.stateOfWin))
                                         ? Container(
-                                            width: 24.w,
+                                            alignment: Alignment.center,
+                                            width: (gameState
+                                                        .correctAnswers[index]
+                                                        .split(' ')
+                                                        .length >
+                                                    1)
+                                                ? null
+                                                : 24.w,
                                             height: 30.h,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 5),
@@ -253,9 +281,15 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                             ),
                                           )
                                         : Container(
-                                            width: 24.w,
-                                            height: 30.h,
                                             alignment: Alignment.center,
+                                            width: (gameState
+                                                        .correctAnswers[index]
+                                                        .split(' ')
+                                                        .length >
+                                                    1)
+                                                ? null
+                                                : 24.w,
+                                            height: 30.h,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 5),
                                             decoration: BoxDecoration(
@@ -265,17 +299,15 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                                     BorderRadius.circular(7)),
                                             margin: const EdgeInsets.symmetric(
                                                 horizontal: 5),
-                                            child: FittedBox(
-                                              child: Text(
-                                                gameState.correctAnswers[index],
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontFamily: AppTheme
-                                                        .getFontFamily5(),
-                                                    color: AppColorPhonetics
-                                                        .white),
-                                                textAlign: TextAlign.center,
-                                              ),
+                                            child: Text(
+                                              gameState.correctAnswers[index],
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontFamily:
+                                                      AppTheme.getFontFamily5(),
+                                                  color:
+                                                      AppColorPhonetics.white),
+                                              textAlign: TextAlign.center,
                                             ),
                                           ),
                                   )),
