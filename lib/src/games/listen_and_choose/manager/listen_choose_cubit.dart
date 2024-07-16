@@ -56,6 +56,12 @@ class ListenChooseCubit extends Cubit<ListenChooseInitial> {
   }
 
   _sayLetter() async {
-    await TalkTts.startTalk(text: "${state.gameData.inst ?? ''} ${state.gameData.sentence??''}");
+    if (state.index == 0) {
+      await TalkTts.startTalk(
+          text:
+              "${state.gameData.inst ?? ''} ${state.gameData.sentence ?? ''}");
+    } else {
+      await TalkTts.startTalk(text: state.gameData.sentence ?? '');
+    }
   }
 }
