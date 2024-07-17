@@ -66,10 +66,10 @@ class RearrangeCubit extends Cubit<RearrangeInitial> {
   }
 
   _checkCorrectAnswer() {
-    String correctAnswer = state.finalAnswer;
-    String userAnswer = state.userAnswers.join(' ');
-    print('userAnswer:$userAnswer , $correctAnswer');
-    if (correctAnswer.replaceAll(' ', '') == userAnswer.replaceAll(' ', '')) {
+    String correctAnswer = state.finalAnswer.replaceAll(' ', '');
+    String userAnswer = state.userAnswers.join(' ').replaceAll(' ', '');
+    print('userAnswer:$userAnswer,$correctAnswer , ${(correctAnswer == userAnswer)}');
+    if (correctAnswer == userAnswer) {
       return true;
     } else {
       return false;
