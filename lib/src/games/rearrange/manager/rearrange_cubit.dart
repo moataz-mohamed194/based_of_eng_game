@@ -69,7 +69,7 @@ class RearrangeCubit extends Cubit<RearrangeInitial> {
     String correctAnswer = state.finalAnswer;
     String userAnswer = state.userAnswers.join(' ');
     print('userAnswer:$userAnswer , $correctAnswer');
-    if (correctAnswer == userAnswer) {
+    if (correctAnswer.replaceAll(' ', '') == userAnswer.replaceAll(' ', '')) {
       return true;
     } else {
       return false;

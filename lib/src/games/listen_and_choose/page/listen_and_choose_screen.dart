@@ -169,14 +169,16 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
                   ),
                 ),
                 20.w.pw,
-                Text(
-                  gameState.isCorrect
-                      ? (gameState.gameData.sentence ?? '')
-                      : gameState.images.first.word ?? '',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: AppTheme.getFontFamily5(),
-                      color: AppColorPhonetics.darkBorderColor),
+                Expanded(
+                  child: Text(
+                    gameState.isCorrect
+                        ? (gameState.gameData.sentence ?? '')
+                        : gameState.images.first.word ?? '',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: AppTheme.getFontFamily5(),
+                        color: AppColorPhonetics.darkBorderColor),
+                  ),
                 )
               ],
             )

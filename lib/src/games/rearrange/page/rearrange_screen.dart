@@ -102,13 +102,13 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                       // width: 24.w,
                                       width:
                                           ((gameState.userAnswers[index] == ''))
-                                              ? 24.w
+                                              ? 25.w
                                               : (gameState.userAnswers[index])
                                                           .split(' ')
                                                           .length >
                                                       1
                                                   ? null
-                                                  : 24.w,
+                                                  : 25.w,
                                       height: 30.h,
                                       child: Text(
                                         (gameState.userAnswers[index] != '')
@@ -203,7 +203,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                                   .length >
                                               1)
                                           ? null
-                                          : 24.w,
+                                          : 25.w,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5),
                                       margin: const EdgeInsets.symmetric(
@@ -225,7 +225,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                                   .length >
                                               1)
                                           ? null
-                                          : 24.w,
+                                          : 25.w,
                                       height: 30.h,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5),
@@ -261,7 +261,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                                         .length >
                                                     1)
                                                 ? null
-                                                : 24.w,
+                                                : 25.w,
                                             height: 30.h,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 5),
@@ -288,7 +288,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                                         .length >
                                                     1)
                                                 ? null
-                                                : 24.w,
+                                                : 27.w,
                                             height: 30.h,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 5),
