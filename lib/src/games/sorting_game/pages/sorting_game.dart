@@ -82,6 +82,7 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                 Expanded(
                     child: Container(
                   height: 0.8.sh,
+                  padding: EdgeInsets.symmetric(horizontal: 3),
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(gameState.woodenBackground!),
