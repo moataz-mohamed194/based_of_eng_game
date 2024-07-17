@@ -15,13 +15,16 @@ class DragWordToPicCubit extends Cubit<DragWordToPicInitial> {
           correctedAnswers: [],
         )) {
     List<GameImagesGameFinalModel>? gameImages = (gameData.gameImages ?? []);
+    List<GameImagesGameFinalModel> gamesLetters = gameImages.reversed.toList();
+
+    gamesLetters.shuffle();
     gameImages.shuffle();
     emit(state.copyWith(
         gameImages: _splitListIntoTwo(gameData.gameImages ?? []).first
             as List<GameImagesGameFinalModel>,
         gameImages2: _splitListIntoTwo(gameData.gameImages ?? []).last
             as List<GameImagesGameFinalModel>,
-        mainGameImages: gameImages));
+        mainGameImages: gamesLetters));
     TalkTts.startTalk(text: state.gameData.inst??'');
   }
   List<List<GameImagesGameFinalModel>>

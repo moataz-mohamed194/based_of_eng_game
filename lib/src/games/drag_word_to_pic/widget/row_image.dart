@@ -71,7 +71,8 @@ class RowImage extends StatelessWidget {
                               "+++++++++++:${item.data.word?.toLowerCase()}, ${gameImages[index].word?.toLowerCase()}");
                           if (context
                               .read<CurrentGamePhoneticsCubit>()
-                              .ableButton()) {
+                              .ableButton() && !stateOfGameData.correctedAnswers
+                              .contains(gameImages[index].id)) {
                           if (item.data.word?.toLowerCase() ==
                               (gameImages[index].word?.toLowerCase())) {
                             context.read<DragWordToPicCubit>().addCorrectAnswer(

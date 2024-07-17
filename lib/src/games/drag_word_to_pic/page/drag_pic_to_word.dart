@@ -113,16 +113,27 @@ class _DragWordToPicGameScreen extends State<DragWordToPicGameScreen> {
                                     width: 25.w,
                                   ),
                                   feedback: TextInDrag(
-                                      image:
-                                          stateOfGameData.mainGameImages![index]),
+                                      isHide: false,
+
+                                      image: stateOfGameData
+                                          .mainGameImages![index]),
                                   child: TextInDrag(
-                                      image:
-                                          stateOfGameData.mainGameImages![index]),
+                                      isHide: false,
+
+                                      image: stateOfGameData
+                                          .mainGameImages![index]),
                                 )
-                              : SizedBox(
-                            height: 30.h,
-                            width: 25.w,
-                                ),
+                              : Opacity(
+                                  opacity: .7,
+                                  child: Container(
+                                    height: 30.h,
+                                    width: 25.w,
+
+                                    child: TextInDrag(
+                                      isHide: true,
+                                        image: stateOfGameData
+                                            .mainGameImages![index]),
+                                  )),
                         ),
                       )),
                 ),
@@ -131,7 +142,6 @@ class _DragWordToPicGameScreen extends State<DragWordToPicGameScreen> {
                   flex: 4,
                   child: Container(
                     height: MediaQuery.of(context).size.height - 0.4.sh,
-
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
