@@ -178,8 +178,11 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
                                 );
                               }, onAcceptWithDetails: (item) async {
                                 if (context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .ableButton()) {
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .ableButton() &&
+                                    !stateOfGameData.correctedAnswers.contains(
+                                        stateOfGameData
+                                            .gamesLetters?[index].id)) {
                                   if (item.data.word?.toLowerCase() ==
                                       (stateOfGameData.gamesLetters?[index].word
                                           ?.toLowerCase())) {
