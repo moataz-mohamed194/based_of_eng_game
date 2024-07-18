@@ -109,28 +109,25 @@ class _DragWordToPicGameScreen extends State<DragWordToPicGameScreen> {
                                   data: stateOfGameData.mainGameImages?[index],
                                   maxSimultaneousDrags: 1,
                                   childWhenDragging: SizedBox(
-                                    height: 30.h,
+                                    height: 29.h,
                                     width: 25.w,
                                   ),
                                   feedback: TextInDrag(
                                       isHide: false,
-
                                       image: stateOfGameData
                                           .mainGameImages![index]),
                                   child: TextInDrag(
                                       isHide: false,
-
                                       image: stateOfGameData
                                           .mainGameImages![index]),
                                 )
                               : Opacity(
                                   opacity: .7,
-                                  child: Container(
-                                    height: 30.h,
+                                  child: SizedBox(
+                                    height: 29.h,
                                     width: 25.w,
-
                                     child: TextInDrag(
-                                      isHide: true,
+                                        isHide: true,
                                         image: stateOfGameData
                                             .mainGameImages![index]),
                                   )),
@@ -140,7 +137,7 @@ class _DragWordToPicGameScreen extends State<DragWordToPicGameScreen> {
 
                 Expanded(
                   flex: 4,
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height - 0.4.sh,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,

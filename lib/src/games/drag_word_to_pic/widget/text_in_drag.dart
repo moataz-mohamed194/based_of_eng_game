@@ -13,17 +13,24 @@ class TextInDrag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 29.h,
       width: 25.w,
-      color: isHide?Colors.grey.withOpacity(.2):AppColorPhonetics.lightBlueColor,
+      color: isHide
+          ? Colors.grey.withOpacity(.2)
+          : AppColorPhonetics.lightBlueColor,
       padding: EdgeInsets.symmetric(vertical: 5.h),
-      child: Text(
-        image.word ?? '',
-        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            color: isHide?Colors.grey.withOpacity(.8):AppColorPhonetics.darkBorderColor,
-            fontFamily: AppTheme.getFontFamily5()),
-        textAlign: TextAlign.center,
+      child: FittedBox(
+        child: Text(
+          image.word ?? '',
+          style: Theme.of(context).textTheme.displayLarge?.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: isHide
+                  ? Colors.grey.withOpacity(.8)
+                  : AppColorPhonetics.darkBorderColor,
+              fontFamily: AppTheme.getFontFamily5()),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
