@@ -1,8 +1,10 @@
+import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import '../core/assets_images_main.dart';
 import '../core/assets_images_phonetics.dart';
 import '../core/assets_svg_images.dart';
 import '../core/phonetics_color.dart';
@@ -13,7 +15,9 @@ import 'button_start_game.dart';
 widgetOfTries(
     {required BuildContext context,
     required CurrentGamePhoneticsState stateOfGame,
-    required Function() actionOfDone,
+    required int countOfStar,
+    required Function() actionOfRetry,
+    Function()? actionOfDone,
     required Function() backButton}) {
   return Dialog(
     backgroundColor: Colors.transparent,
@@ -37,7 +41,7 @@ widgetOfTries(
           Container(
             width: 300.w,
             height: 300.h,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(AppImagesPhonetics.popUpBackground))),
             child: Column(
@@ -47,23 +51,53 @@ widgetOfTries(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                       3,
-                          (index) => Image.asset(
-                        AppImagesPhonetics.iconEmptyStar2,
-                        height: 40.h,
-                      )),
+                      (index) => countOfStar > (index)
+                          ? Image.asset(
+                              AppImagesPhonetics.completeStar,
+                              height: 40.h,
+                            )
+                          : Image.asset(
+                              AppImagesPhonetics.iconEmptyStar2,
+                              height: 40.h,
+                            )),
                 ),
+                // if(countOfStar==0){
                 Text(
-                  '"Try again?"',
+                  countOfStar == 0
+                      ? '"Try again?"'
+                      : countOfStar == 3
+                          ? '"Excellent! Keep going?"'
+                          : countOfStar == 2
+                              ? '"Very Good! Keep going?"'
+                              : countOfStar == 1
+                                  ? '"Good! Keep going?"'
+                                  : '',
                   style: TextStyle(
                     fontSize: 18.0,
                     color: AppColorPhonetics.darkBlueColor,
                     fontFamily: AppTheme.getFontFamily5(),
                   ),
                 ),
-                ReTryButtton(
-                    dataFunction: () => actionOfDone(),
-                    title: 'Retry',
-                    width: 150)
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ReTryButtton(
+                        dataFunction: () => actionOfRetry(),
+                        title: 'Retry',
+                        width: 100),
+                    actionOfDone != null
+                        ? Row(
+                            children: [
+                              5.pw,
+                              ReTryButtton(
+                                  dataFunction: () => actionOfDone(),
+                                  title: 'Done',
+                                  width: 100),
+                            ],
+                          )
+                        : const SizedBox(),
+                  ],
+                )
               ],
             ),
           ),

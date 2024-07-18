@@ -71,9 +71,9 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                     ? null
                                     : () {
                                         TalkTts.startTalk(
-                                            text:
-                                                gameState.gameData?.correctAns ??
-                                                    '');
+                                            text: gameState
+                                                    .gameData?.correctAns ??
+                                                '');
                                       },
                                 child: CachedNetworkImage(
                                   imageUrl: gameState
@@ -142,13 +142,13 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                                           queations: gameState
                                                               .allGames.length);
                                                   if (isLastQuestion) {
-                                                    Future.delayed(
-                                                        const Duration(
-                                                            seconds: 2),
-                                                        () async {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    });
+                                                    // Future.delayed(
+                                                    //     const Duration(
+                                                    //         seconds: 2),
+                                                    //     () async {
+                                                    //   Navigator.of(context)
+                                                    //       .pop();
+                                                    // });
                                                   } else {
                                                     await context
                                                         .read<

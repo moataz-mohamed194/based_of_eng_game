@@ -70,37 +70,40 @@ class RowImage extends StatelessWidget {
                           debugPrint(
                               "+++++++++++:${item.data.word?.toLowerCase()}, ${gameImages[index].word?.toLowerCase()}");
                           if (context
-                              .read<CurrentGamePhoneticsCubit>()
-                              .ableButton() && !stateOfGameData.correctedAnswers
-                              .contains(gameImages[index].id)) {
-                          if (item.data.word?.toLowerCase() ==
-                              (gameImages[index].word?.toLowerCase())) {
-                            context.read<DragWordToPicCubit>().addCorrectAnswer(
-                                correctAnswerId: item.data.id ?? 0);
-                            await context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .addSuccessAnswer(
-                                    questions: mainGameImages.length,
-                                    correctAnswers:
-                                        stateOfGameData.correctedAnswers.length)
-                                .whenComplete(() async {
-                              bool isLastQuestion = context
                                   .read<CurrentGamePhoneticsCubit>()
-                                  .secondWayToCheckIfIsTheLastQuestionOfGame(
-                                      queations: mainGameImages.length);
-                              if (isLastQuestion) {
-                                Future.delayed(const Duration(seconds: 2),
-                                    () async {
-                                  Navigator.of(context).pop();
-                                });
-                              }
-                            });
-                          } else {
-                            await context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .addWrongAnswer(
-                                    actionOfWrongAnswer: () async {});
-                          }
+                                  .ableButton() &&
+                              !stateOfGameData.correctedAnswers
+                                  .contains(gameImages[index].id)) {
+                            if (item.data.word?.toLowerCase() ==
+                                (gameImages[index].word?.toLowerCase())) {
+                              context
+                                  .read<DragWordToPicCubit>()
+                                  .addCorrectAnswer(
+                                      correctAnswerId: item.data.id ?? 0);
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .addSuccessAnswer(
+                                      questions: mainGameImages.length,
+                                      correctAnswers: stateOfGameData
+                                          .correctedAnswers.length)
+                                  .whenComplete(() async {
+                                bool isLastQuestion = context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .secondWayToCheckIfIsTheLastQuestionOfGame(
+                                        queations: mainGameImages.length);
+                                if (isLastQuestion) {
+                                  // Future.delayed(const Duration(seconds: 2),
+                                  //     () async {
+                                  //   Navigator.of(context).pop();
+                                  // });
+                                }
+                              });
+                            } else {
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .addWrongAnswer(
+                                      actionOfWrongAnswer: () async {});
+                            }
                           }
                         });
                       })

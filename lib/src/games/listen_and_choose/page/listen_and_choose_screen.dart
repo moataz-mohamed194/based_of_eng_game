@@ -96,10 +96,10 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
                                   .checkIfIsTheLastQuestionOfGame(
                                       queations: gameState.listGameData.length);
                               if (isLastQuestion) {
-                                Future.delayed(const Duration(seconds: 2),
-                                    () async {
-                                  Navigator.of(context).pop();
-                                });
+                                // Future.delayed(const Duration(seconds: 2),
+                                //     () async {
+                                //   Navigator.of(context).pop();
+                                // });
                               } else {
                                 Future.delayed(const Duration(seconds: 2),
                                     () async {

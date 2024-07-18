@@ -104,10 +104,10 @@ class _DiceGamePage extends State<DiceGamePage> {
                                         .read<CurrentGamePhoneticsCubit>()
                                         .clearCurrentStringOfDice();
                                     if (isLastQuestion) {
-                                      Future.delayed(const Duration(seconds: 2),
-                                          () async {
-                                        Navigator.of(context).pop();
-                                      });
+                                      // Future.delayed(const Duration(seconds: 2),
+                                      //     () async {
+                                      //   Navigator.of(context).pop();
+                                      // });
                                     } else {
                                       context.read<DiceCubit>().playTheDice(
                                           context: context,

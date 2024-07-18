@@ -171,11 +171,11 @@ class _DragOutGame extends State<DragOutGame> {
                                               queations:
                                                   gameState.allGameData.length);
                                       if (isLastQuestion) {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                            () async {
-                                          Navigator.of(context).pop();
-                                        });
+                                        // Future.delayed(
+                                        //     const Duration(seconds: 2),
+                                        //     () async {
+                                        //   Navigator.of(context).pop();
+                                        // });
                                       } else {
                                         await context
                                             .read<CurrentGamePhoneticsCubit>()

@@ -152,11 +152,11 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                                                   queations: gameState
                                                       .listGameData.length);
                                           if (isLastQuestion) {
-                                            Future.delayed(
-                                                const Duration(seconds: 2),
-                                                () async {
-                                              Navigator.of(context).pop();
-                                            });
+                                            // Future.delayed(
+                                            //     const Duration(seconds: 2),
+                                            //     () async {
+                                            //   Navigator.of(context).pop();
+                                            // });
                                           } else {
                                             await context
                                                 .read<

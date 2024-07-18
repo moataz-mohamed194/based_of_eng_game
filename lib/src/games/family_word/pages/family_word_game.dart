@@ -137,15 +137,15 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                               shrinkWrap: true,
                                               padding: EdgeInsets.zero,
                                               itemCount: gameState
-                                                  .correctAnswersData.where((element) =>
-                                              element
-                                                  .gameLetterId ==
-                                                  gameState
-                                                      .gameData
-                                                      .gameLetters![
-                                                  index]
-                                                      .id)
-                                                  .toList().length,
+                                                  .correctAnswersData
+                                                  .where((element) =>
+                                                      element.gameLetterId ==
+                                                      gameState
+                                                          .gameData
+                                                          .gameLetters![index]
+                                                          .id)
+                                                  .toList()
+                                                  .length,
                                               gridDelegate:
                                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                                       crossAxisCount: 2,
@@ -226,11 +226,11 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                           print('isLastGame:$isLastGame');
 
                                           if (isLastGame) {
-                                            Future.delayed(
-                                                const Duration(seconds: 2),
-                                                () async {
-                                              Navigator.of(context).pop();
-                                            });
+                                            // Future.delayed(
+                                            //     const Duration(seconds: 2),
+                                            //     () async {
+                                            //   Navigator.of(context).pop();
+                                            // });
                                           } else {
                                             await context
                                                 .read<

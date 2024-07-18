@@ -110,10 +110,10 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
                                         queations:
                                             gameState.gameImages?.length ?? 0);
                                 if (isLastQuestion) {
-                                  Future.delayed(const Duration(seconds: 2),
-                                      () async {
-                                    Navigator.of(context).pop();
-                                  });
+                                  // Future.delayed(const Duration(seconds: 2),
+                                  //     () async {
+                                  //   Navigator.of(context).pop();
+                                  // });
                                 } else {}
                               });
                             } else {

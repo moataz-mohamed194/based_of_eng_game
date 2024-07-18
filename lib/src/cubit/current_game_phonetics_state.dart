@@ -1,5 +1,7 @@
 part of 'current_game_phonetics_cubit.dart';
-enum StateOfSubWord{ isWord, isLetter, stopTalk}
+
+enum StateOfSubWord { isWord, isLetter, stopTalk }
+
 class CurrentGamePhoneticsState extends Equatable {
   Artboard? avatarArtboardIdle;
   Artboard? avatarArtboardSuccess;
@@ -16,7 +18,7 @@ class CurrentGamePhoneticsState extends Equatable {
   String? currentStringOfDice;
   void Function(int x) actionWhenTriesBeZero;
   void Function() backButton;
-  String? currentAvatar;
+  // String? currentAvatar;
   int index;
   int? countOfTries;
   List<GameFinalModel>? gameData;
@@ -43,7 +45,7 @@ class CurrentGamePhoneticsState extends Equatable {
       this.countOfCorrectAnswers = 0,
       this.statesOfAddStars,
       this.countOfTries,
-      this.currentAvatar,
+      // this.currentAvatar,
       required this.index,
       this.countOfStar});
 
@@ -53,7 +55,7 @@ class CurrentGamePhoneticsState extends Equatable {
       Artboard? avatarArtboardIdle,
       Artboard? avatarArtboardSad,
       bool? touchPositions,
-        StateOfSubWord? stateOfStringIsWord,
+      StateOfSubWord? stateOfStringIsWord,
       BuildContext? context,
       bool? beeTalking,
       Artboard? avatarCurrentArtboard,
@@ -61,7 +63,7 @@ class CurrentGamePhoneticsState extends Equatable {
       String? currentStringOfDice,
       void Function(int x)? actionWhenTriesBeZero,
       void Function()? backButton,
-      String? currentAvatar,
+      // String? currentAvatar,
       String? stateOfAvatar,
       List<GameFinalModel>? gameData,
       List<int>? statesOfAddStars,
@@ -91,7 +93,7 @@ class CurrentGamePhoneticsState extends Equatable {
         stateOfStringIsWord: stateOfStringIsWord ?? this.stateOfStringIsWord,
         statesOfAddStars: statesOfAddStars ?? this.statesOfAddStars,
         stateOfAvatar: stateOfAvatar ?? this.stateOfAvatar,
-        currentAvatar: currentAvatar ?? this.currentAvatar,
+        // currentAvatar: currentAvatar ?? this.currentAvatar,
         avatarArtboardSad: avatarArtboardSad ?? this.avatarArtboardSad,
         countOfTries: countOfTries ?? this.countOfTries,
         avatarArtboardSuccess:
@@ -118,7 +120,7 @@ class CurrentGamePhoneticsState extends Equatable {
         stateOfStringIsWord: stateOfStringIsWord ?? stateOfStringIsWord,
         statesOfAddStars: statesOfAddStars ?? statesOfAddStars,
         stateOfAvatar: stateOfAvatar ?? stateOfAvatar,
-        currentAvatar: currentAvatar ?? currentAvatar,
+        // currentAvatar: currentAvatar ?? currentAvatar,
         avatarArtboardSad: avatarArtboardSad ?? avatarArtboardSad,
         countOfTries: countOfTries ?? countOfTries,
         avatarArtboardSuccess: avatarArtboardSuccess ?? avatarArtboardSuccess,
@@ -138,7 +140,7 @@ class CurrentGamePhoneticsState extends Equatable {
   @override
   List<Object?> get props => [
         basicData,
-        currentAvatar,
+        // currentAvatar,
         avatarArtboardIdle,
         context,
         backButton,
