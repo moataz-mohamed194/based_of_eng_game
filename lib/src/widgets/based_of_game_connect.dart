@@ -156,46 +156,12 @@ class BasedOfGameConnect extends StatelessWidget {
                     stateOfGame.basicData!.gameData!.isRound
                         ? Padding(
                             padding: EdgeInsets.only(left: 10.w, top: 10.h),
-                            child: GestureDetector(
-                              onTap: stateOfGame.beeTalking == true
-                                  ? null
-                                  : () async {
-                                      await context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .beeTalkingTrue();
-                                      await TalkTts.startTalk(
-                                          text: gamesData[stateOfGame.index]
-                                                  .inst ??
-                                              '');
-                                      TalkTts.flutterTts
-                                          .setCompletionHandler(() async {
-                                        if (stateOfGame.stateOfStringIsWord ==
-                                            StateOfSubWord.isWord) {
-                                          await TalkTts.startTalk(
-                                              text: stateOfGame
-                                                      .stateOfStringWillSay ??
-                                                  '');
-                                        } else {
-                                          await AudioPlayerLetters.startPlaySound(
-                                              soundPath: AssetsSoundLetters
-                                                  .getSoundOfLetter(
-                                                      mainGameLetter: stateOfGame
-                                                              .stateOfStringWillSay ??
-                                                          ''));
-                                        }
-                                      });
-
-                                      await context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .beeTalkingFalse();
-                                    },
-                              child: Image.asset(
-                                stateOfGame.basicData?.gameData?.titleImageEn ??
-                                    '',
-                                height: 75.h,
-                                width: 90.w,
-                                fit: BoxFit.fill,
-                              ),
+                            child: Image.asset(
+                              stateOfGame.basicData?.gameData?.titleImageEn ??
+                                  '',
+                              height: 75.h,
+                              width: 90.w,
+                              fit: BoxFit.fill,
                             ),
                           )
                         : Container(
@@ -280,52 +246,13 @@ class BasedOfGameConnect extends StatelessWidget {
                                 ),
                                 PositionedDirectional(
                                   top: 70.h,
-                                  child: GestureDetector(
-                                    onTap: stateOfGame.beeTalking == true
-                                        ? null
-                                        : () async {
-                                            await context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .beeTalkingTrue();
-                                            await TalkTts.startTalk(
-                                                text:
-                                                    gamesData[stateOfGame.index]
-                                                            .inst ??
-                                                        '');
-                                            TalkTts.flutterTts
-                                                .setCompletionHandler(() async {
-                                              if (stateOfGame
-                                                      .stateOfStringIsWord ==
-                                                  StateOfSubWord.isWord) {
-                                                await TalkTts.startTalk(
-                                                    text: stateOfGame
-                                                            .stateOfStringWillSay ??
-                                                        '');
-                                              } else {
-                                                await AudioPlayerLetters.startPlaySound(
-                                                    soundPath: AssetsSoundLetters
-                                                        .getSoundOfLetter(
-                                                            mainGameLetter:
-                                                                stateOfGame
-                                                                        .stateOfStringWillSay ??
-                                                                    ''));
-                                              }
-                                            });
-
-                                            await context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .beeTalkingFalse();
-                                          },
-                                    child: Image.asset(
-                                      stateOfGame.basicData?.gameData
-                                              ?.titleImageEn ??
-                                          '',
-                                      height: 75.h,
-                                      width: 75.w,
-                                      fit: BoxFit.contain,
-                                    ),
+                                  child: Image.asset(
+                                    stateOfGame.basicData?.gameData
+                                            ?.titleImageEn ??
+                                        '',
+                                    height: 75.h,
+                                    width: 75.w,
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                               ],

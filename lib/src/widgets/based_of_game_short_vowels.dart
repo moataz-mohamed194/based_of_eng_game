@@ -74,40 +74,12 @@ class BasedOfGameShortVowels extends StatelessWidget {
               top: 0,
               left: 20,
               // start: 45.w,
-              child: GestureDetector(
-                // onTap: stateOfGame.beeTalking == true
-                //     ? null
-                //     : () async {
-                //         await context
-                //             .read<CurrentGamePhoneticsCubit>()
-                //             .beeTalkingTrue();
-                //         await TalkTts.startTalk(
-                //             text: gamesData[stateOfGame.index].inst ?? '');
-                //         TalkTts.flutterTts.setCompletionHandler(() async {
-                //           if (stateOfGame.stateOfStringIsWord ==
-                //               StateOfSubWord.isWord) {
-                //             await TalkTts.startTalk(
-                //                 text: stateOfGame.stateOfStringWillSay ?? '');
-                //           } else {
-                //             await AudioPlayerLetters.startPlaySound(
-                //                 soundPath: AssetsSoundLetters.getSoundOfLetter(
-                //                     mainGameLetter:
-                //                         stateOfGame.stateOfStringWillSay ??
-                //                             ''));
-                //           }
-                //         });
-                //
-                //         await context
-                //             .read<CurrentGamePhoneticsCubit>()
-                //             .beeTalkingFalse();
-                //       },
-                child: Image.asset(
-                  stateOfGame.basicData?.gameData?.titleImageEn ?? '',
-                  height: 75.h,
-                  width: 85.w,
+              child: Image.asset(
+                stateOfGame.basicData?.gameData?.titleImageEn ?? '',
+                height: 75.h,
+                width: 85.w,
 
-                  // fit: BoxFit.fill,
-                ),
+                // fit: BoxFit.fill,
               ),
             ),
             Positioned(
