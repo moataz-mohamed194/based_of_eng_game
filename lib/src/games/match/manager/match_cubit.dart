@@ -37,7 +37,10 @@ class MatchCubit extends Cubit<MatchInitial> {
   }
 
   int addCorrectAnswer(
-      {required Offset endPosition, required Offset startPosition, required int answerId, required int imageAnswerId}) {
+      {required Offset endPosition,
+      required Offset startPosition,
+      required int answerId,
+      required int imageAnswerId}) {
     int countOfCorrect = state.countCorrectAnswers;
     countOfCorrect++;
     List<List<Offset?>> positions = state.positions;
@@ -46,20 +49,22 @@ class MatchCubit extends Cubit<MatchInitial> {
         countCorrectAnswers: countOfCorrect, positions: positions));
     List<GameLettersGameFinalModel> answers = state.answers;
     List<GameImagesGameFinalModel> imageAnswers = state.imageAnswers;
-    GameLettersGameFinalModel  answer2 = answers.where((test)=> test.id == answerId).first;
+    GameLettersGameFinalModel answer2 =
+        answers.where((test) => test.id == answerId).first;
     int indexAnswer = answers.indexOf(answer2);
-    answers[indexAnswer] =GameLettersGameFinalModel(
-      letter: answers[indexAnswer].letter
-    );
-    GameImagesGameFinalModel  answerImageAnswers2 = imageAnswers.where((test)=> test.id == imageAnswerId).first;
+    answers[indexAnswer] =
+        GameLettersGameFinalModel(letter: answers[indexAnswer].letter);
+    GameImagesGameFinalModel answerImageAnswers2 =
+        imageAnswers.where((test) => test.id == imageAnswerId).first;
     int indexImageAnswers = imageAnswers.indexOf(answerImageAnswers2);
-    imageAnswers[indexImageAnswers] =GameImagesGameFinalModel(
-      word: imageAnswers[indexImageAnswers].word,
-      image: imageAnswers[indexImageAnswers].image
-    );
-    emit(state.copyWith(imageAnswers:imageAnswers, answers:answers));
-      return countOfCorrect;
-
+    imageAnswers[indexImageAnswers] = GameImagesGameFinalModel(
+        word: imageAnswers[indexImageAnswers].word,
+        image: imageAnswers[indexImageAnswers].image);
+    emit(state.copyWith(
+      imageAnswers: imageAnswers,
+      answers: answers,
+    ));
+    return countOfCorrect;
   }
 
   // updateTheCurrentGame({required int index}) {

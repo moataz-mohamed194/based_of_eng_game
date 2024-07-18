@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/core/phonetics_color.dart';
 import 'package:flutter/material.dart';
 
 class LinePainter extends CustomPainter {
@@ -15,7 +16,7 @@ class LinePainter extends CustomPainter {
           end!,
           Paint()
             ..strokeWidth = 4
-            ..color = Colors.red);
+            ..color = AppColorPhonetics.darkBlueColor);
     }
   }
 

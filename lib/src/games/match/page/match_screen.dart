@@ -69,7 +69,7 @@ class _MatchScreen extends State<MatchScreen> {
           return Container(
             margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            width: MediaQuery.of(context).size.width - (300),
+            width: MediaQuery.of(context).size.width - (100.w),
             height: MediaQuery.of(context).size.height - (50.h + 5 + 120.h),
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -77,30 +77,28 @@ class _MatchScreen extends State<MatchScreen> {
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
                     color: AppColorPhonetics.boarderColor, width: 5)),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width - (300),
-              height: MediaQuery.of(context).size.height - (50.h + 5 + 120.h),
-              child: Stack(
-                children: [
-                  IgnorePointer(
-                    child: gestureDetector,
-                  ),
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width - (300),
-                      height: MediaQuery.of(context).size.height -
-                          (50.h + 5 + 120.h),
-                      child: CustomPaint(
-                        size: Size.infinite,
-                        painter: FinalMatchingPainter(gameState.positions),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: List.generate(
-                                  gameState.answers.length,
-                                  (index) => Listener(
-                                      onPointerMove: (event) {
+            child: Stack(
+              children: [
+                IgnorePointer(
+                  child: gestureDetector,
+                ),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width - (100.w),
+                    height:
+                        MediaQuery.of(context).size.height - (50.h + 5 + 120.h),
+                    child: CustomPaint(
+                      size: Size.infinite,
+                      painter: FinalMatchingPainter(gameState.positions),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                                gameState.answers.length,
+                                (index) => Listener(
+                                    onPointerMove: (event) {
+                                      if (gameState.answers[index].id != null) {
                                         var tempHeight =
                                             MediaQuery.of(context).size.height;
                                         if (tempHeight > 500) {
@@ -135,250 +133,242 @@ class _MatchScreen extends State<MatchScreen> {
                                                                   .dy +
                                                               ((120.h) / 2)))));
                                         }
-                                      },
-                                      child: Container(
-                                          height: 60.h,
-                                          width: ((MediaQuery.of(context)
-                                                          .size
-                                                          .width -
-                                                      (300)) /
-                                                  6) *
-                                              2,
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 5),
-                                          child: Draggable<
-                                              GameLettersGameFinalModel>(
-                                            data: gameState.answers[index],
-                                            feedback: const SizedBox(),
-                                            key: gameState.widgetKey[index],
-                                            childWhenDragging: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: (((MediaQuery.of(context)
-                                                                      .size
-                                                                      .width -
-                                                                  (300)) /
-                                                              6) *
-                                                          2) -
-                                                      (20 + 17),
-                                                  child: Text(
-                                                    gameState.answers[index]
-                                                            .letter ??
-                                                        '',
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontFamily: AppTheme
-                                                            .getFontFamily5(),
-                                                        color: AppColorPhonetics
-                                                            .darkBorderColor),
-                                                    textAlign: TextAlign.start,
-                                                  ),
-                                                ),
-                                                20.pw,
-                                                Container(
-                                                  height: 17,
-                                                  width: 17,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              17),
+                                      }
+                                    },
+                                    child: Container(
+                                        height: 60.h,
+                                        width: ((MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    (100.w)) /
+                                                6) *
+                                            2,
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: Draggable<
+                                            GameLettersGameFinalModel>(
+                                          data: gameState.answers[index],
+                                          feedback: const SizedBox(),
+                                          key: gameState.widgetKey[index],
+                                          childWhenDragging: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: (((MediaQuery.of(context)
+                                                                    .size
+                                                                    .width -
+                                                                (100.w)) /
+                                                            6) *
+                                                        2) -
+                                                    (20 + 17),
+                                                child: Text(
+                                                  gameState.answers[index]
+                                                          .letter ??
+                                                      '',
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontFamily: AppTheme
+                                                          .getFontFamily5(),
                                                       color: AppColorPhonetics
-                                                          .lightYellowColor),
-                                                )
-                                              ],
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: (((MediaQuery.of(context)
-                                                                      .size
-                                                                      .width -
-                                                                  (300)) /
-                                                              6) *
-                                                          2) -
-                                                      (20 + 17),
-                                                  child: Text(
-                                                    gameState.answers[index]
-                                                            .letter ??
-                                                        '',
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontFamily: AppTheme
-                                                            .getFontFamily5(),
-                                                        color: AppColorPhonetics
-                                                            .darkBorderColor),
-                                                    textAlign: TextAlign.start,
-                                                  ),
+                                                          .darkBorderColor),
+                                                  textAlign: TextAlign.start,
                                                 ),
-                                                20.pw,
-                                                Container(
-                                                  height: 17,
-                                                  width: 17,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              17),
+                                              ),
+                                              20.pw,
+                                              Container(
+                                                height: 17,
+                                                width: 17,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            17),
+                                                    color: AppColorPhonetics
+                                                        .lightYellowColor),
+                                              )
+                                            ],
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: (((MediaQuery.of(context)
+                                                                    .size
+                                                                    .width -
+                                                                (100.w)) /
+                                                            6) *
+                                                        2) -
+                                                    (20 + 17),
+                                                child: Text(
+                                                  gameState.answers[index]
+                                                          .letter ??
+                                                      '',
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontFamily: AppTheme
+                                                          .getFontFamily5(),
                                                       color: AppColorPhonetics
-                                                          .lightYellowColor),
-                                                )
-                                              ],
-                                            ),
-                                            onDragEnd: (e) {
-                                              setState(() {
-                                                start = Offset.zero;
-                                                end = Offset.zero;
-                                              });
-                                            },
-                                            onDragStarted: () {
-                                              RenderBox renderBox = gameState
-                                                      .widgetKey[index]
-                                                      .currentContext!
-                                                      .findRenderObject()
-                                                  as RenderBox;
-                                              Offset offset = renderBox
-                                                  .localToGlobal(Offset.zero);
-                                              gestureDetector.onPanStart!(
-                                                DragStartDetails(
-                                                  localPosition: Offset(
-                                                      (offset.dx),
-                                                      ((offset.dy) -
-                                                          ((50.h + 5 + 120.h) /
-                                                              2))),
+                                                          .darkBorderColor),
+                                                  textAlign: TextAlign.start,
                                                 ),
-                                              );
-                                            },
-                                          )))),
-                            ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: List.generate(
-                                gameState.imageAnswers.length,
-                                (index) => DragTarget<
-                                        GameLettersGameFinalModel>(
-                                    onAcceptWithDetails: isInteracting !=
-                                                null &&
-                                            isInteracting !=
-                                                BasicOfGameData.stateOIdle
-                                        ? null
-                                        : (item) async {
-                                            print('####:${item.data.letter}');
-                                            print(
-                                                '####:${gameState.imageAnswers[index].word}');
-                                            if (gameState
-                                                    .imageAnswers[index].word
-                                                    ?.toLowerCase() ==
-                                                item.data.letter
-                                                    ?.toLowerCase()) {
-                                              int countCorrectAnswers =
-                                                  await context
-                                                      .read<MatchCubit>()
-                                                      .addCorrectAnswer(
-                                                          endPosition: end!,
-                                                          startPosition: start!,
-                                                          answerId:
-                                                              item.data.id ?? 0,
-                                                          imageAnswerId: gameState
-                                                                  .imageAnswers[
-                                                                      index]
-                                                                  .id ??
-                                                              0);
-                                              print(
-                                                  'gameState.countQuestions:${gameState.countQuestions}, ${gameState.countCorrectAnswers}');
-                                              await context
-                                                  .read<
-                                                      CurrentGamePhoneticsCubit>()
-                                                  .addSuccessAnswer(
-                                                      questions: gameState
-                                                          .countQuestions,
-                                                      correctAnswers:
-                                                          countCorrectAnswers)
-                                                  .whenComplete(() {
-                                                // print('listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
-
-                                                if (gameState.countQuestions ==
-                                                    countCorrectAnswers) {
-                                                  Future.delayed(
-                                                      const Duration(
-                                                          seconds: 2),
-                                                      () async {
-                                                    Navigator.of(context).pop();
-                                                  });
-                                                }
-                                                // else {
-                                                //   Future.delayed(
-                                                //       const Duration(seconds: 2),
-                                                //           () async {
-                                                //         await context
-                                                //             .read<CurrentGamePhoneticsCubit>()
-                                                //             .updateIndexOfCurrentGame();
-                                                //         context
-                                                //             .read<ListenChooseCubit>()
-                                                //             .updateTheCurrentGame(
-                                                //             index: context
-                                                //                 .read<
-                                                //                 CurrentGamePhoneticsCubit>()
-                                                //                 .state
-                                                //                 .index);
-                                                //       });
-                                                // }
-                                              });
-                                            } else {
-                                              await context
-                                                  .read<
-                                                      CurrentGamePhoneticsCubit>()
-                                                  .addWrongAnswer(
-                                                      actionOfWrongAnswer:
-                                                          () async {});
-                                            }
+                                              ),
+                                              20.pw,
+                                              Container(
+                                                height: 17,
+                                                width: 17,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            17),
+                                                    color: AppColorPhonetics
+                                                        .lightYellowColor),
+                                              )
+                                            ],
+                                          ),
+                                          onDragEnd: (e) {
+                                            setState(() {
+                                              start = Offset.zero;
+                                              end = Offset.zero;
+                                            });
                                           },
-                                    builder: (context, onAccepted, onRejected) {
-                                      return Row(
-                                        // crossAxisAlignment: CrossAxisAlignment.center,
-                                        // mainAxisAlignment: MainAxisAlignment.,
-                                        children: [
-                                          Container(
-                                            height: 17,
-                                            width: 17,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(17),
-                                                color: AppColorPhonetics
-                                                    .lightYellowColor),
-                                          ),
-                                          20.pw,
-                                          CachedNetworkImage(
-                                            imageUrl: gameState
-                                                    .imageAnswers[index]
-                                                    .image ??
-                                                '',
-                                            height: (MediaQuery.of(context)
-                                                    .size
-                                                    .height) /
-                                                5,
+                                          onDragStarted: () {
+                                            RenderBox renderBox = gameState
+                                                    .widgetKey[index]
+                                                    .currentContext!
+                                                    .findRenderObject()
+                                                as RenderBox;
+                                            Offset offset = renderBox
+                                                .localToGlobal(Offset.zero);
+                                            gestureDetector.onPanStart!(
+                                              DragStartDetails(
+                                                localPosition: Offset(
+                                                    (offset.dx) + 22.w,
+                                                    ((offset.dy) -
+                                                        ((50.h + 5 + 150.h) /
+                                                            2))),
+                                              ),
+                                            );
+                                          },
+                                        )))),
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: List.generate(
+                              gameState.imageAnswers.length,
+                              (index) => DragTarget<GameLettersGameFinalModel>(
+                                  onAcceptWithDetails: isInteracting != null &&
+                                          isInteracting !=
+                                              BasicOfGameData.stateOIdle
+                                      ? null
+                                      : (item) async {
+                                          print('####:${item.data.letter}');
+                                          print(
+                                              '####:${gameState.imageAnswers[index].word}');
+                                          if (gameState.imageAnswers[index].word
+                                                  ?.toLowerCase() ==
+                                              item.data.letter?.toLowerCase()) {
+                                            int countCorrectAnswers =
+                                                await context
+                                                    .read<MatchCubit>()
+                                                    .addCorrectAnswer(
+                                                        endPosition: end!,
+                                                        startPosition: start!,
+                                                        answerId:
+                                                            item.data.id ?? 0,
+                                                        imageAnswerId: gameState
+                                                                .imageAnswers[
+                                                                    index]
+                                                                .id ??
+                                                            0);
+                                            print(
+                                                'gameState.countQuestions:${gameState.countQuestions}, ${gameState.countCorrectAnswers}');
+                                            await context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .addSuccessAnswer(
+                                                    questions: gameState
+                                                        .countQuestions,
+                                                    correctAnswers:
+                                                        countCorrectAnswers)
+                                                .whenComplete(() {
+                                              // print('listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
 
-                                            // height: 0.33.sh,
-                                            placeholder: (context, url) =>
-                                                const Center(
-                                              child:
-                                                  CupertinoActivityIndicator(),
-                                            ),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    const Icon(
-                                              Icons.error,
-                                              color: Colors.red,
-                                            ),
+                                              if (gameState.countQuestions ==
+                                                  countCorrectAnswers) {
+                                                // Future.delayed(
+                                                //     const Duration(seconds: 2),
+                                                //     () async {
+                                                //   Navigator.of(context).pop();
+                                                // });
+                                              }
+                                              // else {
+                                              //   Future.delayed(
+                                              //       const Duration(seconds: 2),
+                                              //           () async {
+                                              //         await context
+                                              //             .read<CurrentGamePhoneticsCubit>()
+                                              //             .updateIndexOfCurrentGame();
+                                              //         context
+                                              //             .read<ListenChooseCubit>()
+                                              //             .updateTheCurrentGame(
+                                              //             index: context
+                                              //                 .read<
+                                              //                 CurrentGamePhoneticsCubit>()
+                                              //                 .state
+                                              //                 .index);
+                                              //       });
+                                              // }
+                                            });
+                                          } else {
+                                            await context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .addWrongAnswer(
+                                                    actionOfWrongAnswer:
+                                                        () async {});
+                                          }
+                                        },
+                                  builder: (context, onAccepted, onRejected) {
+                                    return Row(
+                                      // crossAxisAlignment: CrossAxisAlignment.center,
+                                      // mainAxisAlignment: MainAxisAlignment.,
+                                      children: [
+                                        Container(
+                                          height: 17,
+                                          width: 17,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(17),
+                                              color: AppColorPhonetics
+                                                  .lightYellowColor),
+                                        ),
+                                        20.pw,
+                                        CachedNetworkImage(
+                                          imageUrl: gameState
+                                                  .imageAnswers[index].image ??
+                                              '',
+                                          height: (MediaQuery.of(context)
+                                                  .size
+                                                  .height) /
+                                              5,
+
+                                          // height: 0.33.sh,
+                                          placeholder: (context, url) =>
+                                              const Center(
+                                            child: CupertinoActivityIndicator(),
                                           ),
-                                        ],
-                                      );
-                                    }),
-                              ),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(
+                                            Icons.error,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }),
                             ),
-                          ],
-                        ),
-                      )),
-                ],
-              ),
+                          ),
+                        ],
+                      ),
+                    )),
+              ],
             ),
           );
         });

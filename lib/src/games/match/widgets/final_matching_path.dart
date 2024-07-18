@@ -14,7 +14,7 @@ class FinalMatchingPainter extends CustomPainter {
           firstPosition[i].first != null &&
           firstPosition[i].last != null) {
         final paint = Paint()
-          ..color = Colors.red
+          ..color = AppColorPhonetics.darkBlueColor
           ..strokeWidth = 2.0
           ..strokeCap = StrokeCap.round;
 

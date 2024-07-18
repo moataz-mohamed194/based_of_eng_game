@@ -15,8 +15,7 @@ class MatchInitial extends Equatable {
   final List<List<Offset?>> positions;
 
   MatchInitial(
-      {
-      required this.gameData,
+      {required this.gameData,
       this.countCorrectAnswers = 0,
       required this.countQuestions,
       required this.answers,
@@ -27,8 +26,7 @@ class MatchInitial extends Equatable {
       required this.imageAnswers});
 
   MatchInitial copyWith(
-      {
-      GameFinalModel? gameData,
+      {GameFinalModel? gameData,
       List<String>? correctAnswers,
       List<List<Offset?>>? positions,
       int? countCorrectAnswers,
