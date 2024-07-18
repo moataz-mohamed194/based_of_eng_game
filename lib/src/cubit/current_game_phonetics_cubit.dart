@@ -42,7 +42,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   bool ableButton() {
-    print('state.stateOfAvatar:${((state.stateOfAvatar == BasicOfGameData.stateOIdle) || (state.stateOfAvatar == null))}');
+    print(
+        'state.stateOfAvatar:${((state.stateOfAvatar == BasicOfGameData.stateOIdle) || (state.stateOfAvatar == null))}');
     log('state.stateOfAvatar:${((state.stateOfAvatar == BasicOfGameData.stateOIdle) || (state.stateOfAvatar == null))}');
     print('state.stateOfAvatar:${(AudioPlayerLetters.player.state)}');
     log('state.stateOfAvatar:${(AudioPlayerLetters.player.state)}');
@@ -172,7 +173,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
                 content: widgetOfTries(
                   context: context,
                   stateOfGame: state,
-                  actionOfDone: () {
+                  actionOfRetry: () {
                     updateDataOfCurrentGame(
                         basicData: state.basicData!,
                         gameData: state.gameData!,
@@ -182,6 +183,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
                   backButton: () {
                     state.backButton();
                   },
+                  countOfStar: 0,
                 ))),
       );
       state.actionWhenTriesBeZero(state.countOfStar ?? 0);
@@ -204,10 +206,45 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         'secondWayToCheckIfIsTheLastQuestionOfGame:$countOfCorrectAnswers , $queations');
 
     if (queations <= countOfCorrectAnswers) {
+      _popUpOfGame();
       return true;
     } else {
       return false;
     }
+  }
+
+  _popUpOfGame() {
+    BuildContext context = state.context;
+
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (alertContext) => WillPopScope(
+          onWillPop: () {
+            return Future.value(false);
+          },
+          child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              content: widgetOfTries(
+                context: context,
+                countOfStar: state.countOfStar ?? 0,
+                stateOfGame: state,
+                actionOfRetry: () {
+                  updateDataOfCurrentGame(
+                      basicData: state.basicData!,
+                      gameData: state.gameData!,
+                      gameIndex: 0);
+                  Navigator.of(context).pop();
+                },
+                actionOfDone: () {
+                  state.backButton();
+                },
+                backButton: () {
+                  state.backButton();
+                },
+              ))),
+    );
   }
 
   getStateOfStars({required int mainCountOfQuestion}) {
@@ -352,8 +389,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     countOfWrongAnswers++;
     // countOfCorrectAnswers = countOfCorrectAnswers-countOfWrongAnswers;
 
-    emit(state.copyWith(
-        countOfWrongAnswers: countOfWrongAnswers));
+    emit(state.copyWith(countOfWrongAnswers: countOfWrongAnswers));
     _checkTheStateOfStarForWrong();
   }
 
@@ -371,14 +407,12 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     } else if (stateOfGameStar == 2) {
       if (countOfStar > 0) {
         // int mainCountOfStar = _mainCountOfStar();
-        if (countOfWrongAnswers == 1 ) {
+        if (countOfWrongAnswers == 1) {
           countOfStar = countOfStar - 1;
           emit(state.copyWith(countOfStar: countOfStar < 0 ? 0 : countOfStar));
-
         } else if (countOfWrongAnswers == 3) {
           countOfStar = countOfStar - 1;
           emit(state.copyWith(countOfStar: countOfStar < 0 ? 0 : countOfStar));
-
         }
       }
     }
