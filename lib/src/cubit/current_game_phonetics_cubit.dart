@@ -139,7 +139,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     await Future.delayed(Duration(milliseconds: 100));
     emit(state.copyWith(
         basicData: basicData,
-        currentAvatar: basicData.basicAvatar,
+        // currentAvatar: basicData.basicAvatar,
         index: gameIndex,
         gameData: gameData));
     _getTheBackGround();
