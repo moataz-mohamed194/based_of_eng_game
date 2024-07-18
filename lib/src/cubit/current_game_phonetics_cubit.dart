@@ -30,7 +30,10 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
             context: context)) {
     _checkDataOfCubit();
     updateDataOfCurrentGame(
-        basicData: basicData, gameData: gameData, gameIndex: 0);
+        basicData: basicData,
+        gameData: gameData,
+        gameIndex: 0,
+        hideLoading: true);
     _getTheBackGround();
     _getTheBackGroundSuccess();
     _getTheBackGroundSad();
@@ -134,9 +137,12 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   updateDataOfCurrentGame(
       {required MainDataOfChapters basicData,
       required List<GameFinalModel> gameData,
-      required int gameIndex}) async {
+      required int gameIndex,
+      bool? hideLoading}) async {
     emit(state.clearAllData());
-    await Future.delayed(Duration(milliseconds: 100));
+    if (hideLoading != true) {
+      await Future.delayed(Duration(milliseconds: 100));
+    }
     emit(state.copyWith(
         basicData: basicData,
         // currentAvatar: basicData.basicAvatar,
