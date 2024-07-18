@@ -62,9 +62,9 @@ class _ClickTheWordScreen extends State<ClickTheWordScreen> {
             MasterWord(word: gameState.headOfQuestion ?? ''),
             25.ph,
             Wrap(
-                runSpacing:10,
+                runSpacing: 10,
                 // mainAxisSize: MainAxisSize.min,
-              alignment: WrapAlignment.center,
+                alignment: WrapAlignment.center,
                 children: List.generate(
                     gameState.choose?.length ?? 0,
                     (index) => Container(
@@ -135,7 +135,7 @@ class _ClickTheWordScreen extends State<ClickTheWordScreen> {
                                                     .state
                                                     .countOfStar ??
                                                 0);
-                                        Navigator.of(context).pop();
+                                        // Navigator.of(context).pop();
 
                                         return;
                                       }

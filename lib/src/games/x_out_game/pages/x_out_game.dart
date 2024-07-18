@@ -130,11 +130,11 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                                               queations:
                                                   state.listGameData.length);
                                       if (isLastQuestion) {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                            () async {
-                                          Navigator.of(context).pop();
-                                        });
+                                        // Future.delayed(
+                                        //     const Duration(seconds: 2),
+                                        //     () async {
+                                        //   Navigator.of(context).pop();
+                                        // });
                                       } else {
                                         await context
                                             .read<CurrentGamePhoneticsCubit>()

@@ -70,9 +70,9 @@ class _GameVideo extends State<GameVideo> {
                       .read<CurrentGamePhoneticsCubit>()
                       .state
                       .actionWhenTriesBeZero(currentStateOfGame);
-                  Future.delayed(const Duration(seconds: 2), () async {
-                    Navigator.of(context).pop();
-                  });
+                  // Future.delayed(const Duration(seconds: 2), () async {
+                  //   Navigator.of(context).pop();
+                  // });
                   // }
                   //   context.read<JourneyBarCubit>().sendStars(
                   //       gamesId: [widget.currentDataGame.id ?? 0],

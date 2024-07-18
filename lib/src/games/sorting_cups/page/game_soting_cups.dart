@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../src_model/export_models.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
+import '../../../core/phonetics_color.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/sorting_cups_cubit.dart';
 import '../widget/cup_widget.dart';
@@ -220,11 +221,11 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                                       .cardsLetters?.length ??
                                                   0);
                                       if (isLastQuestion) {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                            () async {
-                                          Navigator.of(context).pop();
-                                        });
+                                        // Future.delayed(
+                                        //     const Duration(seconds: 2),
+                                        //     () async {
+                                        //   Navigator.of(context).pop();
+                                        // });
                                       } else {}
                                     });
 

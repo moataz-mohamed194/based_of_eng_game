@@ -121,11 +121,11 @@ class _ChooseTheCorrectScreen extends State<ChooseTheCorrectScreen> {
                                                 queations: gameState
                                                     .listGameData.length);
                                         if (isLastQuestion) {
-                                          Future.delayed(
-                                              const Duration(seconds: 2),
-                                              () async {
-                                            Navigator.of(context).pop();
-                                          });
+                                          // Future.delayed(
+                                          //     const Duration(seconds: 2),
+                                          //     () async {
+                                          //   Navigator.of(context).pop();
+                                          // });
                                         } else {
                                           Future.delayed(
                                               const Duration(seconds: 2),

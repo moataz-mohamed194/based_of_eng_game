@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +41,7 @@ widgetOfTries(
           Container(
             width: 300.w,
             height: 300.h,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(AppImagesPhonetics.popUpBackground))),
             child: Column(
@@ -83,13 +84,18 @@ widgetOfTries(
                     ReTryButtton(
                         dataFunction: () => actionOfRetry(),
                         title: 'Retry',
-                        width: 150),
+                        width: 100),
                     actionOfDone != null
-                        ? ReTryButtton(
-                            dataFunction: () => actionOfDone(),
-                            title: 'Done',
-                            width: 150)
-                        : SizedBox(),
+                        ? Row(
+                            children: [
+                              5.pw,
+                              ReTryButtton(
+                                  dataFunction: () => actionOfDone(),
+                                  title: 'Done',
+                                  width: 100),
+                            ],
+                          )
+                        : const SizedBox(),
                   ],
                 )
               ],

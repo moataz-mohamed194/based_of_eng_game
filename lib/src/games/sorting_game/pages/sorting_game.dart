@@ -43,8 +43,8 @@ class _SortingGameScreen extends State<SortingGameScreen> {
             padding: const EdgeInsets.only(bottom: 10, left: 30),
             child: Row(
               crossAxisAlignment: MediaQuery.of(context).size.height < 760
-                ? CrossAxisAlignment.end
-                : CrossAxisAlignment.center,
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.center,
               children: [
                 Container(
                     alignment: Alignment.center,
@@ -183,7 +183,8 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                                     .read<CurrentGamePhoneticsCubit>()
                                     .ableButton()) {
                                   GameImagesGameFinalModel image = details.data;
-                                  if ((gameState.gameData.gameLetters?[index].id) ==
+                                  if ((gameState
+                                          .gameData.gameLetters?[index].id) ==
                                       image.gameLetterId) {
                                     context
                                         .read<SortingCubit>()
@@ -206,11 +207,11 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                                                 queations: gameState
                                                     .listGameData.length);
                                         if (isLastGame) {
-                                          Future.delayed(
-                                              const Duration(seconds: 2),
-                                              () async {
-                                            Navigator.of(context).pop();
-                                          });
+                                          // Future.delayed(
+                                          //     const Duration(seconds: 2),
+                                          //     () async {
+                                          //   Navigator.of(context).pop();
+                                          // });
                                         } else {
                                           await context
                                               .read<CurrentGamePhoneticsCubit>()

@@ -136,6 +136,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       required List<GameFinalModel> gameData,
       required int gameIndex}) async {
     emit(state.clearAllData());
+    await Future.delayed(Duration(milliseconds: 100));
     emit(state.copyWith(
         basicData: basicData,
         currentAvatar: basicData.basicAvatar,
@@ -190,23 +191,30 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     }
   }
 
-  bool checkIfIsTheLastQuestionOfGame({required int queations}) {
+  bool checkIfIsTheLastQuestionOfGame(
+      {required int queations, bool? showAlert}) {
     int countOfCorrectAnswers = state.index + 1;
     print('countOfCorrectAnswers:$countOfCorrectAnswers , $queations');
     if (queations <= countOfCorrectAnswers) {
+      if (showAlert == true) {
+        _popUpOfGame();
+      }
       return true;
     } else {
       return false;
     }
   }
 
-  bool secondWayToCheckIfIsTheLastQuestionOfGame({required int queations}) {
+  bool secondWayToCheckIfIsTheLastQuestionOfGame(
+      {required int queations, bool? showAlert}) {
     int countOfCorrectAnswers = state.countOfCorrectAnswers;
     print(
         'secondWayToCheckIfIsTheLastQuestionOfGame:$countOfCorrectAnswers , $queations');
 
     if (queations <= countOfCorrectAnswers) {
-      _popUpOfGame();
+      if (showAlert == true) {
+        _popUpOfGame();
+      }
       return true;
     } else {
       return false;
@@ -214,8 +222,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   _popUpOfGame() {
-    BuildContext context = state.context;
+    print('_popUpOfGame:{state.theAlertOfShowDialog}');
 
+    // if (state.theAlertOfShowDialog == false) {
+    BuildContext context = state.context;
+    // emit(state.copyWith(theAlertOfShowDialog: true));
     showDialog(
       barrierDismissible: false,
       context: context,
@@ -231,6 +242,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
                 countOfStar: state.countOfStar ?? 0,
                 stateOfGame: state,
                 actionOfRetry: () {
+                  // emit(state.copyWith(theAlertOfShowDialog: false));
+
                   updateDataOfCurrentGame(
                       basicData: state.basicData!,
                       gameData: state.gameData!,
@@ -245,6 +258,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
                 },
               ))),
     );
+    // }
   }
 
   getStateOfStars({required int mainCountOfQuestion}) {
@@ -347,10 +361,11 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     await addStarToStudent(stateOfCountOfCorrectAnswer: correctAnswers);
     bool isLastLesson = supportTheFirstWayOfCheckComplete ?? false;
     if (supportTheFirstWayOfCheckComplete == true) {
-      isLastLesson = checkIfIsTheLastQuestionOfGame(queations: questions);
-    } else {
       isLastLesson =
-          secondWayToCheckIfIsTheLastQuestionOfGame(queations: questions);
+          checkIfIsTheLastQuestionOfGame(queations: questions, showAlert: true);
+    } else {
+      isLastLesson = secondWayToCheckIfIsTheLastQuestionOfGame(
+          queations: questions, showAlert: true);
     }
     if (isLastLesson == true) {
       await Future.delayed(const Duration(seconds: 2));

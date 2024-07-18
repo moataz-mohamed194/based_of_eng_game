@@ -40,7 +40,7 @@ abstract class AppImagesPhonetics {
   static const String sortingCupsNameGame =
       "${mainPathOfImages}sortingCupsNameGame.png";
   static const String sortingCup = "${mainPathOfImages}sortingCup.svg";
-  static const String completeStar = "${mainPathOfImages}complete_star.svg";
+  static const String completeStar = "${mainPathOfImages}complete_star.png";
   static const String iconBoarderOfChar =
       "${mainPathOfImages}iconBoarderOfChar.svg";
   static const String diceNameGame = "${mainPathOfImages}diceNameGame.png";
