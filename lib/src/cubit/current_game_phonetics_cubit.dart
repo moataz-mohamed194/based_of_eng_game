@@ -229,7 +229,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
 
   _popUpOfGame() {
     print('_popUpOfGame:{state.theAlertOfShowDialog}');
-
+    state.actionWhenTriesBeZero(state.countOfStar ?? 0);
     // if (state.theAlertOfShowDialog == false) {
     BuildContext context = state.context;
     // emit(state.copyWith(theAlertOfShowDialog: true));
