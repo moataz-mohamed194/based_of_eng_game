@@ -17,6 +17,7 @@ class GetContactInitial extends ContactLessonState {
     String subLetter = data[index].mainLetter ?? '';
     String unitName = data[index].lesson?.unit?.name ?? '';
     String subGame = data[index].gameTypes?.name ?? '';
+    String programName = data[index].lesson?.unit?.program?.course?.name ?? '';
     int audioFlag = data[index].audioFlag ?? 0;
     debugPrint(
         "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
@@ -24,8 +25,10 @@ class GetContactInitial extends ContactLessonState {
         subLetter: subLetter,
         subGame: subGame,
         unitName: unitName,
-        audioFlag: audioFlag);
-    debugPrint("x:$x ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
+        audioFlag: audioFlag,
+        programName: programName);
+    debugPrint(
+        "x:$x ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
 
     return x;
   }

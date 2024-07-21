@@ -1,6 +1,9 @@
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
 import '../game_types/game_phonatics_types.dart';
+import '../game_types/programs_name_rtl.dart';
+
+
 
 abstract class BasicOfGameData {
   late bool isRound;
@@ -13,12 +16,17 @@ abstract class BasicOfGameData {
   static String stateOfWin = 'win';
   static String stateOfSad = 'sad';
   bool isConnect = false;
+  static List<String> enumValues =
+      ProgramsNameWillRTL.values.map((e) => e.text()).toList();
 
-  static getTheGameType({required String gameType, required int audioFlag}) {
+  static getTheGameType(
+      {required String gameType,
+      required int audioFlag,
+      String? programName}) {
     print('${gameType} == ${GameTypes.wordFamily.text()}');
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
-      return BasicDragOutGame();
+      return BasicDragOutGame(isArabic: enumValues.contains(programName));
     } else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
       return ClickPictureOfWord();
 
@@ -117,9 +125,10 @@ class BasicDragOutGame implements BasicOfGameData {
   @override
   String titleImageEn = AppImagesPhonetics.dragOut;
 
+  bool isArabic;
   @override
   String? completeBasket = AppImagesPhonetics.imageBasketComplete;
-
+  BasicDragOutGame({required this.isArabic});
   @override
   bool isConnect = false;
 

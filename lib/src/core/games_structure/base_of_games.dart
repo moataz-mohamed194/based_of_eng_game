@@ -3,8 +3,6 @@ import 'basic_of_chapter.dart';
 import 'basic_of_game_data.dart';
 
 abstract class BaseOfGames {
-  static String phonics = 'Phonics';
-  static String arabic = 'Arabic';
   static List<int> getTheStarsAddState(int number) {
     if (number % 3 == 0) {
       return List.generate(3, (index) => (number / 3).round()).toList();
@@ -73,6 +71,7 @@ abstract class BaseOfGames {
       {required String subLetter,
       required String subGame,
       required String unitName,
+      required String programName,
       required int audioFlag}) {
     print(':${(unitName
         .toLowerCase()
@@ -210,7 +209,7 @@ abstract class BaseOfGames {
         MainDataOfChaptersTypes.redUnit.text()) {
       return RedPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag, programName:programName));
     }
     return null;
   }
