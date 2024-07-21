@@ -74,6 +74,7 @@ flutter:
     - assets/svg/
     - assets/sound/
     - assets/sound/base/
+    - assets/sound/arabic_base/
     - assets/animation/
     - assets/fonts/
     - assets/math_ball/

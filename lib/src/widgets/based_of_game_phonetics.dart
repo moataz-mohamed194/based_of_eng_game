@@ -49,7 +49,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                           index: stateOfGame.index,
                           gameData: gamesData[stateOfGame.index],
                           allGameData: gamesData),
-                      child: const DragOutGame())
+                      child: DragOutGame())
                 } else if ((stateOfGame.basicData?.gameData
                     is ClickPicture)) ...{
                   BlocProvider<ClickPictureCubit>(
@@ -73,7 +73,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
                               .getBackGround(gamesData[stateOfGame.index]
                                       .gameImages
                                       ?.length ??
-                                  0)),
+                                  0),
+                          isArabic: false),
                       child: const ClickThePictureWithWord())
                 } else if ((stateOfGame.basicData?.gameData
                     is BasicClickTheSoundGame)) ...{
@@ -101,7 +102,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
             ))),
         if (stateOfGame.basicData?.gameData is! Video) ...{
           Positioned(
-              top: MediaQuery.of(context).size.height>650?135.h:0.h,
+              top: MediaQuery.of(context).size.height > 650 ? 135.h : 0.h,
               left: 20,
               child: Image.asset(
                 stateOfGame.basicData?.gameData?.titleImageEn ?? '',
@@ -119,7 +120,10 @@ class BasedOfGamePhonetics extends StatelessWidget {
                   children: [
                     const SizedBox(),
                     GestureDetector(
-                      onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
+                      onTap: context
+                              .read<CurrentGamePhoneticsCubit>()
+                              .ableButton()
+                          ? () async {
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
                                   .beeTalkingTrue();
@@ -127,7 +131,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
                                   text:
                                       gamesData[stateOfGame.index].inst ?? '');
                               TalkTts.flutterTts.setCompletionHandler(() async {
-                                if (stateOfGame.stateOfStringIsWord == StateOfSubWord.isWord) {
+                                if (stateOfGame.stateOfStringIsWord ==
+                                    StateOfSubWord.isWord) {
                                   await TalkTts.startTalk(
                                       text: stateOfGame.stateOfStringWillSay ??
                                           '');
@@ -144,7 +149,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
                                   .beeTalkingFalse();
-                            }:null,
+                            }
+                          : null,
                       child: Container(
                           child: stateOfGame.avatarCurrentArtboard == null
                               ? SizedBox(
