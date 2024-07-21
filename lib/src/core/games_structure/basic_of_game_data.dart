@@ -3,8 +3,6 @@ import '../game_types/assets_images_arabic.dart';
 import '../game_types/game_phonatics_types.dart';
 import '../game_types/programs_name_rtl.dart';
 
-
-
 abstract class BasicOfGameData {
   late bool isRound;
   late String titleImageEn;
@@ -20,15 +18,13 @@ abstract class BasicOfGameData {
       ProgramsNameWillRTL.values.map((e) => e.text()).toList();
 
   static getTheGameType(
-      {required String gameType,
-      required int audioFlag,
-      String? programName}) {
+      {required String gameType, required int audioFlag, String? programName}) {
     print('${gameType} == ${GameTypes.wordFamily.text()}');
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
       return BasicDragOutGame(isArabic: enumValues.contains(programName));
     } else if ((gameType == GameTypes.clickPicture.text()) && audioFlag == 1) {
-      return ClickPictureOfWord();
+      return ClickPictureOfWord(isArabic: enumValues.contains(programName));
 
       ///audio flag == 1 say the word
     } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
@@ -133,7 +129,7 @@ class BasicDragOutGame implements BasicOfGameData {
   bool isConnect = false;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.titleOfXOut;
 
   @override
   int countOfMinimizeStar = 2;
@@ -148,7 +144,6 @@ class ClickPicture implements BasicOfGameData {
 
   @override
   String? completeBasket;
-
   List<String> backgroundImages = [
     // AppImagesPhonetics.circleShape,
     // AppImagesPhonetics.cloudShape,
@@ -263,7 +258,8 @@ class ClickPictureOfWord implements BasicOfGameData {
 
   @override
   String? completeBasket;
-
+  bool isArabic;
+  ClickPictureOfWord({required this.isArabic});
   List<String> backgroundImages = [
     // AppImagesPhonetics.circleShape,
     // AppImagesPhonetics.cloudShape,
@@ -297,7 +293,7 @@ class ClickPictureOfWord implements BasicOfGameData {
   bool isConnect = false;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.titleOfClickThePicture;
 
   @override
   int countOfMinimizeStar = 1;
