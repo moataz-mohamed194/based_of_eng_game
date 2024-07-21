@@ -124,6 +124,11 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                                                 stateOfGame.gameData.mainLetter)
                                             .length ??
                                         0,
+                                    subAction: () {
+                                      context
+                                          .read<ClickTheSoundCubit>()
+                                          .sayTheLetter();
+                                    },
                                     correctAnswers:
                                         ((stateOfGame.correctIndexes?.length ??
                                             0)))
