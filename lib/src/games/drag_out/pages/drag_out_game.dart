@@ -12,7 +12,8 @@ import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/drag_out_cubit.dart';
 
 class DragOutGame extends StatefulWidget {
-  const DragOutGame({super.key});
+  DragOutGame({super.key, this.isArabic = false});
+  final bool isArabic;
   @override
   State<StatefulWidget> createState() {
     return _DragOutGame();
@@ -160,6 +161,7 @@ class _DragOutGame extends State<DragOutGame> {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addSuccessAnswer(
+                                            isArabic: widget.isArabic,
                                             questions:
                                                 gameState.allGameData.length,
                                             correctAnswers:
@@ -194,6 +196,7 @@ class _DragOutGame extends State<DragOutGame> {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addWrongAnswer(
+                                            isArabic: widget.isArabic,
                                             actionOfWrongAnswer: () async {});
                                   }
                                 }

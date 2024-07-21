@@ -7,26 +7,30 @@ class ClickThePictureWithWordInitial extends Equatable {
   final List<String> backGround;
   final List<int> correctIndexes;
   final GameImagesGameFinalModel? chooseWord;
+  final bool isArabic;
   // final int? correctAnswer;
   const ClickThePictureWithWordInitial(
       {required this.gameData,
       this.gameImages,
       required this.backGround,
       required this.correctIndexes,
-      this.chooseWord});
+      this.chooseWord,
+      this.isArabic = false});
 
   ClickThePictureWithWordInitial copyWith(
       {GameFinalModel? gameData,
       List<String>? backGround,
       List<GameImagesGameFinalModel>? gameImages,
       List<int>? correctIndexes,
-      GameImagesGameFinalModel? chooseWord}) {
+      GameImagesGameFinalModel? chooseWord,
+      bool? isArabic}) {
     return ClickThePictureWithWordInitial(
         gameData: gameData ?? this.gameData,
         backGround: backGround ?? this.backGround,
         gameImages: gameImages ?? this.gameImages,
         chooseWord: chooseWord ?? this.chooseWord,
-        correctIndexes: correctIndexes ?? this.correctIndexes);
+        correctIndexes: correctIndexes ?? this.correctIndexes,
+        isArabic: isArabic ?? this.isArabic);
   }
 
   ClickThePictureWithWordInitial clearChooseWord() {

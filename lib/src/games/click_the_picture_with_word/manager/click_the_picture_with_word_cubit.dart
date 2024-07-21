@@ -10,9 +10,14 @@ part 'click_the_picture_with_word_state.dart';
 class ClickThePictureWithWordCubit
     extends Cubit<ClickThePictureWithWordInitial> {
   ClickThePictureWithWordCubit(
-      {required GameFinalModel gameData, required List<String> backGround})
+      {required GameFinalModel gameData,
+      required List<String> backGround,
+      required bool isArabic})
       : super(ClickThePictureWithWordInitial(
-            gameData: gameData, backGround: backGround, correctIndexes: [])) {
+            gameData: gameData,
+            backGround: backGround,
+            correctIndexes: [],
+            isArabic: isArabic)) {
     List<GameImagesGameFinalModel> gameImages = state.gameData.gameImages ?? [];
     gameImages.shuffle();
     emit(state.copyWith(gameImages: gameImages));
@@ -21,8 +26,8 @@ class ClickThePictureWithWordCubit
   }
 
   startGame() async {
-    await TalkTts.startTalk(text: state.gameData.inst ?? '');
-
+    await TalkTts.startTalk(
+        text: state.gameData.inst ?? '', isArabic: state.isArabic);
 
     await getTheRandomWord();
   }
@@ -46,13 +51,15 @@ class ClickThePictureWithWordCubit
       int randomNumber = random.nextInt(countOfTheImage);
       GameImagesGameFinalModel chooseWord = checkImages[randomNumber];
       debugPrint('chooseWord.word ?? ' ':${chooseWord.word ?? ''}');
-      await TalkTts.startTalk(text: chooseWord.word ?? '');
+      await TalkTts.startTalk(
+          text: chooseWord.word ?? '', isArabic: state.isArabic);
       emit(state.copyWith(chooseWord: chooseWord));
     }
     // }
   }
 
-  Future addTheCorrectAnswer({required int idOfUserAnswer}) async {
+  Future addTheCorrectAnswer(
+      {required int idOfUserAnswer, bool? isArabic}) async {
     debugPrint('addTheCorrectAnswer');
     emit(state.clearChooseWord());
 
@@ -64,7 +71,8 @@ class ClickThePictureWithWordCubit
   }
 
   sayTheLetter() async {
-    await TalkTts.startTalk(text: state.chooseWord?.word ?? '');
+    await TalkTts.startTalk(
+        text: state.chooseWord?.word ?? '', isArabic: state.isArabic);
   }
 
   // submitCorrectTheAnswer() async {

@@ -13,20 +13,21 @@ class DragOutCubit extends Cubit<DragOutInitial> {
   DragOutCubit(
       {required GameFinalModel gameData,
       required List<GameFinalModel> allGameData,
-      required int index})
+      required int index,
+      bool? isArabic})
       : super(DragOutInitial(
             gameData: gameData, allGameData: allGameData, index: index)) {
     // emit(state.copyWith(gameData: gameData));
     debugPrint('DragOutCubit');
     emit(state.copyWith(gameData: allGameData[index]));
     reFormatData();
-    sayLetter();
+    sayLetter(isArabic: isArabic);
   }
-reFormatData(){
-  List<GameImagesGameFinalModel> gameImages = state.gameData.gameImages??[];
-  gameImages.shuffle();
-  emit(state.copyWith(gameImages:gameImages));
-}
+  reFormatData() {
+    List<GameImagesGameFinalModel> gameImages = state.gameData.gameImages ?? [];
+    gameImages.shuffle();
+    emit(state.copyWith(gameImages: gameImages));
+  }
 
   updateTheCurrentGame({required int index}) {
     debugPrint('updateTheCurrentGame:${state.gameData.id}, $index');
@@ -35,8 +36,9 @@ reFormatData(){
     reFormatData();
   }
 
-  sayLetter() async {
-    await TalkTts.startTalk(text: state.gameData.inst ?? '');
+  sayLetter({bool? isArabic}) async {
+    await TalkTts.startTalk(
+        text: state.gameData.inst ?? '', isArabic: isArabic ?? false);
 
     await AudioPlayerLetters.startPlaySound(
         soundPath: AssetsSoundLetters.getSoundOfLetter(

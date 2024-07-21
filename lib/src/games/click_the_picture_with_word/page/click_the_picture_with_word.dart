@@ -9,7 +9,8 @@ import '../../click_the_picture/widgets/single_row.dart';
 import '../manager/click_the_picture_with_word_cubit.dart';
 
 class ClickThePictureWithWord extends StatefulWidget {
-  const ClickThePictureWithWord({super.key});
+  const ClickThePictureWithWord({super.key, this.isArabic = false});
+  final bool isArabic;
 
   @override
   State<StatefulWidget> createState() {
@@ -30,7 +31,6 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
         margin: const EdgeInsets.only(bottom: (30), left: 20),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -61,11 +61,10 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
                       width: (MediaQuery.of(context).size.width - 110.w) /
                           (((gameState.gameImages?.length ?? 0) / 2) + 1)
                               .round(),
-                      height:
-                          (( MediaQuery.of(context).size.width < 760
+                      height: ((MediaQuery.of(context).size.width < 760
                               ? MediaQuery.of(context).size.height * 0.7
                               : MediaQuery.of(context).size.height * 0.65)) /
-                              2.5,
+                          2.5,
                       //     (gameData.gameImages?.length ?? 0),
                       index: index,
                       background: gameState.backGround[index],
@@ -91,6 +90,7 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
                                   .addSuccessAnswer(
+                                      isArabic: widget.isArabic,
                                       subAction: () async {
                                         debugPrint(
                                             'subAction:${gameState.chooseWord?.word}');
@@ -121,11 +121,13 @@ class _ClickThePictureWithWord extends State<ClickThePictureWithWord> {
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
                                   .addWrongAnswer(
+                                      isArabic: widget.isArabic,
                                       actionOfWrongAnswer: () async {
-                                await context
-                                    .read<ClickThePictureWithWordCubit>()
-                                    .sayTheLetter();
-                              });
+                                        await context
+                                            .read<
+                                                ClickThePictureWithWordCubit>()
+                                            .sayTheLetter();
+                                      });
                             }
                           }
                         }
