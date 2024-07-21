@@ -122,7 +122,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                             if (context
                                                 .read<SpellingCubit>()
                                                 .checkCurrentFinished()) {
-                                              if (context
+                                              if (await context
                                                   .read<SpellingCubit>()
                                                   .checkIsCorrectAnswer()) {
                                                 await context

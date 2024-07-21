@@ -74,9 +74,14 @@ class SpellingCubit extends Cubit<SpellingInitial> {
   //   }
   // }
 
-  bool checkIsCorrectAnswer() {
-    return state.gameData?.correctAns?.toLowerCase() ==
+  Future<bool> checkIsCorrectAnswer() async {
+    bool stateOfAnswer = state.gameData?.correctAns?.toLowerCase() ==
         state.correctAnswers.join().toLowerCase();
+    if (stateOfAnswer) {
+      TalkTts.startTalk(text: "${state.gameData?.correctAns ?? ''}  ");
+      await Future.delayed(Duration(milliseconds: 500));
+    }
+    return stateOfAnswer;
   }
 
   bool checkCurrentFinished() {
