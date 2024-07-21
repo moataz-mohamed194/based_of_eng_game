@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/widgets/based_of_game_arabic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,6 +81,12 @@ class BasedOfAllGame extends StatelessWidget {
                 } else if (BaseOfGames.isPhonetics(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
                   BasedOfGamePhonetics(
+                    stateOfGame: stateOfGame,
+                    gamesData: gamesData,
+                  ),
+                } else if (BaseOfGames.isArabic(
+                    chapter: stateOfGame.basicData.runtimeType)) ...{
+                  BasedOfGameArabic(
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   ),
