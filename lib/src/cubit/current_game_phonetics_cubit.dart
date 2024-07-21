@@ -357,13 +357,14 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       {required int correctAnswers,
       required int questions,
       bool? supportTheFirstWayOfCheckComplete,
-      void Function()? subAction}) async {
+      void Function()? subAction,
+      bool? isArabic}) async {
     AudioPlayer playerCorrect = AudioPlayer();
     print('correctAnswers:$correctAnswers');
     await _animationOfCorrectAnswer();
     await AudioPlayerGame.startPlaySoundOfCorrect(
         playerCorrect2: playerCorrect,
-        soundPath: AppGameSound.getRandomSoundOfCorrect());
+        soundPath: AppGameSound.getRandomSoundOfCorrect(isArabic: isArabic));
     await addStarToStudent(stateOfCountOfCorrectAnswer: correctAnswers);
     bool isLastLesson = supportTheFirstWayOfCheckComplete ?? false;
     if (supportTheFirstWayOfCheckComplete == true) {
@@ -387,14 +388,16 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     }
   }
 
-  Future<void> addWrongAnswer({void Function()? actionOfWrongAnswer}) async {
+  Future<void> addWrongAnswer(
+      {void Function()? actionOfWrongAnswer, bool? isArabic}) async {
     AudioPlayer playerWrong = AudioPlayer();
 
     await _animationOfWrongAnswer();
     await _increaseCountOfWrongAnswer();
+
     await AudioPlayerGame.startPlaySoundOfWrong(
         playerWrong2: playerWrong,
-        soundPath: AppGameSound.getRandomSoundOfWrong());
+        soundPath: AppGameSound.getRandomSoundOfWrong(isArabic: isArabic));
     if (actionOfWrongAnswer != null) {
       playerWrong.onPlayerComplete.listen((event) {
         actionOfWrongAnswer.call();
