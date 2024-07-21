@@ -66,4 +66,9 @@ class BingoCubit extends Cubit<BingoInitial> {
         soundPath: AssetsSoundLetters.getSoundOfLetter(
             mainGameLetter: state.chooseWord?.letter?.toLowerCase() ?? ''));
   }
+
+  actionOfCompleteGame() async {
+    print('actionOfCompleteGame');
+    await TalkTts.startTalk(text: 'Bingo');
+  }
 }

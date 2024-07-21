@@ -131,6 +131,10 @@ class _BingoGameScreen extends State<BingoGameScreen> {
                                                       .length ??
                                                   0);
                                       if (isLastQuestion) {
+                                        context
+                                            .read<BingoCubit>()
+                                            .actionOfCompleteGame();
+
                                         // Future.delayed(
                                         //     const Duration(seconds: 2),
                                         //     () async {
