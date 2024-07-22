@@ -12,10 +12,15 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
 
   ClickTheSoundCubit({
     required GameFinalModel gameData,
+    bool? isArabic,
   })  : _gameData = gameData,
-        super(ClickTheSoundInitial(gameData: gameData, correctIndexes: [])) {
+        super(ClickTheSoundInitial(
+            gameData: gameData,
+            correctIndexes: [],
+            isArabic: isArabic ?? false)) {
     generateRandomLetters();
-    TalkTts.startTalk(text: _gameData.inst ?? '').whenComplete(() {
+    TalkTts.startTalk(text: _gameData.inst ?? '', isArabic: isArabic ?? false)
+        .whenComplete(() {
       sayTheLetter();
     });
   }
@@ -28,8 +33,7 @@ class ClickTheSoundCubit extends Cubit<ClickTheSoundInitial> {
 
   Future<void> generateRandomLetters() async {
     List<GameLettersGameFinalModel> gameLetters =
-        state.gameData.gameLetters??
-            [];
+        state.gameData.gameLetters ?? [];
     gameLetters.shuffle();
     emit(state.copyWith(letters: gameLetters));
   }

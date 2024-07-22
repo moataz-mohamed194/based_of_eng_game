@@ -17,4 +17,9 @@ abstract class AppImagesArabic {
       "${mainPathOfImages}basicAvatarNormal.png";
 
   static const String titleOfXOut = '${mainPathOfImages}title_of_x_out.png';
+  static const String clickTheSound =
+      '${mainPathOfImages}click_the_sound_ar.png';
+  static const String regularBalon = '${mainPathOfImages}balon_regular.png';
+  static const String wrongBalon = '${mainPathOfImages}balon_wrong.png';
+  static const String correctBalon = '${mainPathOfImages}balon_correct.png';
 }
