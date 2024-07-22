@@ -107,10 +107,6 @@ extension TypeExtension on MainDataOfChaptersTypes {
 }
 
 abstract class MainDataOfChapters {
-  late String basicAvatar;
-  late String winAvatar;
-  late String idelAvatar;
-  late String sadAvatar;
   late String background;
   BasicOfGameData? gameData;
   late Color backGroundOfStarBar;
@@ -129,24 +125,13 @@ class SPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfS;
 
-  @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfGameData? gameData;
 
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
-
   SPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing = 14;
@@ -187,24 +172,17 @@ class APhonetics implements MainDataOfChapters {
           (List<Color?>? colorsOfPaths, List<Offset> points) {
             return null;
           };
-  @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
 
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
 
   @override
   BasicOfGameData? gameData;
 
-  @override
   String winAvatar = AppImagesPhonetics.beeSuccess;
 
   APhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
   @override
   int? countOfPartsOfLettersForTracing = 0;
 }
@@ -230,23 +208,11 @@ class FPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfA;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   FPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -261,23 +227,11 @@ class MPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfM;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   MPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing = 16;
@@ -306,23 +260,11 @@ class KPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfK;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   KPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing = 16;
@@ -351,23 +293,11 @@ class QPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfQ;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   QPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing = 16;
@@ -396,23 +326,11 @@ class VPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfV;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   VPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing = 16;
@@ -441,23 +359,11 @@ class XPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfX;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   XPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing = 16;
@@ -486,23 +392,11 @@ class YPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfY;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   YPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing = 16;
@@ -531,23 +425,11 @@ class ZPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfZ;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   ZPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing = 16;
@@ -565,6 +447,7 @@ class ZPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
+
 }
 
 class TPhonetics implements MainDataOfChapters {
@@ -589,23 +472,11 @@ class TPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfT;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   TPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -633,23 +504,11 @@ class CPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfC;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   CPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -677,23 +536,11 @@ class RPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfR;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   RPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -721,23 +568,11 @@ class IPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfI;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   IPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -765,23 +600,11 @@ class PPhonetics implements MainDataOfChapters {
           };
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   PPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -802,9 +625,6 @@ class HPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfH;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
@@ -812,20 +632,11 @@ class HPhonetics implements MainDataOfChapters {
           };
 
   @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   HPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -853,23 +664,11 @@ class JPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfJ;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   JPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -897,23 +696,11 @@ class UPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfU;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   UPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -941,23 +728,11 @@ class LPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfL;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   LPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -978,9 +753,6 @@ class BPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfB;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
@@ -988,20 +760,11 @@ class BPhonetics implements MainDataOfChapters {
           };
 
   @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   BPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -1029,23 +792,11 @@ class OPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfO;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   OPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -1073,23 +824,11 @@ class GPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfG;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   GPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -1117,23 +856,11 @@ class DPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfD;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   DPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -1161,23 +888,11 @@ class WPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfW;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   WPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -1205,23 +920,11 @@ class EPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfE;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   EPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -1242,9 +945,6 @@ class NPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfN;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
@@ -1252,20 +952,11 @@ class NPhonetics implements MainDataOfChapters {
           };
 
   @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   NPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -1286,9 +977,6 @@ class ShortVowels implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfShortVowels;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
@@ -1296,20 +984,11 @@ class ShortVowels implements MainDataOfChapters {
           };
 
   @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   ShortVowels({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -1330,9 +1009,6 @@ class UpVowels implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfShortVowels;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicAvatarNormal;
-
-  @override
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
@@ -1340,20 +1016,11 @@ class UpVowels implements MainDataOfChapters {
           };
 
   @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   UpVowels({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   int? countOfPartsOfLettersForTracing;
@@ -1374,17 +1041,7 @@ class ConnectionWithoutSortingCups implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfConnect;
 
   @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
-  @override
-  String basicAvatar = AppImagesPhonetics.basicBess;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   ConnectionWithoutSortingCups({required this.mineGameData}) {
     gameData = mineGameData;
@@ -1416,23 +1073,11 @@ class ConnectionSortingCups implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfConnect;
 
   @override
-  String basicAvatar = AppImagesPhonetics.basicBess;
-
-  @override
-  String sadAvatar = AppImagesPhonetics.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesPhonetics.beeSuccess;
 
   ConnectionSortingCups({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  String idelAvatar = AppImagesPhonetics.beeIdleRiv;
 
   @override
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
@@ -1454,23 +1099,43 @@ class RedPhonetics implements MainDataOfChapters {
   String background = AppImagesArabic.bgOfRedUnit;
 
   @override
-  String basicAvatar = AppImagesArabic.basicAvatarNormal;
-
-  @override
-  String sadAvatar = AppImagesArabic.beeFailureRiv;
-
-  @override
   BasicOfGameData? gameData;
-
-  @override
-  String winAvatar = AppImagesArabic.beeSuccess;
 
   RedPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
   @override
-  String idelAvatar = AppImagesArabic.beeIdleRiv;
+  int? countOfPartsOfLettersForTracing = 14;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+}
+
+class MathProgram implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesArabic.bgOfRedUnit;
+
+  @override
+  BasicOfGameData? gameData;
+
+  MathProgram({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
 
   @override
   int? countOfPartsOfLettersForTracing = 14;

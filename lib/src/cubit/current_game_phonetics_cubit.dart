@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../based_of_eng_game.dart';
 import '../core/assets_game_sound.dart';
+import '../core/assets_images_phonetics.dart';
 import '../core/audio_player_game.dart';
 import '../core/audio_player_letters.dart';
 import '../core/talk_tts.dart';
@@ -60,7 +61,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   _getTheBackGround() {
-    rootBundle.load(state.basicData?.idelAvatar ?? '').then(
+    rootBundle.load(AppImagesPhonetics.beeIdleRiv).then(
       (data) async {
         try {
           final file = RiveFile.import(data);
@@ -81,7 +82,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   _getTheBackGroundSuccess() {
-    rootBundle.load(state.basicData?.winAvatar ?? '').then(
+    rootBundle.load(AppImagesPhonetics.beeSuccess).then(
       (data) async {
         try {
           final file = RiveFile.import(data);
@@ -101,7 +102,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   }
 
   _getTheBackGroundSad() {
-    rootBundle.load(state.basicData?.sadAvatar ?? '').then(
+    rootBundle.load(AppImagesPhonetics.beeFailureRiv).then(
       (data) async {
         try {
           final file = RiveFile.import(data);
