@@ -47,7 +47,8 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                     ),
                   }
-                } else if (stateOfGame.basicData is UpVowels) ...{
+                }
+                else if (stateOfGame.basicData is UpVowels) ...{
                   if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
                     if (stateOfGame.basicData?.gameData is SortingCupsGame) ...{
                       BasedOfGameConnectSortingCups(
@@ -66,12 +67,11 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                     ),
                   }
-                } else if (stateOfGame.basicData?.gameData?.isConnect ==
+                }
+                else if (stateOfGame.basicData?.gameData?.isConnect ==
                     true) ...{
                   if (stateOfGame.basicData is ConnectionSortingCups) ...{
-                    if (BaseOfGames.isArabic(
-                        chapter: stateOfGame.basicData?.gameData.runtimeType ??
-                            Type)) ...{
+                    if (stateOfGame.basicData?.isArabic==true) ...{
                       BasedOfGameConnectSortingCupsAr(
                         stateOfGame: stateOfGame,
                         gamesData: gamesData,

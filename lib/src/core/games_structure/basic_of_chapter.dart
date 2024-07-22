@@ -115,6 +115,8 @@ abstract class MainDataOfChapters {
   (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
       get checkTheIndexOfPath;
   late int? countOfPartsOfLettersForTracing = 0;
+
+  bool? isArabic = false;
 }
 
 class SPhonetics implements MainDataOfChapters {
@@ -149,6 +151,9 @@ class SPhonetics implements MainDataOfChapters {
             return FlipBookPainterLetterS.indexOfPointInside(
                 point, size, isFingerPosition);
           };
+
+  @override
+  bool? isArabic;
 }
 
 class APhonetics implements MainDataOfChapters {
@@ -183,6 +188,9 @@ class APhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing = 0;
+
+  @override
+  bool? isArabic;
 }
 
 class FPhonetics implements MainDataOfChapters {
@@ -214,6 +222,9 @@ class FPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class MPhonetics implements MainDataOfChapters {
@@ -247,6 +258,9 @@ class MPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
+
+  @override
+  bool? isArabic;
 }
 
 class KPhonetics implements MainDataOfChapters {
@@ -280,6 +294,9 @@ class KPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
+
+  @override
+  bool? isArabic;
 }
 
 class QPhonetics implements MainDataOfChapters {
@@ -313,6 +330,9 @@ class QPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
+
+  @override
+  bool? isArabic;
 }
 
 class VPhonetics implements MainDataOfChapters {
@@ -346,6 +366,9 @@ class VPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
+
+  @override
+  bool? isArabic;
 }
 
 class XPhonetics implements MainDataOfChapters {
@@ -379,6 +402,9 @@ class XPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
+
+  @override
+  bool? isArabic;
 }
 
 class YPhonetics implements MainDataOfChapters {
@@ -412,6 +438,9 @@ class YPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
+
+  @override
+  bool? isArabic;
 }
 
 class ZPhonetics implements MainDataOfChapters {
@@ -445,6 +474,9 @@ class ZPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
+
+  @override
+  bool? isArabic;
 }
 
 class TPhonetics implements MainDataOfChapters {
@@ -477,6 +509,9 @@ class TPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class CPhonetics implements MainDataOfChapters {
@@ -509,6 +544,9 @@ class CPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class RPhonetics implements MainDataOfChapters {
@@ -541,6 +579,9 @@ class RPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class IPhonetics implements MainDataOfChapters {
@@ -573,6 +614,9 @@ class IPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class PPhonetics implements MainDataOfChapters {
@@ -605,6 +649,9 @@ class PPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class HPhonetics implements MainDataOfChapters {
@@ -637,6 +684,9 @@ class HPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class JPhonetics implements MainDataOfChapters {
@@ -669,6 +719,9 @@ class JPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class UPhonetics implements MainDataOfChapters {
@@ -701,6 +754,9 @@ class UPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class LPhonetics implements MainDataOfChapters {
@@ -733,6 +789,9 @@ class LPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class BPhonetics implements MainDataOfChapters {
@@ -765,6 +824,9 @@ class BPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class OPhonetics implements MainDataOfChapters {
@@ -797,6 +859,9 @@ class OPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class GPhonetics implements MainDataOfChapters {
@@ -829,6 +894,9 @@ class GPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class DPhonetics implements MainDataOfChapters {
@@ -861,6 +929,9 @@ class DPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class WPhonetics implements MainDataOfChapters {
@@ -893,6 +964,9 @@ class WPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class EPhonetics implements MainDataOfChapters {
@@ -925,6 +999,9 @@ class EPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class NPhonetics implements MainDataOfChapters {
@@ -957,6 +1034,9 @@ class NPhonetics implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class ShortVowels implements MainDataOfChapters {
@@ -989,6 +1069,9 @@ class ShortVowels implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class UpVowels implements MainDataOfChapters {
@@ -1021,6 +1104,9 @@ class UpVowels implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class ConnectionWithoutSortingCups implements MainDataOfChapters {
@@ -1053,6 +1139,9 @@ class ConnectionWithoutSortingCups implements MainDataOfChapters {
 
   @override
   int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic;
 }
 
 class ConnectionSortingCups implements MainDataOfChapters {
@@ -1071,8 +1160,13 @@ class ConnectionSortingCups implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  ConnectionSortingCups({required this.mineGameData}) {
+
+  @override
+  bool? isArabic;
+  ConnectionSortingCups({required this.mineGameData, required bool isArabicSub, required String? subBackGround}) {
     gameData = mineGameData;
+    background= subBackGround??background;
+    isArabic = isArabicSub;
   }
 
   @override
@@ -1116,6 +1210,9 @@ class RedPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
+
+  @override
+  bool? isArabic;
 }
 
 class MathProgram implements MainDataOfChapters {
@@ -1148,4 +1245,7 @@ class MathProgram implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
+
+  @override
+  bool? isArabic;
 }

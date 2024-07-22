@@ -68,6 +68,14 @@ abstract class BaseOfGames {
     return listOfChapterOfArabic.contains(chapter);
   }
 
+  static String? detectTheArabicChapter(
+      {required String programName, required BasicOfGameData gameData}) {
+    if (programName.toLowerCase() == MainDataOfChaptersTypes.redUnit.text()) {
+      return RedPhonetics(mineGameData: gameData).background;
+    }
+    return null;
+  }
+
   static getGameDataType(
       {required String subLetter,
       required String subGame,
@@ -88,10 +96,15 @@ abstract class BaseOfGames {
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (BasicOfGameData.isConnectGame(game: subGame.toLowerCase()) ==
         true) {
-      if (subGame.toLowerCase() == GameTypes.sortingCups.text()) {
+      if ((subGame.toLowerCase() == GameTypes.sortingCups.text())) {
+
         return ConnectionSortingCups(
-            mineGameData: SortingCupsGame(
-                isArabic: BasicOfGameData.enumValues.contains(programName)));
+            isArabicSub:
+                BasicOfGameData.enumValues.contains(programName.toLowerCase()),
+            subBackGround: detectTheArabicChapter(
+                programName: unitName,
+                gameData: SortingCupsGame()),
+            mineGameData: SortingCupsGame());
       } else {
         return ConnectionWithoutSortingCups(
             mineGameData: BasicOfGameData.getTheGameType(
