@@ -1,6 +1,50 @@
 part of 'choose_sticks_cubit.dart';
 
 @immutable
-sealed class ChooseSticksState {}
+class ChooseSticksInitial extends Equatable {
+  final List<GameChoicesGameFinalModel>? gameChoices;
+  final num? mainNumber;
+  final int correctAnswers;
+  final num? currentAnswer;
+  final int index;
+  final GameFinalModel gameData;
+  final List<GameFinalModel> allGameData;
 
-final class ChooseSticksInitial extends ChooseSticksState {}
+  ChooseSticksInitial(
+      {required this.allGameData,
+      required this.gameData,
+      required this.correctAnswers,
+      this.currentAnswer,
+      required this.index,
+      this.gameChoices,
+      this.mainNumber});
+  ChooseSticksInitial copyWith({
+    List<GameChoicesGameFinalModel>? gameChoices,
+    num? mainNumber,
+    int? correctAnswers,
+    num? currentAnswer,
+    int? index,
+    GameFinalModel? gameData,
+    List<GameFinalModel>? allGameData,
+  }) {
+    return ChooseSticksInitial(
+        gameData: gameData ?? this.gameData,
+        index: index ?? this.index,
+        mainNumber: mainNumber ?? this.mainNumber,
+        gameChoices: gameChoices ?? this.gameChoices,
+        allGameData: allGameData ?? this.allGameData,
+        currentAnswer: currentAnswer ?? this.currentAnswer,
+        correctAnswers: correctAnswers ?? this.correctAnswers);
+  }
+
+  @override
+  List<Object?> get props => [
+        gameChoices,
+        mainNumber,
+        index,
+        gameData,
+        allGameData,
+        currentAnswer,
+        correctAnswers
+      ];
+}
