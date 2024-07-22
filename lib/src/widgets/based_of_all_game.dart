@@ -11,6 +11,7 @@ import 'based_of_game_phonetics.dart';
 import 'based_of_game_short_vowels.dart';
 import 'based_of_game_short_vowels_text_rive.dart';
 import 'based_of_game_up_vowels.dart';
+import 'based_of_math.dart';
 import 'game_bar.dart';
 import 'widget_of_tries.dart';
 
@@ -65,6 +66,11 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                     ),
                   }
+                } else if (stateOfGame.basicData is MathProgram) ...{
+                  BasedOfMath(
+                    stateOfGame: stateOfGame,
+                    gamesData: gamesData,
+                  )
                 } else if (stateOfGame.basicData?.gameData?.isConnect ==
                     true) ...{
                   if (stateOfGame.basicData is ConnectionSortingCups) ...{
@@ -90,6 +96,25 @@ class BasedOfAllGame extends StatelessWidget {
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   ),
+                } else if (stateOfGame.basicData is MathProgram) ...{
+                  if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
+                    if (stateOfGame.basicData?.gameData is SortingCupsGame) ...{
+                      BasedOfGameConnectSortingCups(
+                        stateOfGame: stateOfGame,
+                        gamesData: gamesData,
+                      ),
+                    } else ...{
+                      BasedOfGameShortVowelsTextNextRive(
+                        stateOfGame: stateOfGame,
+                        gamesData: gamesData,
+                      ),
+                    }
+                  } else ...{
+                    BasedOfGameUpVowels(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  }
                 } else ...{
                   const SizedBox()
                 }

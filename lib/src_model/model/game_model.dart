@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'game_choices_model.dart';
 import 'game_images_model.dart';
 import 'game_letters_model.dart';
 import 'game_types_model.dart';
@@ -26,6 +27,7 @@ class GameFinalModel extends Equatable {
   final String? video;
   final GameTypesFinalModel? gameTypes;
   final List<GameLettersGameFinalModel>? gameLetters;
+  final List<GameChoicesGameFinalModel>? gameChoices;
   final List<GameImagesGameFinalModel>? gameImages;
   final int? lessonId;
   final dynamic stars;
@@ -44,6 +46,7 @@ class GameFinalModel extends Equatable {
       this.numOfLetterRepeat,
       this.video,
       this.mainLetter,
+      this.gameChoices,
       this.name,
       this.inst,
       this.sentence,
@@ -72,7 +75,7 @@ class GameFinalModel extends Equatable {
         lessonId,
         gameTypeId,
         mainLetter,
-        name,
+        name,gameChoices,
         audioFlag,
         video,
         numOfLetters,

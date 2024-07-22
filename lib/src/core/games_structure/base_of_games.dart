@@ -25,6 +25,7 @@ abstract class BaseOfGames {
       }
     }
   }
+  static String math = 'math';
 
   static List<Type> listOfChapterOfPhonetics = [
     SPhonetics,
@@ -211,6 +212,11 @@ abstract class BaseOfGames {
     } else if (unitName.toLowerCase() ==
         MainDataOfChaptersTypes.redUnit.text()) {
       return RedPhonetics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag, programName:programName));
+    }
+    else if (programName.toLowerCase() == math) {
+      return MathProgram(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag, programName:programName));
     }

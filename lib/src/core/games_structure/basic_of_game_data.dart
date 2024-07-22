@@ -76,7 +76,7 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.ninePicCards.text()) {
       return DragWordToPicGame();
     }else if (gameType == GameTypes.mathChooseSticks.text()) {
-      return DragWordToPicGame();
+      return MathChooseSticks();
     }
   }
 
@@ -635,7 +635,7 @@ class MathChooseSticks implements BasicOfGameData {
   bool isRound = false;
 
   @override
-  String titleImageEn = AppImagesMath.mainPathOfImages;
+  String titleImageEn = AppImagesMath.clickTheChoose;
 
   @override
   String? completeBasket;

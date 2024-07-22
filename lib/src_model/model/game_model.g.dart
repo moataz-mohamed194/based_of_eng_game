@@ -16,6 +16,10 @@ GameFinalModel _$GameFinalModelFromJson(Map<String, dynamic> json) =>
       numOfLetterRepeat: (json['num_of_letter_repeat'] as num?)?.toInt(),
       video: json['video'] as String?,
       mainLetter: json['main_letter'] as String?,
+      gameChoices: (json['game_choices'] as List<dynamic>?)
+          ?.map((e) =>
+              GameChoicesGameFinalModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       name: json['name'] as String?,
       inst: json['inst'] as String?,
       sentence: json['sentence'] as String?,
@@ -65,6 +69,7 @@ Map<String, dynamic> _$GameFinalModelToJson(GameFinalModel instance) =>
       'video': instance.video,
       'game_types': instance.gameTypes?.toJson(),
       'game_letters': instance.gameLetters?.map((e) => e.toJson()).toList(),
+      'game_choices': instance.gameChoices?.map((e) => e.toJson()).toList(),
       'game_images': instance.gameImages?.map((e) => e.toJson()).toList(),
       'lesson_id': instance.lessonId,
       'stars': instance.stars,
