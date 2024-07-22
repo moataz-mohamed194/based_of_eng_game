@@ -64,6 +64,7 @@ abstract class BaseOfGames {
 
   static List<Type> listOfChapterOfArabic = [RedPhonetics];
   static bool isArabic({required Type chapter}) {
+
     return listOfChapterOfArabic.contains(chapter);
   }
 
@@ -73,9 +74,11 @@ abstract class BaseOfGames {
       required String unitName,
       required String programName,
       required int audioFlag}) {
-    print(':${(unitName
-        .toLowerCase()
-        .contains(MainDataOfChaptersTypes.shortVowels.text()))}');
+    if(programName.toLowerCase() == MainDataOfChaptersTypes.math.toString().toLowerCase()){
+      return MathProgram(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag, programName:programName));
+    }else
     if (unitName
         .toLowerCase()
         .contains(MainDataOfChaptersTypes.shortVowels.text())) {

@@ -4,6 +4,7 @@ import '../../games/tracing/widget/letter_m.dart';
 import '../../games/tracing/widget/letter_s3.dart';
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
+import '../game_types/assets_images_math.dart';
 import 'basic_of_game_data.dart';
 
 enum MainDataOfChaptersTypes {
@@ -36,7 +37,7 @@ enum MainDataOfChaptersTypes {
   z,
   redUnit,
   shortVowels,
-  up
+  up, math
 }
 
 extension TypeExtension on MainDataOfChaptersTypes {
@@ -102,6 +103,8 @@ extension TypeExtension on MainDataOfChaptersTypes {
         return 'video'.toLowerCase();
       case MainDataOfChaptersTypes.redUnit:
         return "المجموعة الحمراء".toLowerCase();
+      case MainDataOfChaptersTypes.math:
+        return "math".toLowerCase();
     }
   }
 }
@@ -1128,7 +1131,7 @@ class MathProgram implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  String background = AppImagesArabic.bgOfRedUnit;
+  String background = AppImagesMath.mathBg;
 
   @override
   BasicOfGameData? gameData;

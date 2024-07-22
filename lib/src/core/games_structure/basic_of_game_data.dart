@@ -1,5 +1,6 @@
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
+import '../game_types/assets_images_math.dart';
 import '../game_types/game_phonatics_types.dart';
 import '../game_types/programs_name_rtl.dart';
 
@@ -73,6 +74,8 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.chooseTheCorrect.text()) {
       return ChooseTheCorrectGame();
     } else if (gameType == GameTypes.ninePicCards.text()) {
+      return DragWordToPicGame();
+    }else if (gameType == GameTypes.mathChooseSticks.text()) {
       return DragWordToPicGame();
     }
   }
@@ -614,6 +617,25 @@ class ChooseTheCorrectGame implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesPhonetics.chooseTheCorrectGame;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
+}
+class MathChooseSticks implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = AppImagesMath.mainPathOfImages;
 
   @override
   String? completeBasket;

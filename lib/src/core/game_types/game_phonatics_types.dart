@@ -32,7 +32,8 @@ enum GameTypes {
   chooseTheSentence,
   chooseTheCorrect,
   sortingCupsUP,
-  ninePicCards
+  ninePicCards,
+  mathChooseSticks
 }
 
 extension TypeExtension on GameTypes {
@@ -106,6 +107,8 @@ extension TypeExtension on GameTypes {
         return 'اخترالحرف الصحيح'.toLowerCase();
       case GameTypes.createWordArabic:
         return 'كون الكلمات'.toLowerCase();
+      case GameTypes.mathChooseSticks:
+        return 'Math_Choose_Sticks'.toLowerCase();
     }
   }
 }
