@@ -7,6 +7,8 @@ import 'package:based_of_eng_game/src/games/click_the_picture/manager/click_pict
 import 'package:based_of_eng_game/src/games/click_the_picture/pages/click_picture_game.dart';
 import 'package:based_of_eng_game/src/games/click_the_picture_with_word/manager/click_the_picture_with_word_cubit.dart';
 import 'package:based_of_eng_game/src/games/click_the_picture_with_word/page/click_the_picture_with_word.dart';
+import 'package:based_of_eng_game/src/games/click_the_sound/manager/click_the_sound_cubit.dart';
+import 'package:based_of_eng_game/src/games/click_the_sound/pages/click_the_sound_game.dart';
 import 'package:based_of_eng_game/src/games/drag_out/manager/drag_out_cubit.dart';
 import 'package:based_of_eng_game/src/games/drag_out/pages/drag_out_game.dart';
 import 'package:flame_rive/flame_rive.dart';
@@ -64,6 +66,19 @@ class BasedOfGameArabic extends StatelessWidget {
                             textDirection: TextDirection.rtl,
                             child: ClickThePictureWithWord(isArabic: true)),
                       ))
+                } else if ((stateOfGame.basicData?.gameData
+                    is BasicClickTheSoundGame)) ...{
+                  BlocProvider<ClickTheSoundCubit>(
+                      create: (_) => ClickTheSoundCubit(
+                            gameData: gamesData[stateOfGame.index],
+                            isArabic: true,
+                          ),
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 12.w),
+                        child: const Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: ClickTheSoundGame()),
+                      )),
                 }
               ],
             ))),
