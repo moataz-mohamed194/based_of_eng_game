@@ -12,9 +12,11 @@ part 'choose_sticks_state.dart';
 class ChooseSticksCubit extends Cubit<ChooseSticksInitial> {
   ChooseSticksCubit({
     required List<GameFinalModel> allGameData,
+    required BasicOfGameData basicData,
   }) : super(ChooseSticksInitial(
             allGameData: allGameData,
             correctAnswers: 0,
+            basicData: basicData,
             gameData: allGameData[0],
             index: 0)) {
     reFormatGameData();

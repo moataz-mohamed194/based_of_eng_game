@@ -77,7 +77,6 @@ flutter:
     - assets/sound/arabic_base/
     - assets/animation/
     - assets/fonts/
-    - assets/math_ball/
     - assets/math/
     - assets/main_games/
     - assets/phonetics/

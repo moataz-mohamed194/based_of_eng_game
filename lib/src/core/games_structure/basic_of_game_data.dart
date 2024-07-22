@@ -75,8 +75,14 @@ abstract class BasicOfGameData {
       return ChooseTheCorrectGame();
     } else if (gameType == GameTypes.ninePicCards.text()) {
       return DragWordToPicGame();
-    }else if (gameType == GameTypes.mathChooseSticks.text()) {
-      return MathChooseSticks();
+    } else if (gameType == GameTypes.mathChooseSticks.text()) {
+      return MathChooseSticksOrBeadsOrBlocks(tools: ToolsOfMath.sticks);
+    } else if (gameType == GameTypes.mathChooseBeads.text()) {
+      return MathChooseSticksOrBeadsOrBlocks(tools: ToolsOfMath.beads);
+    } else if (gameType == GameTypes.mathChooseBlocks.text()) {
+      return MathChooseSticksOrBeadsOrBlocks(tools: ToolsOfMath.blocks);
+    } else if (gameType == GameTypes.mathChooseBeadsNumber.text()) {
+      return MathChooseNumberSticksOrBeadsOrBlocks(tools: ToolsOfMath.beads);
     }
   }
 
@@ -630,9 +636,11 @@ class ChooseTheCorrectGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 1;
 }
-class MathChooseSticks implements BasicOfGameData {
+
+class MathChooseSticksOrBeadsOrBlocks implements BasicOfGameData {
   @override
   bool isRound = false;
+  MathChooseSticksOrBeadsOrBlocks({required this.tools});
 
   @override
   String titleImageEn = AppImagesMath.clickTheChoose;
@@ -645,7 +653,28 @@ class MathChooseSticks implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+  late ToolsOfMath tools;
+  @override
+  int countOfMinimizeStar = 1;
+}
 
+class MathChooseNumberSticksOrBeadsOrBlocks implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  MathChooseNumberSticksOrBeadsOrBlocks({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.clickTheChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  late ToolsOfMath tools;
   @override
   int countOfMinimizeStar = 1;
 }

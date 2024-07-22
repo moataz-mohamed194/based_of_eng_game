@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/game_types/game_phonatics_types.dart';
+import '../../../../core/games_structure/basic_of_game_data.dart';
 import '../../../../core/phonetics_color.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/choose_sticks_cubit.dart';
 import '../widget/card_of_number.dart';
 import '../widget/card_of_selected.dart';
+import '../widget/get_the_beads.dart';
+import '../widget/get_the_blocks.dart';
 import '../widget/stick.dart';
 
 class ChooseSticksScreen extends StatelessWidget {
@@ -107,11 +111,34 @@ class ChooseSticksScreen extends StatelessWidget {
                                     selectedNumber: gameState.currentAnswer,
                                   ),
                                   10.pw,
-                                  Slick(
-                                    count: int.parse(
-                                        gameState.gameChoices?[index].choice ??
-                                            '0'),
-                                  )
+                                  if ((gameState.basicData
+                                              as MathChooseNumberSticksOrBeadsOrBlocks)
+                                          .tools ==
+                                      ToolsOfMath.sticks) ...{
+                                    Slick(
+                                      count: int.parse(gameState
+                                              .gameChoices?[index].choice ??
+                                          '0'),
+                                    )
+                                  } else if ((gameState.basicData
+                                              as MathChooseNumberSticksOrBeadsOrBlocks)
+                                          .tools ==
+                                      ToolsOfMath.beads) ...{
+                                    GetTheBeads(
+                                      countOfBalls: int.parse(gameState
+                                              .gameChoices?[index].choice ??
+                                          '0'),
+                                    )
+                                  } else if ((gameState.basicData
+                                              as MathChooseNumberSticksOrBeadsOrBlocks)
+                                          .tools ==
+                                      ToolsOfMath.blocks) ...{
+                                    GetTheBlocks(
+                                      countOfBoxes: int.parse(gameState
+                                              .gameChoices?[index].choice ??
+                                          '0'),
+                                    )
+                                  }
                                 ],
                               ))),
                   SizedBox(),

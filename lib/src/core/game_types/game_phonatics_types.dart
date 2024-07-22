@@ -33,7 +33,10 @@ enum GameTypes {
   chooseTheCorrect,
   sortingCupsUP,
   ninePicCards,
-  mathChooseSticks
+  mathChooseSticks,
+  mathChooseBeads,
+  mathChooseBlocks,
+  mathChooseBeadsNumber
 }
 
 extension TypeExtension on GameTypes {
@@ -109,6 +112,14 @@ extension TypeExtension on GameTypes {
         return 'كون الكلمات'.toLowerCase();
       case GameTypes.mathChooseSticks:
         return 'Math_Choose_Sticks'.toLowerCase();
+      case GameTypes.mathChooseBeads:
+        return 'math_choose_beads'.toLowerCase();
+      case GameTypes.mathChooseBlocks:
+        return 'Math_Choose_Blocks'.toLowerCase();
+      case GameTypes.mathChooseBeadsNumber:
+        return 'Math_Choose_Beads_Number'.toLowerCase();
     }
   }
 }
+
+enum ToolsOfMath { sticks, beads, blocks, domino }
