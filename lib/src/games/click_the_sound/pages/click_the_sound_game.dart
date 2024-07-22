@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/core/game_types/assets_images_arabic.dart';
 import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -118,6 +119,7 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                             await context
                                 .read<CurrentGamePhoneticsCubit>()
                                 .addSuccessAnswer(
+                                    isArabic: stateOfGame.isArabic,
                                     questions: stateOfGame.letters
                                             ?.where((element) =>
                                                 element.letter ==
@@ -149,11 +151,13 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                           } else {
                             await context
                                 .read<CurrentGamePhoneticsCubit>()
-                                .addWrongAnswer(actionOfWrongAnswer: () async {
-                              await context
-                                  .read<ClickTheSoundCubit>()
-                                  .sayTheLetter();
-                            });
+                                .addWrongAnswer(
+                                    isArabic: stateOfGame.isArabic,
+                                    actionOfWrongAnswer: () async {
+                                      await context
+                                          .read<ClickTheSoundCubit>()
+                                          .sayTheLetter();
+                                    });
                           }
                         }
                       },
@@ -169,6 +173,7 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
     required int index,
     required ClickTheSoundCubit viewModel,
   }) {
+    final isArabic = viewModel.state.isArabic;
     return InkWell(
       onTap: onPress,
       child: Container(
@@ -178,9 +183,13 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(
-                  viewModel.state.correctIndexes?.contains(index) ?? false
-                      ? AppImagesPhonetics.bubbleDisabled
-                      : AppImagesPhonetics.bubble,
+                  isArabic
+                      ? viewModel.state.correctIndexes?.contains(index) ?? false
+                          ? AppImagesArabic.correctBalon
+                          : AppImagesArabic.regularBalon
+                      : viewModel.state.correctIndexes?.contains(index) ?? false
+                          ? AppImagesPhonetics.bubbleDisabled
+                          : AppImagesPhonetics.bubble,
                 ),
                 fit: BoxFit.contain)),
         child: StrokedText(

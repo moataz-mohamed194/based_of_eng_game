@@ -30,7 +30,7 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPicture();
     } else if (gameType == GameTypes.clickTheSound.text()) {
-      return BasicClickTheSoundGame();
+      return BasicClickTheSoundGame(isArabic: enumValues.contains(programName));
     } else if (gameType == GameTypes.bingo.text()) {
       return BingoGame();
     } else if (gameType == GameTypes.sortingCups.text()) {
@@ -230,6 +230,9 @@ class Video implements BasicOfGameData {
 }
 
 class BasicClickTheSoundGame implements BasicOfGameData {
+  bool isArabic;
+
+  BasicClickTheSoundGame({required this.isArabic});
   @override
   bool isRound = false;
 
@@ -243,7 +246,7 @@ class BasicClickTheSoundGame implements BasicOfGameData {
   bool isConnect = false;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.clickTheSound;
 
   @override
   int countOfMinimizeStar = 1;
