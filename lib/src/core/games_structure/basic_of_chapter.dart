@@ -125,7 +125,6 @@ class SPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfS;
 
-
   @override
   BasicOfGameData? gameData;
 
@@ -172,7 +171,6 @@ class APhonetics implements MainDataOfChapters {
           (List<Color?>? colorsOfPaths, List<Offset> points) {
             return null;
           };
-
 
   @override
   BasicOfGameData? gameData;
@@ -447,7 +445,6 @@ class ZPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
-
 }
 
 class TPhonetics implements MainDataOfChapters {
@@ -1074,7 +1071,6 @@ class ConnectionSortingCups implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-
   ConnectionSortingCups({required this.mineGameData}) {
     gameData = mineGameData;
   }

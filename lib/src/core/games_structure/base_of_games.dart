@@ -64,6 +64,7 @@ abstract class BaseOfGames {
 
   static List<Type> listOfChapterOfArabic = [RedPhonetics];
   static bool isArabic({required Type chapter}) {
+    print('this type is $chapter');
     return listOfChapterOfArabic.contains(chapter);
   }
 
@@ -73,25 +74,24 @@ abstract class BaseOfGames {
       required String unitName,
       required String programName,
       required int audioFlag}) {
-    print(':${(unitName
-        .toLowerCase()
-        .contains(MainDataOfChaptersTypes.shortVowels.text()))}');
+    print(
+        ':${(unitName.toLowerCase().contains(MainDataOfChaptersTypes.shortVowels.text()))}');
     if (unitName
         .toLowerCase()
         .contains(MainDataOfChaptersTypes.shortVowels.text())) {
       return ShortVowels(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }else
-    if (unitName
-        .contains(MainDataOfChaptersTypes.up.text())) {
+    } else if (unitName.contains(MainDataOfChaptersTypes.up.text())) {
       return UpVowels(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }
-    else if (BasicOfGameData.isConnectGame(game: subGame.toLowerCase()) == true) {
+    } else if (BasicOfGameData.isConnectGame(game: subGame.toLowerCase()) ==
+        true) {
       if (subGame.toLowerCase() == GameTypes.sortingCups.text()) {
-        return ConnectionSortingCups(mineGameData: SortingCupsGame());
+        return ConnectionSortingCups(
+            mineGameData: SortingCupsGame(
+                isArabic: BasicOfGameData.enumValues.contains(programName)));
       } else {
         return ConnectionWithoutSortingCups(
             mineGameData: BasicOfGameData.getTheGameType(
@@ -209,7 +209,9 @@ abstract class BaseOfGames {
         MainDataOfChaptersTypes.redUnit.text()) {
       return RedPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag, programName:programName));
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName));
     }
     return null;
   }

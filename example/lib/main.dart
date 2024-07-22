@@ -31,11 +31,11 @@ class MyApp extends StatelessWidget {
             builder: (_, child) {
               return BlocProvider<ContactLessonBloc>(
                   create: (_) => di.sl<ContactLessonBloc>()
-                  //arabic
-                    // ..add(GetContactLessonRequest(lessonId: 91, gameId: 1184)),
+                    //arabic
+                    ..add(GetContactLessonRequest(lessonId: 143, gameId: 1838)),
 
-                  //eng
-                  ..add(GetContactLessonRequest(lessonId: 4, gameId: 168)),
+                  // eng
+                  // ..add(GetContactLessonRequest(lessonId: 4, gameId: 168)),
                   child: BlocConsumer<ContactLessonBloc, ContactLessonState>(
                     listener: (context, state) {
                       if (state is GetContactErrorInitial) {

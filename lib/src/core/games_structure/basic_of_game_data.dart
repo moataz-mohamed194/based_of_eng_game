@@ -34,9 +34,9 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.bingo.text()) {
       return BingoGame();
     } else if (gameType == GameTypes.sortingCups.text()) {
-      return SortingCupsGame();
+      return SortingCupsGame(isArabic: enumValues.contains(programName));
     } else if (gameType == GameTypes.sortingCupsUP.text()) {
-      return SortingCupsGame();
+      return SortingCupsGame(isArabic: enumValues.contains(programName));
     } else if (gameType == GameTypes.sortingPictures.text()) {
       return SortingPicturesGame();
     } else if (gameType == GameTypes.spelling.text()) {
@@ -323,6 +323,9 @@ class BingoGame implements BasicOfGameData {
 }
 
 class SortingCupsGame implements BasicOfGameData {
+  bool isArabic;
+
+  SortingCupsGame({required this.isArabic});
   @override
   bool isRound = false;
 
@@ -336,7 +339,7 @@ class SortingCupsGame implements BasicOfGameData {
   bool isConnect = true;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.titleOfSortingCups;
 
   @override
   int countOfMinimizeStar = 2;

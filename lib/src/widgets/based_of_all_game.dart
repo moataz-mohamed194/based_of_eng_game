@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/widgets/based_of_connect_games_ar.dart';
 import 'package:based_of_eng_game/src/widgets/based_of_game_arabic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,10 +69,19 @@ class BasedOfAllGame extends StatelessWidget {
                 } else if (stateOfGame.basicData?.gameData?.isConnect ==
                     true) ...{
                   if (stateOfGame.basicData is ConnectionSortingCups) ...{
-                    BasedOfGameConnectSortingCups(
-                      stateOfGame: stateOfGame,
-                      gamesData: gamesData,
-                    ),
+                    if (BaseOfGames.isArabic(
+                        chapter: stateOfGame.basicData?.gameData.runtimeType ??
+                            Type)) ...{
+                      BasedOfGameConnectSortingCupsAr(
+                        stateOfGame: stateOfGame,
+                        gamesData: gamesData,
+                      ),
+                    } else ...{
+                      BasedOfGameConnectSortingCups(
+                        stateOfGame: stateOfGame,
+                        gamesData: gamesData,
+                      ),
+                    }
                   } else ...{
                     BasedOfGameConnect(
                       stateOfGame: stateOfGame,
