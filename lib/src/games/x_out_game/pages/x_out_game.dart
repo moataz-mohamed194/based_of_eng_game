@@ -7,6 +7,7 @@ import '../../../../src_model/export_models.dart';
 import '../../../core/assets_images_phonetics.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
+import '../../../core/talk_tts.dart';
 import '../../../core/theme_text.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/x_out_cubit.dart';
@@ -207,6 +208,11 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                                     }
                                   },
                                   word: state.gameImages?[index].word ?? '',
+                                  onTap: () async {
+                                    await TalkTts.startTalk(
+                                        text: state.gameImages?[index].word ??
+                                            '');
+                                  },
                                 );
                         },
                       ),

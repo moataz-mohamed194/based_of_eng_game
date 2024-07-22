@@ -18,6 +18,7 @@ class XOutItemWidget extends StatelessWidget {
     this.isWrong,
     required this.word,
     required this.onDrag,
+    required this.onTap,
   });
 
   final String imageName;
@@ -27,11 +28,12 @@ class XOutItemWidget extends StatelessWidget {
   final int imageId;
   final bool isCorrect;
   final Function(DragTargetDetails<String>) onDrag;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // onTap: onTap,
+      onTap: onTap,
       child: DragTarget<String>(
           builder: (
             BuildContext context,
