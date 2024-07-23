@@ -8,6 +8,8 @@ import '../core/assets_sound_letters.dart';
 import '../core/audio_player_letters.dart';
 import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
+import '../games/math/choose_number/manager/choose_number_cubit.dart';
+import '../games/math/choose_number/screen/choose_numbers_screen.dart';
 import '../games/math/choose_sticks/manager/choose_sticks_cubit.dart';
 import '../games/math/choose_sticks/screen/choose_sticks_screen.dart';
 
@@ -84,7 +86,7 @@ class BasedOfMath extends StatelessWidget {
           ],
         ),
         if (stateOfGame.basicData?.gameData
-            is MathChooseNumberSticksOrBeadsOrBlocks) ...{
+            is MathChooseSticksOrBeadsOrBlocks) ...{
           BlocProvider<ChooseSticksCubit>(
             create: (_) => ChooseSticksCubit(
                 allGameData: gamesData,
@@ -102,6 +104,26 @@ class BasedOfMath extends StatelessWidget {
                           stateOfStringWillSay: gameData.first.inst ?? '');
                 },
                 child: ChooseSticksScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData
+            is MathChooseNumberSticksOrBeadsOrBlocks) ...{
+          BlocProvider<ChooseNumberCubit>(
+            create: (_) => ChooseNumberCubit(
+                allGameData: gamesData,
+                basicData: stateOfGame.basicData!.gameData!),
+            child: BlocListener<ChooseNumberCubit, ChooseNumberInitial>(
+                listener: (context, state) {
+                  final List<GameFinalModel> gameData = gamesData;
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .getStateOfStars(mainCountOfQuestion: gameData.length);
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .saveTheStringWillSay(
+                          stateOfStringIsWord: StateOfSubWord.stopTalk,
+                          stateOfStringWillSay: gameData.first.inst ?? '');
+                },
+                child: ChooseNumberScreen()),
           )
         }
       ],

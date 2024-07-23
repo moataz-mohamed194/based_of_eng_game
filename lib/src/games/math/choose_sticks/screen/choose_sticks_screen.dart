@@ -6,14 +6,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/game_types/game_phonatics_types.dart';
 import '../../../../core/games_structure/basic_of_game_data.dart';
+import '../../../../core/math_weidgt/get_the_blocks.dart';
 import '../../../../core/phonetics_color.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/choose_sticks_cubit.dart';
 import '../widget/card_of_number.dart';
 import '../widget/card_of_selected.dart';
-import '../widget/get_the_beads.dart';
-import '../widget/get_the_blocks.dart';
-import '../widget/stick.dart';
+import '../../../../core/math_weidgt/get_the_beads.dart';
+import '../../../../core/math_weidgt/stick.dart';
 
 class ChooseSticksScreen extends StatelessWidget {
   @override

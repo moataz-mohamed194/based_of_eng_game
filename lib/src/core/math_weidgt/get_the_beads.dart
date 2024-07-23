@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/game_types/assets_images_math.dart';
+import '../game_types/assets_images_math.dart';
 
 class GetTheBeads extends StatelessWidget {
   final int countOfBalls;

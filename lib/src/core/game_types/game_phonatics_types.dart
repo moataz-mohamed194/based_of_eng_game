@@ -36,7 +36,9 @@ enum GameTypes {
   mathChooseSticks,
   mathChooseBeads,
   mathChooseBlocks,
-  mathChooseBeadsNumber
+  mathChooseBeadsNumber,
+  mathChooseBlocksNumber,
+  mathSortingBlocks
 }
 
 extension TypeExtension on GameTypes {
@@ -118,6 +120,10 @@ extension TypeExtension on GameTypes {
         return 'Math_Choose_Blocks'.toLowerCase();
       case GameTypes.mathChooseBeadsNumber:
         return 'Math_Choose_Beads_Number'.toLowerCase();
+      case GameTypes.mathChooseBlocksNumber:
+        return 'Math_Choose_Blocks_Number'.toLowerCase();
+      case GameTypes.mathSortingBlocks:
+        return 'Math_Sorting_Blocks'.toLowerCase();
     }
   }
 }

@@ -83,6 +83,10 @@ abstract class BasicOfGameData {
       return MathChooseSticksOrBeadsOrBlocks(tools: ToolsOfMath.blocks);
     } else if (gameType == GameTypes.mathChooseBeadsNumber.text()) {
       return MathChooseNumberSticksOrBeadsOrBlocks(tools: ToolsOfMath.beads);
+    } else if (gameType == GameTypes.mathChooseBeadsNumber.text()) {
+      return MathChooseNumberSticksOrBeadsOrBlocks(tools: ToolsOfMath.beads);
+    } else if (gameType == GameTypes.mathChooseBlocksNumber.text()) {
+      return MathChooseNumberSticksOrBeadsOrBlocks(tools: ToolsOfMath.beads);
     }
   }
 

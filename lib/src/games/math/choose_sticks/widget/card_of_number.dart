@@ -6,14 +6,14 @@ import '../../../../core/theme_text.dart';
 
 class CardOfNumber extends StatelessWidget {
   final String number;
+  final double? size;
 
-  const CardOfNumber({super.key, required this.number});
+  const CardOfNumber({super.key, required this.number, this.size});
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
-      width: 99.h,
-      height: 99.h,
+      width: size ?? 99.h,
+      height: size ?? 99.h,
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
         color: Colors.white,
@@ -38,14 +38,16 @@ class CardOfNumber extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.28),
           ),
         ),
-        child: Text(
-          number,
-          style: TextStyle(
-            color: AppColorPhonetics.darkBlueColor,
-            fontSize: 30.sp,
-            fontFamily: AppTheme.getFontFamily5(),
-            fontWeight: FontWeight.w400,
-            height: 0,
+        child: FittedBox(
+          child: Text(
+            number,
+            style: TextStyle(
+              color: AppColorPhonetics.darkBlueColor,
+              fontSize: 30.sp,
+              fontFamily: AppTheme.getFontFamily5(),
+              fontWeight: FontWeight.w400,
+              height: 0,
+            ),
           ),
         ),
       ),
