@@ -37,9 +37,6 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isInteracting =
-        context.watch<CurrentGamePhoneticsCubit>().state.stateOfAvatar;
-
     return BlocConsumer<SpellingCubit, SpellingInitial>(
         listener: (context, state) {},
         builder: (context, gameState) {
@@ -52,9 +49,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                     flex: 3,
                     child: Container(
                       padding: const EdgeInsets.only(top: 10),
-                      // height: 0.6.sh,
                       height: MediaQuery.of(context).size.height * 0.64,
-
                       decoration: BoxDecoration(
                           image: DecorationImage(
                         image: AssetImage(gameState.woodenBackground ?? ''),
@@ -62,7 +57,6 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                       )),
                       child: Column(
                         children: [
-                          // 25.ph,
                           Expanded(
                             child: Container(
                               margin: EdgeInsets.symmetric(vertical: .05.sh),
@@ -73,7 +67,8 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                         TalkTts.startTalk(
                                             text: gameState
                                                     .gameData?.correctAns ??
-                                                '');
+                                                '',
+                                            isArabic: gameState.isArabic);
                                       },
                                 child: CachedNetworkImage(
                                   imageUrl: gameState
@@ -91,10 +86,10 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                               ),
                             ),
                           ),
-                          // 10.ph,
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 25),
-                            child: FittedBox(
+                            child: SizedBox(
+                              height: .2.sh,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
@@ -132,6 +127,8 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                                       .read<
                                                           CurrentGamePhoneticsCubit>()
                                                       .addSuccessAnswer(
+                                                          isArabic: gameState
+                                                              .isArabic,
                                                           questions: gameState
                                                               .allGames.length,
                                                           correctAnswers:
@@ -146,15 +143,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                                             queations: gameState
                                                                 .allGames
                                                                 .length);
-                                                    if (isLastQuestion) {
-                                                      // Future.delayed(
-                                                      //     const Duration(
-                                                      //         seconds: 2),
-                                                      //     () async {
-                                                      //   Navigator.of(context)
-                                                      //       .pop();
-                                                      // });
-                                                    } else {
+                                                    if (!isLastQuestion) {
                                                       await context
                                                           .read<
                                                               CurrentGamePhoneticsCubit>()
@@ -174,6 +163,8 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                                                       .read<
                                                           CurrentGamePhoneticsCubit>()
                                                       .addWrongAnswer(
+                                                          isArabic: gameState
+                                                              .isArabic,
                                                           actionOfWrongAnswer:
                                                               () async {});
                                                   await context
@@ -187,67 +178,65 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                               ),
                             ),
                           ),
-                          45.h.ph,
+                          SizedBox(height: 45.h),
                         ],
                       ),
                     )),
-                20.pw,
+                SizedBox(width: 20),
                 Expanded(
                   flex: 4,
                   child: Container(
-                      alignment: Alignment.center,
-                      // height:
-                      //     ((gameState.gameData)?.gameLetters?.length ?? 1) != 26
-                      //         ? MediaQuery.of(context).size.height / 3
-                      //         : null,
-                      margin: EdgeInsets.only(right: 15.w),
-                      padding: EdgeInsets.symmetric(
-                          vertical:
-                              ((gameState.gameData)?.gameLetters?.length ??
-                                          1) ==
-                                      26
-                                  ? 0
-                                  : 20),
-                      // width: MediaQuery.of(context).size.width * 0.37,
-                      // padding: EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                              color: AppColorPhonetics.darkBorderColor,
-                              width: 5)),
-                      child: Center(
-                          child: Wrap(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(right: 15.w),
+                    padding: EdgeInsets.symmetric(
+                      vertical:
+                          ((gameState.gameData)?.gameLetters?.length ?? 1) == 26
+                              ? 0
+                              : 20,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(
+                        color: AppColorPhonetics.darkBorderColor,
+                        width: 5,
+                      ),
+                    ),
+                    child: Center(
+                      child: Wrap(
                         children: List.generate(
-                            ((gameState.gameData)?.gameLetters?.length ?? 1),
-                            (index) {
-                          return ItemCardWidget(
-                            id: ((gameState.gameData?.gameLetters)!
-                                    .map((e) => e.id)
-                                    .toSet()
-                                    .toList()[index]) ??
-                                0,
-                            body: (gameState.gameData?.gameLetters)
-                                    ?.map((e) => e.letter)
-                                    .toSet()
-                                    .toList()[index] ??
-                                '',
-                            maxHeight:
-                                (((gameState.gameData)?.gameLetters?.length ??
-                                            1) ==
-                                        26
-                                    ? 40.h
-                                    : 60.h),
-                            maxWidth:
-                                (((gameState.gameData)?.gameLetters?.length ??
-                                            1) ==
-                                        26
-                                    ? 23.w
-                                    : 30.w),
-                            index: index,
-                          );
-                        }),
-                      ))),
+                          (gameState.gameData?.gameLetters?.length ?? 1),
+                          (index) {
+                            return ItemCardWidget(
+                              id: ((gameState.gameData?.gameLetters)
+                                      ?.map((e) => e.id)
+                                      .toSet()
+                                      .toList()[index]) ??
+                                  0,
+                              body: (gameState.gameData?.gameLetters)
+                                      ?.map((e) => e.letter)
+                                      .toSet()
+                                      .toList()[index] ??
+                                  '',
+                              maxHeight:
+                                  ((gameState.gameData?.gameLetters?.length ??
+                                              1) ==
+                                          26
+                                      ? 40.h
+                                      : 60.h),
+                              maxWidth:
+                                  ((gameState.gameData?.gameLetters?.length ??
+                                              1) ==
+                                          26
+                                      ? 23.w
+                                      : 30.w),
+                              index: index,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

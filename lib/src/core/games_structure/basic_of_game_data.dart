@@ -392,7 +392,7 @@ class SpellingGame implements BasicOfGameData {
   bool isConnect = true;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.titleOfSpelling;
 
   @override
   int countOfMinimizeStar = 2;

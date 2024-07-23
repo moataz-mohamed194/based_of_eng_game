@@ -130,12 +130,13 @@ class BasedOfGameConnect extends StatelessWidget {
                     BlocProvider<SpellingCubit>(
                         create: (_) => SpellingCubit(
                             // gameData: stateOfGameData.data[stateOfGame.index],
+                            isArabic: isArabic,
                             index: stateOfGame.index,
                             background: (stateOfGame.basicData?.gameData
                                     as SpellingGame)
                                 .woodenBackground,
                             allGames: gamesData),
-                        child: const SpellingGameScreen())
+                        child: SpellingGameScreen())
                   } else if ((stateOfGame.basicData?.gameData
                       is SortingPicturesGame)) ...{
                     // const Text('SortingPicturesGame')

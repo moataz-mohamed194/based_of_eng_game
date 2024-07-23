@@ -9,26 +9,31 @@ class SpellingInitial extends Equatable {
   // final int? correctAnswer;
   final String? woodenBackground;
   final int index;
+  final bool isArabic;
 
-  const SpellingInitial(
-      {required this.allGames,
-      required this.correctAnswers,
-      this.cardsLetters,
-      this.index = 0,
-      this.gameData,
-      this.woodenBackground});
+  const SpellingInitial({
+    required this.allGames,
+    required this.correctAnswers,
+    this.cardsLetters,
+    this.index = 0,
+    this.gameData,
+    this.woodenBackground,
+    this.isArabic = false,
+  });
 
-  SpellingInitial copyWith(
-      {List<GameFinalModel>? allGames,
-      GameFinalModel? gameData,
-      List<GameLettersGameFinalModel>? cardsLetters,
-      GameLettersGameFinalModel? chooseWord,
-      int? correctAnswer,
-      int? countOfWrong,
-      int? index,
-      List<String>? indexOfCorrectAnswers,
-      List<String>? correctAnswers,
-      String? woodenBackground}) {
+  SpellingInitial copyWith({
+    List<GameFinalModel>? allGames,
+    GameFinalModel? gameData,
+    List<GameLettersGameFinalModel>? cardsLetters,
+    GameLettersGameFinalModel? chooseWord,
+    int? correctAnswer,
+    int? countOfWrong,
+    int? index,
+    List<String>? indexOfCorrectAnswers,
+    List<String>? correctAnswers,
+    String? woodenBackground,
+    bool? isArabic,
+  }) {
     return SpellingInitial(
       allGames: allGames ?? this.allGames,
       index: index ?? this.index,
@@ -36,6 +41,7 @@ class SpellingInitial extends Equatable {
       gameData: gameData ?? this.gameData,
       correctAnswers: correctAnswers ?? this.correctAnswers,
       woodenBackground: woodenBackground ?? this.woodenBackground,
+      isArabic: isArabic ?? this.isArabic,
       // countOfWrong: countOfWrong ?? this.countOfWrong,
     );
   }
@@ -47,6 +53,7 @@ class SpellingInitial extends Equatable {
         correctAnswers,
         gameData,
         cardsLetters,
-        woodenBackground
+        woodenBackground,
+        isArabic,
       ];
 }

@@ -14,17 +14,21 @@ class SpellingCubit extends Cubit<SpellingInitial> {
   SpellingCubit(
       {required String background,
       required int index,
-      required List<GameFinalModel> allGames})
+      required List<GameFinalModel> allGames,
+      bool isArabic = false})
       : super(SpellingInitial(
-            woodenBackground: background,
-            correctAnswers: List.generate(
-                (allGames.first.correctAns ?? '').split('').length,
-                (index) => ''),
-            allGames: allGames,
-            gameData: allGames.first,
-            index: index)) {
+          woodenBackground: background,
+          correctAnswers: List.generate(
+              (allGames.first.correctAns ?? '').split('').length,
+              (index) => ''),
+          allGames: allGames,
+          gameData: allGames.first,
+          index: index,
+          isArabic: isArabic,
+        )) {
     // emit(state.copyWith(gameData: allGames, correctAnswers: ['', '', '']));
-    TalkTts.startTalk(text: state.allGames[state.index].inst ?? '');
+    TalkTts.startTalk(
+        text: state.allGames[state.index].inst ?? '', isArabic: state.isArabic);
   }
 
   addTheCorrectAnswer({required String answer, required int index}) async {
@@ -78,7 +82,9 @@ class SpellingCubit extends Cubit<SpellingInitial> {
     bool stateOfAnswer = state.gameData?.correctAns?.toLowerCase() ==
         state.correctAnswers.join().toLowerCase();
     if (stateOfAnswer) {
-      TalkTts.startTalk(text: "${state.gameData?.correctAns ?? ''}  ");
+      TalkTts.startTalk(
+          text: "${state.gameData?.correctAns ?? ''}  ",
+          isArabic: state.isArabic);
       await Future.delayed(Duration(milliseconds: 500));
     }
     return stateOfAnswer;
