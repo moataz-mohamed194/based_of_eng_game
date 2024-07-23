@@ -45,9 +45,7 @@ class BasedOfGameArabic extends StatelessWidget {
                           isArabic: true),
                       child: Directionality(
                           textDirection: TextDirection.rtl,
-                          child: DragOutGame(
-                            isArabic: true,
-                          )))
+                          child: DragOutGame()))
                 } else if ((stateOfGame.basicData?.gameData
                     is ClickPictureOfWord)) ...{
                   BlocProvider<ClickThePictureWithWordCubit>(

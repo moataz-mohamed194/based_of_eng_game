@@ -25,21 +25,24 @@ class ClickThePictureWithWordInitial extends Equatable {
       GameImagesGameFinalModel? chooseWord,
       bool? isArabic}) {
     return ClickThePictureWithWordInitial(
-        gameData: gameData ?? this.gameData,
-        backGround: backGround ?? this.backGround,
-        gameImages: gameImages ?? this.gameImages,
-        chooseWord: chooseWord ?? this.chooseWord,
-        correctIndexes: correctIndexes ?? this.correctIndexes,
-        isArabic: isArabic ?? this.isArabic);
+      gameData: gameData ?? this.gameData,
+      backGround: backGround ?? this.backGround,
+      gameImages: gameImages ?? this.gameImages,
+      chooseWord: chooseWord ?? this.chooseWord,
+      correctIndexes: correctIndexes ?? this.correctIndexes,
+      isArabic: isArabic ?? this.isArabic,
+    );
   }
 
   ClickThePictureWithWordInitial clearChooseWord() {
     return ClickThePictureWithWordInitial(
-        gameData: gameData,
-        gameImages: gameImages,
-        backGround: backGround,
-        chooseWord: null,
-        correctIndexes: correctIndexes);
+      gameData: gameData,
+      gameImages: gameImages,
+      backGround: backGround,
+      chooseWord: null,
+      correctIndexes: correctIndexes,
+      isArabic: isArabic,
+    );
   }
 
   @override
@@ -49,6 +52,7 @@ class ClickThePictureWithWordInitial extends Equatable {
         gameData,
         backGround,
         gameImages,
+        isArabic,
         // gameDataPartTwo,
         // gameDataPartOne
       ];

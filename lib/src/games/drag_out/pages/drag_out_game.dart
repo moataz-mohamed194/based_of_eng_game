@@ -12,8 +12,7 @@ import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/drag_out_cubit.dart';
 
 class DragOutGame extends StatefulWidget {
-  DragOutGame({super.key, this.isArabic = false});
-  final bool isArabic;
+  DragOutGame({super.key});
   @override
   State<StatefulWidget> createState() {
     return _DragOutGame();
@@ -124,7 +123,8 @@ class _DragOutGame extends State<DragOutGame> {
                                           TalkTts.startTalk(
                                               text: gameState.gameImages?[index]
                                                       .word ??
-                                                  '');
+                                                  '',
+                                              isArabic: gameState.isArabic);
                                         },
                                         child: CachedNetworkImage(
                                           imageUrl: gameState
@@ -161,7 +161,7 @@ class _DragOutGame extends State<DragOutGame> {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addSuccessAnswer(
-                                            isArabic: widget.isArabic,
+                                            isArabic: gameState.isArabic,
                                             questions:
                                                 gameState.allGameData.length,
                                             correctAnswers:
@@ -196,7 +196,7 @@ class _DragOutGame extends State<DragOutGame> {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addWrongAnswer(
-                                            isArabic: widget.isArabic,
+                                            isArabic: gameState.isArabic,
                                             actionOfWrongAnswer: () async {});
                                   }
                                 }
