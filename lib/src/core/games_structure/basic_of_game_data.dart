@@ -336,6 +336,7 @@ class BingoGame implements BasicOfGameData {
 }
 
 class SortingCupsGame implements BasicOfGameData {
+
   @override
   bool isRound = false;
 
@@ -349,7 +350,7 @@ class SortingCupsGame implements BasicOfGameData {
   bool isConnect = true;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.titleOfSortingCups;
 
   @override
   int countOfMinimizeStar = 2;

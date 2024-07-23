@@ -22,4 +22,7 @@ abstract class AppImagesArabic {
   static const String regularBalon = '${mainPathOfImages}balon_regular.png';
   static const String wrongBalon = '${mainPathOfImages}balon_wrong.png';
   static const String correctBalon = '${mainPathOfImages}balon_correct.png';
+
+  static const String titleOfSortingCups =
+      '${mainPathOfImages}sorting_cups.png';
 }

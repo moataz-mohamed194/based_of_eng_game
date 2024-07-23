@@ -13,8 +13,8 @@ part 'sorting_cups_state.dart';
 class SortingCupsCubit extends Cubit<SortingCupsInitial> {
   final GameFinalModel gameData;
 
-  SortingCupsCubit({required this.gameData})
-      : super(SortingCupsInitial(gameData: gameData)) {
+  SortingCupsCubit({required this.gameData, bool isArabic = false})
+      : super(SortingCupsInitial(gameData: gameData, isArabic: isArabic)) {
     List<GameLettersGameFinalModel> cardsLetters = gameData.gameLetters ?? [];
     cardsLetters.shuffle();
     emit(state.copyWith(gameData: gameData, cardsLetters: cardsLetters));
@@ -22,7 +22,8 @@ class SortingCupsCubit extends Cubit<SortingCupsInitial> {
   }
 
   initStart() async {
-    await TalkTts.startTalk(text: state.gameData.inst ?? '');
+    await TalkTts.startTalk(
+        text: state.gameData.inst ?? '', isArabic: state.isArabic);
 
     getTheRandomWord();
   }
