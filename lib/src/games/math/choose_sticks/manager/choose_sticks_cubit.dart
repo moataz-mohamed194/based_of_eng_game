@@ -36,12 +36,16 @@ class ChooseSticksCubit extends Cubit<ChooseSticksInitial> {
   addAnswer({required num userChoose}) {
     if (userChoose == state.mainNumber) {
       int countCorrectAnswers = state.correctAnswers + 1;
-      emit(state.copyWith(
-          correctAnswers: countCorrectAnswers, currentAnswer: userChoose));
+      emit(
+          state.copyWith(correctAnswers: countCorrectAnswers, isCorrect: true));
       return true;
     } else {
       return false;
     }
+  }
+
+  reStartIsCorrect() {
+    emit(state.copyWith(isCorrect: false));
   }
 
   updateTheCurrentGame({required int index}) {

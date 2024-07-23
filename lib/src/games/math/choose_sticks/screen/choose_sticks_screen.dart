@@ -73,6 +73,10 @@ class ChooseSticksScreen extends StatelessWidget {
                                                 .checkIfIsTheLastQuestionOfGame(
                                                     queations: gameState
                                                         .allGameData.length);
+
+                                            context
+                                                .read<ChooseSticksCubit>()
+                                                .reStartIsCorrect();
                                             if (isLastQuestion) {
                                               // Future.delayed(const Duration(seconds: 2),
                                               //     () async {
@@ -108,11 +112,14 @@ class ChooseSticksScreen extends StatelessWidget {
                                     },
                                     itsId:
                                         gameState.gameChoices?[index].id ?? 0,
-                                    selectedNumber: gameState.currentAnswer,
+                                    isCorrect: (gameState.isCorrect == true) &&
+                                        (gameState.gameChoices?[index].choice)
+                                                .toString() ==
+                                            gameState.mainNumber.toString(),
                                   ),
                                   10.pw,
                                   if ((gameState.basicData
-                                              as MathChooseNumberSticksOrBeadsOrBlocks)
+                                              as MathChooseSticksOrBeadsOrBlocks)
                                           .tools ==
                                       ToolsOfMath.sticks) ...{
                                     Slick(
@@ -121,7 +128,7 @@ class ChooseSticksScreen extends StatelessWidget {
                                           '0'),
                                     )
                                   } else if ((gameState.basicData
-                                              as MathChooseNumberSticksOrBeadsOrBlocks)
+                                              as MathChooseSticksOrBeadsOrBlocks)
                                           .tools ==
                                       ToolsOfMath.beads) ...{
                                     GetTheBeads(
@@ -130,7 +137,7 @@ class ChooseSticksScreen extends StatelessWidget {
                                           '0'),
                                     )
                                   } else if ((gameState.basicData
-                                              as MathChooseNumberSticksOrBeadsOrBlocks)
+                                              as MathChooseSticksOrBeadsOrBlocks)
                                           .tools ==
                                       ToolsOfMath.blocks) ...{
                                     GetTheBlocks(

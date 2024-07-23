@@ -5,7 +5,7 @@ class ChooseSticksInitial extends Equatable {
   final List<GameChoicesGameFinalModel>? gameChoices;
   final num? mainNumber;
   final int correctAnswers;
-  final num? currentAnswer;
+  final bool? isCorrect;
   final int index;
   final BasicOfGameData basicData;
   final GameFinalModel gameData;
@@ -16,7 +16,7 @@ class ChooseSticksInitial extends Equatable {
       required this.gameData,
       required this.correctAnswers,
       required this.basicData,
-      this.currentAnswer,
+      this.isCorrect,
       required this.index,
       this.gameChoices,
       this.mainNumber});
@@ -24,7 +24,7 @@ class ChooseSticksInitial extends Equatable {
     List<GameChoicesGameFinalModel>? gameChoices,
     num? mainNumber,
     int? correctAnswers,
-    num? currentAnswer,
+    bool? isCorrect,
     int? index,
     GameFinalModel? gameData,
     List<GameFinalModel>? allGameData,
@@ -36,7 +36,7 @@ class ChooseSticksInitial extends Equatable {
         basicData: basicData,
         gameChoices: gameChoices ?? this.gameChoices,
         allGameData: allGameData ?? this.allGameData,
-        currentAnswer: currentAnswer ?? this.currentAnswer,
+        isCorrect: isCorrect ?? this.isCorrect,
         correctAnswers: correctAnswers ?? this.correctAnswers);
   }
 
@@ -48,7 +48,7 @@ class ChooseSticksInitial extends Equatable {
         basicData,
         gameData,
         allGameData,
-        currentAnswer,
+        isCorrect,
         correctAnswers
       ];
 }

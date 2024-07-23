@@ -6,15 +6,12 @@ import '../../../../core/phonetics_color.dart';
 import '../../../../core/theme_text.dart';
 
 class CardOfSelected extends StatelessWidget {
-  final num? selectedNumber;
+  final bool? isCorrect;
   final num itsId;
   final void Function()? onTap;
 
   const CardOfSelected(
-      {super.key,
-      required this.onTap,
-      required this.itsId,
-      this.selectedNumber});
+      {super.key, required this.onTap, required this.itsId, this.isCorrect});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -46,7 +43,7 @@ class CardOfSelected extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.28),
             ),
           ),
-          child: itsId == selectedNumber
+          child: isCorrect == true
               ? Image.asset(
                   AppImagesPhonetics.iconSelectedCheckBox,
                   height: 50.h,
