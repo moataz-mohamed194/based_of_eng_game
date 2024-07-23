@@ -11,6 +11,7 @@ class AppGameSound {
   static const String w1 = '${mainPathOfArabicSoundBase}w1.mp3';
   static const String w2 = '${mainPathOfArabicSoundBase}w2.mp3';
   static const String w3 = '${mainPathOfArabicSoundBase}w3.mp3';
+  static const String bingo = '${mainPathOfSoundBase}Bingo.mp3';
   static const String notThatOneSound =
       "${mainPathOfSoundBase}notThatOneSound.mp3";
   static const String notThatOneSound1 =
