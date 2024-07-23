@@ -2,7 +2,7 @@ import 'package:based_of_eng_game/src/cubit/current_game_phonetics_cubit.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../../../../../based_of_eng_game.dart';
 import '../../../../../src_model/model/game_choices_model.dart';
