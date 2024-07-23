@@ -25,254 +25,289 @@ import '../games/x_out_game/pages/x_out_game.dart';
 class BasedOfGameConnect extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
   final List<GameFinalModel> gamesData;
+  final bool isArabic;
   const BasedOfGameConnect(
-      {super.key, required this.stateOfGame, required this.gamesData});
+      {super.key,
+      required this.stateOfGame,
+      required this.gamesData,
+      required this.isArabic});
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        // height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(stateOfGame.basicData?.background ?? ''),
-                fit: BoxFit.fill)),
-        child: Stack(
-          alignment: Alignment.topRight,
-          children: [
-            if (stateOfGame.basicData!.gameData!.isRound) ...{
-              PositionedDirectional(
-                top: -10,
-                start: 90.w,
-                child: GestureDetector(
-                  onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()
-                      ? () async {
-                          await context
-                              .read<CurrentGamePhoneticsCubit>()
-                              .beeTalkingTrue();
-                          await TalkTts.startTalk(
-                              text: gamesData[stateOfGame.index].inst ?? '');
-                          TalkTts.flutterTts.setCompletionHandler(() async {
-                            if (stateOfGame.stateOfStringIsWord ==
-                                StateOfSubWord.isWord) {
-                              await TalkTts.startTalk(
-                                  text: stateOfGame.stateOfStringWillSay ?? '');
-                            } else {
-                              await AudioPlayerLetters.startPlaySound(
-                                  soundPath:
-                                      AssetsSoundLetters.getSoundOfLetter(
-                                          mainGameLetter: stateOfGame
-                                                  .stateOfStringWillSay ??
-                                              ''));
-                            }
-                          });
+    return Directionality(
+      textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+      child: Expanded(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          // height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(stateOfGame.basicData?.background ?? ''),
+                  fit: BoxFit.fill)),
+          child: Stack(
+            alignment: isArabic ? Alignment.topLeft : Alignment.topRight,
+            children: [
+              if (stateOfGame.basicData!.gameData!.isRound) ...{
+                PositionedDirectional(
+                  top: -10,
+                  start: 90.w,
+                  child: GestureDetector(
+                    onTap: context
+                            .read<CurrentGamePhoneticsCubit>()
+                            .ableButton()
+                        ? () async {
+                            await context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .beeTalkingTrue();
+                            await TalkTts.startTalk(
+                                text: gamesData[stateOfGame.index].inst ?? '',
+                                isArabic: isArabic);
+                            TalkTts.flutterTts.setCompletionHandler(() async {
+                              if (stateOfGame.stateOfStringIsWord ==
+                                  StateOfSubWord.isWord) {
+                                await TalkTts.startTalk(
+                                    text:
+                                        stateOfGame.stateOfStringWillSay ?? '',
+                                    isArabic: isArabic);
+                              } else {
+                                await AudioPlayerLetters.startPlaySound(
+                                    soundPath:
+                                        AssetsSoundLetters.getSoundOfLetter(
+                                            mainGameLetter: stateOfGame
+                                                    .stateOfStringWillSay ??
+                                                ''));
+                              }
+                            });
 
-                          await context
-                              .read<CurrentGamePhoneticsCubit>()
-                              .beeTalkingFalse();
-                        }
-                      : null,
-                  child: Container(
-                      alignment: Alignment.center,
-                      child: stateOfGame.avatarCurrentArtboard == null
-                          ? SizedBox(
-                              // stateOfGame.currentAvatar ?? '',
-                              // height:
-                              // MediaQuery.of(context).size.height - (70.h),
-                              height: 85.h,
-                              width: 80.w,
-                            )
-                          : SizedBox(
-                              height: 110.h,
-                              // width: 70.w,
-                              child: Rive(
-                                artboard: stateOfGame.avatarCurrentArtboard!,
-                                fit: BoxFit.fill,
-                                useArtboardSize: true,
-                                alignment: Alignment.center,
-                              ))),
+                            await context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .beeTalkingFalse();
+                          }
+                        : null,
+                    child: Container(
+                        alignment: Alignment.center,
+                        child: stateOfGame.avatarCurrentArtboard == null
+                            ? SizedBox(
+                                // stateOfGame.currentAvatar ?? '',
+                                // height:
+                                // MediaQuery.of(context).size.height - (70.h),
+                                height: 85.h,
+                                width: 80.w,
+                              )
+                            : SizedBox(
+                                height: 110.h,
+                                // width: 70.w,
+                                child: Rive(
+                                  artboard: stateOfGame.avatarCurrentArtboard!,
+                                  fit: BoxFit.fill,
+                                  useArtboardSize: true,
+                                  alignment: Alignment.center,
+                                ))),
+                  ),
                 ),
-              ),
-            },
-            /////////////////////game//////////////////
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if ((stateOfGame.basicData?.gameData is BingoGame)) ...{
-                  BlocProvider<BingoCubit>(
-                      create: (_) => BingoCubit(
-                            gameData: gamesData[stateOfGame.index],
-                          ),
-                      child: const BingoGameScreen())
-                } else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
-                  BlocProvider<XOutCubit>(
-                      create: (_) => XOutCubit(
-                            listGameData: gamesData,
-                            index: stateOfGame.index,
-                          ),
-                      child: const XOutGameScreen())
-                } else if ((stateOfGame.basicData?.gameData
-                    is SpellingGame)) ...{
-                  // const Text('SpellingGame')
-                  BlocProvider<SpellingCubit>(
-                      create: (_) => SpellingCubit(
-                          // gameData: stateOfGameData.data[stateOfGame.index],
-                          index: stateOfGame.index,
-                          background:
-                              (stateOfGame.basicData?.gameData as SpellingGame)
-                                  .woodenBackground,
-                          allGames: gamesData),
-                      child: const SpellingGameScreen())
-                } else if ((stateOfGame.basicData?.gameData
-                    is SortingPicturesGame)) ...{
-                  // const Text('SortingPicturesGame')
-                  BlocProvider<SortingCubit>(
-                      create: (_) => SortingCubit(
-                          index: stateOfGame.index,
-                          background: (stateOfGame.basicData?.gameData
-                                  as SortingPicturesGame)
-                              .woodenBackground,
-                          listGameData: gamesData),
-                      child: SortingGameScreen())
-                } else if ((stateOfGame.basicData?.gameData is DiceGame)) ...{
-                  BlocProvider<DiceCubit>(
-                      create: (_) => DiceCubit(
-                            gameData: gamesData[stateOfGame.index],
-                          ),
-                      child: DiceGamePage())
-                }
-              ],
-            ),
-
-            /////////////////////game title//////////////////
-            Positioned(
-              top: 0,
-              left: 0,
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    stateOfGame.basicData!.gameData!.isRound
-                        ? Padding(
-                            padding: EdgeInsets.only(left: 10.w, top: 10.h),
-                            child: Image.asset(
-                              stateOfGame.basicData?.gameData?.titleImageEn ??
-                                  '',
-                              height: 75.h,
-                              width: 90.w,
-                              fit: BoxFit.fill,
+              },
+              /////////////////////game//////////////////
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if ((stateOfGame.basicData?.gameData is BingoGame)) ...{
+                    BlocProvider<BingoCubit>(
+                        create: (_) => BingoCubit(
+                              gameData: gamesData[stateOfGame.index],
                             ),
-                          )
-                        : Container(
-                            width: 0.4.sw,
-                            height: 0.4.sh,
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Stack(
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Positioned(
-                                  top: 0,
-                                  child: GestureDetector(
-                                    onTap: context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .ableButton()
-                                        ? () async {
-                                            await context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .beeTalkingTrue();
-                                            await TalkTts.startTalk(
-                                                text:
-                                                    gamesData[stateOfGame.index]
-                                                            .inst ??
-                                                        '');
-                                            TalkTts.flutterTts
-                                                .setCompletionHandler(() async {
-                                              if (stateOfGame
-                                                      .stateOfStringIsWord ==
-                                                  StateOfSubWord.isWord) {
-                                                await TalkTts.startTalk(
-                                                    text: stateOfGame
-                                                            .stateOfStringWillSay ??
-                                                        '');
-                                              } else {
-                                                await AudioPlayerLetters.startPlaySound(
-                                                    soundPath: AssetsSoundLetters
-                                                        .getSoundOfLetter(
-                                                            mainGameLetter:
-                                                                stateOfGame
-                                                                        .stateOfStringWillSay ??
-                                                                    ''));
-                                              }
-                                            });
+                        child: const BingoGameScreen())
+                  } else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
+                    BlocProvider<XOutCubit>(
+                        create: (_) => XOutCubit(
+                              listGameData: gamesData,
+                              index: stateOfGame.index,
+                              isArabic: isArabic,
+                            ),
+                        child: const XOutGameScreen())
+                  } else if ((stateOfGame.basicData?.gameData
+                      is SpellingGame)) ...{
+                    // const Text('SpellingGame')
+                    BlocProvider<SpellingCubit>(
+                        create: (_) => SpellingCubit(
+                            // gameData: stateOfGameData.data[stateOfGame.index],
+                            index: stateOfGame.index,
+                            background: (stateOfGame.basicData?.gameData
+                                    as SpellingGame)
+                                .woodenBackground,
+                            allGames: gamesData),
+                        child: const SpellingGameScreen())
+                  } else if ((stateOfGame.basicData?.gameData
+                      is SortingPicturesGame)) ...{
+                    // const Text('SortingPicturesGame')
+                    BlocProvider<SortingCubit>(
+                        create: (_) => SortingCubit(
+                            index: stateOfGame.index,
+                            background: (stateOfGame.basicData?.gameData
+                                    as SortingPicturesGame)
+                                .woodenBackground,
+                            listGameData: gamesData),
+                        child: SortingGameScreen())
+                  } else if ((stateOfGame.basicData?.gameData is DiceGame)) ...{
+                    BlocProvider<DiceCubit>(
+                        create: (_) => DiceCubit(
+                              gameData: gamesData[stateOfGame.index],
+                            ),
+                        child: DiceGamePage())
+                  }
+                ],
+              ),
 
-                                            await context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .beeTalkingFalse();
-                                          }
-                                        : null,
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        child: stateOfGame
-                                                    .avatarCurrentArtboard ==
-                                                null
-                                            ? SizedBox(
-                                                // stateOfGame.currentAvatar ?? '',
-                                                // height:
-                                                // MediaQuery.of(context).size.height - (70.h),
-                                                height: 75.h,
-                                                width: 80.w,
-                                              )
-                                            : Container(
-                                                width: 75.w,
-                                                alignment: Alignment.center,
-                                                margin:
-                                                    EdgeInsets.only(left: 7.w),
-                                                child: SizedBox(
-                                                    height: 120.h,
-                                                    // width: 65.w,
-                                                    child: Rive(
-                                                      artboard: stateOfGame
-                                                          .avatarCurrentArtboard!,
-                                                      fit: BoxFit.fill,
-                                                      useArtboardSize: true,
-                                                      alignment:
-                                                          Alignment.center,
-                                                    )),
-                                              )),
-                                  ),
-                                ),
-                                PositionedDirectional(
-                                  top: 70.h,
-                                  child: Image.asset(
-                                    stateOfGame.basicData?.gameData
+              /////////////////////game title//////////////////
+              Positioned(
+                top: 0,
+                left: isArabic ? null : 0,
+                right: isArabic ? 0 : null,
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      stateOfGame.basicData!.gameData!.isRound
+                          ? Padding(
+                              padding: EdgeInsets.only(
+                                  left: isArabic ? 0 : 10.w,
+                                  right: isArabic ? 10.w : 0,
+                                  top: 10.h),
+                              child: Image.asset(
+                                isArabic
+                                    ? stateOfGame.basicData?.gameData
+                                            ?.titleImageAr ??
+                                        ''
+                                    : stateOfGame.basicData?.gameData
                                             ?.titleImageEn ??
                                         '',
-                                    height: 75.h,
-                                    width: 75.w,
-                                    fit: BoxFit.contain,
+                                height: 75.h,
+                                width: 90.w,
+                                fit: BoxFit.fill,
+                              ),
+                            )
+                          : Container(
+                              width: 0.4.sw,
+                              height: 0.4.sh,
+                              padding: EdgeInsets.only(
+                                  left: isArabic ? 0 : 10,
+                                  right: isArabic ? 10 : 0),
+                              child: Stack(
+                                // crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Positioned(
+                                    top: 0,
+                                    child: GestureDetector(
+                                      onTap: context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .ableButton()
+                                          ? () async {
+                                              await context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .beeTalkingTrue();
+                                              await TalkTts.startTalk(
+                                                  text: gamesData[
+                                                              stateOfGame.index]
+                                                          .inst ??
+                                                      '',
+                                                  isArabic: isArabic);
+                                              TalkTts.flutterTts
+                                                  .setCompletionHandler(
+                                                      () async {
+                                                if (stateOfGame
+                                                        .stateOfStringIsWord ==
+                                                    StateOfSubWord.isWord) {
+                                                  await TalkTts.startTalk(
+                                                      text: stateOfGame
+                                                              .stateOfStringWillSay ??
+                                                          '',
+                                                      isArabic: isArabic);
+                                                } else {
+                                                  await AudioPlayerLetters.startPlaySound(
+                                                      soundPath: AssetsSoundLetters
+                                                          .getSoundOfLetter(
+                                                              mainGameLetter:
+                                                                  stateOfGame
+                                                                          .stateOfStringWillSay ??
+                                                                      ''));
+                                                }
+                                              });
+
+                                              await context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .beeTalkingFalse();
+                                            }
+                                          : null,
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          child: stateOfGame
+                                                      .avatarCurrentArtboard ==
+                                                  null
+                                              ? SizedBox(
+                                                  // stateOfGame.currentAvatar ?? '',
+                                                  // height:
+                                                  // MediaQuery.of(context).size.height - (70.h),
+                                                  height: 75.h,
+                                                  width: 80.w,
+                                                )
+                                              : Container(
+                                                  width: 75.w,
+                                                  alignment: Alignment.center,
+                                                  margin: EdgeInsets.only(
+                                                      left:
+                                                          isArabic ? 0.w : 7.w,
+                                                      right:
+                                                          isArabic ? 7.w : 0.w),
+                                                  child: SizedBox(
+                                                      height: 120.h,
+                                                      // width: 65.w,
+                                                      child: Rive(
+                                                        artboard: stateOfGame
+                                                            .avatarCurrentArtboard!,
+                                                        fit: BoxFit.fill,
+                                                        useArtboardSize: true,
+                                                        alignment:
+                                                            Alignment.center,
+                                                      )),
+                                                )),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  PositionedDirectional(
+                                    top: 70.h,
+                                    child: Image.asset(
+                                      isArabic
+                                          ? stateOfGame.basicData?.gameData
+                                                  ?.titleImageAr ??
+                                              ''
+                                          : stateOfGame.basicData?.gameData
+                                                  ?.titleImageEn ??
+                                              '',
+                                      height: 75.h,
+                                      width: isArabic ? 100.w : 75.w,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
+                      if (stateOfGame.currentStringOfDice != null) ...{
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                          child: WaveDice(
+                            currentAlphabet:
+                                '${stateOfGame.currentStringOfDice}',
+                            width: 90.h,
+                            height: 90.h,
                           ),
-                    if (stateOfGame.currentStringOfDice != null) ...{
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: WaveDice(
-                          currentAlphabet: '${stateOfGame.currentStringOfDice}',
-                          width: 90.h,
-                          height: 90.h,
-                        ),
-                      )
-                    }
-                  ],
+                        )
+                      }
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

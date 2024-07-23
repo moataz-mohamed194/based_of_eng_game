@@ -119,6 +119,12 @@ abstract class BaseOfGames {
             mineGameData: SortingCupsGame());
       } else {
         return ConnectionWithoutSortingCups(
+            isArabicSub:
+                BasicOfGameData.enumValues.contains(programName.toLowerCase()),
+            subBackGround: detectTheArabicChapter(
+                programName: unitName,
+                gameData: BasicOfGameData.getTheGameType(
+                    gameType: subGame.toLowerCase(), audioFlag: audioFlag)),
             mineGameData: BasicOfGameData.getTheGameType(
                 gameType: subGame.toLowerCase(), audioFlag: audioFlag));
       }

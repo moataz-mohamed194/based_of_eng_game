@@ -41,11 +41,11 @@ class XOutItemWidget extends StatelessWidget {
             List<dynamic> rejected,
           ) {
             return Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.h),
               decoration: BoxDecoration(
                 color: Colors.white,
-                border:
-                    Border.all(color: AppColorPhonetics.skyBlueColor, width: 3),
+                border: Border.all(
+                    color: AppColorPhonetics.skyBlueColor, width: 1.5.w),
               ),
               child: Stack(
                 alignment: Alignment.center,

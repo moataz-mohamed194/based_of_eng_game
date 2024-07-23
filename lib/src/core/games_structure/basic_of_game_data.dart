@@ -43,7 +43,7 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.spelling.text()) {
       return SpellingGame();
     } else if (gameType == GameTypes.xOut.text()) {
-      return XOutGame();
+      return XOutGame(isArabic: enumValues.contains(programName));
     } else if (gameType == GameTypes.dice.text()) {
       return DiceGame();
     } else if (gameType == GameTypes.tracing.text()) {
@@ -336,7 +336,6 @@ class BingoGame implements BasicOfGameData {
 }
 
 class SortingCupsGame implements BasicOfGameData {
-
   @override
   bool isRound = false;
 
@@ -400,6 +399,8 @@ class SpellingGame implements BasicOfGameData {
 }
 
 class XOutGame implements BasicOfGameData {
+  bool isArabic;
+  XOutGame({required this.isArabic});
   @override
   bool isRound = false;
 
@@ -413,7 +414,7 @@ class XOutGame implements BasicOfGameData {
   bool isConnect = true;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.titleOfXOut;
 
   @override
   int countOfMinimizeStar = 2;

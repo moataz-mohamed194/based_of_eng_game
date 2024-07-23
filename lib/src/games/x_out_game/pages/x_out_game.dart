@@ -155,6 +155,7 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                                         await context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addSuccessAnswer(
+                                                isArabic: state.isArabic,
                                                 questions:
                                                     state.listGameData.length,
                                                 correctAnswers:
@@ -199,19 +200,21 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                                         await context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addWrongAnswer(
+                                                isArabic: state.isArabic,
                                                 actionOfWrongAnswer: () async {
-                                          await context
-                                              .read<XOutCubit>()
-                                              .clearWrongAnswer();
-                                        });
+                                                  await context
+                                                      .read<XOutCubit>()
+                                                      .clearWrongAnswer();
+                                                });
                                       }
                                     }
                                   },
                                   word: state.gameImages?[index].word ?? '',
                                   onTap: () async {
                                     await TalkTts.startTalk(
-                                        text: state.gameImages?[index].word ??
-                                            '');
+                                        text:
+                                            state.gameImages?[index].word ?? '',
+                                        isArabic: state.isArabic);
                                   },
                                 );
                         },

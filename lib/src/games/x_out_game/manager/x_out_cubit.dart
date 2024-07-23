@@ -10,11 +10,16 @@ import '../../../core/talk_tts.dart';
 part 'x_out_state.dart';
 
 class XOutCubit extends Cubit<XOutInitial> {
-  XOutCubit({required List<GameFinalModel> listGameData, required int index})
+  XOutCubit(
+      {required List<GameFinalModel> listGameData,
+      required int index,
+      bool isArabic = false})
       : super(XOutInitial(
-            listGameData:
-                listGameData.where((element) => element.isEdited == 0).toList(),
-            currentGameIndex: index)) {
+          listGameData:
+              listGameData.where((element) => element.isEdited == 0).toList(),
+          currentGameIndex: index,
+          isArabic: isArabic,
+        )) {
     emit(state.copyWith(gameData: state.listGameData[index]));
     _reFormatData();
     _startSayGame();
@@ -49,7 +54,8 @@ class XOutCubit extends Cubit<XOutInitial> {
   }
 
   _startSayGame() async {
-    await TalkTts.startTalk(text: state.gameData?.inst ?? '');
+    await TalkTts.startTalk(
+        text: state.gameData?.inst ?? '', isArabic: state.isArabic);
     await AudioPlayerLetters.startPlaySound(
         soundPath: AssetsSoundLetters.getSoundOfLetter(
             mainGameLetter: (state.gameData?.mainLetter ?? '')));

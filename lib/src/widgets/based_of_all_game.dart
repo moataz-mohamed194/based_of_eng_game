@@ -96,6 +96,7 @@ class BasedOfAllGame extends StatelessWidget {
                     BasedOfGameConnect(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
+                      isArabic: stateOfGame.basicData?.isArabic ?? false,
                     ),
                   }
                 } else if (BaseOfGames.isPhonetics(

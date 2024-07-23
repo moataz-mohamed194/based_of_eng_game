@@ -1133,8 +1133,13 @@ class ConnectionWithoutSortingCups implements MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
 
-  ConnectionWithoutSortingCups({required this.mineGameData}) {
+  ConnectionWithoutSortingCups(
+      {required this.mineGameData,
+      required bool isArabicSub,
+      required String? subBackGround}) {
     gameData = mineGameData;
+    background = subBackGround ?? background;
+    isArabic = isArabicSub;
   }
 
   @override

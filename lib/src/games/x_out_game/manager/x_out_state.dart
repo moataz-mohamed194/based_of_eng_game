@@ -9,6 +9,7 @@ class XOutInitial extends Equatable {
   final int? isWrong;
   final List<int>? selectedItems;
   final List<GameImagesGameFinalModel>? gameImages;
+  final bool isArabic;
   const XOutInitial({
     required this.listGameData,
     this.gameData,
@@ -17,6 +18,7 @@ class XOutInitial extends Equatable {
     this.isWrong,
     required this.currentGameIndex,
     this.selectedItems = const [],
+    this.isArabic = false,
   });
 
   XOutInitial copyWith({
@@ -27,6 +29,7 @@ class XOutInitial extends Equatable {
     int? isWrong,
     List<GameImagesGameFinalModel>? gameImages,
     List<int>? selectedItems,
+    bool? isArabic,
     // bool? isInteracting,
   }) {
     return XOutInitial(
@@ -37,6 +40,7 @@ class XOutInitial extends Equatable {
       gameImages: gameImages ?? this.gameImages,
       selectedItems: selectedItems ?? this.selectedItems,
       gameData: gameData ?? this.gameData,
+      isArabic: isArabic ?? this.isArabic,
     );
   }
 
@@ -49,6 +53,7 @@ class XOutInitial extends Equatable {
       currentGameIndex: currentGameIndex,
       selectedItems: null,
       gameData: gameData ?? gameData,
+      isArabic: isArabic,
     );
   }
 
@@ -61,6 +66,7 @@ class XOutInitial extends Equatable {
       currentGameIndex: currentGameIndex,
       selectedItems: selectedItems,
       gameData: gameData ?? gameData,
+      isArabic: isArabic,
     );
   }
 
@@ -72,6 +78,7 @@ class XOutInitial extends Equatable {
         selectedItems,
         currentGameIndex,
         gameData,
-        isWrong
+        isWrong,
+        isArabic,
       ];
 }
