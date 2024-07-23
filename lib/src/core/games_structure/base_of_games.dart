@@ -25,6 +25,7 @@ abstract class BaseOfGames {
       }
     }
   }
+
   static String math = 'math';
 
   static List<Type> listOfChapterOfPhonetics = [
@@ -65,7 +66,6 @@ abstract class BaseOfGames {
 
   static List<Type> listOfChapterOfArabic = [RedPhonetics];
   static bool isArabic({required Type chapter}) {
-
     return listOfChapterOfArabic.contains(chapter);
   }
 
@@ -75,25 +75,33 @@ abstract class BaseOfGames {
       required String unitName,
       required String programName,
       required int audioFlag}) {
-    if(programName.toLowerCase() == MainDataOfChaptersTypes.math.toString().toLowerCase()){
+    print(
+        'subLetter:$subLetter , subGame:$subGame , unitName:$unitName , programName:$programName , audioFlag:$audioFlag , ${(unitName.contains(MainDataOfChaptersTypes.consonant.text()))}');
+    if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.math.toString().toLowerCase()) {
       return MathProgram(
           mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag, programName:programName));
-    }else
-    if (unitName
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName));
+    } else if (unitName
         .toLowerCase()
         .contains(MainDataOfChaptersTypes.shortVowels.text())) {
       return ShortVowels(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }else
-    if (unitName
-        .contains(MainDataOfChaptersTypes.up.text())) {
+    } else if (unitName.contains(MainDataOfChaptersTypes.up.text())) {
       return UpVowels(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    }
-    else if (BasicOfGameData.isConnectGame(game: subGame.toLowerCase()) == true) {
+    } else if (unitName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.consonant.text().toLowerCase())) {
+      return ConsonantVowels(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    } else if (BasicOfGameData.isConnectGame(game: subGame.toLowerCase()) ==
+        true) {
       if (subGame.toLowerCase() == GameTypes.sortingCups.text()) {
         return ConnectionSortingCups(mineGameData: SortingCupsGame());
       } else {
@@ -213,12 +221,15 @@ abstract class BaseOfGames {
         MainDataOfChaptersTypes.redUnit.text()) {
       return RedPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag, programName:programName));
-    }
-    else if (programName.toLowerCase() == math) {
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName));
+    } else if (programName.toLowerCase() == math) {
       return MathProgram(
           mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag, programName:programName));
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName));
     }
     return null;
   }

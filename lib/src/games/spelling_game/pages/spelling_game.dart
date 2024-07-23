@@ -94,91 +94,97 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                           // 10.ph,
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 25),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: List.generate(
-                                  gameState.correctAnswers.length,
-                                  (index) => DragTarget<String>(
-                                        builder: (
-                                          BuildContext context,
-                                          List<dynamic> accepted,
-                                          List<dynamic> rejected,
-                                        ) {
-                                          return DragTargetWidget(
-                                              title: gameState
-                                                  .correctAnswers[index]);
-                                        },
-                                        onAcceptWithDetails:
-                                            (DragTargetDetails<String>
-                                                details) async {
-                                          if (context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .ableButton()) {
-                                            context
-                                                .read<SpellingCubit>()
-                                                .addTheCorrectAnswer(
-                                                    index: index,
-                                                    answer: details.data);
+                            child: FittedBox(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: List.generate(
+                                    gameState.correctAnswers.length,
+                                    (index) => DragTarget<String>(
+                                          builder: (
+                                            BuildContext context,
+                                            List<dynamic> accepted,
+                                            List<dynamic> rejected,
+                                          ) {
+                                            return DragTargetWidget(
+                                                title: gameState
+                                                    .correctAnswers[index]);
+                                          },
+                                          onAcceptWithDetails:
+                                              (DragTargetDetails<String>
+                                                  details) async {
                                             if (context
-                                                .read<SpellingCubit>()
-                                                .checkCurrentFinished()) {
-                                              if (await context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .ableButton()) {
+                                              context
                                                   .read<SpellingCubit>()
-                                                  .checkIsCorrectAnswer()) {
-                                                await context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .addSuccessAnswer(
-                                                        questions: gameState
-                                                            .allGames.length,
-                                                        correctAnswers:
-                                                            (gameState.index) +
-                                                                1)
-                                                    .whenComplete(() async {
-                                                  bool isLastQuestion = context
+                                                  .addTheCorrectAnswer(
+                                                      index: index,
+                                                      answer: details.data);
+                                              if (context
+                                                  .read<SpellingCubit>()
+                                                  .checkCurrentFinished()) {
+                                                if (await context
+                                                    .read<SpellingCubit>()
+                                                    .checkIsCorrectAnswer()) {
+                                                  await context
                                                       .read<
                                                           CurrentGamePhoneticsCubit>()
-                                                      .checkIfIsTheLastQuestionOfGame(
-                                                          queations: gameState
-                                                              .allGames.length);
-                                                  if (isLastQuestion) {
-                                                    // Future.delayed(
-                                                    //     const Duration(
-                                                    //         seconds: 2),
-                                                    //     () async {
-                                                    //   Navigator.of(context)
-                                                    //       .pop();
-                                                    // });
-                                                  } else {
-                                                    await context
+                                                      .addSuccessAnswer(
+                                                          questions: gameState
+                                                              .allGames.length,
+                                                          correctAnswers:
+                                                              (gameState
+                                                                      .index) +
+                                                                  1)
+                                                      .whenComplete(() async {
+                                                    bool isLastQuestion = context
                                                         .read<
                                                             CurrentGamePhoneticsCubit>()
-                                                        .updateIndexOfCurrentGame();
-                                                    await context
-                                                        .read<SpellingCubit>()
-                                                        .updateTheCurrentGame(
-                                                            index: context
-                                                                .read<
-                                                                    CurrentGamePhoneticsCubit>()
-                                                                .state
-                                                                .index);
-                                                  }
-                                                });
-                                              } else {
-                                                await context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .addWrongAnswer(
-                                                        actionOfWrongAnswer:
-                                                            () async {});
-                                                await context
-                                                    .read<SpellingCubit>()
-                                                    .clearAnswers();
+                                                        .checkIfIsTheLastQuestionOfGame(
+                                                            queations: gameState
+                                                                .allGames
+                                                                .length);
+                                                    if (isLastQuestion) {
+                                                      // Future.delayed(
+                                                      //     const Duration(
+                                                      //         seconds: 2),
+                                                      //     () async {
+                                                      //   Navigator.of(context)
+                                                      //       .pop();
+                                                      // });
+                                                    } else {
+                                                      await context
+                                                          .read<
+                                                              CurrentGamePhoneticsCubit>()
+                                                          .updateIndexOfCurrentGame();
+                                                      await context
+                                                          .read<SpellingCubit>()
+                                                          .updateTheCurrentGame(
+                                                              index: context
+                                                                  .read<
+                                                                      CurrentGamePhoneticsCubit>()
+                                                                  .state
+                                                                  .index);
+                                                    }
+                                                  });
+                                                } else {
+                                                  await context
+                                                      .read<
+                                                          CurrentGamePhoneticsCubit>()
+                                                      .addWrongAnswer(
+                                                          actionOfWrongAnswer:
+                                                              () async {});
+                                                  await context
+                                                      .read<SpellingCubit>()
+                                                      .clearAnswers();
+                                                }
                                               }
                                             }
-                                          }
-                                        },
-                                      )),
+                                          },
+                                        )),
+                              ),
                             ),
                           ),
                           45.h.ph,

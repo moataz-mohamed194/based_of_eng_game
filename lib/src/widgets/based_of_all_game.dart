@@ -47,6 +47,18 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                     ),
                   }
+                } else if (stateOfGame.basicData is ConsonantVowels) ...{
+                  if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
+                    BasedOfGameShortVowelsTextNextRive(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  } else ...{
+                    BasedOfGameShortVowels(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  }
                 } else if (stateOfGame.basicData is UpVowels) ...{
                   if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
                     if (stateOfGame.basicData?.gameData is SortingCupsGame) ...{

@@ -25,6 +25,7 @@ abstract class AppImagesPhonetics {
   static const String loadingVideo = "${mainPathOfImages}loading_video.png";
   static const String iconEmptyStar = "${mainPathOfImages}empty_star.png";
   static const String iconEmptyStar2 = "${mainPathOfImages}empty_star2.png";
+  static const String ec3Bg = "${mainPathOfImages}ec3_bg.png";
   static const String iconUnselectedCheckBox =
       "${mainPathOfImages}unselected_check_box.png";
   static const String iconSelectedCheckBox =

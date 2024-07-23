@@ -37,7 +37,9 @@ enum MainDataOfChaptersTypes {
   z,
   redUnit,
   shortVowels,
-  up, math
+  up,
+  math,
+  consonant
 }
 
 extension TypeExtension on MainDataOfChaptersTypes {
@@ -105,6 +107,8 @@ extension TypeExtension on MainDataOfChaptersTypes {
         return "المجموعة الحمراء".toLowerCase();
       case MainDataOfChaptersTypes.math:
         return "math".toLowerCase();
+      case MainDataOfChaptersTypes.consonant:
+        return "Consonant".toLowerCase();
     }
   }
 }
@@ -127,7 +131,6 @@ class SPhonetics implements MainDataOfChapters {
 
   @override
   String background = AppImagesPhonetics.backGroundOfS;
-
 
   @override
   BasicOfGameData? gameData;
@@ -175,7 +178,6 @@ class APhonetics implements MainDataOfChapters {
           (List<Color?>? colorsOfPaths, List<Offset> points) {
             return null;
           };
-
 
   @override
   BasicOfGameData? gameData;
@@ -450,7 +452,6 @@ class ZPhonetics implements MainDataOfChapters {
           (Offset point, Size size, bool isFingerPosition) {
             return null;
           };
-
 }
 
 class TPhonetics implements MainDataOfChapters {
@@ -1022,6 +1023,38 @@ class UpVowels implements MainDataOfChapters {
   BasicOfGameData? gameData;
 
   UpVowels({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  int? countOfPartsOfLettersForTracing;
+}
+
+class ConsonantVowels implements MainDataOfChapters {
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.ec3Bg;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+
+  @override
+  BasicOfGameData? gameData;
+
+  ConsonantVowels({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
