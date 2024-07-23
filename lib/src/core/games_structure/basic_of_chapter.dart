@@ -1163,9 +1163,12 @@ class ConnectionSortingCups implements MainDataOfChapters {
 
   @override
   bool? isArabic;
-  ConnectionSortingCups({required this.mineGameData, required bool isArabicSub, required String? subBackGround}) {
+  ConnectionSortingCups(
+      {required this.mineGameData,
+      required bool isArabicSub,
+      required String? subBackGround}) {
     gameData = mineGameData;
-    background= subBackGround??background;
+    background = subBackGround ?? background;
     isArabic = isArabicSub;
   }
 

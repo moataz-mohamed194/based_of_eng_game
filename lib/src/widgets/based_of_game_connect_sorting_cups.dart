@@ -18,9 +18,13 @@ import '../games/sorting_cups/page/game_soting_cups.dart';
 class BasedOfGameConnectSortingCups extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
   final List<GameFinalModel> gamesData;
+  final bool isArabic;
 
   const BasedOfGameConnectSortingCups(
-      {super.key, required this.stateOfGame, required this.gamesData});
+      {super.key,
+      required this.stateOfGame,
+      required this.gamesData,
+      this.isArabic = false});
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -37,39 +41,48 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
                 BlocProvider<SortingCupsCubit>(
                     create: (_) => SortingCupsCubit(
                           gameData: gamesData[stateOfGame.index],
+                          isArabic: isArabic,
                         ),
-                    child: GamesSortingCups())
+                    child: GamesSortingCups(isArabic: isArabic))
               },
             ],
           ),
 
           Positioned(
             top: -10,
-            left: 0,
+            left: isArabic ? null : 0,
+            right: isArabic ? 0 : null,
             child: Container(
                 width: 120.w,
-                padding: EdgeInsets.only(left: 10.w),
+                padding: EdgeInsets.only(
+                    left: isArabic ? 0.w : 10.w, right: isArabic ? 10.w : 0.w),
                 child: Image.asset(
-                  stateOfGame.basicData?.gameData?.titleImageEn ?? '',
+                  isArabic
+                      ? stateOfGame.basicData?.gameData?.titleImageAr ?? ''
+                      : stateOfGame.basicData?.gameData?.titleImageEn ?? '',
                   height: 50.h,
                   width: 120.w,
-                  fit: BoxFit.fill,
+                  fit: isArabic ? BoxFit.contain : BoxFit.fill,
                 )),
           ),
           Positioned(
             bottom: 15.h,
             left: 20,
             child: GestureDetector(
-              onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
+              onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()
+                  ? () async {
                       await context
                           .read<CurrentGamePhoneticsCubit>()
                           .beeTalkingTrue();
                       await TalkTts.startTalk(
-                          text: gamesData[stateOfGame.index].inst ?? '');
+                          text: gamesData[stateOfGame.index].inst ?? '',
+                          isArabic: isArabic);
                       TalkTts.flutterTts.setCompletionHandler(() async {
-                        if (stateOfGame.stateOfStringIsWord == StateOfSubWord.isWord) {
+                        if (stateOfGame.stateOfStringIsWord ==
+                            StateOfSubWord.isWord) {
                           await TalkTts.startTalk(
-                              text: stateOfGame.stateOfStringWillSay ?? '');
+                              text: stateOfGame.stateOfStringWillSay ?? '',
+                              isArabic: isArabic);
                         } else {
                           await AudioPlayerLetters.startPlaySound(
                               soundPath: AssetsSoundLetters.getSoundOfLetter(
@@ -81,7 +94,8 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
                       await context
                           .read<CurrentGamePhoneticsCubit>()
                           .beeTalkingFalse();
-                    }:null,
+                    }
+                  : null,
               child: Container(
                   alignment: Alignment.center,
                   child: stateOfGame.avatarCurrentArtboard == null

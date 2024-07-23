@@ -14,7 +14,8 @@ import '../widget/cup_widget.dart';
 import '../widget/item_card_widget_sorting_cups.dart';
 
 class GamesSortingCups extends StatefulWidget {
-  const GamesSortingCups({super.key});
+  const GamesSortingCups({super.key, this.isArabic = false});
+  final bool isArabic;
 
   @override
   State<StatefulWidget> createState() {
@@ -185,7 +186,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                     .ableButton()) {
                                   log("##:${gameState.gameData.mainLetter?.split('')[index].toLowerCase()}");
 
-                                  log("##:${gameState.chooseWord?.letter?.toLowerCase().toLowerCase()}");
+                                  log("##:${gameState.chooseWord?.letter?.toLowerCase()}");
                                   log("##:${(item.data.letter?.toLowerCase() ?? '')}");
                                   if (gameState.chooseWord?.letter
                                               ?.toLowerCase() ==
@@ -202,6 +203,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addSuccessAnswer(
+                                            isArabic: widget.isArabic,
                                             subAction: () async {
                                               await context
                                                   .read<SortingCupsCubit>()
@@ -288,11 +290,12 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addWrongAnswer(
+                                            isArabic: widget.isArabic,
                                             actionOfWrongAnswer: () async {
-                                      context
-                                          .read<SortingCupsCubit>()
-                                          .sayTheLetter();
-                                    });
+                                              context
+                                                  .read<SortingCupsCubit>()
+                                                  .sayTheLetter();
+                                            });
                                   }
                                 }
                               },
