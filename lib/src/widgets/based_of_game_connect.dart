@@ -141,6 +141,7 @@ class BasedOfGameConnect extends StatelessWidget {
                     // const Text('SortingPicturesGame')
                     BlocProvider<SortingCubit>(
                         create: (_) => SortingCubit(
+                            isArabic: isArabic,
                             index: stateOfGame.index,
                             background: (stateOfGame.basicData?.gameData
                                     as SortingPicturesGame)

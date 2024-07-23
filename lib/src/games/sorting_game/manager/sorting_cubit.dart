@@ -7,11 +7,12 @@ import '../../../core/talk_tts.dart';
 part 'sorting_state.dart';
 
 class SortingCubit extends Cubit<SortingInitial> {
-  SortingCubit({
-    required List<GameFinalModel> listGameData,
-    required String background,
-    required int index,
-  }) : super(SortingInitial(
+  SortingCubit(
+      {required List<GameFinalModel> listGameData,
+      required String background,
+      required int index,
+      bool isArabic = false})
+      : super(SortingInitial(
             gameData: listGameData[index],
             woodenBackground: background,
             currentImages: [],
@@ -19,6 +20,7 @@ class SortingCubit extends Cubit<SortingInitial> {
             correctAnswersData: [],
             correctAnswersIds: [],
             listGameData: listGameData,
+            isArabic: isArabic,
             countOfQuestion: listGameData.fold(
                 0,
                 (previousValue, element) =>
@@ -28,7 +30,8 @@ class SortingCubit extends Cubit<SortingInitial> {
         cardsLetters: state.listGameData.first.gameLetters,
         correctAnswersIds: []));
     changeImages();
-    TalkTts.startTalk(text: state.listGameData.first.inst ?? '');
+    TalkTts.startTalk(
+        text: state.listGameData.first.inst ?? '', isArabic: state.isArabic);
   }
 
   changeImages() {

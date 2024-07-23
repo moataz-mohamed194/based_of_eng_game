@@ -25,4 +25,6 @@ abstract class AppImagesArabic {
 
   static const String titleOfSortingCups =
       '${mainPathOfImages}sorting_cups.png';
+  static const String titleOfSortingPictures =
+      '${mainPathOfImages}sorting_pictures.png';
 }

@@ -192,6 +192,7 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addSuccessAnswer(
+                                            isArabic: gameState.isArabic,
                                             questions:
                                                 gameState.countOfQuestion,
                                             correctAnswers: gameState
@@ -231,6 +232,7 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addWrongAnswer(
+                                            isArabic: gameState.isArabic,
                                             actionOfWrongAnswer: () async {});
                                   }
                                 }

@@ -10,6 +10,7 @@ class SortingInitial extends Equatable {
   final int countOfQuestion;
   final List<GameImagesGameFinalModel> currentImages;
   final List<GameImagesGameFinalModel> correctAnswersData;
+  final bool isArabic;
 
   const SortingInitial({
     required this.listGameData,
@@ -20,29 +21,34 @@ class SortingInitial extends Equatable {
     required this.correctAnswersData,
     this.woodenBackground,
     required this.index,
+    this.isArabic = false,
   });
 
-  SortingInitial copyWith(
-      {List<GameFinalModel>? listGameData,
-      GameFinalModel? gameData,
-      List<GameLettersGameFinalModel>? cardsLetters,
-      GameLettersGameFinalModel? chooseWord,
-      List<String>? indexOfCorrectAnswers,
-      List<int>? correctAnswersIds,
-      List<GameImagesGameFinalModel>? currentImages,
-      List<GameImagesGameFinalModel>? correctAnswersData,
-      int? index,
-      int? countOfQuestion,
-      String? woodenBackground}) {
+  SortingInitial copyWith({
+    List<GameFinalModel>? listGameData,
+    GameFinalModel? gameData,
+    List<GameLettersGameFinalModel>? cardsLetters,
+    GameLettersGameFinalModel? chooseWord,
+    List<String>? indexOfCorrectAnswers,
+    List<int>? correctAnswersIds,
+    List<GameImagesGameFinalModel>? currentImages,
+    List<GameImagesGameFinalModel>? correctAnswersData,
+    int? index,
+    int? countOfQuestion,
+    String? woodenBackground,
+    bool? isArabic,
+  }) {
     return SortingInitial(
-        listGameData: listGameData ?? this.listGameData,
-        countOfQuestion: countOfQuestion ?? this.countOfQuestion,
-        correctAnswersIds: correctAnswersIds ?? this.correctAnswersIds,
-        gameData: gameData ?? this.gameData,
-        woodenBackground: woodenBackground ?? this.woodenBackground,
-        currentImages: currentImages ?? this.currentImages,
-        index: index ?? this.index,
-        correctAnswersData: correctAnswersData ?? this.correctAnswersData);
+      listGameData: listGameData ?? this.listGameData,
+      countOfQuestion: countOfQuestion ?? this.countOfQuestion,
+      correctAnswersIds: correctAnswersIds ?? this.correctAnswersIds,
+      gameData: gameData ?? this.gameData,
+      woodenBackground: woodenBackground ?? this.woodenBackground,
+      currentImages: currentImages ?? this.currentImages,
+      index: index ?? this.index,
+      correctAnswersData: correctAnswersData ?? this.correctAnswersData,
+      isArabic: isArabic ?? this.isArabic,
+    );
   }
 
   @override
@@ -54,6 +60,7 @@ class SortingInitial extends Equatable {
         countOfQuestion,
         currentImages,
         gameData,
-        correctAnswersData
+        correctAnswersData,
+        isArabic,
       ];
 }
