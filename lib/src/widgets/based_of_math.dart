@@ -6,12 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../based_of_eng_game.dart';
 import '../core/assets_sound_letters.dart';
 import '../core/audio_player_letters.dart';
+import '../core/game_types/game_phonatics_types.dart';
 import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 import '../games/math/choose_number/manager/choose_number_cubit.dart';
 import '../games/math/choose_number/screen/choose_numbers_screen.dart';
 import '../games/math/choose_sticks/manager/choose_sticks_cubit.dart';
 import '../games/math/choose_sticks/screen/choose_sticks_screen.dart';
+import '../games/math/sorting_blocks/manager/sorting_blocks_cubit.dart';
+import '../games/math/sorting_blocks/screen/sorting_blocks_screen.dart';
 
 class BasedOfMath extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
@@ -125,6 +128,16 @@ class BasedOfMath extends StatelessWidget {
                 },
                 child: ChooseNumberScreen()),
           )
+        } else if (stateOfGame.basicData?.gameData
+            is MathSortingSticksOrBeadsOrBlocks) ...{
+          BlocProvider<SortingBlocksCubit>(
+              create: (_) => SortingBlocksCubit(
+                  gameData: gamesData[0],
+                  subBloc: context.read<CurrentGamePhoneticsCubit>(),
+                  tools: (stateOfGame.basicData?.gameData
+                          as MathSortingSticksOrBeadsOrBlocks)
+                      .tools),
+              child: SortingBlocksScreen())
         }
       ],
     );
