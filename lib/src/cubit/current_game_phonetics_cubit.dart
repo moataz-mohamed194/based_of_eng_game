@@ -357,6 +357,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   Future addSuccessAnswer(
       {required int correctAnswers,
       required int questions,
+      String? specificSoundPath,
       bool? supportTheFirstWayOfCheckComplete,
       void Function()? subAction,
       bool? isArabic}) async {
@@ -365,7 +366,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     await _animationOfCorrectAnswer();
     await AudioPlayerGame.startPlaySoundOfCorrect(
         playerCorrect2: playerCorrect,
-        soundPath: AppGameSound.getRandomSoundOfCorrect(isArabic: isArabic));
+        soundPath: specificSoundPath ??
+            AppGameSound.getRandomSoundOfCorrect(isArabic: isArabic));
     await addStarToStudent(stateOfCountOfCorrectAnswer: correctAnswers);
     bool isLastLesson = supportTheFirstWayOfCheckComplete ?? false;
     if (supportTheFirstWayOfCheckComplete == true) {

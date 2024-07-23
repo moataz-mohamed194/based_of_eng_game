@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../src_model/export_models.dart';
+import '../../../core/assets_game_sound.dart';
 import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../core/theme_text.dart';
@@ -109,6 +110,17 @@ class _BingoGameScreen extends State<BingoGameScreen> {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addSuccessAnswer(
+                                            specificSoundPath: (gameState
+                                                            .cardsLetters
+                                                            ?.where((element) =>
+                                                                element.id !=
+                                                                null)
+                                                            .length ??
+                                                        0) <=
+                                                    (gameState
+                                                        .correctIndexes.length)
+                                                ? AppGameSound.bingo
+                                                : null,
                                             subAction: () async {
                                               await context
                                                   .read<BingoCubit>()
@@ -131,9 +143,9 @@ class _BingoGameScreen extends State<BingoGameScreen> {
                                                       .length ??
                                                   0);
                                       if (isLastQuestion) {
-                                        context
-                                            .read<BingoCubit>()
-                                            .actionOfCompleteGame();
+                                        // context
+                                        //     .read<BingoCubit>()
+                                        //     .actionOfCompleteGame();
 
                                         // Future.delayed(
                                         //     const Duration(seconds: 2),
