@@ -4,6 +4,7 @@ import 'paint_of_blocks.dart';
 
 class GetTheBlocks extends StatelessWidget {
   final int countOfBoxes;
+  final bool? isSolid;
   final List<ColorModel> colors = [
     ColorModel(
         colorMain: const Color(0xffEE1D23),
@@ -13,7 +14,7 @@ class GetTheBlocks extends StatelessWidget {
         colorBoarder: const Color(0xff173372)),
   ];
 
-  GetTheBlocks({super.key, required this.countOfBoxes});
+  GetTheBlocks({super.key, required this.countOfBoxes, this.isSolid});
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -40,8 +41,12 @@ class GetTheBlocks extends StatelessWidget {
                 child: CustomPaint(
                     size: sizeOfOne,
                     painter: PaintOfBlocks(
-                        color: colors.first.colorMain,
-                        boarderColor: colors.first.colorBoarder)),
+                        color: isSolid == true
+                            ? Colors.grey
+                            : colors.first.colorMain,
+                        boarderColor: isSolid == true
+                            ? Colors.grey.shade400
+                            : colors.first.colorBoarder)),
               );
             } else {
               return Positioned(
@@ -49,8 +54,12 @@ class GetTheBlocks extends StatelessWidget {
                 child: CustomPaint(
                     size: sizeOfOne,
                     painter: PaintOfBlocks(
-                        color: colors.last.colorMain,
-                        boarderColor: colors.last.colorBoarder)),
+                        color: isSolid == true
+                            ? Colors.grey
+                            : colors.last.colorMain,
+                        boarderColor: isSolid == true
+                            ? Colors.grey.shade400
+                            : colors.last.colorBoarder)),
               );
             }
           })

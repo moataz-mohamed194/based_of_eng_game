@@ -124,18 +124,26 @@ class SortingBlocksScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: List.generate(
                     gameState.secondGameChoices?.length ?? 0,
-                    (index) => Draggable<int>(
-                        maxSimultaneousDrags: 1,
-                        feedback: GetTheBlocks(
-                          countOfBoxes: int.parse(
-                              "${gameState.secondGameChoices?[index].choice ?? 0}"),
-                        ),
-                        // childWhenDragging: ,
-                        data: gameState.secondGameChoices?[index].id ?? 0,
-                        child: GetTheBlocks(
-                          countOfBoxes: int.parse(
-                              "${gameState.secondGameChoices?[index].choice ?? 0}"),
-                        ))),
+                    (index) => gameState.correctAnswers.contains(
+                            gameState.secondGameChoices?[index].id ?? 0)
+                        ? GetTheBlocks(
+                            isSolid: true,
+                            countOfBoxes: int.parse(
+                                "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                          )
+                        : Draggable<int>(
+                            maxSimultaneousDrags: 1,
+                            feedback: GetTheBlocks(
+                              countOfBoxes: int.parse(
+                                  "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                            ),
+                            // childWhenDragging: ,
+                            data: gameState.secondGameChoices?[index].id ?? 0,
+                            child: GetTheBlocks(
+                              // isSolid: true,
+                              countOfBoxes: int.parse(
+                                  "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                            ))),
               )
             ],
           );
