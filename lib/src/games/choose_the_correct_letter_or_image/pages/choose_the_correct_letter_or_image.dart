@@ -53,7 +53,7 @@ class _ChooseTheCorrectLetterOrImageGame
         listener: (context, state) {},
         builder: (context, gameState) {
           return Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Stack(
@@ -80,15 +80,16 @@ class _ChooseTheCorrectLetterOrImageGame
     final isLetter = gameState.isLetter;
     return Positioned(
       top: -5.h,
-      left: -30.w,
+      left: 0,
       child: Container(
         alignment: (gameState.gameData.mainLetter ?? '') == 's'
             ? Alignment.topCenter
             : Alignment.center,
         height: 100.h,
-        width: 100.w,
+        width: 40.w,
         decoration: const BoxDecoration(
           image: DecorationImage(
+            fit: BoxFit.cover,
             image: AssetImage(
               AppImagesPhonetics.letterOfClickPic,
             ),
@@ -108,19 +109,23 @@ class _ChooseTheCorrectLetterOrImageGame
                         fontFamily: AppTheme.getFontFamily5()),
                     textAlign: TextAlign.center,
                   )
-                : Center(
-                    child: CachedNetworkImage(
-                      imageUrl: gameState.gameImages?[0].image ?? '',
-                      height: 40.h,
-                      width: 45.w,
-                      placeholder: (context, url) => const Center(
-                        child: CupertinoActivityIndicator(),
+                : Padding(
+                    padding: EdgeInsets.only(right: 5.w, left: 5.w),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: CachedNetworkImage(
+                        imageUrl: gameState.gameImages?[0].image ?? '',
+                        height: 45.h,
+                        width: 45.w,
+                        placeholder: (context, url) => const Center(
+                          child: CupertinoActivityIndicator(),
+                        ),
+                        errorWidget: (context, url, error) => Center(
+                          child: Text('${gameState.gameImages?[0].word}'),
+                        ),
+                        fit: BoxFit.fitHeight,
+                        // height: ,
                       ),
-                      errorWidget: (context, url, error) => Center(
-                        child: Text('${gameState.gameImages?[0].word}'),
-                      ),
-                      fit: BoxFit.contain,
-                      // height: ,
                     ),
                   )),
       ),
@@ -132,12 +137,8 @@ class _ChooseTheCorrectLetterOrImageGame
       required ChooseTheCorrectLetterOrImageState gameState,
       required CurrentGamePhoneticsState stateOfCurrentGamePhoneticsCubit}) {
     return Container(
-      margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height > 500 ? 250.h : (15 + 50),
-          top: 50,
-          right: 35.w),
+      margin: EdgeInsets.only(bottom: 50, top: 50, right: 50.w),
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30.h),
-      width: MediaQuery.of(context).size.width - 100.w,
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -157,7 +158,6 @@ class _ChooseTheCorrectLetterOrImageGame
     final currentGamePhoneticsCubit = context.read<CurrentGamePhoneticsCubit>();
     final isLetter = gameState.isLetter;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: List.generate(
         isLetter
@@ -191,24 +191,30 @@ class _ChooseTheCorrectLetterOrImageGame
                       }
                     },
                     child: isLetter
-                        ? CachedNetworkImage(
-                            imageUrl: gameState.gameImages?[index].image ?? '',
-                            width: (MediaQuery.of(context).size.width -
-                                    (130 + 50 + 130)) /
-                                4,
-                            height: 120.h,
-                            placeholder: (context, url) => const Center(
-                              child: CupertinoActivityIndicator(),
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.h, horizontal: 10.w),
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  gameState.gameImages?[index].image ?? '',
+                              width: (MediaQuery.of(context).size.width -
+                                      (130 + 50 + 130)) /
+                                  4,
+                              height: 120.h,
+                              placeholder: (context, url) => const Center(
+                                child: CupertinoActivityIndicator(),
+                              ),
+                              errorWidget: (context, url, error) => Center(
+                                child: Text(
+                                    '${gameState.gameImages?[index].word}'),
+                              ),
+                              fit: BoxFit.contain,
+                              // height: ,
                             ),
-                            errorWidget: (context, url, error) => Center(
-                              child:
-                                  Text('${gameState.gameImages?[index].word}'),
-                            ),
-                            fit: BoxFit.contain,
-                            // height: ,
                           )
                         : Padding(
-                            padding: EdgeInsets.all(25.h),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 20.h, horizontal: 20.w),
                             child: Text(
                               gameState.gameData.gameLetters?[index].letter ??
                                   '',
@@ -216,7 +222,7 @@ class _ChooseTheCorrectLetterOrImageGame
                                   .textTheme
                                   .displayLarge
                                   ?.copyWith(
-                                      fontSize: 25.spMax,
+                                      fontSize: 45.spMax,
                                       fontWeight: FontWeight.w700,
                                       color: AppColorPhonetics.darkBorderColor,
                                       fontFamily: AppTheme.getFontFamily5()),
