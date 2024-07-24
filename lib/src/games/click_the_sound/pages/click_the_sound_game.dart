@@ -201,6 +201,10 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
           fontSize: MediaQuery.of(context).size.height > 650 ? 35.sp : 25.sp,
           text: letter,
           isDisabled: viewModel.state.correctIndexes?.contains(index) ?? false,
+          backgroundColor: isArabic
+              ? AppColorPhonetics.darkBlueColor
+              : AppColorPhonetics.white,
+          strokeColor: AppColorPhonetics.darkBlueColor,
         ),
       ),
     );

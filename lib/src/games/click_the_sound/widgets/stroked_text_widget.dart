@@ -8,7 +8,8 @@ class StrokedText extends StatelessWidget {
   final double? fontSize;
   final double? strokeWidth;
   final bool? hasShadows;
-
+  final Color backgroundColor;
+  final Color strokeColor;
   const StrokedText({
     super.key,
     required this.text,
@@ -16,6 +17,8 @@ class StrokedText extends StatelessWidget {
     this.fontSize,
     this.strokeWidth,
     this.hasShadows,
+    this.backgroundColor = AppColorPhonetics.lightGreyColor4,
+    this.strokeColor = AppColorPhonetics.darkBlueColor,
   });
 
   @override
@@ -44,8 +47,8 @@ class StrokedText extends StatelessWidget {
             fontFamily: AppTheme.getFontFamily5(),
             foreground: Paint()
               ..color = isDisabled
-                  ? AppColorPhonetics.white.withOpacity(0.5)
-                  : AppColorPhonetics.white,
+                  ? backgroundColor.withOpacity(0.5)
+                  : backgroundColor,
           ),
         ),
         Text(
@@ -57,7 +60,7 @@ class StrokedText extends StatelessWidget {
               ..strokeWidth = strokeWidth ?? 1.7
               ..color = isDisabled
                   ? AppColorPhonetics.lightGreyColor4.withOpacity(0.5)
-                  : AppColorPhonetics.darkBlueColor
+                  : strokeColor
               ..style = PaintingStyle.stroke,
           ),
         ),
