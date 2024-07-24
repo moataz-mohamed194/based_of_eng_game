@@ -9,10 +9,10 @@ import '../core/audio_player_letters.dart';
 import '../core/game_types/game_phonatics_types.dart';
 import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
+import '../games/math/choose_from_obj/manager/choose_sticks_cubit.dart';
+import '../games/math/choose_from_obj/screen/choose_sticks_screen.dart';
 import '../games/math/choose_number/manager/choose_number_cubit.dart';
 import '../games/math/choose_number/screen/choose_numbers_screen.dart';
-import '../games/math/choose_sticks/manager/choose_sticks_cubit.dart';
-import '../games/math/choose_sticks/screen/choose_sticks_screen.dart';
 import '../games/math/sorting_blocks/manager/sorting_blocks_cubit.dart';
 import '../games/math/sorting_blocks/screen/sorting_blocks_screen.dart';
 

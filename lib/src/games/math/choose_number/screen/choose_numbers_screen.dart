@@ -6,11 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/game_types/game_phonatics_types.dart';
 import '../../../../core/games_structure/basic_of_game_data.dart';
+import '../../../../core/math_weidgt/domino.dart';
 import '../../../../core/math_weidgt/get_the_blocks.dart';
 import '../../../../core/phonetics_color.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
-import '../../choose_sticks/widget/card_of_number.dart';
-import '../../choose_sticks/widget/card_of_selected.dart';
+import '../../choose_from_obj/widget/card_of_number.dart';
 import '../manager/choose_number_cubit.dart';
 import '../../../../core/math_weidgt/get_the_beads.dart';
 import '../../../../core/math_weidgt/stick.dart';
@@ -33,6 +33,7 @@ class ChooseNumberScreen extends StatelessWidget {
             builder: (context, gameState) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   SizedBox(),
                   if ((gameState.basicData
@@ -56,8 +57,16 @@ class ChooseNumberScreen extends StatelessWidget {
                     GetTheBlocks(
                       countOfBoxes: int.parse("${gameState.mainNumber ?? '0'}"),
                     )
+                  } else if ((gameState.basicData
+                              as MathChooseNumberSticksOrBeadsOrBlocks)
+                          .tools ==
+                      ToolsOfMath.domino) ...{
+                    DominoWidget(
+                      height: 130.h,
+                      count: int.parse("${gameState.mainNumber ?? '0'}"),
+                    )
                   },
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width / 2,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -124,7 +133,8 @@ class ChooseNumberScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox()
                 ],
               );
             }));

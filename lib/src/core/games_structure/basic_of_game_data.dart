@@ -85,8 +85,12 @@ abstract class BasicOfGameData {
       return MathChooseNumberSticksOrBeadsOrBlocks(tools: ToolsOfMath.beads);
     } else if (gameType == GameTypes.mathChooseBlocksNumber.text()) {
       return MathChooseNumberSticksOrBeadsOrBlocks(tools: ToolsOfMath.blocks);
+    } else if (gameType == GameTypes.mathChooseDominoNumber.text()) {
+      return MathChooseNumberSticksOrBeadsOrBlocks(tools: ToolsOfMath.domino);
     } else if (gameType == GameTypes.mathSortingBlocks.text()) {
       return MathSortingSticksOrBeadsOrBlocks(tools: ToolsOfMath.blocks);
+    } else if (gameType == GameTypes.mathChooseDomino.text()) {
+      return MathChooseSticksOrBeadsOrBlocks(tools: ToolsOfMath.domino);
     } else if (gameType == GameTypes.chooseCorrectWordArabic.text()) {
       return ChooseTheCorrectImageOrLetter(isLetter: true);
     } else if (gameType == GameTypes.chooseFormationArabic.text()) {

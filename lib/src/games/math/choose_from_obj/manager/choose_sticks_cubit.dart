@@ -24,6 +24,7 @@ class ChooseSticksCubit extends Cubit<ChooseSticksInitial> {
   }
 
   reFormatGameData() {
+    reStartIsCorrect();
     int newIndex = state.index;
     GameFinalModel newData = state.allGameData[newIndex];
     List<GameChoicesGameFinalModel> gameChoices = newData.gameChoices ?? [];
