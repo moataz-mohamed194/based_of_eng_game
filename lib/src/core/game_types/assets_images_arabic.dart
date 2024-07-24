@@ -28,4 +28,8 @@ abstract class AppImagesArabic {
   static const String titleOfSortingPictures =
       '${mainPathOfImages}sorting_pictures.png';
   static const String titleOfSpelling = '${mainPathOfImages}spelling.png';
+  static const String titleOfChooseTheCorrectLetter =
+      '${mainPathOfImages}choose_the_correct_image.png';
+  static const String titleOfChooseTheCorrectImage =
+      '${mainPathOfImages}choose_the_correct_letter.png';
 }
