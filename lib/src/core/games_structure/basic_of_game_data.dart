@@ -87,6 +87,10 @@ abstract class BasicOfGameData {
       return MathChooseNumberSticksOrBeadsOrBlocks(tools: ToolsOfMath.blocks);
     } else if (gameType == GameTypes.mathSortingBlocks.text()) {
       return MathSortingSticksOrBeadsOrBlocks(tools: ToolsOfMath.blocks);
+    } else if (gameType == GameTypes.chooseCorrectWordArabic.text()) {
+      return ChooseTheCorrectImageOrLetter(isLetter: true);
+    } else if (gameType == GameTypes.chooseFormationArabic.text()) {
+      return ChooseTheCorrectImageOrLetter(isLetter: false);
     }
   }
 
@@ -639,6 +643,31 @@ class ChooseTheCorrectGame implements BasicOfGameData {
 
   @override
   int countOfMinimizeStar = 1;
+}
+
+class ChooseTheCorrectImageOrLetter implements BasicOfGameData {
+  bool isLetter;
+  ChooseTheCorrectImageOrLetter({this.isLetter = false}) {
+    titleImageAr = isLetter
+        ? AppImagesArabic.titleOfChooseTheCorrectLetter
+        : AppImagesArabic.titleOfChooseTheCorrectImage;
+  }
+  @override
+  String? completeBasket;
+
+  @override
+  int countOfMinimizeStar = 1;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  bool isRound = false;
+
+  @override
+  String? titleImageAr;
+  @override
+  String titleImageEn = '';
 }
 
 class MathChooseSticksOrBeadsOrBlocks implements BasicOfGameData {
