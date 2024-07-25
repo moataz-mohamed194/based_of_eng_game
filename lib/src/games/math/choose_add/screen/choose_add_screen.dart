@@ -13,9 +13,8 @@ import '../../../../core/math_weidgt/domino.dart';
 import '../../../../core/math_weidgt/get_the_blocks.dart';
 import '../../../../core/phonetics_color.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
-import '../manager/choose_sticks_cubit.dart';
-import '../widget/card_of_number.dart';
-import '../widget/card_of_selected.dart';
+import '../../choose_from_obj/widget/card_of_selected.dart';
+import '../manager/choose_add_cubit.dart';
 import '../../../../core/math_weidgt/get_the_beads.dart';
 import '../../../../core/math_weidgt/stick.dart';
 

@@ -1,4 +1,4 @@
-part of 'choose_sticks_cubit.dart';
+part of 'choose_add_cubit.dart';
 
 @immutable
 class ChooseAddInitial extends Equatable {

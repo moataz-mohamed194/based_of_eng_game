@@ -11,7 +11,7 @@ import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 import '../games/math/choose_OE/manager/choose_oe_cubit.dart';
 import '../games/math/choose_OE/screen/choose_oe_screen.dart';
-import '../games/math/choose_add/manager/choose_sticks_cubit.dart';
+import '../games/math/choose_add/manager/choose_add_cubit.dart';
 import '../games/math/choose_add/screen/choose_add_screen.dart';
 import '../games/math/choose_from_obj/manager/choose_sticks_cubit.dart';
 import '../games/math/choose_from_obj/screen/choose_sticks_screen.dart';

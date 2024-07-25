@@ -9,7 +9,7 @@ import '../../../../../src_model/model/game_choices_model.dart';
 import '../../../../core/game_types/game_phonatics_types.dart';
 import '../../../../core/talk_tts.dart';
 
-part 'choose_sticks_state.dart';
+part 'choose_add_state.dart';
 
 class ChooseAddCubit extends Cubit<ChooseAddInitial> {
   ChooseAddCubit({
