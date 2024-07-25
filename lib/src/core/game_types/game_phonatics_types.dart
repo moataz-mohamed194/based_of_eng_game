@@ -45,7 +45,9 @@ enum GameTypes {
   mathDragDominoOE,
   mathDragBlocksOE,
   mathChooseBeadsOE,
-  mathDragSticks
+  mathDragSticks,
+  mathChooseBlocksAdd,
+  mathChooseBeadsAdd
 }
 
 extension TypeExtension on GameTypes {
@@ -145,6 +147,10 @@ extension TypeExtension on GameTypes {
         return 'Math_Choose_Beads_OE'.toLowerCase();
       case GameTypes.mathDragSticks:
         return 'Math_Drag_Sticks'.toLowerCase();
+      case GameTypes.mathChooseBlocksAdd:
+        return 'Math_Choose_Blocks_Add'.toLowerCase();
+      case GameTypes.mathChooseBeadsAdd:
+        return 'Math_Choose_Beads_Add'.toLowerCase();
     }
   }
 }

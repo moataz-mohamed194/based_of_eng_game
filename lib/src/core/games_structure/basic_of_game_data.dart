@@ -105,6 +105,10 @@ abstract class BasicOfGameData {
       return MathChooseBeadsOE(tools: ToolsOfMath.beads);
     } else if (gameType == GameTypes.mathDragSticks.text()) {
       return MathDragSticks();
+    } else if (gameType == GameTypes.mathChooseBlocksAdd.text()) {
+      return MathChooseBlocksAdd(tools: ToolsOfMath.blocks);
+    } else if (gameType == GameTypes.mathChooseBeadsAdd.text()) {
+      return MathChooseBlocksAdd(tools: ToolsOfMath.beads);
     }
   }
 
@@ -814,6 +818,27 @@ class MathChooseBeadsOE implements BasicOfGameData {
   @override
   bool isRound = false;
   MathChooseBeadsOE({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.clickTheChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  late ToolsOfMath tools;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class MathChooseBlocksAdd implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  MathChooseBlocksAdd({required this.tools});
 
   @override
   String titleImageEn = AppImagesMath.clickTheChoose;

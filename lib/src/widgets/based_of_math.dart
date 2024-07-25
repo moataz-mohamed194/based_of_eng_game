@@ -11,6 +11,8 @@ import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 import '../games/math/choose_OE/manager/choose_oe_cubit.dart';
 import '../games/math/choose_OE/screen/choose_oe_screen.dart';
+import '../games/math/choose_add/manager/choose_sticks_cubit.dart';
+import '../games/math/choose_add/screen/choose_add_screen.dart';
 import '../games/math/choose_from_obj/manager/choose_sticks_cubit.dart';
 import '../games/math/choose_from_obj/screen/choose_sticks_screen.dart';
 import '../games/math/choose_number/manager/choose_number_cubit.dart';
@@ -198,6 +200,25 @@ class BasedOfMath extends StatelessWidget {
                 allGameData: gamesData,
                 subBloc: context.read<CurrentGamePhoneticsCubit>()),
             child: DragSticksScreen(),
+          )
+        } else if (stateOfGame.basicData?.gameData is MathChooseBlocksAdd) ...{
+          BlocProvider<ChooseAddCubit>(
+            create: (_) => ChooseAddCubit(
+                allGameData: gamesData,
+                basicData: stateOfGame.basicData!.gameData!),
+            child: BlocListener<ChooseAddCubit, ChooseAddInitial>(
+                listener: (context, state) {
+                  final List<GameFinalModel> gameData = gamesData;
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .getStateOfStars(mainCountOfQuestion: gameData.length);
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .saveTheStringWillSay(
+                          stateOfStringIsWord: StateOfSubWord.stopTalk,
+                          stateOfStringWillSay: gameData.first.inst ?? '');
+                },
+                child: ChooseAddScreen()),
           )
         }
       ],

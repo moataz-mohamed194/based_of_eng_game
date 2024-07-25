@@ -3,6 +3,7 @@ abstract class AppImagesMath {
 
   static const String mathBg = "${mainPathOfImages}math_bg.png";
   static const String mathDragDrop = "${mainPathOfImages}drag_drop.png";
+  static const String woodBgNumber = "${mainPathOfImages}wood_bg_number.png";
   static const String clickTheChoose =
       "${mainPathOfImages}click_the_choose.png";
   static const String ball1 = "${mainPathOfImages}ball1.svg";
