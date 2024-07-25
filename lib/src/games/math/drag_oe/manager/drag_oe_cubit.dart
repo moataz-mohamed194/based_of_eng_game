@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 
 import '../../../../../based_of_eng_game.dart';
 import '../../../../../src_model/model/game_choices_model.dart';
+import '../../../../core/game_types/game_phonatics_types.dart';
 import '../../../../core/talk_tts.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
 
@@ -12,7 +13,8 @@ part 'drag_oe_state.dart';
 class DragOeCubit extends Cubit<DragOeInitial> {
   DragOeCubit(
       {required List<GameFinalModel> allGameData,
-      required BasicOfGameData basicData,
+      // required BasicOfGameData basicData,
+      required ToolsOfMath tools,
       required CurrentGamePhoneticsCubit subBloc})
       : super(DragOeInitial(
             allGameData: allGameData,
@@ -26,7 +28,7 @@ class DragOeCubit extends Cubit<DragOeInitial> {
                             ?.where((ele) => ele.isCorrect == 1)
                             .length ??
                         0)),
-            basicData: basicData,
+            tools: tools,
             gameData: allGameData[0],
             index: 0)) {
     subAction(subBloc: subBloc);

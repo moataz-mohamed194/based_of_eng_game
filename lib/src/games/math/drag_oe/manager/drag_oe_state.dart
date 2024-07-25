@@ -7,7 +7,7 @@ class DragOeInitial extends Equatable {
   final int index;
   final int countOfCorrect;
   final int countOfQuestions;
-  final BasicOfGameData basicData;
+  final ToolsOfMath tools;
   final GameFinalModel gameData;
   final List<GameFinalModel> allGameData;
 
@@ -16,7 +16,7 @@ class DragOeInitial extends Equatable {
       required this.gameData,
       required this.correctAnswers,
       required this.countOfCorrect,
-      required this.basicData,
+      required this.tools,
       required this.countOfQuestions,
       required this.index,
       this.gameChoices});
@@ -32,7 +32,7 @@ class DragOeInitial extends Equatable {
     return DragOeInitial(
         gameData: gameData ?? this.gameData,
         index: index ?? this.index,
-        basicData: basicData,
+        tools: tools,
         countOfCorrect: countOfCorrect ?? this.countOfCorrect,
         countOfQuestions: countOfQuestions,
         gameChoices: gameChoices ?? this.gameChoices,
@@ -45,7 +45,7 @@ class DragOeInitial extends Equatable {
         gameChoices,
         countOfCorrect,
         index,
-        basicData,
+        tools,
         countOfQuestions,
         gameData,
         allGameData,

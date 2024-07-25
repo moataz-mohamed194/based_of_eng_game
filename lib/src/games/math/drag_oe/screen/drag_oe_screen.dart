@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../src_model/model/game_choices_model.dart';
+import '../../../../core/game_types/game_phonatics_types.dart';
 import '../../../../core/math_weidgt/domino.dart';
+import '../../../../core/math_weidgt/get_the_blocks.dart';
 import '../../../../core/phonetics_color.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
@@ -12,7 +14,6 @@ import '../manager/drag_oe_cubit.dart';
 class DragOeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return BlocConsumer<DragOeCubit, DragOeInitial>(
         listener: (context, state) {},
         builder: (context, gameState) {
@@ -36,14 +37,9 @@ class DragOeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(
                           color: AppColorPhonetics.boarderColor, width: 5)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: List.generate(
-                        gameState.correctAnswers.length,
-                        (index) => _childOfDomino(
-                            isDisable: false,
-                            data: gameState.correctAnswers[index])),
-                  ),
+                  child: gameState.tools == ToolsOfMath.domino
+                      ? _parentOfDominoResult(gameState: gameState)
+                      : _parentOfBlocksResult(gameState: gameState),
                 );
               }, onAcceptWithDetails: (item) async {
                 if (context.read<CurrentGamePhoneticsCubit>().ableButton()) {
@@ -54,15 +50,6 @@ class DragOeScreen extends StatelessWidget {
                     await context
                         .read<CurrentGamePhoneticsCubit>()
                         .addSuccessAnswer(
-                            subAction: () {
-                              // context
-                              //     .read<DragOeCubit>()
-                              //     .checkIsNeedToIncreaseIndex(action: () {
-                              //   context
-                              //       .read<CurrentGamePhoneticsCubit>()
-                              //       .updateIndexOfCurrentGame();
-                              // });
-                            },
                             questions: context
                                 .read<DragOeCubit>()
                                 .state
@@ -114,35 +101,83 @@ class DragOeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(
                         color: AppColorPhonetics.boarderColor, width: 5)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                      gameState.gameChoices?.length ?? 0,
-                      (index) => Draggable<GameChoicesGameFinalModel>(
-                          maxSimultaneousDrags: gameState.correctAnswers
-                                  .where((element) =>
-                                      element.id ==
-                                      gameState.gameChoices![index].id)
-                                  .isNotEmpty
-                              ? 0
-                              : 1,
-                          feedback: _childOfDomino(
-                              isDisable: false,
-                              data: gameState.gameChoices![index]),
-                          // childWhenDragging: ,
-                          data: gameState.gameChoices![index],
-                          child: _childOfDomino(
-                              isDisable: gameState.correctAnswers
-                                  .where((element) =>
-                                      element.id ==
-                                      gameState.gameChoices![index].id)
-                                  .isNotEmpty,
-                              data: gameState.gameChoices![index]))),
-                ),
+                child: gameState.tools == ToolsOfMath.domino
+                    ? _parentOfDomino(gameState: gameState)
+                    : _parentOfBlocks(gameState: gameState),
               ),
             ],
           );
         });
+  }
+
+  _parentOfDominoResult({required DragOeInitial gameState}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: List.generate(
+          gameState.correctAnswers.length,
+          (index) => _childOfDomino(
+              isDisable: false, data: gameState.correctAnswers[index])),
+    );
+  }
+
+  _parentOfBlocksResult({required DragOeInitial gameState}) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: List.generate(
+          gameState.correctAnswers.length,
+          (index) => _childOfBlocks(
+              isDisable: false, data: gameState.correctAnswers[index])),
+    );
+  }
+
+  _parentOfDomino({required DragOeInitial gameState}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: List.generate(
+          gameState.gameChoices?.length ?? 0,
+          (index) => Draggable<GameChoicesGameFinalModel>(
+              maxSimultaneousDrags: gameState.correctAnswers
+                      .where((element) =>
+                          element.id == gameState.gameChoices![index].id)
+                      .isNotEmpty
+                  ? 0
+                  : 1,
+              feedback: _childOfDomino(
+                  isDisable: false, data: gameState.gameChoices![index]),
+              // childWhenDragging: ,
+              data: gameState.gameChoices![index],
+              child: _childOfDomino(
+                  isDisable: gameState.correctAnswers
+                      .where((element) =>
+                          element.id == gameState.gameChoices![index].id)
+                      .isNotEmpty,
+                  data: gameState.gameChoices![index]))),
+    );
+  }
+
+  _parentOfBlocks({required DragOeInitial gameState}) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: List.generate(
+          gameState.gameChoices?.length ?? 0,
+          (index) => Draggable<GameChoicesGameFinalModel>(
+              maxSimultaneousDrags: gameState.correctAnswers
+                      .where((element) =>
+                          element.id == gameState.gameChoices![index].id)
+                      .isNotEmpty
+                  ? 0
+                  : 1,
+              feedback: _childOfBlocks(
+                  isDisable: false, data: gameState.gameChoices![index]),
+              // childWhenDragging: ,
+              data: gameState.gameChoices![index],
+              child: _childOfBlocks(
+                  isDisable: gameState.correctAnswers
+                      .where((element) =>
+                          element.id == gameState.gameChoices![index].id)
+                      .isNotEmpty,
+                  data: gameState.gameChoices![index]))),
+    );
   }
 
   _childOfDomino(
@@ -167,5 +202,14 @@ class DragOeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _childOfBlocks(
+      {required GameChoicesGameFinalModel data, required bool isDisable}) {
+    return Opacity(
+        opacity: isDisable ? (.1) : 1,
+        child: GetTheBlocks(
+          countOfBoxes: int.parse(data.choice ?? '0'),
+        ));
   }
 }

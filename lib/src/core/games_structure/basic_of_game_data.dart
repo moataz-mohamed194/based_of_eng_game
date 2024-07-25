@@ -99,6 +99,8 @@ abstract class BasicOfGameData {
       return MathChooseOEDomino(tools: ToolsOfMath.domino);
     } else if (gameType == GameTypes.mathDragDominoOE.text()) {
       return MathDragDominoOE(tools: ToolsOfMath.domino);
+    } else if (gameType == GameTypes.mathDragBlocksOE.text()) {
+      return MathDragDominoOE(tools: ToolsOfMath.blocks);
     }
   }
 

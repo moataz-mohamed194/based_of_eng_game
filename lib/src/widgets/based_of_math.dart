@@ -165,7 +165,8 @@ class BasedOfMath extends StatelessWidget {
               create: (_) => DragOeCubit(
                   allGameData: gamesData,
                   subBloc: context.read<CurrentGamePhoneticsCubit>(),
-                  basicData: stateOfGame.basicData!.gameData!),
+                  tools: (stateOfGame.basicData?.gameData as MathDragDominoOE)
+                      .tools),
               child: BlocListener<DragOeCubit, DragOeInitial>(
                   listener: (context, state) {}, child: DragOeScreen()))
         }
