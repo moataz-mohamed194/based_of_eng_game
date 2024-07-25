@@ -95,6 +95,8 @@ abstract class BasicOfGameData {
       return ChooseTheCorrectImageOrLetter(isLetter: true);
     } else if (gameType == GameTypes.chooseFormationArabic.text()) {
       return ChooseTheCorrectImageOrLetter(isLetter: false);
+    } else if (gameType == GameTypes.mathChooseDominoOE.text()) {
+      return MathChooseOEDomino(tools: ToolsOfMath.domino);
     }
   }
 
@@ -723,6 +725,27 @@ class MathSortingSticksOrBeadsOrBlocks implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesMath.mathDragDrop;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  late ToolsOfMath tools;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class MathChooseOEDomino implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  MathChooseOEDomino({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.clickTheChoose;
 
   @override
   String? completeBasket;

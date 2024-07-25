@@ -9,6 +9,8 @@ import '../core/audio_player_letters.dart';
 import '../core/game_types/game_phonatics_types.dart';
 import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
+import '../games/math/choose_OE/manager/choose_oe_cubit.dart';
+import '../games/math/choose_OE/screen/choose_oe_screen.dart';
 import '../games/math/choose_from_obj/manager/choose_sticks_cubit.dart';
 import '../games/math/choose_from_obj/screen/choose_sticks_screen.dart';
 import '../games/math/choose_number/manager/choose_number_cubit.dart';
@@ -138,6 +140,24 @@ class BasedOfMath extends StatelessWidget {
                           as MathSortingSticksOrBeadsOrBlocks)
                       .tools),
               child: SortingBlocksScreen())
+        } else if (stateOfGame.basicData?.gameData is MathChooseOEDomino) ...{
+          BlocProvider<ChooseOeCubit>(
+              create: (_) => ChooseOeCubit(
+                  allGameData: gamesData,
+                  basicData: stateOfGame.basicData!.gameData!),
+              child: BlocListener<ChooseOeCubit, ChooseOeInitial>(
+                  listener: (context, state) {
+                    final List<GameFinalModel> gameData = gamesData;
+                    context
+                        .read<CurrentGamePhoneticsCubit>()
+                        .getStateOfStars(mainCountOfQuestion: gameData.length);
+                    context
+                        .read<CurrentGamePhoneticsCubit>()
+                        .saveTheStringWillSay(
+                            stateOfStringIsWord: StateOfSubWord.stopTalk,
+                            stateOfStringWillSay: gameData.first.inst ?? '');
+                  },
+                  child: ChooseOeScreen()))
         }
       ],
     );
