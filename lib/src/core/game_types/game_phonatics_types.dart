@@ -41,7 +41,8 @@ enum GameTypes {
   mathChooseDominoNumber,
   mathSortingBlocks,
   mathChooseDomino,
-  mathChooseDominoOE
+  mathChooseDominoOE,
+  mathDragDominoOE
 }
 
 extension TypeExtension on GameTypes {
@@ -133,6 +134,8 @@ extension TypeExtension on GameTypes {
         return 'Math_Choose_Domino_Number'.toLowerCase();
       case GameTypes.mathChooseDominoOE:
         return 'Math_Choose_Domino_OE'.toLowerCase();
+      case GameTypes.mathDragDominoOE:
+        return 'Math_Drag_Domino_OE'.toLowerCase();
     }
   }
 }

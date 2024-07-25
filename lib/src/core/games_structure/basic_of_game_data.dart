@@ -97,6 +97,8 @@ abstract class BasicOfGameData {
       return ChooseTheCorrectImageOrLetter(isLetter: false);
     } else if (gameType == GameTypes.mathChooseDominoOE.text()) {
       return MathChooseOEDomino(tools: ToolsOfMath.domino);
+    } else if (gameType == GameTypes.mathDragDominoOE.text()) {
+      return MathDragDominoOE(tools: ToolsOfMath.domino);
     }
   }
 
@@ -743,6 +745,27 @@ class MathChooseOEDomino implements BasicOfGameData {
   @override
   bool isRound = false;
   MathChooseOEDomino({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.clickTheChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  late ToolsOfMath tools;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class MathDragDominoOE implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  MathDragDominoOE({required this.tools});
 
   @override
   String titleImageEn = AppImagesMath.clickTheChoose;

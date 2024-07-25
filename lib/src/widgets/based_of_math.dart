@@ -15,6 +15,8 @@ import '../games/math/choose_from_obj/manager/choose_sticks_cubit.dart';
 import '../games/math/choose_from_obj/screen/choose_sticks_screen.dart';
 import '../games/math/choose_number/manager/choose_number_cubit.dart';
 import '../games/math/choose_number/screen/choose_numbers_screen.dart';
+import '../games/math/drag_oe/manager/drag_oe_cubit.dart';
+import '../games/math/drag_oe/screen/drag_oe_screen.dart';
 import '../games/math/sorting_blocks/manager/sorting_blocks_cubit.dart';
 import '../games/math/sorting_blocks/screen/sorting_blocks_screen.dart';
 
@@ -158,6 +160,32 @@ class BasedOfMath extends StatelessWidget {
                             stateOfStringWillSay: gameData.first.inst ?? '');
                   },
                   child: ChooseOeScreen()))
+        } else if (stateOfGame.basicData?.gameData is MathDragDominoOE) ...{
+          BlocProvider<DragOeCubit>(
+              create: (_) => DragOeCubit(
+                  allGameData: gamesData,
+                  basicData: stateOfGame.basicData!.gameData!),
+              child: BlocListener<DragOeCubit, DragOeInitial>(
+                  listener: (context, state) {
+                    final List<GameFinalModel> gameData = gamesData;
+                    int count = gameData.fold(
+                        0,
+                        (previousValue, element) =>
+                            previousValue +
+                            (element.gameChoices
+                                    ?.where((ele) => ele.isCorrect == 1)
+                                    .length ??
+                                0));
+                    context
+                        .read<CurrentGamePhoneticsCubit>()
+                        .getStateOfStars(mainCountOfQuestion: count);
+                    context
+                        .read<CurrentGamePhoneticsCubit>()
+                        .saveTheStringWillSay(
+                            stateOfStringIsWord: StateOfSubWord.stopTalk,
+                            stateOfStringWillSay: gameData.first.inst ?? '');
+                  },
+                  child: DragOeScreen()))
         }
       ],
     );
