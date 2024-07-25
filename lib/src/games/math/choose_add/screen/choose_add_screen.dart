@@ -43,9 +43,13 @@ class ChooseAddScreen extends StatelessWidget {
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _question(question: gameState.mainQuestion),
+                      _question(
+                          question: gameState.mainQuestion,
+                          tools: gameState.tools),
                       10.ph,
-                      _question(question: gameState.subQuestion),
+                      _question(
+                          question: gameState.subQuestion,
+                          tools: gameState.tools),
                     ],
                   )),
                   Expanded(
@@ -61,7 +65,8 @@ class ChooseAddScreen extends StatelessWidget {
                                 question: gameState.gameChoices![index],
                                 mainBloc:
                                     context.read<CurrentGamePhoneticsCubit>(),
-                                bloc: context.read<ChooseAddCubit>()))),
+                                bloc: context.read<ChooseAddCubit>(),
+                                tools: gameState.tools))),
                   )),
                   10.pw,
                 ],
@@ -69,22 +74,27 @@ class ChooseAddScreen extends StatelessWidget {
             }));
   }
 
-  _question({required GameLettersGameFinalModel? question}) {
+  _question({
+    required GameLettersGameFinalModel? question,
+    required ToolsOfMath tools,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Container(
           width: 20.w,
           height: 20.w,
-          padding: EdgeInsets.all(5),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.all(5),
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(AppImagesMath.woodBgNumber))),
           child: FittedBox(
             child: Text(
               "${question?.letter ?? 0}",
               style: TextStyle(
-                color: AppColorPhonetics.darkBlueColor,
+                color: int.parse("${question?.letter ?? 0}") % 2 != 0
+                    ? AppColorPhonetics.redColor
+                    : AppColorPhonetics.darkBlueColor,
                 fontSize: 20.sp,
                 fontFamily: AppTheme.getFontFamily5(),
                 fontWeight: FontWeight.w400,
@@ -94,9 +104,15 @@ class ChooseAddScreen extends StatelessWidget {
           ),
         ),
         5.ph,
-        GetTheBlocks(
-          countOfBoxes: int.parse("${question?.letter ?? 0}"),
-        )
+        if (tools == ToolsOfMath.blocks) ...{
+          GetTheBlocks(
+            countOfBoxes: int.parse("${question?.letter ?? 0}"),
+          )
+        } else if (tools == ToolsOfMath.beads) ...{
+          GetTheBeads(
+            countOfBalls: int.parse("${question?.letter ?? 0}"),
+          )
+        }
       ],
     );
   }
@@ -106,6 +122,7 @@ class ChooseAddScreen extends StatelessWidget {
     required ChooseAddInitial gameState,
     required CurrentGamePhoneticsCubit mainBloc,
     required ChooseAddCubit bloc,
+    required ToolsOfMath tools,
   }) {
     return Row(
       children: [
@@ -147,22 +164,30 @@ class ChooseAddScreen extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            GetTheBlocks(
-              countOfBoxes: int.parse("${question?.choice ?? 0}"),
-            ),
+            if (tools == ToolsOfMath.blocks) ...{
+              GetTheBlocks(
+                countOfBoxes: int.parse("${question?.choice ?? 0}"),
+              ),
+            } else if (tools == ToolsOfMath.beads) ...{
+              GetTheBeads(
+                countOfBalls: int.parse("${question?.choice ?? 0}"),
+              )
+            },
             5.ph,
             Container(
               width: 20.w,
               height: 20.w,
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(AppImagesMath.woodBgNumber))),
               child: FittedBox(
                 child: Text(
                   "${question?.choice ?? 0}",
                   style: TextStyle(
-                    color: AppColorPhonetics.darkBlueColor,
+                    color: int.parse("${question?.choice ?? 0}") % 2 != 0
+                        ? AppColorPhonetics.redColor
+                        : AppColorPhonetics.darkBlueColor,
                     fontSize: 20.sp,
                     fontFamily: AppTheme.getFontFamily5(),
                     fontWeight: FontWeight.w400,

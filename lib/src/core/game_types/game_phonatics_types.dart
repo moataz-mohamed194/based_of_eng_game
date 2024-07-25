@@ -47,7 +47,7 @@ enum GameTypes {
   mathChooseBeadsOE,
   mathDragSticks,
   mathChooseBlocksAdd,
-  mathChooseBeadsAdd
+  mathChooseBeadsAdd,
 }
 
 extension TypeExtension on GameTypes {

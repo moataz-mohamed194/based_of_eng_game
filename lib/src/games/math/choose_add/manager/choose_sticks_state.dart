@@ -9,7 +9,7 @@ class ChooseAddInitial extends Equatable {
   final int correctAnswers;
   final bool? isCorrect;
   final int index;
-  final BasicOfGameData basicData;
+  final ToolsOfMath tools;
   final GameFinalModel gameData;
   final List<GameFinalModel> allGameData;
 
@@ -17,7 +17,7 @@ class ChooseAddInitial extends Equatable {
       {required this.allGameData,
       required this.gameData,
       required this.correctAnswers,
-      required this.basicData,
+      required this.tools,
       this.isCorrect,
       this.subQuestion,
       this.mainQuestion,
@@ -41,7 +41,7 @@ class ChooseAddInitial extends Equatable {
         subQuestion: subQuestion ?? this.subQuestion,
         mainQuestion: mainQuestion ?? this.mainQuestion,
         mainNumber: mainNumber ?? this.mainNumber,
-        basicData: basicData,
+        tools: tools,
         gameChoices: gameChoices ?? this.gameChoices,
         allGameData: allGameData ?? this.allGameData,
         isCorrect: isCorrect ?? this.isCorrect,
@@ -53,7 +53,7 @@ class ChooseAddInitial extends Equatable {
         gameChoices,
         mainNumber,
         index,
-        basicData,
+        tools,
         gameData,
         allGameData,
         isCorrect,

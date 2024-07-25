@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../../../based_of_eng_game.dart';
 import '../../../../../src_model/export_models.dart';
 import '../../../../../src_model/model/game_choices_model.dart';
+import '../../../../core/game_types/game_phonatics_types.dart';
 import '../../../../core/talk_tts.dart';
 
 part 'choose_sticks_state.dart';
@@ -13,11 +14,11 @@ part 'choose_sticks_state.dart';
 class ChooseAddCubit extends Cubit<ChooseAddInitial> {
   ChooseAddCubit({
     required List<GameFinalModel> allGameData,
-    required BasicOfGameData basicData,
+    required ToolsOfMath tools,
   }) : super(ChooseAddInitial(
             allGameData: allGameData,
             correctAnswers: 0,
-            basicData: basicData,
+            tools: tools,
             gameData: allGameData[0],
             index: 0)) {
     reFormatGameData();

@@ -205,7 +205,8 @@ class BasedOfMath extends StatelessWidget {
           BlocProvider<ChooseAddCubit>(
             create: (_) => ChooseAddCubit(
                 allGameData: gamesData,
-                basicData: stateOfGame.basicData!.gameData!),
+                tools: (stateOfGame.basicData!.gameData! as MathChooseBlocksAdd)
+                    .tools),
             child: BlocListener<ChooseAddCubit, ChooseAddInitial>(
                 listener: (context, state) {
                   final List<GameFinalModel> gameData = gamesData;
