@@ -95,6 +95,8 @@ abstract class BasicOfGameData {
       return ChooseTheCorrectImageOrLetter(isLetter: true);
     } else if (gameType == GameTypes.chooseFormationArabic.text()) {
       return ChooseTheCorrectImageOrLetter(isLetter: false);
+    } else if (gameType == GameTypes.matchingArabic.text()) {
+      return MatchingArabic();
     }
   }
 
@@ -670,6 +672,26 @@ class ChooseTheCorrectImageOrLetter implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+  @override
+  String titleImageEn = '';
+}
+
+class MatchingArabic implements BasicOfGameData {
+  @override
+  String? completeBasket;
+
+  @override
+  int countOfMinimizeStar = 1;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  bool isRound = true;
+
+  @override
+  String? titleImageAr = AppImagesArabic.titleOfMatching;
+
   @override
   String titleImageEn = '';
 }
