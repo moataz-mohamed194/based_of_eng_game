@@ -66,7 +66,6 @@ class DominoWidget extends StatelessWidget {
             );
           },
           separatorBuilder: (context, index) {
-            print('#${(count ~/ 2)}, $index');
             return index == (count ~/ 2) ? 0.ph : 10.ph;
           },
           itemCount: count ~/ 2),

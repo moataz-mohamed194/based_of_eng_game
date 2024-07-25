@@ -361,6 +361,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
       bool? supportTheFirstWayOfCheckComplete,
       void Function()? subAction,
       bool? isArabic}) async {
+    print('addSuccessAnswer');
     AudioPlayer playerCorrect = AudioPlayer();
     print('correctAnswers:$correctAnswers');
     await _animationOfCorrectAnswer();

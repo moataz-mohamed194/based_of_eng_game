@@ -164,28 +164,10 @@ class BasedOfMath extends StatelessWidget {
           BlocProvider<DragOeCubit>(
               create: (_) => DragOeCubit(
                   allGameData: gamesData,
+                  subBloc: context.read<CurrentGamePhoneticsCubit>(),
                   basicData: stateOfGame.basicData!.gameData!),
               child: BlocListener<DragOeCubit, DragOeInitial>(
-                  listener: (context, state) {
-                    final List<GameFinalModel> gameData = gamesData;
-                    int count = gameData.fold(
-                        0,
-                        (previousValue, element) =>
-                            previousValue +
-                            (element.gameChoices
-                                    ?.where((ele) => ele.isCorrect == 1)
-                                    .length ??
-                                0));
-                    context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .getStateOfStars(mainCountOfQuestion: count);
-                    context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .saveTheStringWillSay(
-                            stateOfStringIsWord: StateOfSubWord.stopTalk,
-                            stateOfStringWillSay: gameData.first.inst ?? '');
-                  },
-                  child: DragOeScreen()))
+                  listener: (context, state) {}, child: DragOeScreen()))
         }
       ],
     );
