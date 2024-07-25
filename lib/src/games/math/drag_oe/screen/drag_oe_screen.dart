@@ -41,6 +41,7 @@ class DragOeScreen extends StatelessWidget {
                     children: List.generate(
                         gameState.correctAnswers.length,
                         (index) => _childOfDomino(
+                            isDisable: false,
                             data: gameState.correctAnswers[index])),
                   ),
                 );
@@ -118,12 +119,24 @@ class DragOeScreen extends StatelessWidget {
                   children: List.generate(
                       gameState.gameChoices?.length ?? 0,
                       (index) => Draggable<GameChoicesGameFinalModel>(
-                          maxSimultaneousDrags: 1,
+                          maxSimultaneousDrags: gameState.correctAnswers
+                                  .where((element) =>
+                                      element.id ==
+                                      gameState.gameChoices![index].id)
+                                  .isNotEmpty
+                              ? 0
+                              : 1,
                           feedback: _childOfDomino(
+                              isDisable: false,
                               data: gameState.gameChoices![index]),
                           // childWhenDragging: ,
                           data: gameState.gameChoices![index],
                           child: _childOfDomino(
+                              isDisable: gameState.correctAnswers
+                                  .where((element) =>
+                                      element.id ==
+                                      gameState.gameChoices![index].id)
+                                  .isNotEmpty,
                               data: gameState.gameChoices![index]))),
                 ),
               ),
@@ -132,23 +145,27 @@ class DragOeScreen extends StatelessWidget {
         });
   }
 
-  _childOfDomino({required GameChoicesGameFinalModel data}) {
-    return Column(
-      children: [
-        Text(
-          data.choice ?? '0',
-          style: TextStyle(
-            color: AppColorPhonetics.darkBlueColor,
-            fontSize: 20.sp,
-            fontFamily: AppTheme.getFontFamily5(),
-            fontWeight: FontWeight.w400,
-            height: 0,
+  _childOfDomino(
+      {required GameChoicesGameFinalModel data, required bool isDisable}) {
+    return Opacity(
+      opacity: isDisable ? (.1) : 1,
+      child: Column(
+        children: [
+          Text(
+            data.choice ?? '0',
+            style: TextStyle(
+              color: AppColorPhonetics.darkBlueColor,
+              fontSize: 20.sp,
+              fontFamily: AppTheme.getFontFamily5(),
+              fontWeight: FontWeight.w400,
+              height: 0,
+            ),
           ),
-        ),
-        DominoWidget(
-          count: int.parse(data.choice ?? '0'),
-        ),
-      ],
+          DominoWidget(
+            count: int.parse(data.choice ?? '0'),
+          ),
+        ],
+      ),
     );
   }
 }
