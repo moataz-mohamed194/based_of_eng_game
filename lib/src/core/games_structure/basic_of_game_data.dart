@@ -101,6 +101,8 @@ abstract class BasicOfGameData {
       return MathDragDominoOE(tools: ToolsOfMath.domino);
     } else if (gameType == GameTypes.mathDragBlocksOE.text()) {
       return MathDragDominoOE(tools: ToolsOfMath.blocks);
+    } else if (gameType == GameTypes.mathChooseBeadsOE.text()) {
+      return MathChooseBeadsOE(tools: ToolsOfMath.beads);
     }
   }
 
@@ -768,6 +770,27 @@ class MathDragDominoOE implements BasicOfGameData {
   @override
   bool isRound = false;
   MathDragDominoOE({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.clickTheChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  late ToolsOfMath tools;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class MathChooseBeadsOE implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  MathChooseBeadsOE({required this.tools});
 
   @override
   String titleImageEn = AppImagesMath.clickTheChoose;
