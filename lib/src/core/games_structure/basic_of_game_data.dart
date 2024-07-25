@@ -103,6 +103,8 @@ abstract class BasicOfGameData {
       return MathDragDominoOE(tools: ToolsOfMath.blocks);
     } else if (gameType == GameTypes.mathChooseBeadsOE.text()) {
       return MathChooseBeadsOE(tools: ToolsOfMath.beads);
+    } else if (gameType == GameTypes.mathDragSticks.text()) {
+      return MathDragSticks();
     }
   }
 
@@ -689,6 +691,27 @@ class MathChooseSticksOrBeadsOrBlocks implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesMath.clickTheChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  late ToolsOfMath tools;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class MathDragSticks implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  MathDragSticks();
+
+  @override
+  String titleImageEn = AppImagesMath.mathDragDrop;
 
   @override
   String? completeBasket;

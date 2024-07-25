@@ -19,6 +19,8 @@ import '../games/math/choose_number_oe/manager/choose_number_oe_cubit.dart';
 import '../games/math/choose_number_oe/screen/choose_numbers_oe_screen.dart';
 import '../games/math/drag_oe/manager/drag_oe_cubit.dart';
 import '../games/math/drag_oe/screen/drag_oe_screen.dart';
+import '../games/math/drag_sticks/manager/drag_sticks_cubit.dart';
+import '../games/math/drag_sticks/screen/drag_sticks_screen.dart';
 import '../games/math/sorting_blocks/manager/sorting_blocks_cubit.dart';
 import '../games/math/sorting_blocks/screen/sorting_blocks_screen.dart';
 
@@ -189,6 +191,13 @@ class BasedOfMath extends StatelessWidget {
                           stateOfStringWillSay: gameData.first.inst ?? '');
                 },
                 child: ChooseNumberOEScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData is MathDragSticks) ...{
+          BlocProvider<DragSticksCubit>(
+            create: (_) => DragSticksCubit(
+                allGameData: gamesData,
+                subBloc: context.read<CurrentGamePhoneticsCubit>()),
+            child: DragSticksScreen(),
           )
         }
       ],

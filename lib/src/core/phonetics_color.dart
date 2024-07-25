@@ -10,7 +10,10 @@ class AppColorPhonetics {
   static const Color lightBlueColor2 = Color(0xffBEDDEC);
   static const Color lightBlueColor4 = Color(0xff4D7F97);
   static const Color lightYellowColor2 = Color(0xffDF861A);
+  static const Color lightYellowColor3 = Color(0xFFFEFCD6);
   static const Color greenColor3 = Color(0xFFA6F4D6);
+  static const Color lightBlack = Color(0x3F000000);
+  static const Color lightBlack2 = Color(0x33000000);
   static const Color correct = Color(0xFFB1E59F);
   static const Color incorrect = Color(0xFFF9B1B1);
   static const Color skyBlueColor = Color(0xFF9ADFF5);
