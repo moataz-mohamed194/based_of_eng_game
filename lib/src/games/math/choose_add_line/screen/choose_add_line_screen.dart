@@ -14,11 +14,11 @@ import '../../../../core/math_weidgt/get_the_blocks.dart';
 import '../../../../core/phonetics_color.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
 import '../../choose_from_obj/widget/card_of_selected.dart';
+import '../manager/choose_add_line_cubit.dart';
 import '../../../../core/math_weidgt/get_the_beads.dart';
 import '../../../../core/math_weidgt/stick.dart';
-import '../manager/choose_add_cubit.dart';
 
-class ChooseAddScreen extends StatelessWidget {
+class ChooseAddLineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +31,7 @@ class ChooseAddScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             border:
                 Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
-        child: BlocConsumer<ChooseAddCubit, ChooseAddInitial>(
+        child: BlocConsumer<ChooseAddLineCubit, ChooseAddLineInitial>(
             listener: (context, state) {},
             builder: (context, gameState) {
               return Row(
@@ -39,7 +39,7 @@ class ChooseAddScreen extends StatelessWidget {
                 children: [
                   10.pw,
                   Expanded(
-                      child: Column(
+                      child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _question(
@@ -64,7 +64,7 @@ class ChooseAddScreen extends StatelessWidget {
                                 question: gameState.gameChoices![index],
                                 mainBloc:
                                     context.read<CurrentGamePhoneticsCubit>(),
-                                bloc: context.read<ChooseAddCubit>(),
+                                bloc: context.read<ChooseAddLineCubit>(),
                                 tools: gameState.tools))),
                   )),
                   10.pw,
@@ -78,8 +78,19 @@ class ChooseAddScreen extends StatelessWidget {
     required ToolsOfMath tools,
   }) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        if (tools == ToolsOfMath.blocks) ...{
+          GetTheBlocks(
+            countOfBoxes: int.parse("${question?.letter ?? 0}"),
+          )
+        } else if (tools == ToolsOfMath.beads) ...{
+          GetTheBeads(
+            countOfBalls: int.parse("${question?.letter ?? 0}"),
+          )
+        },
+        5.ph,
         Container(
           width: 20.w,
           height: 20.w,
@@ -102,25 +113,15 @@ class ChooseAddScreen extends StatelessWidget {
             ),
           ),
         ),
-        5.ph,
-        if (tools == ToolsOfMath.blocks) ...{
-          GetTheBlocks(
-            countOfBoxes: int.parse("${question?.letter ?? 0}"),
-          )
-        } else if (tools == ToolsOfMath.beads) ...{
-          GetTheBeads(
-            countOfBalls: int.parse("${question?.letter ?? 0}"),
-          )
-        }
       ],
     );
   }
 
   _answer({
     required GameChoicesGameFinalModel? question,
-    required ChooseAddInitial gameState,
+    required ChooseAddLineInitial gameState,
     required CurrentGamePhoneticsCubit mainBloc,
-    required ChooseAddCubit bloc,
+    required ChooseAddLineCubit bloc,
     required ToolsOfMath tools,
   }) {
     return Row(
