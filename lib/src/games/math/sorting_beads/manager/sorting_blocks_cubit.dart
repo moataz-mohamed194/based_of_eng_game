@@ -5,23 +5,22 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../../based_of_eng_game.dart';
-import '../../../../../src_model/export_models.dart';
 import '../../../../../src_model/model/game_choices_model.dart';
 import '../../../../core/game_types/game_phonatics_types.dart';
 import '../../../../core/talk_tts.dart';
 
 part 'sorting_blocks_state.dart';
 
-class SortingBeadsCubit extends Cubit<SortingBeadsInitial> {
-  SortingBeadsCubit(
+class SortingBlocksCubit extends Cubit<SortingBlocksInitial> {
+  SortingBlocksCubit(
       {required GameFinalModel gameData,
       required ToolsOfMath tools,
       required CurrentGamePhoneticsCubit subBloc})
-      : super(SortingBeadsInitial(
+      : super(SortingBlocksInitial(
           // allGameData: allGameData,
           correctAnswers: [],
           tools: tools,
-          gameData: gameData, gameImages: [],
+          gameData: gameData,
           // index: 0
         )) {
     subAction(subBloc: subBloc);
@@ -31,29 +30,28 @@ class SortingBeadsCubit extends Cubit<SortingBeadsInitial> {
 
   reFormatGameData() {
     GameFinalModel newData = state.gameData;
-    List<GameLettersGameFinalModel> gameLetters = newData.gameLetters ?? [];
-    List<GameImagesGameFinalModel> gameImages = newData.gameImages ?? [];
-    gameLetters.shuffle();
-    gameImages.shuffle();
-    // GameChoicesGameFinalModel mainLetter = gameChoices.reduce((current, next) {
-    //   return int.parse(current.choice ?? '0') > int.parse(next.choice ?? '0')
-    //       ? current
-    //       : next;
-    // });
+    List<GameChoicesGameFinalModel> gameChoices = newData.gameChoices ?? [];
+    List<GameChoicesGameFinalModel> gameChoices2 =
+        gameChoices.reversed.toList();
+    gameChoices.shuffle();
+    gameChoices2.shuffle();
+    GameChoicesGameFinalModel mainLetter = gameChoices.reduce((current, next) {
+      return int.parse(current.choice ?? '0') > int.parse(next.choice ?? '0')
+          ? current
+          : next;
+    });
     emit(state.copyWith(
-      gameData: newData,
-      gameImages: gameImages,
-      gameLetters: gameLetters,
-    ));
+        gameData: newData,
+        gameChoices: gameChoices,
+        mainNumber: int.parse(mainLetter.choice ?? '0'),
+        secondGameChoices: gameChoices2));
   }
 
-  addAnswer(
-      {required num userChoose,
-      required GameImagesGameFinalModel secondChoose}) {
+  addAnswer({required num userChoose, required num secondChoose}) {
     print('userChoose:$userChoose, $secondChoose');
-    if (userChoose == secondChoose.gameLetterId) {
-      List<GameImagesGameFinalModel> countCorrectAnswers = state.correctAnswers;
-      countCorrectAnswers.add(secondChoose);
+    if (userChoose == secondChoose) {
+      List<int> countCorrectAnswers = state.correctAnswers;
+      countCorrectAnswers.add(userChoose.toInt());
       emit(state.copyWith(correctAnswers: countCorrectAnswers));
       return true;
     } else {
@@ -76,7 +74,7 @@ class SortingBeadsCubit extends Cubit<SortingBeadsInitial> {
 
   subAction({required CurrentGamePhoneticsCubit subBloc}) {
     subBloc.getStateOfStars(
-        mainCountOfQuestion: state.gameData.gameLetters?.length ?? 0);
+        mainCountOfQuestion: state.gameData.gameChoices?.length ?? 0);
     subBloc.saveTheStringWillSay(
         stateOfStringIsWord: StateOfSubWord.stopTalk,
         stateOfStringWillSay: state.gameData.inst ?? '');

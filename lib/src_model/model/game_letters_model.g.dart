@@ -11,6 +11,7 @@ GameLettersGameFinalModel _$GameLettersGameFinalModelFromJson(
     GameLettersGameFinalModel(
       id: (json['id'] as num?)?.toInt(),
       letter: json['letter'] as String?,
+      secLetter: json['sec_letter'] as String?,
       number: (json['number'] as num?)?.toInt(),
       mainQuestion: (json['main_question'] as num?)?.toInt(),
       gameId: (json['game_id'] as num?)?.toInt(),
@@ -27,6 +28,7 @@ Map<String, dynamic> _$GameLettersGameFinalModelToJson(
     <String, dynamic>{
       'id': instance.id,
       'letter': instance.letter,
+      'sec_letter': instance.secLetter,
       'number': instance.number,
       'warmup_id': instance.warmupId,
       'unit_id': instance.unitId,

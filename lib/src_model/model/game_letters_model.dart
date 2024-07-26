@@ -6,6 +6,7 @@ part 'game_letters_model.g.dart';
 class GameLettersGameFinalModel extends Equatable {
   final int? id;
   final String? letter;
+  final String? secLetter;
   final int? number;
   final int? warmupId;
   final int? unitId;
@@ -19,6 +20,7 @@ class GameLettersGameFinalModel extends Equatable {
   const GameLettersGameFinalModel(
       {this.id,
       this.letter,
+      this.secLetter,
       this.number,
       this.mainQuestion,
       this.gameId,
@@ -40,6 +42,7 @@ class GameLettersGameFinalModel extends Equatable {
         gameId,
         id,
         letter,
+        secLetter,
         mainQuestion,
         number,
         warmupId,

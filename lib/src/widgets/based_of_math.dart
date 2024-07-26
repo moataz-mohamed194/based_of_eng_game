@@ -29,6 +29,8 @@ import '../games/math/drag_oe/manager/drag_oe_cubit.dart';
 import '../games/math/drag_oe/screen/drag_oe_screen.dart';
 import '../games/math/drag_sticks/manager/drag_sticks_cubit.dart';
 import '../games/math/drag_sticks/screen/drag_sticks_screen.dart';
+import '../games/math/sorting_beads/manager/sorting_blocks_cubit.dart';
+import '../games/math/sorting_beads/screen/sorting_blocks_screen.dart';
 import '../games/math/sorting_blocks/manager/sorting_blocks_cubit.dart';
 import '../games/math/sorting_blocks/screen/sorting_blocks_screen.dart';
 
@@ -154,6 +156,14 @@ class BasedOfMath extends StatelessWidget {
                           as MathSortingSticksOrBeadsOrBlocks)
                       .tools),
               child: SortingBlocksScreen())
+        } else if (stateOfGame.basicData?.gameData is MathSortingBeads) ...{
+          BlocProvider<SortingBeadsCubit>(
+              create: (_) => SortingBeadsCubit(
+                  gameData: gamesData[0],
+                  subBloc: context.read<CurrentGamePhoneticsCubit>(),
+                  tools: (stateOfGame.basicData?.gameData as MathSortingBeads)
+                      .tools),
+              child: SortingBeadsScreen())
         } else if (stateOfGame.basicData?.gameData is MathChooseOEDomino) ...{
           BlocProvider<ChooseOeCubit>(
               create: (_) => ChooseOeCubit(

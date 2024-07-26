@@ -12,14 +12,16 @@ class GetTheBeads extends StatelessWidget {
     // TODO: implement build
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(AppImagesMath.circle),
-        ...List.generate(
-            countOfBalls,
-            (index) =>
-                SvgPicture.asset(selectedBall(countOfBalls: countOfBalls))),
-        SvgPicture.asset(AppImagesMath.circle),
-      ],
+      children: countOfBalls != 0
+          ? [
+              SvgPicture.asset(AppImagesMath.circle),
+              ...List.generate(
+                  countOfBalls,
+                  (index) => SvgPicture.asset(
+                      selectedBall(countOfBalls: countOfBalls))),
+              SvgPicture.asset(AppImagesMath.circle),
+            ]
+          : [],
     );
   }
 

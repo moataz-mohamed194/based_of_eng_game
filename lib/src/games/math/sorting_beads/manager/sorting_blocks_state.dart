@@ -1,50 +1,49 @@
 part of 'sorting_blocks_cubit.dart';
 
 @immutable
-class SortingBeadsInitial extends Equatable {
-  final List<GameLettersGameFinalModel>? gameLetters;
-  final List<GameImagesGameFinalModel>? gameImages;
+class SortingBlocksInitial extends Equatable {
+  final List<GameChoicesGameFinalModel>? gameChoices;
+  final List<GameChoicesGameFinalModel>? secondGameChoices;
   final num? mainNumber;
-  final List<GameImagesGameFinalModel> correctAnswers;
+  final List<int> correctAnswers;
   // final int index;
   final ToolsOfMath tools;
   final GameFinalModel gameData;
   // final List<GameFinalModel> allGameData;
 
-  SortingBeadsInitial(
+  SortingBlocksInitial(
       {required this.gameData,
       required this.correctAnswers,
       required this.tools,
-      required this.gameImages,
-      // this.secondGameChoices,
+      this.secondGameChoices,
       // required this.index,
-      this.gameLetters,
+      this.gameChoices,
       this.mainNumber});
-  SortingBeadsInitial copyWith({
-    List<GameLettersGameFinalModel>? gameLetters,
-    List<GameImagesGameFinalModel>? gameImages,
+  SortingBlocksInitial copyWith({
+    List<GameChoicesGameFinalModel>? gameChoices,
+    List<GameChoicesGameFinalModel>? secondGameChoices,
     num? mainNumber,
-    List<GameImagesGameFinalModel>? correctAnswers,
+    List<int>? correctAnswers,
     // int? index,
     GameFinalModel? gameData,
     // List<GameFinalModel>? allGameData,
   }) {
-    return SortingBeadsInitial(
+    return SortingBlocksInitial(
         gameData: gameData ?? this.gameData,
-        gameImages: gameImages ?? this.gameImages,
+        secondGameChoices: secondGameChoices ?? this.secondGameChoices,
         // index: index ?? this.index,
         mainNumber: mainNumber ?? this.mainNumber,
         tools: tools,
-        gameLetters: gameLetters ?? this.gameLetters,
+        gameChoices: gameChoices ?? this.gameChoices,
         // allGameData: allGameData ?? this.allGameData,
         correctAnswers: correctAnswers ?? this.correctAnswers);
   }
 
   @override
   List<Object?> get props => [
-        gameLetters,
+        gameChoices,
         mainNumber,
-        gameImages,
+        secondGameChoices,
         // index,
         tools,
         gameData,
