@@ -95,6 +95,8 @@ abstract class BasicOfGameData {
       return ChooseTheCorrectImageOrLetter(isLetter: true);
     } else if (gameType == GameTypes.chooseFormationArabic.text()) {
       return ChooseTheCorrectImageOrLetter(isLetter: false);
+    } else if (gameType == GameTypes.bingoArabic.text()) {
+      return BingoArabicGame();
     }
   }
 
@@ -105,7 +107,8 @@ abstract class BasicOfGameData {
     GameTypes.dice.text(),
     GameTypes.xOut.text(),
     GameTypes.spelling.text(),
-    GameTypes.spellingWord.text()
+    GameTypes.spellingWord.text(),
+    GameTypes.bingoArabic.text()
   ];
 
   static bool isConnectGame({required String game}) {
@@ -733,6 +736,26 @@ class MathSortingSticksOrBeadsOrBlocks implements BasicOfGameData {
   @override
   String? titleImageAr;
   late ToolsOfMath tools;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class BingoArabicGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = '';
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
+  @override
+  String? titleImageAr = '';
+
   @override
   int countOfMinimizeStar = 1;
 }

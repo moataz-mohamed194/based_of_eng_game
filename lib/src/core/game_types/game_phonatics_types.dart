@@ -40,7 +40,8 @@ enum GameTypes {
   mathChooseBlocksNumber,
   mathChooseDominoNumber,
   mathSortingBlocks,
-  mathChooseDomino
+  mathChooseDomino,
+  bingoArabic
 }
 
 extension TypeExtension on GameTypes {
@@ -130,6 +131,8 @@ extension TypeExtension on GameTypes {
         return 'Math_Choose_Domino'.toLowerCase();
       case GameTypes.mathChooseDominoNumber:
         return 'Math_Choose_Domino_Number'.toLowerCase();
+      case GameTypes.bingoArabic:
+        return 'Arabic Bingo'.toLowerCase();
     }
   }
 }
