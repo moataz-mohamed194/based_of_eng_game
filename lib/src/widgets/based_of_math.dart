@@ -23,6 +23,8 @@ import '../games/math/choose_number/manager/choose_number_cubit.dart';
 import '../games/math/choose_number/screen/choose_numbers_screen.dart';
 import '../games/math/choose_number_oe/manager/choose_number_oe_cubit.dart';
 import '../games/math/choose_number_oe/screen/choose_numbers_oe_screen.dart';
+import '../games/math/choose_sub/manager/choose_sub_cubit.dart';
+import '../games/math/choose_sub/screen/choose_sub_screen.dart';
 import '../games/math/drag_add/manager/drag_add_cubit.dart';
 import '../games/math/drag_add/screen/drag_add_screen.dart';
 import '../games/math/drag_oe/manager/drag_oe_cubit.dart';
@@ -236,6 +238,26 @@ class BasedOfMath extends StatelessWidget {
                           stateOfStringWillSay: gameData.first.inst ?? '');
                 },
                 child: ChooseAddScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData is MathChooseBlocksSub) ...{
+          BlocProvider<ChooseSubCubit>(
+            create: (_) => ChooseSubCubit(
+                allGameData: gamesData,
+                tools: (stateOfGame.basicData!.gameData! as MathChooseBlocksSub)
+                    .tools),
+            child: BlocListener<ChooseSubCubit, ChooseSubInitial>(
+                listener: (context, state) {
+                  final List<GameFinalModel> gameData = gamesData;
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .getStateOfStars(mainCountOfQuestion: gameData.length);
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .saveTheStringWillSay(
+                          stateOfStringIsWord: StateOfSubWord.stopTalk,
+                          stateOfStringWillSay: gameData.first.inst ?? '');
+                },
+                child: ChooseSubScreen()),
           )
         } else if (stateOfGame.basicData?.gameData
             is MathChooseBlocksAddLine) ...{

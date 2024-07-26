@@ -51,7 +51,8 @@ enum GameTypes {
   mathChooseBlocksAddLine,
   mathChooseBeadsAddLine,
   mathDragBlocksAdd,
-  mathDragBeadsAdd
+  mathDragBeadsAdd,
+  mathChooseBlocksSub
 }
 
 extension TypeExtension on GameTypes {
@@ -163,6 +164,8 @@ extension TypeExtension on GameTypes {
         return 'Math_Drag_Blocks_Add'.toLowerCase();
       case GameTypes.mathDragBeadsAdd:
         return 'Math_Drag_Beads_Add'.toLowerCase();
+      case GameTypes.mathChooseBlocksSub:
+        return 'Math_Choose_Blocks_Sub'.toLowerCase();
     }
   }
 }

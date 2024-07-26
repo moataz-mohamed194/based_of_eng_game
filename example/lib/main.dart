@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               return BlocProvider<ContactLessonBloc>(
                   create: (_) => di.sl<ContactLessonBloc>()
                     //arabic
-                    ..add(GetContactLessonRequest(lessonId: 155, gameId: 2002)),
+                    ..add(GetContactLessonRequest(lessonId: 156, gameId: 2015)),
 
                   // eng
                   // ..add(GetContactLessonRequest(lessonId: 4, gameId: 168)),
