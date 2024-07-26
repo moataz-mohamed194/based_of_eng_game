@@ -10,16 +10,21 @@ class CardOfBlocks extends StatelessWidget {
   final int number;
   final ToolsOfMath tools;
   final double? size;
+  final double? newWidth;
 
   const CardOfBlocks(
-      {super.key, required this.number, this.size, required this.tools});
+      {super.key,
+      required this.number,
+      this.size,
+      required this.tools,
+      this.newWidth});
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
     final sizeOfOne = Size(width / 15, (width / 22).toDouble());
     return Container(
-      width: width / 3,
+      width: newWidth ?? (width / 3),
       height: 65.h,
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
@@ -45,27 +50,9 @@ class CardOfBlocks extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.28),
             ),
           ),
-          child:
-              // FittedBox(
-              //   child: Column(
-              //     children: [
-              //       if (tools == ToolsOfMath.sticks) ...{
-              //         Slick(
-              //           count: number,
-              //         )
-              //       } else if (tools == ToolsOfMath.beads) ...{
-              //         GetTheBeads(
-              //           countOfBalls: number,
-              //         )
-              //       } else if (tools == ToolsOfMath.blocks) ...{
-              GetTheBlocks(
+          child: GetTheBlocks(
             countOfBoxes: number,
-          )
-          //       }
-          //     ],
-          //   ),
-          // ),
-          ),
+          )),
     );
   }
 }
