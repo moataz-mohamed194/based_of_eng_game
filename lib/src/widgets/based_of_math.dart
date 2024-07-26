@@ -13,6 +13,8 @@ import '../games/math/choose_OE/manager/choose_oe_cubit.dart';
 import '../games/math/choose_OE/screen/choose_oe_screen.dart';
 import '../games/math/choose_add/manager/choose_add_cubit.dart';
 import '../games/math/choose_add/screen/choose_add_screen.dart';
+import '../games/math/choose_add_beads_line/manager/choose_add_beads_line_cubit.dart';
+import '../games/math/choose_add_beads_line/screen/choose_add_beads_line_screen.dart';
 import '../games/math/choose_add_line/manager/choose_add_line_cubit.dart';
 import '../games/math/choose_add_line/screen/choose_add_line_screen.dart';
 import '../games/math/choose_from_obj/manager/choose_sticks_cubit.dart';
@@ -246,6 +248,29 @@ class BasedOfMath extends StatelessWidget {
                           stateOfStringWillSay: gameData.first.inst ?? '');
                 },
                 child: ChooseAddLineScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData
+            is MathChooseBeadsAddLine) ...{
+          BlocProvider<ChooseAddBeadsLineCubit>(
+            create: (_) => ChooseAddBeadsLineCubit(
+                allGameData: gamesData,
+                tools:
+                    (stateOfGame.basicData!.gameData! as MathChooseBeadsAddLine)
+                        .tools),
+            child: BlocListener<ChooseAddBeadsLineCubit,
+                    ChooseAddBeadsLineInitial>(
+                listener: (context, state) {
+                  final List<GameFinalModel> gameData = gamesData;
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .getStateOfStars(mainCountOfQuestion: gameData.length);
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .saveTheStringWillSay(
+                          stateOfStringIsWord: StateOfSubWord.stopTalk,
+                          stateOfStringWillSay: gameData.first.inst ?? '');
+                },
+                child: ChooseAddBeadsLineScreen()),
           )
         } else if (stateOfGame.basicData?.gameData is MathDragBlocksAdd) ...{
           BlocProvider<DragAddCubit>(
