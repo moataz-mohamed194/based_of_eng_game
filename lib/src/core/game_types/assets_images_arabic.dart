@@ -32,4 +32,5 @@ abstract class AppImagesArabic {
       '${mainPathOfImages}choose_the_correct_image.png';
   static const String titleOfChooseTheCorrectImage =
       '${mainPathOfImages}choose_the_correct_letter.png';
+  static const String titleOfMatching = '${mainPathOfImages}arabic_match.png';
 }
