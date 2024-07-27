@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +28,8 @@ class MatchArabicScreen extends StatefulWidget {
 class _MatchArabicScreen extends State<MatchArabicScreen> {
   @override
   void initState() {
-    final GameFinalModel gameData = context.read<MatchArabicCubit>().state.gameData;
+    final GameFinalModel gameData =
+        context.read<MatchArabicCubit>().state.gameData;
     context
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.gameImages?.length ?? 0);
@@ -67,10 +70,10 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
         listener: (context, state) {},
         builder: (context, gameState) {
           return Container(
-            margin: const EdgeInsets.only(bottom: 20, top: 20),
+            margin: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             width: MediaQuery.of(context).size.width - (100.w),
-            height: MediaQuery.of(context).size.height - (50.h + 5 + 50.h),
+            height: MediaQuery.of(context).size.height - (130.h + 5),
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -104,41 +107,34 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
                                               globalPosition:
                                                   event.localPosition,
                                               localPosition: Offset(
-                                                  event.localPosition.dx,
-                                                  index == 0
-                                                      ? (event.localPosition
-                                                              .dy +
-                                                          ((120.h)))
-                                                      : (event.localPosition
-                                                              .dy +
-                                                          ((100.h *
-                                                              (index +
-                                                                  1)))))));
+                                                  event.position.dx - 100.w,
+                                                  event.position.dy - (90.h))));
                                     } else {
+                                      print(
+                                          'event.localPosition:${event.localPosition}');
                                       gestureDetector.onPanUpdate!(
                                           DragUpdateDetails(
                                               delta: Offset.zero,
-                                              globalPosition:
-                                                  event.position,
+                                              globalPosition: event.position,
                                               localPosition: Offset(
-                                                  event.localPosition.dx,
-                                                  index == 0
-                                                      ? event
-                                                          .localPosition.dy
-                                                      : (event.localPosition
-                                                              .dy +
-                                                          ((120.h) / 2)))));
+                                                  event.position.dx - 90.w,
+                                                  event.position.dy -
+                                                      (120.h))));
                                     }
                                   }
                                 },
-                                child:
-                                Draggable<
-                                    GameLettersGameFinalModel>(
+                                child: Draggable<GameLettersGameFinalModel>(
                                   data: gameState.answers[index],
+                                  maxSimultaneousDrags:
+                                      gameState.answers[index].id == null
+                                          ? 0
+                                          : 1,
                                   feedback: const SizedBox(),
                                   key: gameState.widgetKey[index],
-                                  childWhenDragging: _buildLetters(gameState, context, index),
-                                  child: _buildLetters(gameState, context, index),
+                                  childWhenDragging:
+                                      _buildLetters(gameState, context, index),
+                                  child:
+                                      _buildLetters(gameState, context, index),
                                   onDragEnd: (e) {
                                     setState(() {
                                       start = Offset.zero;
@@ -147,19 +143,15 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
                                   },
                                   onDragStarted: () {
                                     RenderBox renderBox = gameState
-                                            .widgetKey[index]
-                                            .currentContext!
-                                            .findRenderObject()
-                                        as RenderBox;
-                                    Offset offset = renderBox
-                                        .localToGlobal(Offset.zero);
+                                        .widgetKey[index].currentContext!
+                                        .findRenderObject() as RenderBox;
+                                    Offset offset =
+                                        renderBox.localToGlobal(Offset.zero);
                                     gestureDetector.onPanStart!(
                                       DragStartDetails(
                                         localPosition: Offset(
-                                            (offset.dx) ,
-                                            ((offset.dy) -
-                                                ((50.h + 5 + 150.h) /
-                                                    2))),
+                                            (offset.dx) - 70.w,
+                                            ((offset.dy) - 40.h)),
                                       ),
                                     );
                                   },
@@ -168,7 +160,6 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-
                         children: List.generate(
                           gameState.imageAnswers.length,
                           (index) => DragTarget<GameLettersGameFinalModel>(
@@ -177,72 +168,42 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
                                           BasicOfGameData.stateOIdle
                                   ? null
                                   : (item) async {
+                                      // if (item.data.id == null) {
+                                      print('$start, ####:${item.data.id}');
                                       print('####:${item.data.letter}');
                                       print(
-                                          '####:${gameState.imageAnswers[index].word}');
-                                      if (gameState.imageAnswers[index].word
-                                              ?.toLowerCase() ==
-                                          item.data.letter?.toLowerCase()) {
-                                        int countCorrectAnswers =
-                                            await context
-                                                .read<MatchArabicCubit>()
-                                                .addCorrectAnswer(
-                                                    endPosition: end!,
-                                                    startPosition: start!,
-                                                    answerId:
-                                                        item.data.id ?? 0,
-                                                    imageAnswerId: gameState
-                                                            .imageAnswers[
-                                                                index]
-                                                            .id ??
-                                                        0);
+                                          '####:${gameState.imageAnswers[index].gameLetterId}');
+                                      if (gameState.imageAnswers[index]
+                                              .gameLetterId ==
+                                          item.data.id) {
+                                        int countCorrectAnswers = await context
+                                            .read<MatchArabicCubit>()
+                                            .addCorrectAnswer(
+                                                endPosition: end!,
+                                                startPosition: start!,
+                                                answerId: item.data.id ?? 0,
+                                                imageAnswerId: gameState
+                                                        .imageAnswers[index]
+                                                        .id ??
+                                                    0);
                                         print(
                                             'gameState.countQuestions:${gameState.countQuestions}, ${gameState.countCorrectAnswers}');
                                         await context
-                                            .read<
-                                                CurrentGamePhoneticsCubit>()
+                                            .read<CurrentGamePhoneticsCubit>()
                                             .addSuccessAnswer(
-                                                questions: gameState
-                                                    .countQuestions,
+                                                questions:
+                                                    gameState.countQuestions,
                                                 correctAnswers:
                                                     countCorrectAnswers)
-                                            .whenComplete(() {
-                                          // print('listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
-
-                                          if (gameState.countQuestions ==
-                                              countCorrectAnswers) {
-                                            // Future.delayed(
-                                            //     const Duration(seconds: 2),
-                                            //     () async {
-                                            //   Navigator.of(context).pop();
-                                            // });
-                                          }
-                                          // else {
-                                          //   Future.delayed(
-                                          //       const Duration(seconds: 2),
-                                          //           () async {
-                                          //         await context
-                                          //             .read<CurrentGamePhoneticsCubit>()
-                                          //             .updateIndexOfCurrentGame();
-                                          //         context
-                                          //             .read<ListenChooseCubit>()
-                                          //             .updateTheCurrentGame(
-                                          //             index: context
-                                          //                 .read<
-                                          //                 CurrentGamePhoneticsCubit>()
-                                          //                 .state
-                                          //                 .index);
-                                          //       });
-                                          // }
-                                        });
+                                            .whenComplete(() {});
                                       } else {
                                         await context
-                                            .read<
-                                                CurrentGamePhoneticsCubit>()
+                                            .read<CurrentGamePhoneticsCubit>()
                                             .addWrongAnswer(
                                                 actionOfWrongAnswer:
                                                     () async {});
                                       }
+                                      // }
                                     },
                               builder: (context, onAccepted, onRejected) {
                                 return Column(
@@ -260,13 +221,12 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
                                     ),
                                     20.pw,
                                     CachedNetworkImage(
-                                      imageUrl: gameState
-                                              .imageAnswers[index].image ??
-                                          '',
-                                      height: (MediaQuery.of(context)
-                                              .size
-                                              .height) /
-                                          5,
+                                      imageUrl:
+                                          gameState.imageAnswers[index].image ??
+                                              '',
+                                      height:
+                                          (MediaQuery.of(context).size.height) /
+                                              5,
 
                                       // height: 0.33.sh,
                                       placeholder: (context, url) =>
@@ -293,9 +253,10 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
         });
   }
 
-  Widget _buildLetters(MatchArabicInitial gameState, BuildContext context, int index) {
+  Widget _buildLetters(
+      MatchArabicInitial gameState, BuildContext context, int index) {
     return Container(
-      height: 120.h,
+      height: 100.h,
       margin: EdgeInsets.symmetric(horizontal: 5.w),
       child: Column(
         children: [
@@ -306,14 +267,16 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
       ),
     );
   }
-  Widget _buildLetter(BuildContext context, MatchArabicInitial gameState, int index) {
+
+  Widget _buildLetter(
+      BuildContext context, MatchArabicInitial gameState, int index) {
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: 10.w, vertical: 0.h), //EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.r),
         border:
-        Border.all(color: AppColorPhonetics.darkBorderColor, width: 2.w),
+            Border.all(color: AppColorPhonetics.darkBorderColor, width: 2.w),
       ),
       child: FittedBox(
         child: Text(
@@ -327,6 +290,7 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
       ),
     );
   }
+
   Widget _buildCircle({required Color circleColor}) {
     return Container(
       height: 17,
