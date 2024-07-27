@@ -6,25 +6,33 @@ class DragPicToWordInitial extends Equatable {
   final List<GameImagesGameFinalModel>? gameImages;
   final List<GameImagesGameFinalModel>? gamesLetters;
   final List<int> correctedAnswers;
+  final bool isArabic;
 
-  const DragPicToWordInitial(
-      {required this.gameData,
-      required this.correctedAnswers,
-      this.gamesLetters,
-      this.gameImages});
+  const DragPicToWordInitial({
+    required this.gameData,
+    required this.correctedAnswers,
+    this.gamesLetters,
+    this.gameImages,
+    this.isArabic = false,
+  });
 
-  DragPicToWordInitial copyWith(
-      {GameFinalModel? gameData,
-      List<GameImagesGameFinalModel>? gamesLetters,
-      List<int>? correctedAnswers,
-      List<GameImagesGameFinalModel>? gameImages}) {
+  DragPicToWordInitial copyWith({
+    GameFinalModel? gameData,
+    List<GameImagesGameFinalModel>? gamesLetters,
+    List<int>? correctedAnswers,
+    List<GameImagesGameFinalModel>? gameImages,
+    bool? isArabic,
+  }) {
     return DragPicToWordInitial(
-        gameData: gameData ?? this.gameData,
-        gameImages: gameImages ?? this.gameImages,
-        gamesLetters: gamesLetters ?? this.gamesLetters,
-        correctedAnswers: correctedAnswers ?? this.correctedAnswers);
+      gameData: gameData ?? this.gameData,
+      gameImages: gameImages ?? this.gameImages,
+      gamesLetters: gamesLetters ?? this.gamesLetters,
+      correctedAnswers: correctedAnswers ?? this.correctedAnswers,
+      isArabic: isArabic ?? this.isArabic,
+    );
   }
 
   @override
-  List<Object?> get props => [gameData,correctedAnswers,gamesLetters,  gameImages];
+  List<Object?> get props =>
+      [gameData, correctedAnswers, gamesLetters, gameImages, isArabic];
 }

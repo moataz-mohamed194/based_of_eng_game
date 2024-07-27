@@ -45,13 +45,14 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                   image: AssetImage(stateOfGame.basicData?.background ?? ''),
                   fit: BoxFit.fill)),
           child: Stack(
-            alignment: Alignment.topRight,
+            alignment: isArabic ? Alignment.topLeft : Alignment.topRight,
             children: [
               /////////////////////game title//////////////////
 
               Positioned(
                 top: 0,
-                left: -20,
+                left: isArabic ? null : -20,
+                right: isArabic ? -20 : null,
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,8 +66,9 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                                     .read<CurrentGamePhoneticsCubit>()
                                     .beeTalkingTrue();
                                 await TalkTts.startTalk(
-                                    text: gamesData[stateOfGame.index].inst ??
-                                        '');
+                                    text:
+                                        gamesData[stateOfGame.index].inst ?? '',
+                                    isArabic: isArabic);
                                 TalkTts.flutterTts
                                     .setCompletionHandler(() async {
                                   if (stateOfGame.stateOfStringIsWord !=
@@ -76,7 +78,8 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                                       await TalkTts.startTalk(
                                           text: stateOfGame
                                                   .stateOfStringWillSay ??
-                                              '');
+                                              '',
+                                          isArabic: isArabic);
                                     } else {
                                       await AudioPlayerLetters.startPlaySound(
                                           soundPath: AssetsSoundLetters
@@ -101,7 +104,9 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                                     width: 80.w,
                                   )
                                 : Container(
-                                    margin: EdgeInsets.only(left: 7.w),
+                                    margin: EdgeInsets.only(
+                                        left: isArabic ? 0.w : 7.w,
+                                        right: isArabic ? 7.w : 0.w),
                                     child: SizedBox(
                                         height: 100.h,
                                         // width: 65.w,
@@ -139,7 +144,8 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                         is DragPicToWordGame)) ...{
                       BlocProvider<DragPicToWordCubit>(
                           create: (_) => DragPicToWordCubit(
-                              gameData: gamesData[stateOfGame.index]),
+                              gameData: gamesData[stateOfGame.index],
+                              isArabic: isArabic),
                           child: DragPicToWordGameScreen())
                     } else if ((stateOfGame.basicData?.gameData
                         is DragWordToPicGame)) ...{
@@ -172,9 +178,14 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                 top: 0,
                 start: 35.w,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10.w, top: 10.h),
+                  padding: EdgeInsets.only(
+                      left: isArabic ? 0.w : 10.w,
+                      right: isArabic ? 10.w : 0.w,
+                      top: 10.h),
                   child: Image.asset(
-                    stateOfGame.basicData?.gameData?.titleImageEn ?? '',
+                    isArabic
+                        ? stateOfGame.basicData?.gameData?.titleImageAr ?? ''
+                        : stateOfGame.basicData?.gameData?.titleImageEn ?? '',
                     height: 75.h,
                     width: 120.w,
                     // fit: BoxFit.fill,

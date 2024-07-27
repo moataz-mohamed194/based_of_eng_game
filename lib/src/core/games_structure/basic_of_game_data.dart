@@ -514,7 +514,7 @@ class DragPicToWordGame implements BasicOfGameData {
   bool isConnect = true;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.titleOfDragAndDrop;
 
   @override
   int countOfMinimizeStar = 1;

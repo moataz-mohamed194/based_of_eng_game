@@ -39,7 +39,8 @@ enum MainDataOfChaptersTypes {
   shortVowels,
   up,
   math,
-  consonant
+  consonant,
+  firstArabicUnit,
 }
 
 extension TypeExtension on MainDataOfChaptersTypes {
@@ -109,6 +110,8 @@ extension TypeExtension on MainDataOfChaptersTypes {
         return "math".toLowerCase();
       case MainDataOfChaptersTypes.consonant:
         return "Consonant".toLowerCase();
+      case MainDataOfChaptersTypes.firstArabicUnit:
+        return "الوحدة الأولى (المدود)".toLowerCase();
     }
   }
 }
@@ -1070,8 +1073,13 @@ class ShortVowels implements MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
 
-  ShortVowels({required this.mineGameData}) {
+  ShortVowels(
+      {required this.mineGameData,
+      required bool isArabicSub,
+      required String? subBackGround}) {
     gameData = mineGameData;
+    isArabic = isArabicSub;
+    background = subBackGround ?? AppImagesPhonetics.backGroundOfShortVowels;
   }
 
   @override
