@@ -13,11 +13,11 @@ class MatchArabicCubit extends Cubit<MatchArabicInitial> {
   }) : super(MatchArabicInitial(
           gameData: gameData,
           // listGameData: listGameData,
-          answers: [],
+          answers: gameData.gameLetters ?? [],
           positions: [],
           countQuestions: gameData.gameImages?.length ?? 0,
           widgetKey: [],
-          imageAnswers: [],
+          imageAnswers: gameData.gameImages ?? [],
         )) {
     reFormatAnswers();
   }
@@ -25,8 +25,7 @@ class MatchArabicCubit extends Cubit<MatchArabicInitial> {
   reFormatAnswers() {
     GameFinalModel data = state.gameData;
     List<GameLettersGameFinalModel> answers = data.gameLetters ?? [];
-    List<GameImagesGameFinalModel> imageAnswers = data.gameImages ?? [];
-    answers.shuffle();
+    List<GameImagesGameFinalModel> imageAnswers = state.imageAnswers;
     imageAnswers.shuffle();
     emit(state.copyWith(
       imageAnswers: imageAnswers,
@@ -34,6 +33,8 @@ class MatchArabicCubit extends Cubit<MatchArabicInitial> {
       positions: List.generate(answers.length, (index) => [null, null]),
       widgetKey: List.generate(answers.length * 3, (index) => GlobalKey()),
     ));
+    print('reFormatAnswers:${state.answers.first.id}');
+    print('reFormatAnswers:${data.gameImages?.first.id}');
   }
 
   int addCorrectAnswer(

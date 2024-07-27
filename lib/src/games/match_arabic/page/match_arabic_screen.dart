@@ -210,16 +210,16 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
                                   // crossAxisAlignment: CrossAxisAlignment.center,
                                   // mainAxisAlignment: MainAxisAlignment.,
                                   children: [
-                                    Container(
-                                      height: 17,
-                                      width: 17,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(17),
-                                          color: AppColorPhonetics
-                                              .lightYellowColor),
-                                    ),
-                                    20.pw,
+                                    // Container(
+                                    //   height: 17,
+                                    //   width: 17,
+                                    //   decoration: BoxDecoration(
+                                    //       borderRadius:
+                                    //           BorderRadius.circular(17),
+                                    //       color: AppColorPhonetics
+                                    //           .lightYellowColor),
+                                    // ),
+                                    // 20.pw,
                                     CachedNetworkImage(
                                       imageUrl:
                                           gameState.imageAnswers[index].image ??
