@@ -33,4 +33,6 @@ abstract class AppImagesArabic {
   static const String titleOfChooseTheCorrectImage =
       '${mainPathOfImages}choose_the_correct_letter.png';
   static const String titleOfMatching = '${mainPathOfImages}arabic_match.png';
+  static const String titleOfDragAndDrop =
+      '${mainPathOfImages}drag_and_drop.png';
 }

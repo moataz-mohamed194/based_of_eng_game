@@ -25,156 +25,164 @@ import '../games/spelling_game/pages/spelling_game.dart';
 class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
   final List<GameFinalModel> gamesData;
+  final bool isArabic;
 
   const BasedOfGameShortVowelsTextNextRive(
-      {super.key, required this.stateOfGame, required this.gamesData});
+      {super.key,
+      required this.stateOfGame,
+      required this.gamesData,
+      this.isArabic = false});
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        // height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(stateOfGame.basicData?.background ?? ''),
-                fit: BoxFit.fill)),
-        child: Stack(
-          alignment: Alignment.topRight,
-          children: [
-            /////////////////////game title//////////////////
+    return Directionality(
+      textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+      child: Expanded(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          // height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(stateOfGame.basicData?.background ?? ''),
+                  fit: BoxFit.fill)),
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              /////////////////////game title//////////////////
 
-            Positioned(
-              top: 0,
-              left: -20,
-              child: Center(
+              Positioned(
+                top: 0,
+                left: -20,
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .ableButton()
+                            ? () async {
+                                await context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .beeTalkingTrue();
+                                await TalkTts.startTalk(
+                                    text: gamesData[stateOfGame.index].inst ??
+                                        '');
+                                TalkTts.flutterTts
+                                    .setCompletionHandler(() async {
+                                  if (stateOfGame.stateOfStringIsWord !=
+                                      StateOfSubWord.stopTalk) {
+                                    if (stateOfGame.stateOfStringIsWord ==
+                                        StateOfSubWord.isWord) {
+                                      await TalkTts.startTalk(
+                                          text: stateOfGame
+                                                  .stateOfStringWillSay ??
+                                              '');
+                                    } else {
+                                      await AudioPlayerLetters.startPlaySound(
+                                          soundPath: AssetsSoundLetters
+                                              .getSoundOfLetter(
+                                                  mainGameLetter: stateOfGame
+                                                          .stateOfStringWillSay ??
+                                                      ''));
+                                    }
+                                  }
+                                });
+
+                                await context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .beeTalkingFalse();
+                              }
+                            : null,
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: stateOfGame.avatarCurrentArtboard == null
+                                ? SizedBox(
+                                    height: 75.h,
+                                    width: 80.w,
+                                  )
+                                : Container(
+                                    margin: EdgeInsets.only(left: 7.w),
+                                    child: SizedBox(
+                                        height: 100.h,
+                                        // width: 65.w,
+                                        child: Rive(
+                                          artboard: stateOfGame
+                                              .avatarCurrentArtboard!,
+                                          fit: BoxFit.fill,
+                                          useArtboardSize: true,
+                                          alignment: Alignment.center,
+                                        )),
+                                  )),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              /////////////////////game//////////////////
+              Center(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: context
-                              .read<CurrentGamePhoneticsCubit>()
-                              .ableButton()
-                          ? () async {
-                              await context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .beeTalkingTrue();
-                              await TalkTts.startTalk(
-                                  text:
-                                      gamesData[stateOfGame.index].inst ?? '');
-                              TalkTts.flutterTts.setCompletionHandler(() async {
-                                if (stateOfGame.stateOfStringIsWord !=
-                                    StateOfSubWord.stopTalk) {
-                                  if (stateOfGame.stateOfStringIsWord ==
-                                      StateOfSubWord.isWord) {
-                                    await TalkTts.startTalk(
-                                        text:
-                                            stateOfGame.stateOfStringWillSay ??
-                                                '');
-                                  } else {
-                                    await AudioPlayerLetters.startPlaySound(
-                                        soundPath:
-                                            AssetsSoundLetters.getSoundOfLetter(
-                                                mainGameLetter: stateOfGame
-                                                        .stateOfStringWillSay ??
-                                                    ''));
-                                  }
-                                }
-                              });
-
-                              await context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .beeTalkingFalse();
-                            }
-                          : null,
-                      child: Container(
-                          alignment: Alignment.center,
-                          child: stateOfGame.avatarCurrentArtboard == null
-                              ? SizedBox(
-
-                                  height: 75.h,
-                                  width: 80.w,
-                                )
-                              : Container(
-                                  margin: EdgeInsets.only(left: 7.w),
-                                  child: SizedBox(
-                                      height: 100.h,
-                                      // width: 65.w,
-                                      child: Rive(
-                                        artboard:
-                                            stateOfGame.avatarCurrentArtboard!,
-                                        fit: BoxFit.fill,
-                                        useArtboardSize: true,
-                                        alignment: Alignment.center,
-                                      )),
-                                )),
-                    ),
+                    if ((stateOfGame.basicData?.gameData
+                        is SpellingWordGame)) ...{
+                      BlocProvider<SpellingCubit>(
+                          create: (_) => SpellingCubit(
+                              // gameData: stateOfGameData.data[stateOfGame.index],
+                              index: stateOfGame.index,
+                              background: (stateOfGame.basicData?.gameData
+                                      as SpellingWordGame)
+                                  .woodenBackground,
+                              allGames: gamesData),
+                          child: const SpellingGameScreen())
+                    } else if ((stateOfGame.basicData?.gameData
+                        is DragPicToWordGame)) ...{
+                      BlocProvider<DragPicToWordCubit>(
+                          create: (_) => DragPicToWordCubit(
+                              gameData: gamesData[stateOfGame.index]),
+                          child: DragPicToWordGameScreen())
+                    } else if ((stateOfGame.basicData?.gameData
+                        is DragWordToPicGame)) ...{
+                      BlocProvider<DragWordToPicCubit>(
+                          create: (_) => DragWordToPicCubit(
+                              gameData: gamesData[stateOfGame.index]),
+                          child: DragWordToPicGameScreen())
+                    } else if ((stateOfGame.basicData?.gameData
+                        is WordFamilyGame)) ...{
+                      BlocProvider<SortingCubit>(
+                          create: (_) => SortingCubit(
+                              index: stateOfGame.index,
+                              background: (stateOfGame.basicData?.gameData
+                                      as WordFamilyGame)
+                                  .woodenBackground,
+                              listGameData: gamesData),
+                          child: FamilyWordGameScreen())
+                    } else if ((stateOfGame.basicData?.gameData
+                        is ListenAndChooseGame)) ...{
+                      BlocProvider<ListenChooseCubit>(
+                          create: (_) => ListenChooseCubit(
+                              index: stateOfGame.index,
+                              listGameData: gamesData),
+                          child: ListenAndChooseScreen())
+                    }
                   ],
                 ),
               ),
-            ),
-            /////////////////////game//////////////////
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if ((stateOfGame.basicData?.gameData
-                      is SpellingWordGame)) ...{
-                    BlocProvider<SpellingCubit>(
-                        create: (_) => SpellingCubit(
-                            // gameData: stateOfGameData.data[stateOfGame.index],
-                            index: stateOfGame.index,
-                            background: (stateOfGame.basicData?.gameData
-                                    as SpellingWordGame)
-                                .woodenBackground,
-                            allGames: gamesData),
-                        child: const SpellingGameScreen())
-                  } else if ((stateOfGame.basicData?.gameData
-                      is DragPicToWordGame)) ...{
-                    BlocProvider<DragPicToWordCubit>(
-                        create: (_) => DragPicToWordCubit(
-                            gameData: gamesData[stateOfGame.index]),
-                        child: DragPicToWordGameScreen())
-                  } else if ((stateOfGame.basicData?.gameData
-                      is DragWordToPicGame)) ...{
-                    BlocProvider<DragWordToPicCubit>(
-                        create: (_) => DragWordToPicCubit(
-                            gameData: gamesData[stateOfGame.index]),
-                        child: DragWordToPicGameScreen())
-                  } else if ((stateOfGame.basicData?.gameData
-                      is WordFamilyGame)) ...{
-                    BlocProvider<SortingCubit>(
-                        create: (_) => SortingCubit(
-                            index: stateOfGame.index,
-                            background: (stateOfGame.basicData?.gameData
-                                    as WordFamilyGame)
-                                .woodenBackground,
-                            listGameData: gamesData),
-                        child: FamilyWordGameScreen())
-                  } else if ((stateOfGame.basicData?.gameData
-                      is ListenAndChooseGame)) ...{
-                    BlocProvider<ListenChooseCubit>(
-                        create: (_) => ListenChooseCubit(
-                            index: stateOfGame.index, listGameData: gamesData),
-                        child: ListenAndChooseScreen())
-                  }
-                ],
-              ),
-            ),
-            PositionedDirectional(
-              top: 0,
-              start: 35.w,
-              child: Padding(
-                padding: EdgeInsets.only(left: 10.w, top: 10.h),
-                child: Image.asset(
-                  stateOfGame.basicData?.gameData?.titleImageEn ?? '',
-                  height: 75.h,
-                  width: 120.w,
-                  // fit: BoxFit.fill,
+              PositionedDirectional(
+                top: 0,
+                start: 35.w,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10.w, top: 10.h),
+                  child: Image.asset(
+                    stateOfGame.basicData?.gameData?.titleImageEn ?? '',
+                    height: 75.h,
+                    width: 120.w,
+                    // fit: BoxFit.fill,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
