@@ -18,6 +18,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../games/match/manager/match_cubit.dart';
+import '../games/match/page/match_screen.dart';
+import '../games/match_arabic/manager/match_arabic_cubit.dart';
+import '../games/match_arabic/page/match_arabic_screen.dart';
+
 class BasedOfGameArabic extends StatelessWidget {
   const BasedOfGameArabic(
       {super.key, required this.stateOfGame, required this.gamesData});
@@ -91,6 +96,14 @@ class BasedOfGameArabic extends StatelessWidget {
                               .isLetter),
                       child: const ChooseTheCorrectLetterOrImageGame())
                 }
+                else if ((stateOfGame.basicData?.gameData
+                  is MatchingArabic)) ...{
+                    BlocProvider<MatchArabicCubit>(
+                        create: (_) => MatchArabicCubit(
+                          gameData: gamesData[stateOfGame.index],
+                        ),
+                        child: MatchArabicScreen())
+                  }
               ],
             ))),
         if (stateOfGame.basicData?.gameData is! Video) ...{

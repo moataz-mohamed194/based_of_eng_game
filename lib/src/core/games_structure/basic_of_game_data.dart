@@ -96,9 +96,9 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.chooseFormationArabic.text()) {
       return ChooseTheCorrectImageOrLetter(isLetter: false);
     }
-    // else if (gameType == GameTypes.matchingArabic.text()) {
-    //   return MatchingArabic();
-    // }
+    else if (gameType == GameTypes.matchingArabic.text()) {
+      return MatchingArabic();
+    }
     else if (gameType == GameTypes.mathChooseDominoOE.text()) {
       return MathChooseOEDomino(tools: ToolsOfMath.domino);
     } else if (gameType == GameTypes.mathDragDominoOE.text()) {
@@ -597,6 +597,25 @@ class MatchGame implements BasicOfGameData {
 
   @override
   String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
+}
+class MatchingArabic implements BasicOfGameData {
+  @override
+  bool isRound = true;
+
+  @override
+  String titleImageEn = AppImagesArabic.titleOfMatching;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr = AppImagesArabic.titleOfMatching;
 
   @override
   int countOfMinimizeStar = 1;

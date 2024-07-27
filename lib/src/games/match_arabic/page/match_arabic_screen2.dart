@@ -10,11 +10,11 @@ import '../../../../src_model/export_models.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../core/theme_text.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
+import '../manager/match_arabic_cubit.dart';
 import '../widgets/final_matching_path.dart';
-import '../manager/match_cubit.dart';
 
-class ArabicMatch extends StatefulWidget {
-  const ArabicMatch({super.key});
+class MatchArabicScreen extends StatefulWidget {
+  const MatchArabicScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -22,10 +22,10 @@ class ArabicMatch extends StatefulWidget {
   }
 }
 
-class _ArabicMatch extends State<ArabicMatch> {
+class _ArabicMatch extends State<MatchArabicScreen> {
   @override
   void initState() {
-    final GameFinalModel gameData = context.read<MatchCubit>().state.gameData;
+    final GameFinalModel gameData = context.read<MatchArabicCubit>().state.gameData;
     context
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.gameImages?.length ?? 0);
@@ -40,7 +40,7 @@ class _ArabicMatch extends State<ArabicMatch> {
     final isInteracting =
         context.watch<CurrentGamePhoneticsCubit>().state.stateOfAvatar;
 
-    return BlocConsumer<MatchCubit, MatchInitial>(
+    return BlocConsumer<MatchArabicCubit, MatchArabicInitial>(
       listener: (context, state) {},
       builder: (context, gameState) {
         return Container(
@@ -53,12 +53,12 @@ class _ArabicMatch extends State<ArabicMatch> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
               border:
-                  Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
+              Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
           child: Stack(
             children: [
               CustomPaint(
                 size: Size.infinite,
-                painter: FinalMatchingPainter(gameState.positions),
+                painter: FinalMatchingArabicPainter(gameState.positions),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -75,24 +75,24 @@ class _ArabicMatch extends State<ArabicMatch> {
   }
 
   Widget _buildImages(
-      MatchInitial gameState, String? isInteracting, BuildContext context) {
+      MatchArabicInitial gameState, String? isInteracting, BuildContext context) {
     return Flexible(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(
             gameState.imageAnswers.length,
-            (index) => Column(
-                  children: [
-                    _buildCircle(circleColor: AppColorPhonetics.lightPurple),
-                    20.ph,
-                    _buildImage(gameState, index, context),
-                  ],
-                )),
+                (index) => Column(
+              children: [
+                _buildCircle(circleColor: AppColorPhonetics.lightPurple),
+                20.ph,
+                _buildImage(gameState, index, context),
+              ],
+            )),
       ),
     );
   }
 
-  Widget _buildImage(MatchInitial gameState, int index, BuildContext context) {
+  Widget _buildImage(MatchArabicInitial gameState, int index, BuildContext context) {
     return CachedNetworkImage(
       imageUrl: gameState.imageAnswers[index].image ?? '',
       height: (MediaQuery.of(context).size.height) / 5,
@@ -107,23 +107,23 @@ class _ArabicMatch extends State<ArabicMatch> {
     );
   }
 
-  Widget _buildLetters(MatchInitial gameState, BuildContext context) {
+  Widget _buildLetters(MatchArabicInitial gameState, BuildContext context) {
     return Flexible(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(
             gameState.answers.length,
-            (index) => Container(
-                  height: 120.h,
-                  margin: EdgeInsets.symmetric(horizontal: 5.w),
-                  child: Column(
-                    children: [
-                      _buildLetter(context, gameState, index),
-                      10.ph,
-                      _buildCircle(circleColor: AppColorPhonetics.lightBlue)
-                    ],
-                  ),
-                )),
+                (index) => Container(
+              height: 120.h,
+              margin: EdgeInsets.symmetric(horizontal: 5.w),
+              child: Column(
+                children: [
+                  _buildLetter(context, gameState, index),
+                  10.ph,
+                  _buildCircle(circleColor: AppColorPhonetics.lightBlue)
+                ],
+              ),
+            )),
       ),
     );
   }
@@ -137,14 +137,14 @@ class _ArabicMatch extends State<ArabicMatch> {
     );
   }
 
-  Widget _buildLetter(BuildContext context, MatchInitial gameState, int index) {
+  Widget _buildLetter(BuildContext context, MatchArabicInitial gameState, int index) {
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: 10.w, vertical: 0.h), //EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.r),
         border:
-            Border.all(color: AppColorPhonetics.darkBorderColor, width: 2.w),
+        Border.all(color: AppColorPhonetics.darkBorderColor, width: 2.w),
       ),
       child: FittedBox(
         child: Text(
