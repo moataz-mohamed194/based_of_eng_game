@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../../based_of_eng_game.dart';
 import '../../../../../src_model/model/game_choices_model.dart';
