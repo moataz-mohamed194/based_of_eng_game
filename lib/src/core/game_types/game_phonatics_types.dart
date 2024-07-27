@@ -53,7 +53,7 @@ enum GameTypes {
   mathDragBlocksAdd,
   mathDragBeadsAdd,
   mathChooseBlocksSub,
-  mathDragBlocksSub
+  mathDragBlocksSub,
   bingoArabic
 }
 

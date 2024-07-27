@@ -95,9 +95,11 @@ abstract class BasicOfGameData {
       return ChooseTheCorrectImageOrLetter(isLetter: true);
     } else if (gameType == GameTypes.chooseFormationArabic.text()) {
       return ChooseTheCorrectImageOrLetter(isLetter: false);
-    } else if (gameType == GameTypes.matchingArabic.text()) {
-      return MatchingArabic();
-    } else if (gameType == GameTypes.mathChooseDominoOE.text()) {
+    }
+    // else if (gameType == GameTypes.matchingArabic.text()) {
+    //   return MatchingArabic();
+    // }
+    else if (gameType == GameTypes.mathChooseDominoOE.text()) {
       return MathChooseOEDomino(tools: ToolsOfMath.domino);
     } else if (gameType == GameTypes.mathDragDominoOE.text()) {
       return MathDragDominoOE(tools: ToolsOfMath.domino);
@@ -943,6 +945,27 @@ class MathChooseBlocksAddLine implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesMath.clickTheChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  late ToolsOfMath tools;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class MathDragSticks implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  MathDragSticks();
+
+  @override
+  String titleImageEn = AppImagesMath.mathDragDrop;
 
   @override
   String? completeBasket;
