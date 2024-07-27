@@ -54,6 +54,7 @@ enum GameTypes {
   mathDragBeadsAdd,
   mathChooseBlocksSub,
   mathDragBlocksSub
+  bingoArabic
 }
 
 extension TypeExtension on GameTypes {
@@ -169,6 +170,8 @@ extension TypeExtension on GameTypes {
         return 'Math_Choose_Blocks_Sub'.toLowerCase();
       case GameTypes.mathDragBlocksSub:
         return 'Math_Drag_Blocks_Sub'.toLowerCase();
+      case GameTypes.bingoArabic:
+        return 'Arabic Bingo'.toLowerCase();
     }
   }
 }

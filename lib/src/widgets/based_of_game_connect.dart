@@ -1,3 +1,5 @@
+import 'package:based_of_eng_game/src/games/bingo_arabic_game/manager/bingo_arabic_cubit.dart';
+import 'package:based_of_eng_game/src/games/bingo_arabic_game/pages/bingo_arabic_game.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,11 @@ class BasedOfGameConnect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+      textDirection: isArabic
+          ? stateOfGame.basicData?.gameData is BingoArabicGame
+              ? TextDirection.ltr
+              : TextDirection.rtl
+          : TextDirection.ltr,
       child: Expanded(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -44,7 +50,11 @@ class BasedOfGameConnect extends StatelessWidget {
                   image: AssetImage(stateOfGame.basicData?.background ?? ''),
                   fit: BoxFit.fill)),
           child: Stack(
-            alignment: isArabic ? Alignment.topLeft : Alignment.topRight,
+            alignment: isArabic
+                ? stateOfGame.basicData?.gameData is BingoArabicGame
+                    ? Alignment.topRight
+                    : Alignment.topLeft
+                : Alignment.topRight,
             children: [
               if (stateOfGame.basicData!.gameData!.isRound) ...{
                 PositionedDirectional(
@@ -116,6 +126,13 @@ class BasedOfGameConnect extends StatelessWidget {
                               gameData: gamesData[stateOfGame.index],
                             ),
                         child: const BingoGameScreen())
+                  } else if ((stateOfGame.basicData?.gameData
+                      is BingoArabicGame)) ...{
+                    BlocProvider<BingoArabicCubit>(
+                      create: (_) => BingoArabicCubit(
+                          gameData: gamesData[stateOfGame.index]),
+                      child: const BingoArabicGameScreen(),
+                    )
                   } else if ((stateOfGame.basicData?.gameData is XOutGame)) ...{
                     BlocProvider<XOutCubit>(
                         create: (_) => XOutCubit(
@@ -162,8 +179,16 @@ class BasedOfGameConnect extends StatelessWidget {
               /////////////////////game title//////////////////
               Positioned(
                 top: 0,
-                left: isArabic ? null : 0,
-                right: isArabic ? 0 : null,
+                left: isArabic
+                    ? stateOfGame.basicData?.gameData is BingoArabicGame
+                        ? 0
+                        : null
+                    : 0,
+                right: isArabic
+                    ? stateOfGame.basicData?.gameData is BingoArabicGame
+                        ? null
+                        : 0
+                    : null,
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,8 +196,18 @@ class BasedOfGameConnect extends StatelessWidget {
                       stateOfGame.basicData!.gameData!.isRound
                           ? Padding(
                               padding: EdgeInsets.only(
-                                  left: isArabic ? 0 : 10.w,
-                                  right: isArabic ? 10.w : 0,
+                                  left: isArabic
+                                      ? stateOfGame.basicData?.gameData
+                                              is BingoArabicGame
+                                          ? 10.w
+                                          : 0
+                                      : 10.w,
+                                  right: isArabic
+                                      ? stateOfGame.basicData?.gameData
+                                              is BingoArabicGame
+                                          ? 0
+                                          : 10.w
+                                      : 0,
                                   top: 10.h),
                               child: Image.asset(
                                 isArabic
@@ -191,13 +226,30 @@ class BasedOfGameConnect extends StatelessWidget {
                               width: 0.4.sw,
                               height: 0.4.sh,
                               padding: EdgeInsets.only(
-                                  left: isArabic ? 0 : 10,
-                                  right: isArabic ? 10 : 0),
+                                  left: isArabic
+                                      ? stateOfGame.basicData?.gameData
+                                              is BingoArabicGame
+                                          ? 10
+                                          : 0
+                                      : 10,
+                                  right: isArabic
+                                      ? stateOfGame.basicData?.gameData
+                                              is BingoArabicGame
+                                          ? 0
+                                          : 10
+                                      : 0),
                               child: Stack(
                                 // crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Positioned(
-                                    top: 0,
+                                    top: stateOfGame.basicData?.gameData
+                                            is BingoArabicGame
+                                        ? null
+                                        : 0,
+                                    bottom: stateOfGame.basicData?.gameData
+                                            is BingoArabicGame
+                                        ? 0
+                                        : null,
                                     child: GestureDetector(
                                       onTap: context
                                               .read<CurrentGamePhoneticsCubit>()
@@ -257,10 +309,20 @@ class BasedOfGameConnect extends StatelessWidget {
                                                   width: 75.w,
                                                   alignment: Alignment.center,
                                                   margin: EdgeInsets.only(
-                                                      left:
-                                                          isArabic ? 0.w : 7.w,
-                                                      right:
-                                                          isArabic ? 7.w : 0.w),
+                                                      left: isArabic
+                                                          ? stateOfGame
+                                                                      .basicData
+                                                                  is BingoArabicGame
+                                                              ? 7.w
+                                                              : 0.w
+                                                          : 7.w,
+                                                      right: isArabic
+                                                          ? stateOfGame
+                                                                      .basicData
+                                                                  is BingoArabicGame
+                                                              ? 0.w
+                                                              : 7.w
+                                                          : 0.w),
                                                   child: SizedBox(
                                                       height: 120.h,
                                                       // width: 65.w,
@@ -275,21 +337,25 @@ class BasedOfGameConnect extends StatelessWidget {
                                                 )),
                                     ),
                                   ),
-                                  PositionedDirectional(
-                                    top: 70.h,
-                                    child: Image.asset(
-                                      isArabic
-                                          ? stateOfGame.basicData?.gameData
-                                                  ?.titleImageAr ??
-                                              ''
-                                          : stateOfGame.basicData?.gameData
-                                                  ?.titleImageEn ??
-                                              '',
-                                      height: 75.h,
-                                      width: isArabic ? 100.w : 75.w,
-                                      fit: BoxFit.contain,
+                                  if (stateOfGame.basicData?.gameData
+                                      is BingoArabicGame)
+                                    const SizedBox()
+                                  else
+                                    PositionedDirectional(
+                                      top: 70.h,
+                                      child: Image.asset(
+                                        isArabic
+                                            ? stateOfGame.basicData?.gameData
+                                                    ?.titleImageAr ??
+                                                ''
+                                            : stateOfGame.basicData?.gameData
+                                                    ?.titleImageEn ??
+                                                '',
+                                        height: 75.h,
+                                        width: isArabic ? 100.w : 75.w,
+                                        fit: BoxFit.contain,
+                                      ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),

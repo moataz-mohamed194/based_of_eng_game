@@ -123,6 +123,8 @@ abstract class BasicOfGameData {
       return MathChooseBlocksSub(tools: ToolsOfMath.blocks);
     } else if (gameType == GameTypes.mathDragBlocksSub.text()) {
       return MathDragBlocksSub(tools: ToolsOfMath.blocks);
+    } else if (gameType == GameTypes.bingoArabic.text()) {
+      return BingoArabicGame();
     }
   }
 
@@ -133,7 +135,8 @@ abstract class BasicOfGameData {
     GameTypes.dice.text(),
     GameTypes.xOut.text(),
     GameTypes.spelling.text(),
-    GameTypes.spellingWord.text()
+    GameTypes.spellingWord.text(),
+    GameTypes.bingoArabic.text()
   ];
 
   static bool isConnectGame({required String game}) {
@@ -702,26 +705,6 @@ class ChooseTheCorrectImageOrLetter implements BasicOfGameData {
   String titleImageEn = '';
 }
 
-class MatchingArabic implements BasicOfGameData {
-  @override
-  String? completeBasket;
-
-  @override
-  int countOfMinimizeStar = 1;
-
-  @override
-  bool isConnect = false;
-
-  @override
-  bool isRound = true;
-
-  @override
-  String? titleImageAr = AppImagesArabic.titleOfMatching;
-
-  @override
-  String titleImageEn = '';
-}
-
 class MathChooseSticksOrBeadsOrBlocks implements BasicOfGameData {
   @override
   bool isRound = false;
@@ -729,27 +712,6 @@ class MathChooseSticksOrBeadsOrBlocks implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesMath.clickTheChoose;
-
-  @override
-  String? completeBasket;
-
-  @override
-  bool isConnect = false;
-
-  @override
-  String? titleImageAr;
-  late ToolsOfMath tools;
-  @override
-  int countOfMinimizeStar = 1;
-}
-
-class MathDragSticks implements BasicOfGameData {
-  @override
-  bool isRound = false;
-  MathDragSticks();
-
-  @override
-  String titleImageEn = AppImagesMath.mathDragDrop;
 
   @override
   String? completeBasket;
@@ -1012,6 +974,26 @@ class MathChooseBeadsAddLine implements BasicOfGameData {
   @override
   String? titleImageAr;
   late ToolsOfMath tools;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class BingoArabicGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = '';
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
+  @override
+  String? titleImageAr = '';
+
   @override
   int countOfMinimizeStar = 1;
 }
