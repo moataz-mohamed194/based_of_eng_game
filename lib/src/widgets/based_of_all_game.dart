@@ -39,10 +39,9 @@ class BasedOfAllGame extends StatelessWidget {
                 if (stateOfGame.basicData is ShortVowels) ...{
                   if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
                     BasedOfGameShortVowelsTextNextRive(
-                      stateOfGame: stateOfGame,
-                      gamesData: gamesData,
-                      isArabic : stateOfGame.basicData?.isArabic ?? false
-                    ),
+                        stateOfGame: stateOfGame,
+                        gamesData: gamesData,
+                        isArabic: stateOfGame.basicData?.isArabic ?? false),
                   } else ...{
                     BasedOfGameShortVowels(
                       stateOfGame: stateOfGame,
