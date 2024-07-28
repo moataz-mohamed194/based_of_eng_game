@@ -1,4 +1,4 @@
-import 'package:based_of_eng_game/src/widgets/based_of_connect_games_ar.dart';
+import 'package:based_of_eng_game/src/widgets/based_of_full_board_games_ar.dart';
 import 'package:based_of_eng_game/src/widgets/based_of_game_arabic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -130,8 +130,12 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                     ),
                   }
-                } else ...{
-                  const SizedBox()
+                } else if (stateOfGame.basicData is RUnitArabic ||
+                    stateOfGame.basicData is FirstUnitArabic) ...{
+                  BasedOfFullBoardGamesAr(
+                    stateOfGame: stateOfGame,
+                    gamesData: gamesData,
+                  )
                 }
               ],
             ),

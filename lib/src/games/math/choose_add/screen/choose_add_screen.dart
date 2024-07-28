@@ -39,33 +39,48 @@ class ChooseAddScreen extends StatelessWidget {
                 children: [
                   10.pw,
                   Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _question(
-                          question: gameState.mainQuestion,
-                          tools: gameState.tools),
-                      10.ph,
-                      _question(
-                          question: gameState.subQuestion,
-                          tools: gameState.tools),
-                    ],
-                  )),
+                      child: FittedBox(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 5),
+                          child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                          _question(
+                              question: gameState.mainQuestion,
+                              tools: gameState.tools),
+                          10.ph,
+                          _question(
+                              showDown:true,
+                              question: gameState.subQuestion,
+                              tools: gameState.tools),
+                                              ],
+                                            ),
+                        ),
+                      )),
+                  10.pw,
                   Expanded(
                       child: FittedBox(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: List.generate(
-                            gameState.gameChoices?.length ?? 0,
-                            (index) => _answer(
-                                gameState: gameState,
-                                question: gameState.gameChoices![index],
-                                mainBloc:
-                                    context.read<CurrentGamePhoneticsCubit>(),
-                                bloc: context.read<ChooseAddCubit>(),
-                                tools: gameState.tools))),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 5.h),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List.generate(
+                              gameState.gameChoices?.length ?? 0,
+                              (index) => Column(
+                                children: [
+                                  _answer(
+                                      gameState: gameState,
+                                      question: gameState.gameChoices![index],
+                                      mainBloc:
+                                      context.read<CurrentGamePhoneticsCubit>(),
+                                      bloc: context.read<ChooseAddCubit>(),
+                                      tools: gameState.tools),
+                                  7.ph
+                                ],
+                              ))),
+                    ),
                   )),
                   10.pw,
                 ],
@@ -76,33 +91,37 @@ class ChooseAddScreen extends StatelessWidget {
   _question({
     required GameLettersGameFinalModel? question,
     required ToolsOfMath tools,
+    bool? showDown,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Container(
-          width: 20.w,
-          height: 20.w,
-          padding: const EdgeInsets.all(5),
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(AppImagesMath.woodBgNumber))),
-          child: FittedBox(
-            child: Text(
-              "${question?.letter ?? 0}",
-              style: TextStyle(
-                color: int.parse("${question?.letter ?? 0}") % 2 != 0
-                    ? AppColorPhonetics.redColor
-                    : AppColorPhonetics.darkBlueColor,
-                fontSize: 20.sp,
-                fontFamily: AppTheme.getFontFamily5(),
-                fontWeight: FontWeight.w400,
-                height: 0,
+        if(showDown!=true)...{
+          Container(
+            width: 20.w,
+            height: 20.w,
+            padding: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImagesMath.woodBgNumber))),
+            child: FittedBox(
+              child: Text(
+                "${question?.letter ?? 0}",
+                style: TextStyle(
+                  color:(tools == ToolsOfMath.beads)? AppColorPhonetics.redColor: int.parse("${question?.letter ?? 0}") % 2 != 0
+                      ? AppColorPhonetics.redColor
+                      : AppColorPhonetics.darkBlueColor,
+                  fontSize: 20.sp,
+                  fontFamily: AppTheme.getFontFamily5(),
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
               ),
             ),
           ),
-        ),
-        5.ph,
+          5.ph,
+        },
+
         if (tools == ToolsOfMath.blocks) ...{
           GetTheBlocks(
             countOfBoxes: int.parse("${question?.letter ?? 0}"),
@@ -111,6 +130,32 @@ class ChooseAddScreen extends StatelessWidget {
           GetTheBeads(
             countOfBalls: int.parse("${question?.letter ?? 0}"),
           )
+        },
+        if(showDown==true)...{
+
+          5.ph,
+          Container(
+            width: 20.w,
+            height: 20.w,
+            padding: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImagesMath.woodBgNumber))),
+            child: FittedBox(
+              child: Text(
+                "${question?.letter ?? 0}",
+                style: TextStyle(
+                  color:(tools == ToolsOfMath.beads)? AppColorPhonetics.redColor: int.parse("${question?.letter ?? 0}") % 2 != 0
+                      ? AppColorPhonetics.redColor
+                      : AppColorPhonetics.darkBlueColor,
+                  fontSize: 20.sp,
+                  fontFamily: AppTheme.getFontFamily5(),
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
+            ),
+          ),
         }
       ],
     );
@@ -184,7 +229,7 @@ class ChooseAddScreen extends StatelessWidget {
                 child: Text(
                   "${question?.choice ?? 0}",
                   style: TextStyle(
-                    color: int.parse("${question?.choice ?? 0}") % 2 != 0
+                    color:(tools == ToolsOfMath.beads)? AppColorPhonetics.redColor: int.parse("${question?.choice ?? 0}") % 2 != 0
                         ? AppColorPhonetics.redColor
                         : AppColorPhonetics.darkBlueColor,
                     fontSize: 20.sp,

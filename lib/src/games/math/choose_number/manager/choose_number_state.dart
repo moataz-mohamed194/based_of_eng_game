@@ -7,6 +7,7 @@ class ChooseNumberInitial extends Equatable {
   final int correctAnswers;
   final num? currentAnswer;
   final int index;
+  final bool? isCorrect;
   final BasicOfGameData basicData;
   final GameFinalModel gameData;
   final List<GameFinalModel> allGameData;
@@ -17,6 +18,7 @@ class ChooseNumberInitial extends Equatable {
       required this.correctAnswers,
       required this.basicData,
       this.currentAnswer,
+      this.isCorrect,
       required this.index,
       this.gameChoices,
       this.mainNumber});
@@ -26,6 +28,7 @@ class ChooseNumberInitial extends Equatable {
     int? correctAnswers,
     num? currentAnswer,
     int? index,
+    bool? isCorrect,
     GameFinalModel? gameData,
     List<GameFinalModel>? allGameData,
   }) {
@@ -33,6 +36,7 @@ class ChooseNumberInitial extends Equatable {
         gameData: gameData ?? this.gameData,
         index: index ?? this.index,
         mainNumber: mainNumber ?? this.mainNumber,
+        isCorrect: isCorrect ?? this.isCorrect,
         basicData: basicData,
         gameChoices: gameChoices ?? this.gameChoices,
         allGameData: allGameData ?? this.allGameData,

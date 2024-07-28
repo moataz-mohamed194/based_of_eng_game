@@ -11,8 +11,9 @@ class DominoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 30.w,
-      height: height ?? 140.h,
+      height: height ?? 130.h,
       clipBehavior: Clip.antiAlias,
+      alignment: Alignment.center,
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -20,14 +21,10 @@ class DominoWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+      child:
           SizedBox(
-            width: 30.w,
-            height: height != null ? ((height ?? 0) - 10) : 130.h,
+            // widthh: 30.w,
+            // height: height != null ? ((height ?? 0) - 10) : 130.h,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,38 +41,55 @@ class DominoWidget extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
+
     );
   }
 
   _listOfCreateBots() {
-    return SizedBox(
-      height: ((count ~/ 2) * 25),
-      child: ListView.separated(
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _redBot(),
-                _redBot(),
-              ],
-            );
-          },
-          separatorBuilder: (context, index) {
-            return index == (count ~/ 2) ? 0.ph : 10.ph;
-          },
-          itemCount: count ~/ 2),
+    return Column(
+      children: List.generate( ((count ~/ 2)), (index)=>Column(
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _redBot(),
+              _redBot(),
+            ],
+          ),
+          index == (count ~/ 2) ? 0.ph : 10.ph
+        ],
+      ))
+        // SizedBox(
+        //   // height: ((count ~/ 2) * 25),
+        //   child: ListView.separated(
+        //       shrinkWrap: true,
+        //       physics: NeverScrollableScrollPhysics(),
+        //       itemBuilder: (context, index) {
+        //         return Row(
+        //           mainAxisSize: MainAxisSize.max,
+        //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //           crossAxisAlignment: CrossAxisAlignment.center,
+        //           children: [
+        //             _redBot(),
+        //             _redBot(),
+        //           ],
+        //         );
+        //       },
+        //       separatorBuilder: (context, index) {
+        //         return index == (count ~/ 2) ? 0.ph : 10.ph;
+        //       },
+        //       itemCount: count ~/ 2),
+        // ),
+      // ],
     );
   }
 
   _redBot() {
     return Container(
-      width: 6.w,
-      height: 6.w,
+      width: 13.h,
+      height: 13.h,
       decoration: const ShapeDecoration(
         color: Color(0xFFAA2020),
         shape: OvalBorder(),

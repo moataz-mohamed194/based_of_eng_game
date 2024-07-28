@@ -40,30 +40,37 @@ class ChooseAddBeadsLineScreen extends StatelessWidget {
                 children: [
                   10.pw,
                   Expanded(
-                      child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _question(
-                          question: gameState.mainQuestion,
-                          tools: gameState.tools),
-                      // 10.pw,
-                      Text(
-                        "+",
-                        style: TextStyle(
-                          color: AppColorPhonetics.darkBlueColor,
-                          fontSize: 20.sp,
-                          fontFamily: AppTheme.getFontFamily5(),
-                          fontWeight: FontWeight.w400,
-                          height: 0,
+                      child: FittedBox(
+                        child: Center(
+                          child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                          _question(
+                              question: gameState.mainQuestion,
+                              tools: gameState.tools),
+                          // 10.pw,
+                          Center(
+                            child: Text(
+                              "+",
+                              style: TextStyle(
+                                color: AppColorPhonetics.darkBlueColor,
+                                fontSize: 20.sp,
+                                fontFamily: AppTheme.getFontFamily5(),
+                                fontWeight: FontWeight.w400,
+                                height: 0,
+                              ),
+                            ),
+                          ),
+                          _question(
+                              question: gameState.subQuestion,
+                              tools: gameState.tools),
+                                              ],
+                                            ),
                         ),
-                      ),
-                      _question(
-                          question: gameState.subQuestion,
-                          tools: gameState.tools),
-                    ],
-                  )),
+                      )),
+                  10.pw,
                   Expanded(
                       child: FittedBox(
                     child: Column(

@@ -130,7 +130,8 @@ class BasedOfMath extends StatelessWidget {
                 },
                 child: ChooseSticksScreen()),
           )
-        } else if (stateOfGame.basicData?.gameData
+        }
+        else if (stateOfGame.basicData?.gameData
             is MathChooseNumberSticksOrBeadsOrBlocks) ...{
           BlocProvider<ChooseNumberCubit>(
             create: (_) => ChooseNumberCubit(
@@ -150,7 +151,8 @@ class BasedOfMath extends StatelessWidget {
                 },
                 child: ChooseNumberScreen()),
           )
-        } else if (stateOfGame.basicData?.gameData
+        }
+        else if (stateOfGame.basicData?.gameData
             is MathSortingSticksOrBeadsOrBlocks) ...{
           BlocProvider<SortingBlocksCubit>(
               create: (_) => SortingBlocksCubit(

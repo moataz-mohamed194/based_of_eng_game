@@ -31,117 +31,131 @@ class ChooseOeScreen extends StatelessWidget {
         child: BlocConsumer<ChooseOeCubit, ChooseOeInitial>(
             listener: (context, state) {},
             builder: (context, gameState) {
-              return Row(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                      gameState.gameChoices?.length ?? 0,
-                      (index) => Row(
-                            children: [
-                              if ((gameState.basicData as MathChooseOEDomino)
-                                      .tools ==
-                                  ToolsOfMath.domino) ...{
-                                Row(
-                                  children: [
-                                    CardOfSelected(
-                                      onTap: () async {
-                                        if (context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .ableButton()) {
-                                          bool stateOfAnswer = context
-                                              .read<ChooseOeCubit>()
-                                              .addAnswer(
-                                                  userChoose: gameState
-                                                      .gameChoices?[index]);
-                                          if (stateOfAnswer == true) {
-                                            await context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .addSuccessAnswer(
-                                                    questions: gameState
-                                                        .allGameData.length,
-                                                    correctAnswers: gameState
-                                                            .correctAnswers +
-                                                        1)
-                                                .whenComplete(() {
-                                              bool isLastQuestion = context
-                                                  .read<
-                                                      CurrentGamePhoneticsCubit>()
-                                                  .checkIfIsTheLastQuestionOfGame(
-                                                      queations: gameState
-                                                          .allGameData.length);
-
-                                              if (isLastQuestion) {
-                                                // Future.delayed(const Duration(seconds: 2),
-                                                //     () async {
-                                                //   Navigator.of(context).pop();
-                                                // });
-                                              } else {
-                                                Future.delayed(
-                                                    const Duration(seconds: 2),
-                                                    () async {
-                                                  await context
-                                                      .read<
-                                                          CurrentGamePhoneticsCubit>()
-                                                      .updateIndexOfCurrentGame();
-                                                  context
+              return FittedBox(
+                child: Container(
+                  // height: MediaQuery.of(context).size.height -
+                  //     (90.h + 50.h + 5 + 20.h), // < 760
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      10.ph,
+                      Row(
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List.generate(
+                              gameState.gameChoices?.length ?? 0,
+                              (index) => Row(
+                                    children: [
+                                      if ((gameState.basicData as MathChooseOEDomino)
+                                              .tools ==
+                                          ToolsOfMath.domino) ...{
+                                        Row(
+                                          children: [
+                                            CardOfSelected(
+                                              onTap: () async {
+                                                if (context
+                                                    .read<CurrentGamePhoneticsCubit>()
+                                                    .ableButton() && gameState.isCorrect!=true) {
+                                                  bool stateOfAnswer = context
                                                       .read<ChooseOeCubit>()
-                                                      .updateTheCurrentGame(
-                                                          index: context
+                                                      .addAnswer(
+                                                          userChoose: gameState
+                                                              .gameChoices?[index]);
+                                                  if (stateOfAnswer == true) {
+                                                    await context
+                                                        .read<
+                                                            CurrentGamePhoneticsCubit>()
+                                                        .addSuccessAnswer(
+                                                            questions: gameState
+                                                                .allGameData.length,
+                                                            correctAnswers: gameState
+                                                                    .correctAnswers +
+                                                                1)
+                                                        .whenComplete(() {
+                                                      bool isLastQuestion = context
+                                                          .read<
+                                                              CurrentGamePhoneticsCubit>()
+                                                          .checkIfIsTheLastQuestionOfGame(
+                                                              queations: gameState
+                                                                  .allGameData.length);
+
+                                                      if (isLastQuestion) {
+                                                        // Future.delayed(const Duration(seconds: 2),
+                                                        //     () async {
+                                                        //   Navigator.of(context).pop();
+                                                        // });
+                                                      } else {
+                                                        Future.delayed(
+                                                            const Duration(seconds: 2),
+                                                            () async {
+                                                          await context
                                                               .read<
                                                                   CurrentGamePhoneticsCubit>()
-                                                              .state
-                                                              .index);
-                                                });
-                                              }
-                                            });
-                                          } else {
-                                            await context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .addWrongAnswer(
-                                                    actionOfWrongAnswer:
-                                                        () async {});
-                                          }
-                                        }
-                                      },
-                                      itsId:
-                                          gameState.gameChoices?[index].id ?? 0,
-                                      isCorrect:
-                                          (gameState.isCorrect == true) &&
-                                              (gameState.gameChoices?[index]
-                                                      .isCorrect ==
-                                                  1),
-                                    ),
-                                    10.pw,
-                                    Column(
-                                      children: [
-                                        Text(
-                                          gameState
-                                                  .gameChoices?[index].choice ??
-                                              '0',
-                                          style: TextStyle(
-                                            color:
-                                                AppColorPhonetics.darkBlueColor,
-                                            fontSize: 20.sp,
-                                            fontFamily:
-                                                AppTheme.getFontFamily5(),
-                                            fontWeight: FontWeight.w400,
-                                            height: 0,
-                                          ),
-                                        ),
-                                        DominoWidget(
-                                          count: int.parse(gameState
-                                                  .gameChoices?[index].choice ??
-                                              '0'),
+                                                              .updateIndexOfCurrentGame();
+                                                          context
+                                                              .read<ChooseOeCubit>()
+                                                              .updateTheCurrentGame(
+                                                                  index: context
+                                                                      .read<
+                                                                          CurrentGamePhoneticsCubit>()
+                                                                      .state
+                                                                      .index);
+                                                        });
+                                                      }
+                                                    });
+                                                  } else {
+                                                    await context
+                                                        .read<
+                                                            CurrentGamePhoneticsCubit>()
+                                                        .addWrongAnswer(
+                                                            actionOfWrongAnswer:
+                                                                () async {});
+                                                  }
+                                                }
+                                              },
+                                              itsId:
+                                                  gameState.gameChoices?[index].id ?? 0,
+                                              isCorrect:
+                                                  (gameState.isCorrect == true) &&
+                                                      (gameState.gameChoices?[index]
+                                                              .isCorrect ==
+                                                          1),
+                                            ),
+                                            10.pw,
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  gameState
+                                                          .gameChoices?[index].choice ??
+                                                      '0',
+                                                  style: TextStyle(
+                                                    color:
+                                                        AppColorPhonetics.darkBlueColor,
+                                                    fontSize: 20.sp,
+                                                    fontFamily:
+                                                        AppTheme.getFontFamily5(),
+                                                    fontWeight: FontWeight.w400,
+                                                    height: 0,
+                                                  ),
+                                                ),
+                                                DominoWidget(
+                                                  count: int.parse(gameState
+                                                          .gameChoices?[index].choice ??
+                                                      '0'),
+                                                )
+                                              ],
+                                            )
+                                          ],
                                         )
-                                      ],
-                                    )
-                                  ],
-                                )
-                              }
-                            ],
-                          )));
+                                      }
+                                    ],
+                                  ))),
+                      10.ph,
+
+                    ],
+                  ),
+                ),
+              );
             }));
   }
 }

@@ -27,8 +27,8 @@ class DragSubScreen extends StatelessWidget {
         builder: (context, gameState) {
           return Container(
             height: MediaQuery.of(context).size.height -
-                (90.h + 50.h + 5 + 20.h), // < 760
-            margin: EdgeInsets.only(left: 40.w, right: 40.w, bottom: 20.h),
+                (90.h + 50.h + 5 + 10.h), // < 760
+            margin: EdgeInsets.only(left: 40.w, right: 40.w, bottom: 10.h),
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -53,12 +53,14 @@ class DragSubScreen extends StatelessWidget {
                               question: gameState.subQuestion),
                         ],
                       ),
+                      10.ph,
                       DragTarget<GameChoicesGameFinalModel>(builder: (
                         BuildContext context,
                         List<dynamic> accepted,
                         List<dynamic> rejected,
                       ) {
                         return CardOfBlocks(
+                          alignment: Alignment.centerRight,
                           newWidth: MediaQuery.of(context).size.width / 2,
                           number: gameState.isCorrect == true
                               ? (int.parse(
@@ -71,7 +73,7 @@ class DragSubScreen extends StatelessWidget {
                       }, onAcceptWithDetails: (item) async {
                         if (context
                             .read<CurrentGamePhoneticsCubit>()
-                            .ableButton()) {
+                            .ableButton()&& gameState.isCorrect!=true) {
                           bool stateOfAnswer = context
                               .read<DragSubCubit>()
                               .addAnswer(userChoose: item.data);
@@ -119,23 +121,30 @@ class DragSubScreen extends StatelessWidget {
                       })
                     ],
                   ),
+                  10.ph,
                   SizedBox(
-                    width: MediaQuery.of(context).size.width,
+                    // width: MediaQuery.of(context).size.width,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       mainAxisSize: MainAxisSize.max,
                       children: List.generate(
                           gameState.gameChoices?.length ?? 0,
-                          (index) => _answer(
+                          (index) => Row(
+                            children: [
+                              _answer(
                                 answer: gameState.gameChoices![index],
                                 tools: gameState.tools,
                                 gameState: gameState,
                                 mainBloc:
-                                    context.read<CurrentGamePhoneticsCubit>(),
+                                context.read<CurrentGamePhoneticsCubit>(),
                                 bloc: context.read<DragSubCubit>(),
-                              )),
+                              ),
+                              20.pw
+                            ],
+                          )),
                     ),
                   ),
+                  5.ph
                 ],
               ),
             ),
@@ -216,7 +225,10 @@ class DragSubScreen extends StatelessWidget {
                 countOfBoxes: int.parse("${answer?.choice ?? 0}"),
               )
             : SizedBox(),
-        child: Column(
+        child: Opacity(
+
+            opacity: gameState.isCorrect == true && ((int.parse("${gameState.subQuestion?.letter??0}")-int.parse("${gameState.mainQuestion?.letter??0}"))== int.parse("${answer?.choice??0}"))?(.3):1 ,
+            child:Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             if (tools == ToolsOfMath.blocks) ...{
@@ -229,29 +241,29 @@ class DragSubScreen extends StatelessWidget {
               )
             },
             5.ph,
-            Container(
-              width: 20.w,
-              height: 20.w,
-              padding: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(AppImagesMath.woodBgNumber))),
-              child: FittedBox(
-                child: Text(
-                  "${answer?.choice ?? 0}",
-                  style: TextStyle(
-                    color: int.parse("${answer?.choice ?? 0}") % 2 != 0
-                        ? AppColorPhonetics.redColor
-                        : AppColorPhonetics.darkBlueColor,
-                    fontSize: 20.sp,
-                    fontFamily: AppTheme.getFontFamily5(),
-                    fontWeight: FontWeight.w400,
-                    height: 0,
+             Container(
+                width: 20.w,
+                height: 20.w,
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(AppImagesMath.woodBgNumber))),
+                child: FittedBox(
+                  child: Text(
+                    "${answer?.choice ?? 0}",
+                    style: TextStyle(
+                      color: int.parse("${answer?.choice ?? 0}") % 2 != 0
+                          ? AppColorPhonetics.redColor
+                          : AppColorPhonetics.darkBlueColor,
+                      fontSize: 20.sp,
+                      fontFamily: AppTheme.getFontFamily5(),
+                      fontWeight: FontWeight.w400,
+                      height: 0,
+                    ),
                   ),
                 ),
-              ),
             ),
           ],
-        ));
+        )));
   }
 }

@@ -54,7 +54,9 @@ enum GameTypes {
   mathDragBeadsAdd,
   mathChooseBlocksSub,
   mathDragBlocksSub,
-  bingoArabic
+  bingoArabic,
+  completeTheWord,
+  chooseTheStretchedLetter
 }
 
 extension TypeExtension on GameTypes {
@@ -172,6 +174,10 @@ extension TypeExtension on GameTypes {
         return 'Math_Drag_Blocks_Sub'.toLowerCase();
       case GameTypes.bingoArabic:
         return 'Arabic Bingo'.toLowerCase();
+      case GameTypes.completeTheWord:
+        return 'أكمل الكلمة'.toLowerCase();
+      case GameTypes.chooseTheStretchedLetter:
+        return 'اختر الحرف الممدود'.toLowerCase();
     }
   }
 }

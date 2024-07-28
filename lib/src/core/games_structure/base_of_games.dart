@@ -71,8 +71,13 @@ abstract class HandlingActionsAndDataOfChapters {
 
   static String? detectTheArabicChapter(
       {required String programName, required BasicOfGameData gameData}) {
-    if (programName.toLowerCase() == MainDataOfChaptersTypes.redUnit.text()) {
+    if (programName.toLowerCase() == MainDataOfChaptersTypes.redUnit.text() ||
+        programName.toLowerCase() ==
+            MainDataOfChaptersTypes.rUnitArabic.text()) {
       return RedPhonetics(mineGameData: gameData).background;
+    } else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.firstUnitArabic.text()) {
+      return FirstUnitArabic(mineGameData: gameData).background;
     }
     return null;
   }
@@ -249,6 +254,20 @@ abstract class HandlingActionsAndDataOfChapters {
               gameType: subGame.toLowerCase(),
               audioFlag: audioFlag,
               programName: programName));
+    } else if (unitName.toLowerCase() ==
+        MainDataOfChaptersTypes.rUnitArabic.text()) {
+      return RUnitArabic(
+          subBackGround: detectTheArabicChapter(
+              programName: unitName,
+              gameData: BasicOfGameData.getTheGameType(
+                  gameType: subGame.toLowerCase(), audioFlag: audioFlag)),
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    } else if (unitName.toLowerCase() ==
+        MainDataOfChaptersTypes.firstUnitArabic.text()) {
+      return FirstUnitArabic(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     }
     return null;
   }

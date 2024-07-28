@@ -28,15 +28,18 @@ class ChooseNumberCubit extends Cubit<ChooseNumberInitial> {
     List<GameChoicesGameFinalModel> gameChoices = newData.gameChoices ?? [];
     gameChoices.shuffle();
     num mainLetter = int.parse("${newData.mainLetter ?? 0}");
-    emit(state.copyWith(
+    emit(state.copyWith(isCorrect:false,
         gameData: newData, gameChoices: gameChoices, mainNumber: mainLetter));
   }
 
+  reStartIsCorrect() {
+    emit(state.copyWith(isCorrect: false));
+  }
   addAnswer({required num userChoose}) {
     if (userChoose == state.mainNumber) {
       int countCorrectAnswers = state.correctAnswers + 1;
       emit(state.copyWith(
-          correctAnswers: countCorrectAnswers, currentAnswer: userChoose));
+          correctAnswers: countCorrectAnswers, currentAnswer: userChoose, isCorrect: true));
       return true;
     } else {
       return false;
@@ -44,6 +47,8 @@ class ChooseNumberCubit extends Cubit<ChooseNumberInitial> {
   }
 
   updateTheCurrentGame({required int index}) {
+    reStartIsCorrect();
+
     TalkTts.reBackTheDefaultValue();
     int newIndex = state.index;
     newIndex++;
