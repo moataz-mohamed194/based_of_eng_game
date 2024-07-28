@@ -109,7 +109,8 @@ class BasedOfGameUpVowels extends StatelessWidget {
               bottom: 15,
               right: 0,
               child: GestureDetector(
-                onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
+                onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()
+                    ? () async {
                         await context
                             .read<CurrentGamePhoneticsCubit>()
                             .beeTalkingTrue();
@@ -143,7 +144,8 @@ class BasedOfGameUpVowels extends StatelessWidget {
                         await context
                             .read<CurrentGamePhoneticsCubit>()
                             .beeTalkingFalse();
-                      }:null,
+                      }
+                    : null,
                 child: Container(
                     alignment: Alignment.center,
                     child: stateOfGame.avatarCurrentArtboard == null
