@@ -84,6 +84,26 @@ class BasedOfAllGame extends StatelessWidget {
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   )
+                } else if (stateOfGame.basicData?.gameData?.isConnect ==
+                    true) ...{
+                  if (stateOfGame.basicData is ConnectionSortingCups) ...{
+                    BasedOfGameConnectSortingCups(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                      isArabic: stateOfGame.basicData?.isArabic ?? false,
+                    ),
+                  } else if (stateOfGame.basicData is FirstUnitArabic) ...{
+                    BasedOfFullBoardGamesAr(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    )
+                  } else ...{
+                    BasedOfGameConnect(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                      isArabic: stateOfGame.basicData?.isArabic ?? false,
+                    ),
+                  }
                 } else if (HandlingActionsAndDataOfChapters.isPhonetics(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
                   BasedOfGamePhonetics(
@@ -121,21 +141,6 @@ class BasedOfAllGame extends StatelessWidget {
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   )
-                } else if (stateOfGame.basicData?.gameData?.isConnect ==
-                    true) ...{
-                  if (stateOfGame.basicData is ConnectionSortingCups) ...{
-                    BasedOfGameConnectSortingCups(
-                      stateOfGame: stateOfGame,
-                      gamesData: gamesData,
-                      isArabic: stateOfGame.basicData?.isArabic ?? false,
-                    ),
-                  } else ...{
-                    BasedOfGameConnect(
-                      stateOfGame: stateOfGame,
-                      gamesData: gamesData,
-                      isArabic: stateOfGame.basicData?.isArabic ?? false,
-                    ),
-                  }
                 }
               ],
             ),
