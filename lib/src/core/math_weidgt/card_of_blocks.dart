@@ -11,11 +11,13 @@ class CardOfBlocks extends StatelessWidget {
   final ToolsOfMath tools;
   final double? size;
   final double? newWidth;
+  final AlignmentGeometry? alignment;
 
   const CardOfBlocks(
       {super.key,
       required this.number,
       this.size,
+      this.alignment,
       required this.tools,
       this.newWidth});
   @override
@@ -42,7 +44,7 @@ class CardOfBlocks extends StatelessWidget {
         ],
       ),
       child: Container(
-          alignment: Alignment.centerLeft,
+          alignment:alignment?? Alignment.centerLeft,
           margin: EdgeInsets.all(5),
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(

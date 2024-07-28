@@ -39,33 +39,44 @@ class ChooseAddLineScreen extends StatelessWidget {
                 children: [
                   10.pw,
                   Expanded(
-                      child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _question(
-                          question: gameState.mainQuestion,
-                          tools: gameState.tools),
-                      10.ph,
-                      _question(
-                          question: gameState.subQuestion,
-                          tools: gameState.tools),
-                    ],
-                  )),
+                      child: FittedBox(
+                        child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                        _question(
+                            question: gameState.mainQuestion,
+                            tools: gameState.tools),
+                        10.pw,
+                        _question(
+                            question: gameState.subQuestion,
+                            tools: gameState.tools),
+                                            ],
+                                          ),
+                      )),
+                  10.pw,
                   Expanded(
                       child: FittedBox(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: List.generate(
-                            gameState.gameChoices?.length ?? 0,
-                            (index) => _answer(
-                                gameState: gameState,
-                                question: gameState.gameChoices![index],
-                                mainBloc:
-                                    context.read<CurrentGamePhoneticsCubit>(),
-                                bloc: context.read<ChooseAddLineCubit>(),
-                                tools: gameState.tools))),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List.generate(
+                              gameState.gameChoices?.length ?? 0,
+                              (index) => Column(
+                                children: [
+                                  _answer(
+                                      gameState: gameState,
+                                      question: gameState.gameChoices![index],
+                                      mainBloc:
+                                      context.read<CurrentGamePhoneticsCubit>(),
+                                      bloc: context.read<ChooseAddLineCubit>(),
+                                      tools: gameState.tools),
+                                  10.ph
+                                ],
+                              ))),
+                    ),
                   )),
                   10.pw,
                 ],
@@ -78,7 +89,7 @@ class ChooseAddLineScreen extends StatelessWidget {
     required ToolsOfMath tools,
   }) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (tools == ToolsOfMath.blocks) ...{
