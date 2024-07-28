@@ -58,7 +58,7 @@ class ChooseSubScreen extends StatelessWidget {
                           children: [
                             CardOfNumber(
                               size: 70.h,
-                              number: gameState.mainQuestion?.letter ?? '0',
+                              number: gameState.subQuestion?.letter ?? '0',
                             ),
                             Text(
                               '-',
@@ -72,25 +72,27 @@ class ChooseSubScreen extends StatelessWidget {
                             ),
                             CardOfNumber(
                               size: 70.h,
-                              number: gameState.subQuestion?.letter ?? '0',
+                              number: gameState.mainQuestion?.letter ?? '0',
                             ),
                           ],
                         )
                       ],
                     )),
                 Expanded(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                      gameState.gameChoices?.length ?? 0,
-                      (index) => _answer(
-                            answer: gameState.gameChoices![index],
-                            tools: gameState.tools,
-                            gameState: gameState,
-                            mainBloc: context.read<CurrentGamePhoneticsCubit>(),
-                            bloc: context.read<ChooseSubCubit>(),
-                          )),
-                )),
+                    child: FittedBox(
+                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: List.generate(
+                        gameState.gameChoices?.length ?? 0,
+                        (index) => _answer(
+                              answer: gameState.gameChoices![index],
+                              tools: gameState.tools,
+                              gameState: gameState,
+                              mainBloc: context.read<CurrentGamePhoneticsCubit>(),
+                              bloc: context.read<ChooseSubCubit>(),
+                            )),
+                                      ),
+                    )),
               ],
             ),
           );

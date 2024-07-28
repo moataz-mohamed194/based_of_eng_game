@@ -37,101 +37,111 @@ class DragAddScreen extends StatelessWidget {
               return FittedBox(
                 child: Column(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _question(
-                            question: gameState.mainQuestion,
-                            tools: gameState.tools,
-                            isUp: true),
-                        10.ph,
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            _question(
-                                question: gameState.subQuestion,
-                                tools: gameState.tools,
-                                isUp: false),
-                            DragTarget<GameChoicesGameFinalModel>(builder: (
-                              BuildContext context,
-                              List<dynamic> accepted,
-                              List<dynamic> rejected,
-                            ) {
-                              return _question(
-                                  question: gameState.correctAnswer,
-                                  tools: gameState.tools,
-                                  isUp: false,
-                                  isHide: gameState.isCorrect != true);
-                            }, onAcceptWithDetails: (item) async {
-                              if (context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .ableButton()) {
-                                bool stateOfAnswer = context
-                                    .read<DragAddCubit>()
-                                    .addAnswer(userChoose: item.data);
-                                if (stateOfAnswer == true) {
-                                  await context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .addSuccessAnswer(
-                                          questions:
-                                              gameState.allGameData.length,
-                                          correctAnswers:
-                                              gameState.correctAnswers + 1)
-                                      .whenComplete(() {
-                                    bool isLastQuestion = context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .checkIfIsTheLastQuestionOfGame(
-                                            queations:
-                                                gameState.allGameData.length);
+                    5.ph,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width-100.w,
 
-                                    if (isLastQuestion) {
-                                      // Future.delayed(const Duration(seconds: 2),
-                                      //     () async {
-                                      //   Navigator.of(context).pop();
-                                      // });
-                                    } else {
-                                      Future.delayed(const Duration(seconds: 2),
-                                          () async {
-                                        await context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .updateIndexOfCurrentGame();
-                                        context
-                                            .read<DragAddCubit>()
-                                            .updateTheCurrentGame(
-                                                index: context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .state
-                                                    .index);
-                                      });
-                                    }
-                                  });
-                                } else {
-                                  await context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .addWrongAnswer(
-                                          actionOfWrongAnswer: () async {});
-                                }
-                              }
-                            })
-                          ],
-                        )
-                      ],
-                    ),
-                    Row(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: List.generate(
-                            gameState.gameChoices?.length ?? 0,
-                            (index) => _answer(
-                                gameState: gameState,
-                                question: gameState.gameChoices![index],
-                                mainBloc:
-                                    context.read<CurrentGamePhoneticsCubit>(),
-                                bloc: context.read<DragAddCubit>(),
-                                tools: gameState.tools))),
-                    10.ph,
+                        children: [
+                          _question(
+                              question: gameState.mainQuestion,
+                              tools: gameState.tools,
+                              isUp: true),
+                          10.ph,
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              _question(
+                                  question: gameState.subQuestion,
+                                  tools: gameState.tools,
+                                  isUp: false),
+                              DragTarget<GameChoicesGameFinalModel>(builder: (
+                                BuildContext context,
+                                List<dynamic> accepted,
+                                List<dynamic> rejected,
+                              ) {
+                                return _question(
+                                    question: gameState.correctAnswer,
+                                    tools: gameState.tools,
+                                    isUp: false,
+                                    isHide: gameState.isCorrect != true);
+                              }, onAcceptWithDetails: (item) async {
+                                if (context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .ableButton()) {
+                                  bool stateOfAnswer = context
+                                      .read<DragAddCubit>()
+                                      .addAnswer(userChoose: item.data);
+                                  if (stateOfAnswer == true) {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addSuccessAnswer(
+                                            questions:
+                                                gameState.allGameData.length,
+                                            correctAnswers:
+                                                gameState.correctAnswers + 1)
+                                        .whenComplete(() {
+                                      bool isLastQuestion = context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .checkIfIsTheLastQuestionOfGame(
+                                              queations:
+                                                  gameState.allGameData.length);
+
+                                      if (isLastQuestion) {
+                                        // Future.delayed(const Duration(seconds: 2),
+                                        //     () async {
+                                        //   Navigator.of(context).pop();
+                                        // });
+                                      } else {
+                                        Future.delayed(const Duration(seconds: 2),
+                                            () async {
+                                          await context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .updateIndexOfCurrentGame();
+                                          context
+                                              .read<DragAddCubit>()
+                                              .updateTheCurrentGame(
+                                                  index: context
+                                                      .read<
+                                                          CurrentGamePhoneticsCubit>()
+                                                      .state
+                                                      .index);
+                                        });
+                                      }
+                                    });
+                                  } else {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addWrongAnswer(
+                                            actionOfWrongAnswer: () async {});
+                                  }
+                                }
+                              })
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    5.ph,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List.generate(
+                              gameState.gameChoices?.length ?? 0,
+                              (index) => _answer(
+                                  gameState: gameState,
+                                  question: gameState.gameChoices![index],
+                                  mainBloc:
+                                      context.read<CurrentGamePhoneticsCubit>(),
+                                  bloc: context.read<DragAddCubit>(),
+                                  tools: gameState.tools))),
+                    ),
+                    5.ph,
                   ],
                 ),
               );

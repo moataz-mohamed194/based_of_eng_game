@@ -87,12 +87,13 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
 
   _subRow(List<GameLettersGameFinalModel> firstLetters,
       ClickTheSoundInitial stateOfGame) {
+    final currentAnswer = stateOfGame.gameData.mainLetter;
     return SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Row(
-          children: List.generate(
-            (firstLetters.length ?? 0),
-            (index) => Expanded(
+          children: List.generate((firstLetters.length), (index) {
+            final currentLetter = firstLetters[index].letter ?? '';
+            return Expanded(
               child: _buildBubbleWidget(
                 letter: firstLetters[index].letter ?? '',
                 viewModel: context.read<ClickTheSoundCubit>(),
@@ -110,8 +111,9 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                             .ableButton()) {
                           print(
                               '###:${(context.read<CurrentGamePhoneticsCubit>().ableButton())}');
-                          if (firstLetters[index].letter ==
-                              stateOfGame.gameData.mainLetter) {
+                          if (currentAnswer == null
+                              ? false
+                              : currentLetter.contains(currentAnswer)) {
                             await context
                                 .read<ClickTheSoundCubit>()
                                 .incrementCorrectAnswerCount(
@@ -167,8 +169,8 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                         }
                       },
               ),
-            ),
-          ),
+            );
+          }),
         ));
   }
 

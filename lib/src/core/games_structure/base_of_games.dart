@@ -2,7 +2,7 @@ import '../game_types/game_phonatics_types.dart';
 import 'basic_of_chapter.dart';
 import 'basic_of_game_data.dart';
 
-abstract class BaseOfGames {
+abstract class HandlingActionsAndDataOfChapters {
   static List<int> getTheStarsAddState(int number) {
     if (number % 3 == 0) {
       return List.generate(3, (index) => (number / 3).round()).toList();
@@ -73,13 +73,16 @@ abstract class BaseOfGames {
       {required String programName, required BasicOfGameData gameData}) {
     if (programName.toLowerCase() == MainDataOfChaptersTypes.redUnit.text() ||
         programName.toLowerCase() ==
-            MainDataOfChaptersTypes.firstArabicUnit.text()) {
+            MainDataOfChaptersTypes.rUnitArabic.text()) {
       return RedPhonetics(mineGameData: gameData).background;
+    } else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.firstUnitArabic.text()) {
+      return FirstUnitArabic(mineGameData: gameData).background;
     }
     return null;
   }
 
-  static getGameDataType(
+  static getTheChapterDataType(
       {required String subLetter,
       required String subGame,
       required String unitName,
@@ -257,16 +260,18 @@ abstract class BaseOfGames {
               gameType: subGame.toLowerCase(),
               audioFlag: audioFlag,
               programName: programName));
-    } else if (unitName
-        .toLowerCase()
-        .contains(MainDataOfChaptersTypes.firstArabicUnit.text())) {
-      return ShortVowels(
-          isArabicSub:
-              BasicOfGameData.enumValues.contains(programName.toLowerCase()),
+    } else if (unitName.toLowerCase() ==
+        MainDataOfChaptersTypes.rUnitArabic.text()) {
+      return RUnitArabic(
           subBackGround: detectTheArabicChapter(
               programName: unitName,
               gameData: BasicOfGameData.getTheGameType(
                   gameType: subGame.toLowerCase(), audioFlag: audioFlag)),
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    } else if (unitName.toLowerCase() ==
+        MainDataOfChaptersTypes.firstUnitArabic.text()) {
+      return FirstUnitArabic(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     }

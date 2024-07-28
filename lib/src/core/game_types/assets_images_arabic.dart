@@ -8,7 +8,8 @@ abstract class AppImagesArabic {
   static const String diamondShape = "${mainPathOfImages}diamond_shape.png";
   static const String hexagonShape = "${mainPathOfImages}hexagon_shape.png";
   static const String bgOfRedUnit = "${mainPathOfImages}bg_of_red_unit.png";
-
+  static const String bgOfFirstUnit =
+      '${mainPathOfImages}violet_background.png';
   static const String beeFailureRiv = "${mainPathOfImages}beeFailure.riv";
   static const String beeIdleRiv = "${mainPathOfImages}beeIdle.riv";
   static const String beeSuccess = "${mainPathOfImages}beeSuccess.riv";
@@ -33,6 +34,10 @@ abstract class AppImagesArabic {
   static const String titleOfChooseTheCorrectImage =
       '${mainPathOfImages}choose_the_correct_letter.png';
   static const String titleOfMatching = '${mainPathOfImages}arabic_match.png';
+  static const String titleOfCompleteTheWord =
+      '${mainPathOfImages}complete_the_word.png';
+  static const String titleOfChooseTheStretchedLetter =
+      '${mainPathOfImages}choose_the_stretched_letter.png';
   static const String titleOfDragAndDrop =
       '${mainPathOfImages}drag_and_drop.png';
 }

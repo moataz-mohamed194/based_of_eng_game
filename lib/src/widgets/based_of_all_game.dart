@@ -1,4 +1,4 @@
-import 'package:based_of_eng_game/src/widgets/based_of_connect_games_ar.dart';
+import 'package:based_of_eng_game/src/widgets/based_of_full_board_games_ar.dart';
 import 'package:based_of_eng_game/src/widgets/based_of_game_arabic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,9 +39,9 @@ class BasedOfAllGame extends StatelessWidget {
                 if (stateOfGame.basicData is ShortVowels) ...{
                   if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
                     BasedOfGameShortVowelsTextNextRive(
-                        stateOfGame: stateOfGame,
-                        gamesData: gamesData,
-                        isArabic: stateOfGame.basicData?.isArabic ?? false),
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
                   } else ...{
                     BasedOfGameShortVowels(
                       stateOfGame: stateOfGame,
@@ -84,28 +84,13 @@ class BasedOfAllGame extends StatelessWidget {
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   )
-                } else if (stateOfGame.basicData?.gameData?.isConnect ==
-                    true) ...{
-                  if (stateOfGame.basicData is ConnectionSortingCups) ...{
-                    BasedOfGameConnectSortingCups(
-                      stateOfGame: stateOfGame,
-                      gamesData: gamesData,
-                      isArabic: stateOfGame.basicData?.isArabic ?? false,
-                    ),
-                  } else ...{
-                    BasedOfGameConnect(
-                      stateOfGame: stateOfGame,
-                      gamesData: gamesData,
-                      isArabic: stateOfGame.basicData?.isArabic ?? false,
-                    ),
-                  }
-                } else if (BaseOfGames.isPhonetics(
+                } else if (HandlingActionsAndDataOfChapters.isPhonetics(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
                   BasedOfGamePhonetics(
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   ),
-                } else if (BaseOfGames.isArabic(
+                } else if (HandlingActionsAndDataOfChapters.isArabic(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
                   BasedOfGameArabic(
                     stateOfGame: stateOfGame,
@@ -130,8 +115,27 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                     ),
                   }
-                } else ...{
-                  const SizedBox()
+                } else if (stateOfGame.basicData is RUnitArabic ||
+                    stateOfGame.basicData is FirstUnitArabic) ...{
+                  BasedOfFullBoardGamesAr(
+                    stateOfGame: stateOfGame,
+                    gamesData: gamesData,
+                  )
+                } else if (stateOfGame.basicData?.gameData?.isConnect ==
+                    true) ...{
+                  if (stateOfGame.basicData is ConnectionSortingCups) ...{
+                    BasedOfGameConnectSortingCups(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                      isArabic: stateOfGame.basicData?.isArabic ?? false,
+                    ),
+                  } else ...{
+                    BasedOfGameConnect(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                      isArabic: stateOfGame.basicData?.isArabic ?? false,
+                    ),
+                  }
                 }
               ],
             ),

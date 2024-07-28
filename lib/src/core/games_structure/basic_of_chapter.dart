@@ -40,7 +40,8 @@ enum MainDataOfChaptersTypes {
   up,
   math,
   consonant,
-  firstArabicUnit,
+  rUnitArabic,
+  firstUnitArabic
 }
 
 extension TypeExtension on MainDataOfChaptersTypes {
@@ -110,7 +111,9 @@ extension TypeExtension on MainDataOfChaptersTypes {
         return "math".toLowerCase();
       case MainDataOfChaptersTypes.consonant:
         return "Consonant".toLowerCase();
-      case MainDataOfChaptersTypes.firstArabicUnit:
+      case MainDataOfChaptersTypes.rUnitArabic:
+        return "مراجعة".toLowerCase();
+      case MainDataOfChaptersTypes.firstUnitArabic:
         return "الوحدة الأولى (المدود)".toLowerCase();
     }
   }
@@ -1271,6 +1274,77 @@ class MathProgram implements MainDataOfChapters {
 
   @override
   bool? isArabic;
+}
+
+class FirstUnitArabic implements MainDataOfChapters {
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesArabic.bgOfFirstUnit;
+
+  @override
+  BasicOfGameData? gameData;
+
+  FirstUnitArabic({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+
+  @override
+  int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic = true;
+}
+
+class RUnitArabic implements MainDataOfChapters {
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfConnect;
+
+  @override
+  BasicOfGameData? gameData;
+
+  RUnitArabic({required this.mineGameData, required String? subBackGround}) {
+    gameData = mineGameData;
+    background = subBackGround ?? background;
+  }
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+
+  @override
+  int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic = true;
 }
 
 class ConsonantVowels implements MainDataOfChapters {
