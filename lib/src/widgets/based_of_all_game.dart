@@ -99,13 +99,13 @@ class BasedOfAllGame extends StatelessWidget {
                       isArabic: stateOfGame.basicData?.isArabic ?? false,
                     ),
                   }
-                } else if (BaseOfGames.isPhonetics(
+                } else if (HandlingActionsAndDataOfChapters.isPhonetics(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
                   BasedOfGamePhonetics(
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   ),
-                } else if (BaseOfGames.isArabic(
+                } else if (HandlingActionsAndDataOfChapters.isArabic(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
                   BasedOfGameArabic(
                     stateOfGame: stateOfGame,

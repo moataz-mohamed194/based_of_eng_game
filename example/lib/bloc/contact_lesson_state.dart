@@ -21,7 +21,7 @@ class GetContactInitial extends ContactLessonState {
     int audioFlag = data[index].audioFlag ?? 0;
     debugPrint(
         "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
-    MainDataOfChapters? x = BaseOfGames.getGameDataType(
+    MainDataOfChapters? x = HandlingActionsAndDataOfChapters.getTheChapterDataType(
         subLetter: subLetter,
         subGame: subGame,
         unitName: unitName,

@@ -2,7 +2,7 @@ import '../game_types/game_phonatics_types.dart';
 import 'basic_of_chapter.dart';
 import 'basic_of_game_data.dart';
 
-abstract class BaseOfGames {
+abstract class HandlingActionsAndDataOfChapters {
   static List<int> getTheStarsAddState(int number) {
     if (number % 3 == 0) {
       return List.generate(3, (index) => (number / 3).round()).toList();
@@ -77,7 +77,7 @@ abstract class BaseOfGames {
     return null;
   }
 
-  static getGameDataType(
+  static getTheChapterDataType(
       {required String subLetter,
       required String subGame,
       required String unitName,
