@@ -41,44 +41,39 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
     return BlocConsumer<DragPicToWordCubit, DragPicToWordInitial>(
         listener: (context, state) {},
         builder: (context, stateOfGameData) {
-          return Expanded(
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                10.ph,
-                10.ph,
-                Container(
-                    alignment: Alignment.center,
-                    width: ((30.w + 14 + 10) *
-                        (stateOfGameData.gameImages?.length ?? 0)),
-                    padding: const EdgeInsets.all(24),
-                    decoration: ShapeDecoration(
-                      color: Colors.white.withOpacity(0.8199999928474426),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(4),
-                          topRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(4),
-                        ),
+          return Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              10.ph,
+              10.ph,
+              Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(24),
+                  decoration: ShapeDecoration(
+                    color: Colors.white.withOpacity(0.8199999928474426),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(4),
+                        topRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(4),
                       ),
-                      shadows: const [
-                        BoxShadow(
-                          color: Color(0x3F000000),
-                          blurRadius: 14,
-                          offset: Offset(0, 4),
-                          spreadRadius: 0,
-                        )
-                      ],
                     ),
-                    child:
-                        _buildListOfImages(stateOfGameData: stateOfGameData)),
-                _buildListOfLetters(
-                    stateOfGameData: stateOfGameData, context: context),
-              ],
-            ),
+                    shadows: const [
+                      BoxShadow(
+                        color: Color(0x3F000000),
+                        blurRadius: 14,
+                        offset: Offset(0, 4),
+                        spreadRadius: 0,
+                      )
+                    ],
+                  ),
+                  child: _buildListOfImages(stateOfGameData: stateOfGameData)),
+              _buildListOfLetters(
+                  stateOfGameData: stateOfGameData, context: context),
+            ],
           );
         });
   }
@@ -177,48 +172,44 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
   Widget _buildListOfImages({required DragPicToWordInitial stateOfGameData}) {
     final gameImages = stateOfGameData.gameImages ?? [];
     final correctedAnswers = stateOfGameData.correctedAnswers;
-    return Flexible(
-      child: FittedBox(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: List.generate(
-            gameImages.length,
-            (index) => correctedAnswers.contains(gameImages[index].id) == false
-                ? Draggable<GameImagesGameFinalModel>(
-                    data: gameImages[index],
-                    maxSimultaneousDrags: 1,
-                    childWhenDragging: Container(
-                      width: 30.w,
-                      margin: const EdgeInsets.symmetric(horizontal: 7),
-                      height: 50.h,
-                      padding: const EdgeInsets.only(
-                          left: 4.40, right: 3.70, bottom: 0.44),
-                    ),
-                    feedback: ImageInDrag(image: gameImages[index]),
-                    child: ImageInDrag(image: gameImages[index]),
-                  )
-                : Container(
-                    width: 30.w,
-                    margin: const EdgeInsets.symmetric(horizontal: 7),
-                    height: 50.h,
-                    padding: const EdgeInsets.only(
-                        left: 4.40, right: 3.70, bottom: 0.44),
-                    child: CachedNetworkImage(
-                      imageUrl: gameImages[index].image ?? '',
-                      color: Colors.grey.withOpacity(.7),
-                      placeholder: (context, url) => const Center(
-                        child: CupertinoActivityIndicator(),
-                      ),
-                      errorWidget: (context, url, error) => const Icon(
-                        Icons.error,
-                        color: Colors.red,
-                      ),
-                    ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: List.generate(
+        gameImages.length,
+        (index) => correctedAnswers.contains(gameImages[index].id) == false
+            ? Draggable<GameImagesGameFinalModel>(
+                data: gameImages[index],
+                maxSimultaneousDrags: 1,
+                childWhenDragging: Container(
+                  width: 30.w,
+                  margin: const EdgeInsets.symmetric(horizontal: 7),
+                  height: 50.h,
+                  padding: const EdgeInsets.only(
+                      left: 4.40, right: 3.70, bottom: 0.44),
+                ),
+                feedback: ImageInDrag(image: gameImages[index]),
+                child: ImageInDrag(image: gameImages[index]),
+              )
+            : Container(
+                width: 30.w,
+                margin: const EdgeInsets.symmetric(horizontal: 7),
+                height: 50.h,
+                padding: const EdgeInsets.only(
+                    left: 4.40, right: 3.70, bottom: 0.44),
+                child: CachedNetworkImage(
+                  imageUrl: gameImages[index].image ?? '',
+                  color: Colors.grey.withOpacity(.7),
+                  placeholder: (context, url) => const Center(
+                    child: CupertinoActivityIndicator(),
                   ),
-          ),
-        ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
       ),
     );
   }
