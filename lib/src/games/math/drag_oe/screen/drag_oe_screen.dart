@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,17 +32,28 @@ class DragOeScreen extends StatelessWidget {
                       (90.h + 50.h + 5 + 20.h), // < 760
                   width: (MediaQuery.of(context).size.width - 40.w) / 2,
                   margin: EdgeInsets.only(bottom: 20.h),
-                  alignment: Alignment.center,
+                    padding: const EdgeInsets.only(bottom: 5),
+
+                    alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(
-                          color: AppColorPhonetics.boarderColor, width: 5)),
-                  child: gameState.tools == ToolsOfMath.domino
-                      ? _parentOfDominoResult(gameState: gameState)
-                      : _parentOfBlocksResult(gameState: gameState),
+                          color: AppColorPhonetics.darkBorderColor, width: 5)),
+                  child:gameState.correctAnswers.isEmpty?SizedBox():FittedBox(
+                      child:  SizedBox(
+                        width: (MediaQuery.of(context).size.width - 40.w) / 2,
+                        height: MediaQuery.of(context).size.height -
+                            (90.h + 50.h + 5 + 20.h),
+                        child:gameState.tools == ToolsOfMath.domino
+                            ? _parentOfDominoResult(gameState: gameState)
+                            : _parentOfBlocksResult(gameState: gameState),
+                      )
+
+                )
                 );
-              }, onAcceptWithDetails: (item) async {
+              },
+                  onAcceptWithDetails: (item) async {
                 if (context.read<CurrentGamePhoneticsCubit>().ableButton()) {
                   bool stateOfAnswer = context
                       .read<DragOeCubit>()
@@ -95,15 +107,22 @@ class DragOeScreen extends StatelessWidget {
                     (90.h + 50.h + 5 + 20.h), // < 760
                 width: (MediaQuery.of(context).size.width - 40.w) / 2,
                 margin: EdgeInsets.only(bottom: 20.h),
+                padding: const EdgeInsets.only(bottom: 5),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(
-                        color: AppColorPhonetics.boarderColor, width: 5)),
-                child: gameState.tools == ToolsOfMath.domino
-                    ? _parentOfDomino(gameState: gameState)
-                    : _parentOfBlocks(gameState: gameState),
+                        color: AppColorPhonetics.darkBorderColor, width: 5)),
+                child: FittedBox(
+                    child: SizedBox(
+                  width: (MediaQuery.of(context).size.width - 40.w) / 2,
+                      height: MediaQuery.of(context).size.height -
+                          (90.h + 50.h + 5 + 20.h),
+                  child: gameState.tools == ToolsOfMath.domino
+                      ? _parentOfDomino(gameState: gameState)
+                      : _parentOfBlocks(gameState: gameState),
+                )),
               ),
             ],
           );
@@ -112,10 +131,11 @@ class DragOeScreen extends StatelessWidget {
 
   _parentOfDominoResult({required DragOeInitial gameState}) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
           gameState.correctAnswers.length,
           (index) => _childOfDomino(
+              showSpace:true,
               isDisable: false, data: gameState.correctAnswers[index])),
     );
   }
@@ -181,24 +201,32 @@ class DragOeScreen extends StatelessWidget {
   }
 
   _childOfDomino(
-      {required GameChoicesGameFinalModel data, required bool isDisable}) {
+      {required GameChoicesGameFinalModel data, required bool isDisable, bool? showSpace}) {
     return Opacity(
       opacity: isDisable ? (.1) : 1,
-      child: Column(
+      child: Row(
         children: [
-          Text(
-            data.choice ?? '0',
-            style: TextStyle(
-              color: AppColorPhonetics.darkBlueColor,
-              fontSize: 20.sp,
-              fontFamily: AppTheme.getFontFamily5(),
-              fontWeight: FontWeight.w400,
-              height: 0,
-            ),
+          Column(
+            children: [
+              Text(
+                data.choice ?? '0',
+                style: TextStyle(
+                  color: AppColorPhonetics.darkBlueColor,
+                  fontSize: 20.sp,
+                  fontFamily: AppTheme.getFontFamily5(),
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+              DominoWidget(
+                count: int.parse(data.choice ?? '0'),
+              ),
+            ],
           ),
-          DominoWidget(
-            count: int.parse(data.choice ?? '0'),
-          ),
+          if(showSpace==true)...{
+            10.pw
+          }
         ],
       ),
     );

@@ -24,7 +24,6 @@ class ChooseSticksCubit extends Cubit<ChooseSticksInitial> {
   }
 
   reFormatGameData() {
-    reStartIsCorrect();
     int newIndex = state.index;
     GameFinalModel newData = state.allGameData[newIndex];
     List<GameChoicesGameFinalModel> gameChoices = newData.gameChoices ?? [];
@@ -51,6 +50,7 @@ class ChooseSticksCubit extends Cubit<ChooseSticksInitial> {
 
   updateTheCurrentGame({required int index}) {
     TalkTts.reBackTheDefaultValue();
+    reStartIsCorrect();
     int newIndex = state.index;
     newIndex++;
     emit(state.copyWith(index: index));

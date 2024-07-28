@@ -7,8 +7,9 @@ import '../../../../core/theme_text.dart';
 class CardOfNumber extends StatelessWidget {
   final String number;
   final double? size;
+  final bool? isCorrect;
 
-  const CardOfNumber({super.key, required this.number, this.size});
+  const CardOfNumber({super.key, required this.number, this.size, this.isCorrect});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +17,7 @@ class CardOfNumber extends StatelessWidget {
       height: size ?? 99.h,
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
-        color: Colors.white,
+        color: isCorrect==true?AppColorPhonetics.greenColor2:Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.28),
         ),
@@ -33,6 +34,8 @@ class CardOfNumber extends StatelessWidget {
         alignment: Alignment.center,
         margin: EdgeInsets.all(5),
         decoration: ShapeDecoration(
+          color: isCorrect==true?AppColorPhonetics.greenColor2:Colors.white,
+
           shape: RoundedRectangleBorder(
             side: BorderSide(width: 2.03, color: Color(0xFFA1CBEA)),
             borderRadius: BorderRadius.circular(16.28),
@@ -42,7 +45,7 @@ class CardOfNumber extends StatelessWidget {
           child: Text(
             number,
             style: TextStyle(
-              color: AppColorPhonetics.darkBlueColor,
+              color: isCorrect==true?Colors.white:AppColorPhonetics.darkBlueColor,
               fontSize: 30.sp,
               fontFamily: AppTheme.getFontFamily5(),
               fontWeight: FontWeight.w400,

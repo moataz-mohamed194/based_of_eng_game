@@ -48,11 +48,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   bool ableButton() {
     print(
         'state.stateOfAvatar:${((state.stateOfAvatar == BasicOfGameData.stateOIdle) || (state.stateOfAvatar == null))}');
-    log('state.stateOfAvatar:${((state.stateOfAvatar == BasicOfGameData.stateOIdle) || (state.stateOfAvatar == null))}');
+    log('state.stateOfAvatar:${state.stateOfAvatar}');
     print('state.stateOfAvatar:${(AudioPlayerLetters.player.state)}');
-    log('state.stateOfAvatar:${(AudioPlayerLetters.player.state)}');
-    print('state.stateOfAvatar:${(AudioPlayerLetters.player.state)}');
-    log('state.stateOfAvatar:${(TalkTts.data)}');
     log('state.stateOfAvatar:${(TalkTts.data)}');
     return ((state.stateOfAvatar == BasicOfGameData.stateOIdle) ||
             (state.stateOfAvatar == null)) &&

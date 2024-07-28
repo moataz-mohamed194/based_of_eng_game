@@ -42,7 +42,7 @@ class CardOfBlocks extends StatelessWidget {
         ],
       ),
       child: Container(
-          alignment: Alignment.center,
+          alignment: Alignment.centerLeft,
           margin: EdgeInsets.all(5),
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
@@ -50,8 +50,13 @@ class CardOfBlocks extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.28),
             ),
           ),
-          child: GetTheBlocks(
-            countOfBoxes: number,
+          child: FittedBox(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 7.w),
+              child: GetTheBlocks(
+                countOfBoxes: number,
+              ),
+            ),
           )),
     );
   }

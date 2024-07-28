@@ -36,7 +36,7 @@ class ChooseNumberOECubit extends Cubit<ChooseNumberOEInitial> {
   addAnswer({required GameChoicesGameFinalModel userChoose}) {
     if (userChoose.isCorrect == 1) {
       int countCorrectAnswers = state.correctAnswers + 1;
-      emit(state.copyWith(correctAnswers: countCorrectAnswers));
+      emit(state.copyWith(correctAnswers: countCorrectAnswers, isCorrect:true));
       return true;
     } else {
       return false;
