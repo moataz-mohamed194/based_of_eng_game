@@ -2,6 +2,8 @@ import 'package:based_of_eng_game/src/games/choose_the_sentence/manager/listen_c
 import 'package:based_of_eng_game/src/games/choose_the_sentence/page/listen_and_choose_screen.dart';
 import 'package:based_of_eng_game/src/games/complete_the_word/manager/complete_the_word_cubit.dart';
 import 'package:based_of_eng_game/src/games/complete_the_word/page/complete_the_word_game.dart';
+import 'package:based_of_eng_game/src/games/drag_pic_to_word/manager/drag_pic_to_word_cubit.dart';
+import 'package:based_of_eng_game/src/games/drag_pic_to_word/page/drag_pic_to_word.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +46,16 @@ class BasedOfFullBoardGamesAr extends StatelessWidget {
                           isArabic: true,
                         ),
                     child: CompleteTheWordGame())
+              } else if ((stateOfGame.basicData?.gameData
+                  is DragPicToWordGame)) ...{
+                BlocProvider<DragPicToWordCubit>(
+                    create: (_) => DragPicToWordCubit(
+                          gameData: gamesData[stateOfGame.index],
+                          isArabic: true,
+                        ),
+                    child: DragPicToWordGameScreen())
+              } else ...{
+                const Text('no game')
               },
             ],
           ),

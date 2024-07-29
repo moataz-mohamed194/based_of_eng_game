@@ -101,10 +101,22 @@ abstract class HandlingActionsAndDataOfChapters {
         .toLowerCase()
         .contains(MainDataOfChaptersTypes.shortVowels.text())) {
       return ShortVowels(
+          isArabicSub:
+              BasicOfGameData.enumValues.contains(programName.toLowerCase()),
+          subBackGround: detectTheArabicChapter(
+              programName: unitName,
+              gameData: BasicOfGameData.getTheGameType(
+                  gameType: subGame.toLowerCase(), audioFlag: audioFlag)),
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (unitName.contains(MainDataOfChaptersTypes.up.text())) {
       return UpVowels(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    } else if (unitName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.rUnitPhonics.text().toLowerCase())) {
+      return RUnitPhonics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (unitName

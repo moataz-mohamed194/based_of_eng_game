@@ -5,8 +5,6 @@ import 'package:based_of_eng_game/src/core/talk_tts.dart';
 import 'package:based_of_eng_game/src/cubit/current_game_phonetics_cubit.dart';
 import 'package:based_of_eng_game/src/games/choose_the_correct_letter_or_image/manager/choose_the_correct_letter_or_image_cubit.dart';
 import 'package:based_of_eng_game/src/games/choose_the_correct_letter_or_image/pages/choose_the_correct_letter_or_image.dart';
-import 'package:based_of_eng_game/src/games/click_the_picture/manager/click_picture_cubit.dart';
-import 'package:based_of_eng_game/src/games/click_the_picture/pages/click_picture_game.dart';
 import 'package:based_of_eng_game/src/games/click_the_picture_with_word/manager/click_the_picture_with_word_cubit.dart';
 import 'package:based_of_eng_game/src/games/click_the_picture_with_word/page/click_the_picture_with_word.dart';
 import 'package:based_of_eng_game/src/games/click_the_sound/manager/click_the_sound_cubit.dart';
@@ -95,15 +93,14 @@ class BasedOfGameArabic extends StatelessWidget {
                                   as ChooseTheCorrectImageOrLetter)
                               .isLetter),
                       child: const ChooseTheCorrectLetterOrImageGame())
+                } else if ((stateOfGame.basicData?.gameData
+                    is MatchingArabic)) ...{
+                  BlocProvider<MatchArabicCubit>(
+                      create: (_) => MatchArabicCubit(
+                            gameData: gamesData[stateOfGame.index],
+                          ),
+                      child: MatchArabicScreen())
                 }
-                else if ((stateOfGame.basicData?.gameData
-                  is MatchingArabic)) ...{
-                    BlocProvider<MatchArabicCubit>(
-                        create: (_) => MatchArabicCubit(
-                          gameData: gamesData[stateOfGame.index],
-                        ),
-                        child: MatchArabicScreen())
-                  }
               ],
             ))),
         if (stateOfGame.basicData?.gameData is! Video) ...{

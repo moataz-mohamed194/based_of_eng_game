@@ -10,14 +10,16 @@ part 'drag_pic_to_word_state.dart';
 class DragPicToWordCubit extends Cubit<DragPicToWordInitial> {
   DragPicToWordCubit({
     required GameFinalModel gameData,
+    bool isArabic = false,
   }) : super(DragPicToWordInitial(
-          gameData: gameData,
-          // gameImages: gameData.gameImages ?? [],
-          correctedAnswers: [],
-          // gamesLetters:[]
-        )) {
+            gameData: gameData,
+            // gameImages: gameData.gameImages ?? [],
+            correctedAnswers: [],
+            isArabic: isArabic
+            // gamesLetters:[]
+            )) {
     reFormatGame();
-    TalkTts.startTalk(text: state.gameData.inst ?? '');
+    TalkTts.startTalk(text: state.gameData.inst ?? '', isArabic: isArabic);
   }
 
   reFormatGame() {

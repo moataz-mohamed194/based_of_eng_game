@@ -9,9 +9,8 @@ import '../cubit/current_game_phonetics_cubit.dart';
 import 'based_of_game_connect.dart';
 import 'based_of_game_connect_sorting_cups.dart';
 import 'based_of_game_phonetics.dart';
-import 'based_of_game_short_vowels.dart';
 import 'based_of_game_short_vowels_text_rive.dart';
-import 'based_of_game_up_vowels.dart';
+import 'based_of_game_up_and_short_vowels.dart';
 import 'based_of_math.dart';
 import 'game_bar.dart';
 import 'widget_of_tries.dart';
@@ -43,7 +42,7 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                     ),
                   } else ...{
-                    BasedOfGameShortVowels(
+                    BasedOfGameUpAndShortVowels(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),
@@ -55,7 +54,26 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                     ),
                   } else ...{
-                    BasedOfGameShortVowels(
+                    BasedOfGameUpAndShortVowels(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  }
+                } else if (stateOfGame.basicData is RUnitPhonics) ...{
+                  if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
+                    if (stateOfGame.basicData?.gameData is SortingCupsGame) ...{
+                      BasedOfGameConnectSortingCups(
+                        stateOfGame: stateOfGame,
+                        gamesData: gamesData,
+                      ),
+                    } else ...{
+                      BasedOfGameShortVowelsTextNextRive(
+                        stateOfGame: stateOfGame,
+                        gamesData: gamesData,
+                      ),
+                    }
+                  } else ...{
+                    BasedOfGameUpAndShortVowels(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),
@@ -74,7 +92,7 @@ class BasedOfAllGame extends StatelessWidget {
                       ),
                     }
                   } else ...{
-                    BasedOfGameUpVowels(
+                    BasedOfGameUpAndShortVowels(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),
@@ -92,6 +110,11 @@ class BasedOfAllGame extends StatelessWidget {
                       gamesData: gamesData,
                       isArabic: stateOfGame.basicData?.isArabic ?? false,
                     ),
+                  } else if (stateOfGame.basicData is FirstUnitArabic) ...{
+                    BasedOfFullBoardGamesAr(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    )
                   } else ...{
                     BasedOfGameConnect(
                       stateOfGame: stateOfGame,
@@ -125,7 +148,7 @@ class BasedOfAllGame extends StatelessWidget {
                       ),
                     }
                   } else ...{
-                    BasedOfGameUpVowels(
+                    BasedOfGameUpAndShortVowels(
                       stateOfGame: stateOfGame,
                       gamesData: gamesData,
                     ),

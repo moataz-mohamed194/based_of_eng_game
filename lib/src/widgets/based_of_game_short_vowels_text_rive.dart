@@ -59,17 +59,17 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                                   .read<CurrentGamePhoneticsCubit>()
                                   .beeTalkingTrue();
                               await TalkTts.startTalk(
-                                  text:
-                                      gamesData[stateOfGame.index].inst ?? '');
+                                text: gamesData[stateOfGame.index].inst ?? '',
+                              );
                               TalkTts.flutterTts.setCompletionHandler(() async {
                                 if (stateOfGame.stateOfStringIsWord !=
                                     StateOfSubWord.stopTalk) {
                                   if (stateOfGame.stateOfStringIsWord ==
                                       StateOfSubWord.isWord) {
                                     await TalkTts.startTalk(
-                                        text:
-                                            stateOfGame.stateOfStringWillSay ??
-                                                '');
+                                      text: stateOfGame.stateOfStringWillSay ??
+                                          '',
+                                    );
                                   } else {
                                     await AudioPlayerLetters.startPlaySound(
                                         soundPath:
@@ -90,12 +90,13 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                           alignment: Alignment.center,
                           child: stateOfGame.avatarCurrentArtboard == null
                               ? SizedBox(
-
                                   height: 75.h,
                                   width: 80.w,
                                 )
                               : Container(
-                                  margin: EdgeInsets.only(left: 7.w),
+                                  margin: EdgeInsets.only(
+                                    left: 7.w,
+                                  ),
                                   child: SizedBox(
                                       height: 100.h,
                                       // width: 65.w,
@@ -133,7 +134,8 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                       is DragPicToWordGame)) ...{
                     BlocProvider<DragPicToWordCubit>(
                         create: (_) => DragPicToWordCubit(
-                            gameData: gamesData[stateOfGame.index]),
+                              gameData: gamesData[stateOfGame.index],
+                            ),
                         child: DragPicToWordGameScreen())
                   } else if ((stateOfGame.basicData?.gameData
                       is DragWordToPicGame)) ...{

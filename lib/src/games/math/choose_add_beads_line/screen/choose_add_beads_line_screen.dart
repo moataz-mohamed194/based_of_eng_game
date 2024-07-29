@@ -41,35 +41,52 @@ class ChooseAddBeadsLineScreen extends StatelessWidget {
                   10.pw,
                   Expanded(
                       child: FittedBox(
-                        child: Center(
-                          child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                          _question(
-                              question: gameState.mainQuestion,
-                              tools: gameState.tools),
-                          // 10.pw,
-                          Center(
-                            child: Text(
-                              "+",
-                              style: TextStyle(
-                                color: AppColorPhonetics.darkBlueColor,
-                                fontSize: 20.sp,
-                                fontFamily: AppTheme.getFontFamily5(),
-                                fontWeight: FontWeight.w400,
-                                height: 0,
-                              ),
-                            ),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              _question(
+                                  question: gameState.mainQuestion,
+                                  tools: gameState.tools),
+                              // 10.pw,
+                              _question(
+                                  question: gameState.subQuestion,
+                                  tools: gameState.tools),
+                            ],
                           ),
-                          _question(
-                              question: gameState.subQuestion,
-                              tools: gameState.tools),
-                                              ],
-                                            ),
-                        ),
-                      )),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              CardOfNumber(
+                                size: 70.h,
+                                number: gameState.mainQuestion?.letter ?? '0',
+                              ),
+                              // 10.pw,
+                              Center(
+                                child: Text(
+                                  "+",
+                                  style: TextStyle(
+                                    color: AppColorPhonetics.darkBlueColor,
+                                    fontSize: 20.sp,
+                                    fontFamily: AppTheme.getFontFamily5(),
+                                    fontWeight: FontWeight.w400,
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                              CardOfNumber(
+                                size: 70.h,
+                                number: gameState.subQuestion?.letter ?? '0',
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )),
                   10.pw,
                   Expanded(
                       child: FittedBox(
@@ -117,10 +134,6 @@ class ChooseAddBeadsLineScreen extends StatelessWidget {
           )
         },
         5.ph,
-        CardOfNumber(
-          size: 70.h,
-          number: question?.letter ?? '0',
-        ),
       ],
     );
   }

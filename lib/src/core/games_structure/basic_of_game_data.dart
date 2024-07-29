@@ -55,7 +55,7 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.dragPicToWord.text()) {
       return DragPicToWordGame();
     } else if (gameType == GameTypes.dragWordToPic.text()) {
-      return DragWordToPicGame();
+      return DragWordToPicGame(isArabic: enumValues.contains(programName));
     } else if (gameType == GameTypes.wordFamily.text()) {
       print('WordFamilyGame');
       return WordFamilyGame();
@@ -74,7 +74,7 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.chooseTheCorrect.text()) {
       return ChooseTheCorrectGame();
     } else if (gameType == GameTypes.ninePicCards.text()) {
-      return DragWordToPicGame();
+      return DragWordToPicGame(isArabic: enumValues.contains(programName));
     } else if (gameType == GameTypes.mathChooseSticks.text()) {
       return MathChooseSticksOrBeadsOrBlocks(tools: ToolsOfMath.sticks);
     } else if (gameType == GameTypes.mathChooseBeads.text()) {
@@ -516,13 +516,16 @@ class DragPicToWordGame implements BasicOfGameData {
   bool isConnect = true;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.titleOfDragAndDrop;
 
   @override
   int countOfMinimizeStar = 1;
 }
 
 class DragWordToPicGame implements BasicOfGameData {
+  bool isArabic;
+
+  DragWordToPicGame({required this.isArabic});
   @override
   bool isRound = true;
 
@@ -536,7 +539,7 @@ class DragWordToPicGame implements BasicOfGameData {
   bool isConnect = true;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.titleOfDragAndDrop;
 
   @override
   int countOfMinimizeStar = 1;
@@ -983,7 +986,7 @@ class MathDragBlocksAdd implements BasicOfGameData {
   MathDragBlocksAdd({required this.tools});
 
   @override
-  String titleImageEn = AppImagesMath.clickTheChoose;
+  String titleImageEn = AppImagesMath.mathDragDrop;
 
   @override
   String? completeBasket;
