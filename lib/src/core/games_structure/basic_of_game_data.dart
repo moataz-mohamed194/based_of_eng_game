@@ -19,7 +19,10 @@ abstract class BasicOfGameData {
       ProgramsNameWillRTL.values.map((e) => e.text()).toList();
 
   static getTheGameType(
-      {required String gameType, required int audioFlag, String? programName}) {
+      {required String gameType,
+      required int audioFlag,
+      String? programName,
+      String? gameName}) {
     print('${gameType} == ${GameTypes.wordFamily.text()}');
     gameType.toLowerCase();
     if (gameType == GameTypes.dragOut.text()) {
@@ -92,9 +95,11 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.mathChooseDomino.text()) {
       return MathChooseSticksOrBeadsOrBlocks(tools: ToolsOfMath.domino);
     } else if (gameType == GameTypes.chooseCorrectWordArabic.text()) {
-      return ChooseTheCorrectImageOrLetter(isLetter: true);
+      return ChooseTheCorrectImageOrLetter(isImage: true);
     } else if (gameType == GameTypes.chooseFormationArabic.text()) {
-      return ChooseTheCorrectImageOrLetter(isLetter: false);
+      return ChooseTheCorrectImageOrLetter(
+          isImage: false,
+          isTashkeel: gameName == GameTypes.chooseFormationArabic.text());
     } else if (gameType == GameTypes.matchingArabic.text()) {
       return MatchingArabic();
     } else if (gameType == GameTypes.mathChooseDominoOE.text()) {
@@ -746,17 +751,21 @@ class ChooseTheCorrectGame implements BasicOfGameData {
 }
 
 class ChooseTheCorrectImageOrLetter implements BasicOfGameData {
-  bool isLetter;
-  ChooseTheCorrectImageOrLetter({this.isLetter = false}) {
-    titleImageAr = isLetter
-        ? AppImagesArabic.titleOfChooseTheCorrectLetter
-        : AppImagesArabic.titleOfChooseTheCorrectImage;
+  bool isImage;
+  bool isTashkeel;
+  ChooseTheCorrectImageOrLetter(
+      {this.isImage = false, this.isTashkeel = false}) {
+    titleImageAr = isImage
+        ? AppImagesArabic.titleOfChooseTheCorrectImage
+        : isTashkeel
+            ? AppImagesArabic.titleOfA5tarElTashkeel
+            : AppImagesArabic.titleOfChooseTheCorrectLetter;
   }
   @override
   String? completeBasket;
 
   @override
-  int countOfMinimizeStar = 1;
+  int countOfMinimizeStar = 2;
 
   @override
   bool isConnect = false;
