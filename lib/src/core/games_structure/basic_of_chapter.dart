@@ -41,6 +41,7 @@ enum MainDataOfChaptersTypes {
   math,
   consonant,
   rUnitArabic,
+  rUnitPhonics,
   firstUnitArabic
 }
 
@@ -113,6 +114,8 @@ extension TypeExtension on MainDataOfChaptersTypes {
         return "Consonant".toLowerCase();
       case MainDataOfChaptersTypes.rUnitArabic:
         return "مراجعة".toLowerCase();
+      case MainDataOfChaptersTypes.rUnitPhonics:
+        return "R Unit".toLowerCase();
       case MainDataOfChaptersTypes.firstUnitArabic:
         return "الوحدة الأولى (المدود)".toLowerCase();
     }
@@ -1331,6 +1334,41 @@ class RUnitArabic implements MainDataOfChapters {
   RUnitArabic({required this.mineGameData, required String? subBackGround}) {
     gameData = mineGameData;
     background = subBackGround ?? background;
+  }
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+
+  @override
+  int? countOfPartsOfLettersForTracing;
+
+  @override
+  bool? isArabic = true;
+}
+
+class RUnitPhonics implements MainDataOfChapters {
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesPhonetics.backGroundOfShortVowels;
+
+  @override
+  BasicOfGameData? gameData;
+
+  RUnitPhonics({required this.mineGameData}) {
+    gameData = mineGameData;
   }
 
   @override

@@ -115,6 +115,12 @@ abstract class HandlingActionsAndDataOfChapters {
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (unitName
         .toLowerCase()
+        .contains(MainDataOfChaptersTypes.rUnitPhonics.text().toLowerCase())) {
+      return RUnitPhonics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+    } else if (unitName
+        .toLowerCase()
         .contains(MainDataOfChaptersTypes.consonant.text().toLowerCase())) {
       return ConsonantVowels(
           mineGameData: BasicOfGameData.getTheGameType(

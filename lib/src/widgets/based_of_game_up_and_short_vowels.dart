@@ -30,11 +30,11 @@ import '../games/sorting_game/pages/sorting_game.dart';
 import '../games/spelling_game/manager/spelling_cubit.dart';
 import '../games/spelling_game/pages/spelling_game.dart';
 
-class BasedOfGameUpVowels extends StatelessWidget {
+class BasedOfGameUpAndShortVowels extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
   final List<GameFinalModel> gamesData;
 
-  const BasedOfGameUpVowels(
+  const BasedOfGameUpAndShortVowels(
       {super.key, required this.stateOfGame, required this.gamesData});
   @override
   Widget build(BuildContext context) {
@@ -89,6 +89,22 @@ class BasedOfGameUpVowels extends StatelessWidget {
                         create: (_) => ChooseTheCorrectCubit(
                             index: stateOfGame.index, listGameData: gamesData),
                         child: ChooseTheCorrectScreen())
+                  } else if ((stateOfGame.basicData?.gameData
+                      is RearrangeGame)) ...{
+                    BlocProvider<RearrangeCubit>(
+                        create: (_) => RearrangeCubit(
+                              // gameData: stateOfGameData.data[stateOfGame.index],
+                              index: stateOfGame.index,
+                              listGameData: gamesData,
+                            ),
+                        child: RearrangeScreen())
+                  } else if ((stateOfGame.basicData?.gameData
+                      is MatchGame)) ...{
+                    BlocProvider<MatchCubit>(
+                        create: (_) => MatchCubit(
+                              gameData: gamesData[stateOfGame.index],
+                            ),
+                        child: MatchScreen())
                   }
                 ],
               ),
@@ -109,7 +125,8 @@ class BasedOfGameUpVowels extends StatelessWidget {
               bottom: 15,
               right: 0,
               child: GestureDetector(
-                onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()?() async {
+                onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()
+                    ? () async {
                         await context
                             .read<CurrentGamePhoneticsCubit>()
                             .beeTalkingTrue();
@@ -143,7 +160,8 @@ class BasedOfGameUpVowels extends StatelessWidget {
                         await context
                             .read<CurrentGamePhoneticsCubit>()
                             .beeTalkingFalse();
-                      }:null,
+                      }
+                    : null,
                 child: Container(
                     alignment: Alignment.center,
                     child: stateOfGame.avatarCurrentArtboard == null
