@@ -29,10 +29,12 @@ abstract class AppImagesArabic {
   static const String titleOfSortingPictures =
       '${mainPathOfImages}sorting_pictures.png';
   static const String titleOfSpelling = '${mainPathOfImages}spelling.png';
+  static const String titleOfA5tarElTashkeel =
+      '${mainPathOfImages}a5tar_el_tashkeel.png';
   static const String titleOfChooseTheCorrectLetter =
-      '${mainPathOfImages}choose_the_correct_image.png';
-  static const String titleOfChooseTheCorrectImage =
       '${mainPathOfImages}choose_the_correct_letter.png';
+  static const String titleOfChooseTheCorrectImage =
+      '${mainPathOfImages}choose_the_correct_image.png';
   static const String titleOfMatching = '${mainPathOfImages}arabic_match.png';
   static const String titleOfCompleteTheWord =
       '${mainPathOfImages}complete_the_word.png';
@@ -40,4 +42,5 @@ abstract class AppImagesArabic {
       '${mainPathOfImages}choose_the_stretched_letter.png';
   static const String titleOfDragAndDrop =
       '${mainPathOfImages}drag_and_drop.png';
+  static const String correctImage = '${mainPathOfImages}correct_image.png';
 }
