@@ -224,7 +224,7 @@ class BasedOfGameConnect extends StatelessWidget {
                             )
                           : Container(
                               width: 0.4.sw,
-                              height: 0.4.sh,
+                              height: 0.41.sh,
                               padding: EdgeInsets.only(
                                   left: isArabic
                                       ? stateOfGame.basicData?.gameData
@@ -353,7 +353,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                                 '',
                                         height: 75.h,
                                         width: isArabic ? 100.w : 75.w,
-                                        fit: BoxFit.contain,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                 ],
