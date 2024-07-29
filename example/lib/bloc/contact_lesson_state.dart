@@ -18,15 +18,18 @@ class GetContactInitial extends ContactLessonState {
     String unitName = data[index].lesson?.unit?.name ?? '';
     String subGame = data[index].gameTypes?.name ?? '';
     String programName = data[index].lesson?.unit?.program?.course?.name ?? '';
+    String lessonName = data[index].lesson?.name ?? '';
     int audioFlag = data[index].audioFlag ?? 0;
     debugPrint(
         "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
-    MainDataOfChapters? x = HandlingActionsAndDataOfChapters.getTheChapterDataType(
-        subLetter: subLetter,
-        subGame: subGame,
-        unitName: unitName,
-        audioFlag: audioFlag,
-        programName: programName);
+    MainDataOfChapters? x =
+        HandlingActionsAndDataOfChapters.getTheChapterDataType(
+            subLetter: subLetter,
+            subGame: subGame,
+            unitName: unitName,
+            audioFlag: audioFlag,
+            programName: programName,
+            lessonName: lessonName);
     debugPrint(
         "x:$x ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
 

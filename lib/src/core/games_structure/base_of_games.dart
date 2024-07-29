@@ -64,16 +64,22 @@ abstract class HandlingActionsAndDataOfChapters {
     return listOfChapterOfPhonetics.contains(chapter);
   }
 
-  static List<Type> listOfChapterOfArabic = [RedPhonetics];
+  static List<Type> listOfChapterOfArabic = [
+    RedPhonetics,
+    OrangeUnit,
+    GreenUnit,
+    BlueUnit,
+    VioletUnit,
+    YellowUnit,
+    FirstUnitArabic
+  ];
   static bool isArabic({required Type chapter}) {
     return listOfChapterOfArabic.contains(chapter);
   }
 
   static String? detectTheArabicChapter(
       {required String programName, required BasicOfGameData gameData}) {
-    if (programName.toLowerCase() == MainDataOfChaptersTypes.redUnit.text() ||
-        programName.toLowerCase() ==
-            MainDataOfChaptersTypes.rUnitArabic.text()) {
+    if (programName.toLowerCase() == MainDataOfChaptersTypes.redUnit.text()) {
       return RedPhonetics(mineGameData: gameData).background;
     } else if (programName.toLowerCase() ==
         MainDataOfChaptersTypes.firstUnitArabic.text()) {
@@ -87,7 +93,8 @@ abstract class HandlingActionsAndDataOfChapters {
       required String subGame,
       required String unitName,
       required String programName,
-      required int audioFlag}) {
+      required int audioFlag,
+      required String lessonName}) {
     print(
         'subLetter:$subLetter , subGame:$subGame , unitName:$unitName , programName:$programName , audioFlag:$audioFlag , ${(unitName.contains(MainDataOfChaptersTypes.consonant.text()))}');
     if (programName.toLowerCase() ==
@@ -254,8 +261,49 @@ abstract class HandlingActionsAndDataOfChapters {
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (unitName.toLowerCase() ==
-        MainDataOfChaptersTypes.redUnit.text()) {
+            MainDataOfChaptersTypes.redUnit.text() ||
+        lessonName.contains(MainDataOfChaptersTypes.redUnit.text())) {
       return RedPhonetics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName));
+    } else if (unitName.toLowerCase() ==
+            MainDataOfChaptersTypes.orangeUnit.text() ||
+        lessonName.contains(MainDataOfChaptersTypes.orangeUnit.text())) {
+      return OrangeUnit(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName));
+    } else if (unitName.toLowerCase() ==
+            MainDataOfChaptersTypes.yellowUnit.text() ||
+        lessonName.contains(MainDataOfChaptersTypes.yellowUnit.text())) {
+      return YellowUnit(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName));
+    } else if (unitName.toLowerCase() ==
+            MainDataOfChaptersTypes.blueUnit.text() ||
+        lessonName.contains(MainDataOfChaptersTypes.blueUnit.text())) {
+      return BlueUnit(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName));
+    } else if (unitName.toLowerCase() ==
+            MainDataOfChaptersTypes.greenUnit.text() ||
+        lessonName.contains(MainDataOfChaptersTypes.greenUnit.text())) {
+      return GreenUnit(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName));
+    } else if (unitName.toLowerCase() ==
+            MainDataOfChaptersTypes.violetUnit.text() ||
+        lessonName.contains(MainDataOfChaptersTypes.violetUnit.text())) {
+      return VioletUnit(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(),
               audioFlag: audioFlag,
