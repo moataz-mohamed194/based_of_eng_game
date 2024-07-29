@@ -36,6 +36,11 @@ enum MainDataOfChaptersTypes {
   y,
   z,
   redUnit,
+  orangeUnit,
+  yellowUnit,
+  blueUnit,
+  greenUnit,
+  violetUnit,
   shortVowels,
   up,
   math,
@@ -118,6 +123,16 @@ extension TypeExtension on MainDataOfChaptersTypes {
         return "R Unit".toLowerCase();
       case MainDataOfChaptersTypes.firstUnitArabic:
         return "الوحدة الأولى (المدود)".toLowerCase();
+      case MainDataOfChaptersTypes.blueUnit:
+        return "المجموعة الزرقاء".toLowerCase();
+      case MainDataOfChaptersTypes.greenUnit:
+        return "المجموعة الخضراء".toLowerCase();
+      case MainDataOfChaptersTypes.orangeUnit:
+        return "المجموعة البرتقالية".toLowerCase();
+      case MainDataOfChaptersTypes.violetUnit:
+        return "المجموعة البنفسجية".toLowerCase();
+      case MainDataOfChaptersTypes.yellowUnit:
+        return "المجموعة الصفراء".toLowerCase();
     }
   }
 }
@@ -1221,6 +1236,181 @@ class RedPhonetics implements MainDataOfChapters {
   BasicOfGameData? gameData;
 
   RedPhonetics({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  int? countOfPartsOfLettersForTracing = 14;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+
+  @override
+  bool? isArabic;
+}
+
+class BlueUnit implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesArabic.bgOfBlueUnit;
+
+  @override
+  BasicOfGameData? gameData;
+
+  BlueUnit({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  int? countOfPartsOfLettersForTracing = 14;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+
+  @override
+  bool? isArabic;
+}
+
+class GreenUnit implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesArabic.bgOfGreenUnit;
+
+  @override
+  BasicOfGameData? gameData;
+
+  GreenUnit({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  int? countOfPartsOfLettersForTracing = 14;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+
+  @override
+  bool? isArabic;
+}
+
+class YellowUnit implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesArabic.bgOfYellowUnit;
+
+  @override
+  BasicOfGameData? gameData;
+
+  YellowUnit({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  int? countOfPartsOfLettersForTracing = 14;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+
+  @override
+  bool? isArabic;
+}
+
+class VioletUnit implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesArabic.bgOfVioletUnit;
+
+  @override
+  BasicOfGameData? gameData;
+
+  VioletUnit({required this.mineGameData}) {
+    gameData = mineGameData;
+  }
+
+  @override
+  int? countOfPartsOfLettersForTracing = 14;
+
+  @override
+  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
+      get tracingOfLetter =>
+          (List<Color?>? colorsOfPaths, List<Offset> points) {
+            return null;
+          };
+  @override
+  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
+      get checkTheIndexOfPath =>
+          (Offset point, Size size, bool isFingerPosition) {
+            return null;
+          };
+
+  @override
+  bool? isArabic;
+}
+
+class OrangeUnit implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesArabic.bgOfOrangeUnit;
+
+  @override
+  BasicOfGameData? gameData;
+
+  OrangeUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
 

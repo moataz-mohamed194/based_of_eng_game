@@ -8,8 +8,16 @@ abstract class AppImagesArabic {
   static const String diamondShape = "${mainPathOfImages}diamond_shape.png";
   static const String hexagonShape = "${mainPathOfImages}hexagon_shape.png";
   static const String bgOfRedUnit = "${mainPathOfImages}bg_of_red_unit.png";
-  static const String bgOfFirstUnit =
+  static const String bgOfVioletUnit =
       '${mainPathOfImages}violet_background.png';
+  static const String bgOfOrangeUnit =
+      '${mainPathOfImages}orange_background.png';
+  static const String bgOfYellowUnit =
+      '${mainPathOfImages}yellow_background.png';
+  static const String bgOfFirstUnit =
+      '${mainPathOfImages}first_unit_background.png';
+  static const String bgOfGreenUnit = '${mainPathOfImages}green_background.png';
+  static const String bgOfBlueUnit = '${mainPathOfImages}blue_background.png';
   static const String beeFailureRiv = "${mainPathOfImages}beeFailure.riv";
   static const String beeIdleRiv = "${mainPathOfImages}beeIdle.riv";
   static const String beeSuccess = "${mainPathOfImages}beeSuccess.riv";

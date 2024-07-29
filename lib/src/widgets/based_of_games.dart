@@ -24,7 +24,7 @@ class BasedOfGames extends StatelessWidget {
                 .actionWhenTriesBeZero(stateOfGame.countOfStar ?? 0);
           }
         },
-        canPop: true,
+        canPop: false,
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,

@@ -33,8 +33,7 @@ class ItemCardWidget extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: Container(
-              height: 70.0,
-              width: 60.0,
+              height: (MediaQuery.of(context).size.height ) / 6,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
               ),

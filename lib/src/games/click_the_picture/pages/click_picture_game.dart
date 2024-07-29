@@ -166,19 +166,15 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                             )),
                   ),
                   Positioned(
-                      bottom: MediaQuery.of(context).size.height < 760
-                          ? MediaQuery.of(context).size.height * 0.4
-                          : MediaQuery.of(context).size.height * 0.5,
+                      bottom: MediaQuery.of(context).size.height * 0.4,
                       right: MediaQuery.of(context).size.height < 760
-                          ? -130
-                          : -210,
+                          ? (-80).h
+                          : (-150).h,
                       child: Container(
-                          alignment:
-                              (stateOfGameData.gameData.mainLetter ?? '') == 's'
-                                  ? Alignment.topCenter
-                                  : Alignment.center,
-                          height: 100.h,
-                          width: 100.w,
+                          alignment:Alignment.center,
+                          // height: .2.sh,
+                          // width: 100.w,
+                          padding: EdgeInsets.all(.1.sh),
                           decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(

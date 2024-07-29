@@ -8,6 +8,7 @@ class StrokeText extends StatelessWidget {
   final double? fontSize;
   final double? strokeWidth;
   final Color? color;
+  final double? height;
   final Color? strokeColor;
   const StrokeText(
       {super.key,
@@ -15,6 +16,7 @@ class StrokeText extends StatelessWidget {
       required this.isDisabled,
       this.strokeWidth,
       this.fontSize,
+      this.height,
       this.color,
       this.strokeColor});
 
@@ -48,6 +50,7 @@ class StrokeText extends StatelessWidget {
                       ? AppColorPhonetics.lightGreyColor4.withOpacity(0.5)
                       : AppColorPhonetics.darkBlueColor
               ..style = PaintingStyle.stroke,
+            height: height
           ),
         ),
       ],

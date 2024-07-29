@@ -23,7 +23,7 @@ class DicePopUp extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           content: Container(
-            margin: EdgeInsets.only(left: (70.w), top: 100.h),
+            margin: EdgeInsets.only(left: (70.w), top: 50.h),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: DiceWidget3(
