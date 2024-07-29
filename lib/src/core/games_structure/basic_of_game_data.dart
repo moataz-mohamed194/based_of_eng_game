@@ -986,7 +986,7 @@ class MathDragBlocksAdd implements BasicOfGameData {
   MathDragBlocksAdd({required this.tools});
 
   @override
-  String titleImageEn = AppImagesMath.clickTheChoose;
+  String titleImageEn = AppImagesMath.mathDragDrop;
 
   @override
   String? completeBasket;
