@@ -38,7 +38,6 @@ class BasedOfGameArabic extends StatelessWidget {
             bottom: 0,
             child: SizedBox(
                 child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 if ((stateOfGame.basicData?.gameData is BasicDragOutGame)) ...{
                   ///todo need to know why when the index of CurrentGamePhoneticsCubit change not the gameData change
@@ -91,7 +90,7 @@ class BasedOfGameArabic extends StatelessWidget {
                           allGameData: gamesData,
                           isLetter: (stateOfGame.basicData?.gameData
                                   as ChooseTheCorrectImageOrLetter)
-                              .isLetter),
+                              .isImage),
                       child: const ChooseTheCorrectLetterOrImageGame())
                 } else if ((stateOfGame.basicData?.gameData
                     is MatchingArabic)) ...{
@@ -105,11 +104,12 @@ class BasedOfGameArabic extends StatelessWidget {
             ))),
         if (stateOfGame.basicData?.gameData is! Video) ...{
           Positioned(
-              top: MediaQuery.of(context).size.height > 650 ? 135.h : 0.h,
-              right: 20.w,
+              top: MediaQuery.of(context).size.height > 650 ? 70.h : 0.h,
+              right: MediaQuery.of(context).size.height > 650 ? 10.w : 20.w,
               child: Image.asset(
                 stateOfGame.basicData?.gameData?.titleImageAr ?? '',
-                height: 75.h,
+                height: MediaQuery.of(context).size.height > 650 ? 125.h : 80.h,
+                fit: BoxFit.fill,
               )),
           Positioned(
             bottom: 15,

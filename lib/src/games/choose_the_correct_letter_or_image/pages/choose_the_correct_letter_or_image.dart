@@ -1,5 +1,7 @@
 import 'package:based_of_eng_game/src/core/theme_text.dart';
 import 'package:based_of_eng_game/src/games/choose_the_correct_letter_or_image/manager/choose_the_correct_letter_or_image_cubit.dart';
+import 'package:based_of_eng_game/src/games/choose_the_correct_letter_or_image/widgets/image_item.dart';
+import 'package:based_of_eng_game/src/games/choose_the_correct_letter_or_image/widgets/letter_item.dart';
 import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -46,14 +48,14 @@ class _ChooseTheCorrectLetterOrImageGame
     final stateOfCurrentGamePhoneticsCubit =
         context.watch<CurrentGamePhoneticsCubit>().state;
     return Container(
+      height: MediaQuery.of(context).size.height - (70.h),
       alignment: Alignment.center,
-      // height: MediaQuery.of(context).size.height - (70.h),
       child: BlocConsumer<ChooseTheCorrectLetterOrImageCubit,
           ChooseTheCorrectLetterOrImageState>(
         listener: (context, state) {},
         builder: (context, gameState) {
           return Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Stack(
@@ -65,7 +67,7 @@ class _ChooseTheCorrectLetterOrImageGame
                           stateOfCurrentGamePhoneticsCubit),
                   _buildTitleImageOrLetter(gameState, context),
                 ],
-              )
+              ),
             ],
           );
         },
@@ -79,17 +81,17 @@ class _ChooseTheCorrectLetterOrImageGame
         context.read<ChooseTheCorrectLetterOrImageCubit>();
     final isLetter = gameState.isLetter;
     return Positioned(
-      top: -5.h,
-      left: 0,
+      top: 0.w,
+      left: -2.5.w,
       child: Container(
         alignment: (gameState.gameData.mainLetter ?? '') == 's'
-            ? Alignment.topCenter
+            ? Alignment.center
             : Alignment.center,
-        height: 100.h,
-        width: 40.w,
+        height: isLetter ? 100.h : 130.h,
+        width: isLetter ? 50.w : 65.w,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             image: AssetImage(
               AppImagesPhonetics.letterOfClickPic,
             ),
@@ -115,15 +117,14 @@ class _ChooseTheCorrectLetterOrImageGame
                       alignment: Alignment.center,
                       child: CachedNetworkImage(
                         imageUrl: gameState.gameImages?[0].image ?? '',
-                        height: 45.h,
-                        width: 45.w,
+                        width: 35.w,
                         placeholder: (context, url) => const Center(
                           child: CupertinoActivityIndicator(),
                         ),
                         errorWidget: (context, url, error) => Center(
                           child: Text('${gameState.gameImages?[0].word}'),
                         ),
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.fill,
                         // height: ,
                       ),
                     ),
@@ -137,8 +138,10 @@ class _ChooseTheCorrectLetterOrImageGame
       required ChooseTheCorrectLetterOrImageState gameState,
       required CurrentGamePhoneticsState stateOfCurrentGamePhoneticsCubit}) {
     return Container(
-      margin: EdgeInsets.only(bottom: 50, top: 50, right: 50.w),
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30.h),
+      margin: EdgeInsets.only(bottom: 50, top: 50, right: 30.w),
+      padding: EdgeInsets.symmetric(vertical: 20.h),
+      height: 300.h,
+      width: MediaQuery.of(context).size.width - 100.w,
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -155,119 +158,93 @@ class _ChooseTheCorrectLetterOrImageGame
       {required ChooseTheCorrectLetterOrImageState gameState,
       required CurrentGamePhoneticsState stateOfCurrentGamePhoneticsCubit,
       required BuildContext context}) {
+    final chooseTheCorrectLetterOrImageCubit =
+        context.read<ChooseTheCorrectLetterOrImageCubit>();
     final currentGamePhoneticsCubit = context.read<CurrentGamePhoneticsCubit>();
     final isLetter = gameState.isLetter;
+    final gameImages = gameState.gameImages ?? [];
+    final gameLetters = gameState.gameData.gameLetters ?? [];
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
-        isLetter
-            ? gameState.gameImages?.length ?? 0
-            : gameState.gameData.gameLetters?.length ?? 0,
+        isLetter ? gameImages.length : gameLetters.length,
         (index) => DragTarget<String>(
           builder: (
             BuildContext context,
             List<dynamic> accepted,
             List<dynamic> rejected,
           ) {
-            return (stateOfCurrentGamePhoneticsCubit.stateOfAvatar ==
-                    BasicOfGameData.stateOfWin)
-                ? SizedBox(
-                    width:
-                        (MediaQuery.of(context).size.width - (130 + 50 + 130)) /
-                            4,
-                    height: 110.h,
-                  )
-                : GestureDetector(
-                    onTap: () async {
-                      if (currentGamePhoneticsCubit.ableButton()) {
-                        if (!isLetter
-                            ? gameState.gameData.gameLetters![index].id ==
-                                gameState.gameImages?.first.gameLetterId
-                            : gameState.gameImages?[index].correct == 1) {
-                          await _addSuccessAnswer(context, gameState);
-                        } else {
-                          await _addWrongAnswer(context);
-                        }
+            return GestureDetector(
+              onTap: () async {
+                if (currentGamePhoneticsCubit.ableButton() &&
+                    gameState.isCorrect == false) {
+                  if (!isLetter
+                      ? gameState.gameData.gameLetters![index].id ==
+                          gameState.gameImages?.first.gameLetterId
+                      : gameState.gameImages?[index].correct == 1) {
+                    await chooseTheCorrectLetterOrImageCubit.addSuccess();
+                    await context
+                        .read<CurrentGamePhoneticsCubit>()
+                        .addSuccessAnswer(
+                            isArabic: true,
+                            questions: gameState.allGameData.length,
+                            correctAnswers: (gameState.index) + 1)
+                        .whenComplete(() async {
+                      bool isLastQuestion = context
+                          .read<CurrentGamePhoneticsCubit>()
+                          .checkIfIsTheLastQuestionOfGame(
+                              queations: gameState.allGameData.length);
+                      if (!isLastQuestion) {
+                        await context
+                            .read<CurrentGamePhoneticsCubit>()
+                            .updateIndexOfCurrentGame();
+                        context
+                            .read<ChooseTheCorrectLetterOrImageCubit>()
+                            .updateTheCurrentGame(
+                                index: context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .state
+                                    .index);
                       }
-                    },
-                    child: isLetter
-                        ? Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.h, horizontal: 10.w),
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  gameState.gameImages?[index].image ?? '',
-                              width: (MediaQuery.of(context).size.width -
-                                      (130 + 50 + 130)) /
-                                  4,
-                              height: 120.h,
-                              placeholder: (context, url) => const Center(
-                                child: CupertinoActivityIndicator(),
-                              ),
-                              errorWidget: (context, url, error) => Center(
-                                child: Text(
-                                    '${gameState.gameImages?[index].word}'),
-                              ),
-                              fit: BoxFit.contain,
-                              // height: ,
-                            ),
-                          )
-                        : Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 20.h, horizontal: 20.w),
-                            child: Text(
+                    });
+                  } else {
+                    await context
+                        .read<CurrentGamePhoneticsCubit>()
+                        .addWrongAnswer(
+                            isArabic: true, actionOfWrongAnswer: () async {});
+                  }
+                }
+              },
+              child: isLetter
+                  ? Row(
+                      children: [
+                        ImageItem(
+                            imageUrl: gameState.gameImages?[index].image ?? '',
+                            letterOfImage:
+                                gameState.gameImages?[index].word ?? '',
+                            isCorrect: gameState.isCorrect == true &&
+                                gameState.gameImages?[index].correct == 1),
+                        40.pw,
+                      ],
+                    )
+                  : Row(
+                      children: [
+                        LetterItem(
+                          letter:
                               gameState.gameData.gameLetters?[index].letter ??
                                   '',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge
-                                  ?.copyWith(
-                                      fontSize: 45.spMax,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColorPhonetics.darkBorderColor,
-                                      fontFamily: AppTheme.getFontFamily5()),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                  );
+                          isCorrect: gameState.isCorrect == true &&
+                              gameState.gameData.gameLetters?[index].id ==
+                                  gameState.gameImages?.first.gameLetterId,
+                        ),
+                        40.pw
+                      ],
+                    ),
+            );
           },
         ),
       ),
     );
-  }
-
-  Future<void> _addWrongAnswer(BuildContext context) async {
-    await context
-        .read<CurrentGamePhoneticsCubit>()
-        .addWrongAnswer(isArabic: true, actionOfWrongAnswer: () async {});
-  }
-
-  Future<void> _addSuccessAnswer(BuildContext context,
-      ChooseTheCorrectLetterOrImageState gameState) async {
-    await context
-        .read<CurrentGamePhoneticsCubit>()
-        .addSuccessAnswer(
-            isArabic: true,
-            questions: gameState.allGameData.length,
-            correctAnswers: (gameState.index) + 1)
-        .whenComplete(() async {
-      bool isLastQuestion = context
-          .read<CurrentGamePhoneticsCubit>()
-          .checkIfIsTheLastQuestionOfGame(
-              queations: gameState.allGameData.length);
-      if (isLastQuestion) {
-        // Future.delayed(
-        //     const Duration(seconds: 2),
-        //     () async {
-        //   Navigator.of(context).pop();
-        // });
-      } else {
-        await context
-            .read<CurrentGamePhoneticsCubit>()
-            .updateIndexOfCurrentGame();
-        context.read<ChooseTheCorrectLetterOrImageCubit>().updateTheCurrentGame(
-            index: context.read<CurrentGamePhoneticsCubit>().state.index);
-      }
-    });
   }
 }

@@ -25,6 +25,14 @@ class ChooseTheCorrectLetterOrImageCubit
     reFormatData();
     sayLetter();
   }
+  Future<void> addSuccess() async {
+    emit(state.copyWith(isCorrect: true));
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    emit(state.copyWith(isCorrect: false));
+  }
+
   void reFormatData() {
     List<GameImagesGameFinalModel> gameImages = state.gameData.gameImages ?? [];
     gameImages.shuffle();

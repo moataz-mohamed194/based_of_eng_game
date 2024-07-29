@@ -130,7 +130,15 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                                         child: GridView.builder(
                                             shrinkWrap: true,
                                             itemCount: gameState
-                                                .correctAnswersData.length,
+                                                .correctAnswersData
+                                                .where((element) =>
+                                                    element.gameLetterId ==
+                                                    gameState.gameData
+                                                        .gameLetters![index].id)
+                                                .toList()
+                                                .length,
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
                                             padding: EdgeInsets.zero,
                                             gridDelegate:
                                                 const SliverGridDelegateWithFixedCrossAxisCount(
