@@ -32,7 +32,7 @@ import '../games/math/drag_oe/screen/drag_oe_screen.dart';
 import '../games/math/drag_sticks/manager/drag_sticks_cubit.dart';
 import '../games/math/drag_sticks/screen/drag_sticks_screen.dart';
 import '../games/math/drag_sub/manager/choose_sub_cubit.dart';
-import '../games/math/drag_sub/screen/choose_sub_screen.dart';
+import '../games/math/drag_sub/screen/drag_sub_screen.dart';
 import '../games/math/sorting_beads/manager/sorting_blocks_cubit.dart';
 import '../games/math/sorting_beads/screen/sorting_blocks_screen.dart';
 import '../games/math/sorting_blocks/manager/sorting_blocks_cubit.dart';

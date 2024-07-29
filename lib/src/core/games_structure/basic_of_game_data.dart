@@ -129,6 +129,8 @@ abstract class BasicOfGameData {
       return CompleteTheWord();
     } else if (gameType == GameTypes.chooseTheStretchedLetter.text()) {
       return ChooseTheStretchedLetter();
+    } else if (gameType == GameTypes.memoryCards.text()){
+      return MemoryCard();
     }
   }
 
@@ -704,6 +706,24 @@ class ChooseTheStretchedLetter implements BasicOfGameData {
   String? titleImageAr = AppImagesArabic.titleOfChooseTheStretchedLetter;
   @override
   int countOfMinimizeStar = 1;
+}
+class MemoryCard implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = AppImagesPhonetics.listenAndChooseGame;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  @override
+  int countOfMinimizeStar = 2;
 }
 
 class CompleteTheWord implements BasicOfGameData {
