@@ -342,7 +342,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                     const SizedBox()
                                   else
                                     PositionedDirectional(
-                                      top: 70.h,
+                                      top: 59.h,
                                       child: Image.asset(
                                         isArabic
                                             ? stateOfGame.basicData?.gameData
@@ -351,7 +351,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                             : stateOfGame.basicData?.gameData
                                                     ?.titleImageEn ??
                                                 '',
-                                        // height: 75.h,
+                                        // height: 0.41.sh - 70.h,
                                         width: isArabic ? 100.w : 75.w,
                                         fit: BoxFit.fill,
                                       ),
