@@ -70,6 +70,7 @@ class _BingoGameScreen extends State<BingoGameScreen> {
                           'Bingo',
                           style: TextStyle(
                               fontSize: 23.sp,
+                              height: 0,
                               fontFamily: AppTheme.getFontFamily5(),
                               color: Colors.white),
                         ))

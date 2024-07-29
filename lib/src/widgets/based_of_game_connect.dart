@@ -217,7 +217,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                     : stateOfGame.basicData?.gameData
                                             ?.titleImageEn ??
                                         '',
-                                height: 75.h,
+                                // height: 75.h,
                                 width: 90.w,
                                 fit: BoxFit.fill,
                               ),
@@ -351,7 +351,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                             : stateOfGame.basicData?.gameData
                                                     ?.titleImageEn ??
                                                 '',
-                                        height: 75.h,
+                                        // height: 75.h,
                                         width: isArabic ? 100.w : 75.w,
                                         fit: BoxFit.fill,
                                       ),

@@ -102,11 +102,12 @@ class BasedOfGamePhonetics extends StatelessWidget {
             ))),
         if (stateOfGame.basicData?.gameData is! Video) ...{
           Positioned(
-              top: MediaQuery.of(context).size.height > 650 ? 135.h : 0.h,
+              top: MediaQuery.of(context).size.height > 650 ? 100.h : 0.h,
               left: 20,
               child: Image.asset(
                 stateOfGame.basicData?.gameData?.titleImageEn ?? '',
-                height: 75.h,
+                height:MediaQuery.of(context).size.height > 650 ? .15.sh:75.h,
+                fit: BoxFit.fill,
               )),
           Positioned(
             bottom: 15,

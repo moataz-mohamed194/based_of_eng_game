@@ -54,12 +54,13 @@ class ItemCardWidget extends StatelessWidget {
           alignment: Alignment.center,
           child: (hide == true)
               ? Container(
-                  height: 50,
+                  width: 25.w,
                   decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: AppColorPhonetics.darkBorderColor),
                 )
-              : StrokeText(text: body, isDisabled: false,
+              : StrokeText(
+            height:0,text: body, isDisabled: false,
             fontSize: MediaQuery.of(context).size.height < 760
               ? 20.sp
               : 40.sp,),
