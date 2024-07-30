@@ -48,11 +48,11 @@ class _ChooseTheSentenceScreen extends State<ChooseTheSentenceScreen> {
           stateOfStringWillSay: state.gameData.inst ?? '');
     }, builder: (context, gameState) {
       return Container(
-        margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        margin: const EdgeInsets.only(bottom: (15 + 30), top: 50),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
         width: MediaQuery.of(context).size.width - (130 + 50 + 130),
         alignment: Alignment.center,
-        decoration: BoxDecoration(
+        decoration: BoxDecoration (
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border:
@@ -64,7 +64,9 @@ class _ChooseTheSentenceScreen extends State<ChooseTheSentenceScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: List.generate(gameState.choose.length, (index) {
                     return Column(
                       children: [
@@ -140,7 +142,7 @@ class _ChooseTheSentenceScreen extends State<ChooseTheSentenceScreen> {
                               Text(
                                 gameState.choose[index].letter ?? '',
                                 style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 15.sp,
                                     fontFamily: AppTheme.getFontFamily5(),
                                     color: AppColorPhonetics.darkBorderColor),
                               ),

@@ -90,15 +90,6 @@ class BasedOfGameUpAndShortVowels extends StatelessWidget {
                             index: stateOfGame.index, listGameData: gamesData),
                         child: ChooseTheCorrectScreen())
                   } else if ((stateOfGame.basicData?.gameData
-                      is RearrangeGame)) ...{
-                    BlocProvider<RearrangeCubit>(
-                        create: (_) => RearrangeCubit(
-                              // gameData: stateOfGameData.data[stateOfGame.index],
-                              index: stateOfGame.index,
-                              listGameData: gamesData,
-                            ),
-                        child: RearrangeScreen())
-                  } else if ((stateOfGame.basicData?.gameData
                       is MatchGame)) ...{
                     BlocProvider<MatchCubit>(
                         create: (_) => MatchCubit(
@@ -115,8 +106,8 @@ class BasedOfGameUpAndShortVowels extends StatelessWidget {
               // start: 45.w,
               child: Image.asset(
                 stateOfGame.basicData?.gameData?.titleImageEn ?? '',
-                height: 75.h,
-                width: 85.w,
+                height: 40.h,
+                // width: 85.w,
 
                 // fit: BoxFit.fill,
               ),

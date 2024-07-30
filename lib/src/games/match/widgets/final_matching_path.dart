@@ -15,7 +15,7 @@ class FinalMatchingPainter extends CustomPainter {
           firstPosition[i].last != null) {
         final paint = Paint()
           ..color = AppColorPhonetics.darkBlueColor
-          ..strokeWidth = 2.0
+          ..strokeWidth = 4.0
           ..strokeCap = StrokeCap.round;
 
         canvas.drawLine(firstPosition[i].first!, firstPosition[i].last!, paint);

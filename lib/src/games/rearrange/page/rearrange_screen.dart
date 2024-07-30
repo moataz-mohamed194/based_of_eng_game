@@ -42,7 +42,7 @@ class _RearrangeScreen extends State<RearrangeScreen> {
         listener: (context, state) {},
         builder: (context, gameState) {
           return Container(
-            margin: const EdgeInsets.only(bottom: (15 + 50), top: 50),
+            margin:  EdgeInsets.only(bottom: (15 + 50), top: 50, right: 50.w),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             width: (gameState.userAnswers.length * 25.w) + 0.33.sw,
             alignment: Alignment.center,
@@ -73,246 +73,255 @@ class _RearrangeScreen extends State<RearrangeScreen> {
                 },
                 Expanded(
                     flex: 2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: List.generate(
-                            gameState.correctAnswers.length,
-                            (index) => Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                child: DragTarget<String>(builder: (
-                                  BuildContext context,
-                                  List<dynamic> accepted,
-                                  List<dynamic> rejected,
-                                ) {
-                                  return DottedBorder(
-                                    // color: Colors.black,
-                                    strokeWidth: 1,
-                                    dashPattern: [8, 4],
-                                    color: AppColorPhonetics.darkBorderColor,
-                                    borderType: BorderType.RRect,
-                                    radius: const Radius.circular(7),
-                                    // padding: const EdgeInsets.all(6),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      // width: 24.w,
-                                      width:
-                                          ((gameState.userAnswers[index] == ''))
-                                              ? 25.w
-                                              : (gameState.userAnswers[index])
-                                                          .split(' ')
-                                                          .length >
-                                                      1
-                                                  ? null
-                                                  : 25.w,
-                                      height: 30.h,
-                                      child: Text(
-                                        (gameState.userAnswers[index] != '')
-                                            ? gameState.userAnswers[index]
-                                            : gameState.correctAnswers[index],
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily:
-                                                AppTheme.getFontFamily5(),
-                                            color:
-                                                (gameState.userAnswers[index] ==
-                                                        '')
-                                                    ? Colors.transparent
-                                                    : AppColorPhonetics
-                                                        .darkBorderColor),
-                                        textAlign: TextAlign.center,
+                    child: FittedBox(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: List.generate(
+                              gameState.correctAnswers.length,
+                              (index) => Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: DragTarget<String>(builder: (
+                                    BuildContext context,
+                                    List<dynamic> accepted,
+                                    List<dynamic> rejected,
+                                  ) {
+                                    return DottedBorder(
+                                      // color: Colors.black,
+                                      strokeWidth: 1,
+                                      dashPattern: [8, 4],
+                                      color: AppColorPhonetics.darkBorderColor,
+                                      borderType: BorderType.RRect,
+                                      radius: const Radius.circular(7),
+                                      // padding: const EdgeInsets.all(6),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        // width: 24.w,
+                                        width:
+                                            ((gameState.userAnswers[index] == ''))
+                                                ? 25.w
+                                                : (gameState.userAnswers[index])
+                                                            .split(' ')
+                                                            .length >
+                                                        1
+                                                    ? null
+                                                    : 25.w,
+                                        height: 30.h,
+                                        child: Text(
+                                          (gameState.userAnswers[index] != '')
+                                              ? gameState.userAnswers[index]
+                                              : gameState.correctAnswers[index],
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontFamily:
+                                                  AppTheme.getFontFamily5(),
+                                              color:
+                                                  (gameState.userAnswers[index] ==
+                                                          '')
+                                                      ? Colors.transparent
+                                                      : AppColorPhonetics
+                                                          .darkBorderColor),
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }, onAcceptWithDetails: (item) async {
-                                  if (context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .ableButton()) {
-                                    bool? answerState = context
-                                        .read<RearrangeCubit>()
-                                        .addUserAnswer(
-                                            index: index, answer: item.data);
-                                    if (answerState != null) {
-                                      if (answerState == true) {
-                                        await context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .addSuccessAnswer(
-                                                questions: gameState
-                                                    .listGameData.length,
-                                                correctAnswers:
-                                                    (gameState.index) + 1)
-                                            .whenComplete(() async {
-                                          bool isLastQuestion = context
+                                    );
+                                  }, onAcceptWithDetails: (item) async {
+                                    if (context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .ableButton()) {
+                                      bool? answerState = context
+                                          .read<RearrangeCubit>()
+                                          .addUserAnswer(
+                                              index: index, answer: item.data);
+                                      if (answerState != null) {
+                                        if (answerState == true) {
+                                          await context
                                               .read<CurrentGamePhoneticsCubit>()
-                                              .checkIfIsTheLastQuestionOfGame(
-                                                  queations: gameState
-                                                      .listGameData.length);
-                                          if (isLastQuestion) {
-                                            // Future.delayed(
-                                            //     const Duration(seconds: 2),
-                                            //     () async {
-                                            //   Navigator.of(context).pop();
-                                            // });
-                                          } else {
-                                            await context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .updateIndexOfCurrentGame();
+                                              .addSuccessAnswer(
+                                                  questions: gameState
+                                                      .listGameData.length,
+                                                  correctAnswers:
+                                                      (gameState.index) + 1)
+                                              .whenComplete(() async {
+                                            bool isLastQuestion = context
+                                                .read<CurrentGamePhoneticsCubit>()
+                                                .checkIfIsTheLastQuestionOfGame(
+                                                    queations: gameState
+                                                        .listGameData.length);
+                                            if (isLastQuestion) {
+                                              // Future.delayed(
+                                              //     const Duration(seconds: 2),
+                                              //     () async {
+                                              //   Navigator.of(context).pop();
+                                              // });
+                                            } else {
+                                              await context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .updateIndexOfCurrentGame();
+                                              context
+                                                  .read<RearrangeCubit>()
+                                                  .updateTheCurrentGame(
+                                                      index: context
+                                                          .read<
+                                                              CurrentGamePhoneticsCubit>()
+                                                          .state
+                                                          .index);
+                                            }
+                                          });
+                                        } else {
+                                          await context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .addWrongAnswer(
+                                                  actionOfWrongAnswer: () async {
                                             context
                                                 .read<RearrangeCubit>()
-                                                .updateTheCurrentGame(
-                                                    index: context
-                                                        .read<
-                                                            CurrentGamePhoneticsCubit>()
-                                                        .state
-                                                        .index);
-                                          }
-                                        });
-                                      } else {
-                                        await context
-                                            .read<CurrentGamePhoneticsCubit>()
-                                            .addWrongAnswer(
-                                                actionOfWrongAnswer: () async {
-                                          context
-                                              .read<RearrangeCubit>()
-                                              .clearUserAnswer();
-                                        });
+                                                .clearUserAnswer();
+                                          });
+                                        }
                                       }
                                     }
-                                  }
-                                })),
+                                  })),
+                            ),
                           ),
-                        ),
-                        15.ph,
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: List.generate(
-                              gameState.correctAnswers.length,
-                              (index) => Draggable<String>(
-                                    maxSimultaneousDrags: 1,
-                                    data: gameState.correctAnswers[index] ?? '',
-                                    childWhenDragging: Container(
-                                      alignment: Alignment.center,
-                                      height: 30.h,
-                                      width: (gameState.correctAnswers[index]
-                                                  .split(' ')
-                                                  .length >
-                                              1)
-                                          ? null
-                                          : 25.w,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      child: Text(
-                                        gameState.correctAnswers[index],
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily:
-                                                AppTheme.getFontFamily5(),
-                                            color: AppColorPhonetics.white),
-                                        textAlign: TextAlign.center,
+                          15.ph,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: List.generate(
+                                gameState.correctAnswers.length,
+                                (index) => Draggable<String>(
+                                      maxSimultaneousDrags: 1,
+                                      data: gameState.correctAnswers[index] ?? '',
+                                      childWhenDragging: Container(
+                                        alignment: Alignment.center,
+                                        height: 30.h,
+                                        width: (gameState
+                                            .correctAnswers[index]
+                                            .split(' ')
+                                            .length >
+                                            1)
+                                            ? null
+                                            : 27.w,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: FittedBox(
+                                          child: Text(
+                                            gameState.correctAnswers[index],
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontFamily:
+                                                    AppTheme.getFontFamily5(),
+                                                color: AppColorPhonetics.white),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    feedback: Container(
-                                      alignment: Alignment.center,
-                                      width: (gameState.correctAnswers[index]
-                                                  .split(' ')
-                                                  .length >
-                                              1)
-                                          ? null
-                                          : 25.w,
-                                      height: 30.h,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      decoration: BoxDecoration(
-                                          color:
-                                              AppColorPhonetics.darkBorderColor,
-                                          borderRadius:
-                                              BorderRadius.circular(7)),
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      child: Text(
-                                        gameState.correctAnswers[index],
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily:
-                                                AppTheme.getFontFamily5(),
-                                            decoration:
-                                                TextDecoration.underline,
-                                            decorationColor: AppColorPhonetics
-                                                .darkBorderColor,
-                                            color: AppColorPhonetics.white),
-                                        textAlign: TextAlign.center,
+                                      feedback: Container(
+                                        alignment: Alignment.center,
+                                        width: (gameState.correctAnswers[index]
+                                                    .split(' ')
+                                                    .length >
+                                                1)
+                                            ? null
+                                            : 25.w,
+                                        height: 30.h,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        decoration: BoxDecoration(
+                                            color:
+                                                AppColorPhonetics.darkBorderColor,
+                                            borderRadius:
+                                                BorderRadius.circular(7)),
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: FittedBox(
+                                          child: Text(
+                                            gameState.correctAnswers[index],
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontFamily:
+                                                    AppTheme.getFontFamily5(),
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                decorationColor: AppColorPhonetics
+                                                    .darkBorderColor,
+                                                color: AppColorPhonetics.white),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    child: ((stateOfCurrentGamePhoneticsCubit
-                                                .stateOfAvatar ==
-                                            BasicOfGameData.stateOfWin))
-                                        ? Container(
-                                            alignment: Alignment.center,
-                                            width: (gameState
-                                                        .correctAnswers[index]
-                                                        .split(' ')
-                                                        .length >
-                                                    1)
-                                                ? null
-                                                : 25.w,
-                                            height: 30.h,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 5),
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 5),
-                                            child: FittedBox(
-                                              child: Text(
-                                                gameState.correctAnswers[index],
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontFamily: AppTheme
-                                                        .getFontFamily5(),
-                                                    color: AppColorPhonetics
-                                                        .white),
-                                                textAlign: TextAlign.center,
+                                      child: ((stateOfCurrentGamePhoneticsCubit
+                                                  .stateOfAvatar ==
+                                              BasicOfGameData.stateOfWin))
+                                          ? Container(
+                                              alignment: Alignment.center,
+                                              width: (gameState
+                                                          .correctAnswers[index]
+                                                          .split(' ')
+                                                          .length >
+                                                      1)
+                                                  ? null
+                                                  : 25.w,
+                                              height: 30.h,
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 5),
+                                              margin: const EdgeInsets.symmetric(
+                                                  horizontal: 5),
+                                              child: FittedBox(
+                                                child: Text(
+                                                  gameState.correctAnswers[index],
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontFamily: AppTheme
+                                                          .getFontFamily5(),
+                                                      color: AppColorPhonetics
+                                                          .white),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            )
+                                          : Container(
+                                              alignment: Alignment.center,
+                                              width: (gameState
+                                                          .correctAnswers[index]
+                                                          .split(' ')
+                                                          .length >
+                                                      1)
+                                                  ? null
+                                                  : 27.w,
+                                              height: 30.h,
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 5),
+                                              decoration: BoxDecoration(
+                                                  color: AppColorPhonetics
+                                                      .darkBorderColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(7)),
+                                              margin: const EdgeInsets.symmetric(
+                                                  horizontal: 5),
+                                              child: FittedBox(
+                                                child: Text(
+                                                  gameState.correctAnswers[index],
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontFamily:
+                                                          AppTheme.getFontFamily5(),
+                                                      color:
+                                                          AppColorPhonetics.white),
+                                                  textAlign: TextAlign.center,
+                                                ),
                                               ),
                                             ),
-                                          )
-                                        : Container(
-                                            alignment: Alignment.center,
-                                            width: (gameState
-                                                        .correctAnswers[index]
-                                                        .split(' ')
-                                                        .length >
-                                                    1)
-                                                ? null
-                                                : 27.w,
-                                            height: 30.h,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 5),
-                                            decoration: BoxDecoration(
-                                                color: AppColorPhonetics
-                                                    .darkBorderColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(7)),
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 5),
-                                            child: Text(
-                                              gameState.correctAnswers[index],
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontFamily:
-                                                      AppTheme.getFontFamily5(),
-                                                  color:
-                                                      AppColorPhonetics.white),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                  )),
-                        ),
-                      ],
+                                    )),
+                          ),
+                        ],
+                      ),
                     ))
               ],
             ),

@@ -224,7 +224,7 @@ class BasedOfGameConnect extends StatelessWidget {
                             )
                           : Container(
                               width: 0.4.sw,
-                              height: 0.41.sh,
+                              height: stateOfGame.basicData?.gameData is XOutGame? 0.5.sh:0.41.sh,
                               padding: EdgeInsets.only(
                                   left: isArabic
                                       ? stateOfGame.basicData?.gameData
@@ -342,7 +342,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                     const SizedBox()
                                   else
                                     PositionedDirectional(
-                                      top: 59.h,
+                                      top:71.h,
                                       child: Image.asset(
                                         isArabic
                                             ? stateOfGame.basicData?.gameData

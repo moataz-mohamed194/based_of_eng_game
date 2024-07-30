@@ -84,8 +84,7 @@ class _MatchScreen extends State<MatchScreen> {
                 ),
                 SizedBox(
                     width: MediaQuery.of(context).size.width - (100.w),
-                    height:
-                        MediaQuery.of(context).size.height - (50.h + 5 + 120.h),
+                    height: MediaQuery.of(context).size.height - (50.h + 5 + 120.h),
                     child: CustomPaint(
                       size: Size.infinite,
                       painter: FinalMatchingPainter(gameState.positions),
@@ -135,7 +134,82 @@ class _MatchScreen extends State<MatchScreen> {
                                         }
                                       }
                                     },
-                                    child: Container(
+                                    child:Draggable<
+                                        GameLettersGameFinalModel>(
+                                        data: gameState.answers[index],
+                                        feedback: const SizedBox(),
+                                        onDragEnd: (e) {
+                                          setState(() {
+                                            start = Offset.zero;
+                                            end = Offset.zero;
+                                          });
+                                        },
+                                        onDragStarted: () {
+                                          RenderBox renderBox = gameState
+                                              .widgetKey[index]
+                                              .currentContext!
+                                              .findRenderObject()
+                                          as RenderBox;
+                                          Offset offset = renderBox
+                                              .localToGlobal(Offset.zero);
+                                          gestureDetector.onPanStart!(
+                                            DragStartDetails(
+                                              localPosition: Offset(
+                                                  (offset.dx) + 25.w,
+                                                  ((offset.dy) -
+                                                      ((50.h + 5 + 150.h) /
+                                                          2))),
+                                            ),
+                                          );
+                                        },
+                                        key: gameState.widgetKey[index],
+                                        childWhenDragging: Container(
+                                            height: 60.h,
+                                            width: ((MediaQuery.of(context)
+                                                .size
+                                                .width -
+                                                (100.w)) /
+                                                6) *
+                                                2,
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 5),
+                                            child:Row(
+                                          children: [
+                                            SizedBox(
+                                              width: (((MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                                  (100.w)) /
+                                                  6) *
+                                                  2) -
+                                                  (20 + 17),
+                                              child: Text(
+                                                gameState.answers[index]
+                                                    .letter ??
+                                                    '',
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontFamily: AppTheme
+                                                        .getFontFamily5(),
+                                                    color: AppColorPhonetics
+                                                        .darkBorderColor),
+                                                textAlign: TextAlign.start,
+                                              ),
+                                            ),
+                                            20.pw,
+                                            Container(
+                                              height: 17,
+                                              width: 17,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      17),
+                                                  color: AppColorPhonetics
+                                                      .lightYellowColor),
+                                            )
+                                          ],
+                                        )),
+                                        child: Container(
                                         height: 60.h,
                                         width: ((MediaQuery.of(context)
                                                         .size
@@ -145,12 +219,8 @@ class _MatchScreen extends State<MatchScreen> {
                                             2,
                                         margin: const EdgeInsets.symmetric(
                                             horizontal: 5),
-                                        child: Draggable<
-                                            GameLettersGameFinalModel>(
-                                          data: gameState.answers[index],
-                                          feedback: const SizedBox(),
-                                          key: gameState.widgetKey[index],
-                                          childWhenDragging: Row(
+                                        child:
+                                           Row(
                                             children: [
                                               SizedBox(
                                                 width: (((MediaQuery.of(context)
@@ -186,183 +256,113 @@ class _MatchScreen extends State<MatchScreen> {
                                               )
                                             ],
                                           ),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: (((MediaQuery.of(context)
-                                                                    .size
-                                                                    .width -
-                                                                (100.w)) /
-                                                            6) *
-                                                        2) -
-                                                    (20 + 17),
-                                                child: Text(
-                                                  gameState.answers[index]
-                                                          .letter ??
-                                                      '',
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontFamily: AppTheme
-                                                          .getFontFamily5(),
-                                                      color: AppColorPhonetics
-                                                          .darkBorderColor),
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                              ),
-                                              20.pw,
-                                              Container(
-                                                height: 17,
-                                                width: 17,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            17),
-                                                    color: AppColorPhonetics
-                                                        .lightYellowColor),
-                                              )
-                                            ],
-                                          ),
-                                          onDragEnd: (e) {
-                                            setState(() {
-                                              start = Offset.zero;
-                                              end = Offset.zero;
-                                            });
-                                          },
-                                          onDragStarted: () {
-                                            RenderBox renderBox = gameState
-                                                    .widgetKey[index]
-                                                    .currentContext!
-                                                    .findRenderObject()
-                                                as RenderBox;
-                                            Offset offset = renderBox
-                                                .localToGlobal(Offset.zero);
-                                            gestureDetector.onPanStart!(
-                                              DragStartDetails(
-                                                localPosition: Offset(
-                                                    (offset.dx) + 22.w,
-                                                    ((offset.dy) -
-                                                        ((50.h + 5 + 150.h) /
-                                                            2))),
-                                              ),
-                                            );
-                                          },
+
                                         )))),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: List.generate(
-                              gameState.imageAnswers.length,
-                              (index) => DragTarget<GameLettersGameFinalModel>(
-                                  onAcceptWithDetails: isInteracting != null &&
-                                          isInteracting !=
-                                              BasicOfGameData.stateOIdle
-                                      ? null
-                                      : (item) async {
-                                          print('####:${item.data.letter}');
-                                          print(
-                                              '####:${gameState.imageAnswers[index].word}');
-                                          if (gameState.imageAnswers[index].word
-                                                  ?.toLowerCase() ==
-                                              item.data.letter?.toLowerCase()) {
-                                            int countCorrectAnswers =
-                                                await context
-                                                    .read<MatchCubit>()
-                                                    .addCorrectAnswer(
-                                                        endPosition: end!,
-                                                        startPosition: start!,
-                                                        answerId:
-                                                            item.data.id ?? 0,
-                                                        imageAnswerId: gameState
-                                                                .imageAnswers[
-                                                                    index]
-                                                                .id ??
-                                                            0);
+                          FittedBox(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: List.generate(
+                                gameState.imageAnswers.length,
+                                (index) => DragTarget<GameLettersGameFinalModel>(
+                                    onAcceptWithDetails: isInteracting != null &&
+                                            isInteracting !=
+                                                BasicOfGameData.stateOIdle
+                                        ? null
+                                        : (item) async {
+                                            print('####:${item.data.letter}');
                                             print(
-                                                'gameState.countQuestions:${gameState.countQuestions}, ${gameState.countCorrectAnswers}');
-                                            await context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .addSuccessAnswer(
-                                                    questions: gameState
-                                                        .countQuestions,
-                                                    correctAnswers:
-                                                        countCorrectAnswers)
-                                                .whenComplete(() {
-                                              // print('listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
+                                                '####:${gameState.imageAnswers[index].word}');
+                                            if (gameState.imageAnswers[index].word
+                                                    ?.toLowerCase() ==
+                                                item.data.letter?.toLowerCase()) {
+                                              int countCorrectAnswers =
+                                                  await context
+                                                      .read<MatchCubit>()
+                                                      .addCorrectAnswer(
+                                                          endPosition: end!,
+                                                          startPosition: start!,
+                                                          answerId:
+                                                              item.data.id ?? 0,
+                                                          imageAnswerId: gameState
+                                                                  .imageAnswers[
+                                                                      index]
+                                                                  .id ??
+                                                              0);
+                                              print(
+                                                  'gameState.countQuestions:${gameState.countQuestions}, ${gameState.countCorrectAnswers}');
+                                              await context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .addSuccessAnswer(
+                                                      questions: gameState
+                                                          .countQuestions,
+                                                      correctAnswers:
+                                                          countCorrectAnswers)
+                                                  .whenComplete(() {
+                                                // print('listGameData:${gameState.listGameData.length}, countCorrectAnswers:${gameState.countCorrectAnswers}');
 
-                                              if (gameState.countQuestions ==
-                                                  countCorrectAnswers) {
-                                                // Future.delayed(
-                                                //     const Duration(seconds: 2),
-                                                //     () async {
-                                                //   Navigator.of(context).pop();
-                                                // });
-                                              }
-                                              // else {
-                                              //   Future.delayed(
-                                              //       const Duration(seconds: 2),
-                                              //           () async {
-                                              //         await context
-                                              //             .read<CurrentGamePhoneticsCubit>()
-                                              //             .updateIndexOfCurrentGame();
-                                              //         context
-                                              //             .read<ListenChooseCubit>()
-                                              //             .updateTheCurrentGame(
-                                              //             index: context
-                                              //                 .read<
-                                              //                 CurrentGamePhoneticsCubit>()
-                                              //                 .state
-                                              //                 .index);
-                                              //       });
-                                              // }
-                                            });
-                                          } else {
-                                            await context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .addWrongAnswer(
-                                                    actionOfWrongAnswer:
-                                                        () async {});
-                                          }
-                                        },
-                                  builder: (context, onAccepted, onRejected) {
-                                    return Row(
-                                      // crossAxisAlignment: CrossAxisAlignment.center,
-                                      // mainAxisAlignment: MainAxisAlignment.,
-                                      children: [
-                                        Container(
-                                          height: 17,
-                                          width: 17,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(17),
-                                              color: AppColorPhonetics
-                                                  .lightYellowColor),
-                                        ),
-                                        20.pw,
-                                        CachedNetworkImage(
-                                          imageUrl: gameState
-                                                  .imageAnswers[index].image ??
-                                              '',
-                                          height: (MediaQuery.of(context)
-                                                  .size
-                                                  .height) /
-                                              5,
+                                                if (gameState.countQuestions ==
+                                                    countCorrectAnswers) {
+                                                  // Future.delayed(
+                                                  //     const Duration(seconds: 2),
+                                                  //     () async {
+                                                  //   Navigator.of(context).pop();
+                                                  // });
+                                                }
+                                                // else {
+                                                //   Future.delayed(
+                                                //       const Duration(seconds: 2),
+                                                //           () async {
+                                                //         await context
+                                                //             .read<CurrentGamePhoneticsCubit>()
+                                                //             .updateIndexOfCurrentGame();
+                                                //         context
+                                                //             .read<ListenChooseCubit>()
+                                                //             .updateTheCurrentGame(
+                                                //             index: context
+                                                //                 .read<
+                                                //                 CurrentGamePhoneticsCubit>()
+                                                //                 .state
+                                                //                 .index);
+                                                //       });
+                                                // }
+                                              });
+                                            } else {
+                                              await context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .addWrongAnswer(
+                                                      actionOfWrongAnswer:
+                                                          () async {});
+                                            }
+                                          },
+                                    builder: (context, onAccepted, onRejected) {
+                                      return
+                                          FittedBox(
+                                            child: CachedNetworkImage(
+                                              imageUrl: gameState
+                                                      .imageAnswers[index].image ??
+                                                  '',
+                                              height: (MediaQuery.of(context)
+                                                      .size
+                                                      .height) /
+                                                  5,
 
-                                          // height: 0.33.sh,
-                                          placeholder: (context, url) =>
-                                              const Center(
-                                            child: CupertinoActivityIndicator(),
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(
-                                            Icons.error,
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }),
+                                              // height: 0.33.sh,
+                                              placeholder: (context, url) =>
+                                                  const Center(
+                                                child: CupertinoActivityIndicator(),
+                                              ),
+                                              errorWidget: (context, url, error) =>
+                                                  const Icon(
+                                                Icons.error,
+                                                color: Colors.red,
+                                              ),
+                                                                                ),
+                                          );
+                                    }),
+                              ),
                             ),
                           ),
                         ],
