@@ -45,6 +45,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                40.pw,
                 Expanded(
                     flex: 3,
                     child: Container(
@@ -57,183 +58,164 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                       )),
                       child: Column(
                         children: [
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.symmetric(vertical: .05.sh),
-                              child: GestureDetector(
-                                onTap: TalkTts.data == StateOfTalk.talking
-                                    ? null
-                                    : () {
-                                        TalkTts.startTalk(
-                                            text: gameState
-                                                    .gameData?.correctAns ??
-                                                '',
-                                            isArabic: gameState.isArabic);
-                                      },
-                                child: CachedNetworkImage(
-                                  imageUrl: gameState
-                                          .gameData?.gameImages?.first.image ??
-                                      '',
-                                  height: 1,
-                                  placeholder: (context, url) => const Center(
-                                    child: CupertinoActivityIndicator(),
-                                  ),
-                                  errorWidget: (context, url, error) => Center(
-                                    child: Text(
-                                        '${gameState.gameData?.gameImages?.first.word}'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 25),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: List.generate(
-                                  gameState.correctAnswers.length,
-                                  (index) => DragTarget<String>(
-                                        builder: (
-                                          BuildContext context,
-                                          List<dynamic> accepted,
-                                          List<dynamic> rejected,
-                                        ) {
-                                          return DragTargetWidget(
-                                              title: gameState
-                                                  .correctAnswers[index]);
-                                        },
-                                        onAcceptWithDetails:
-                                            (DragTargetDetails<String>
-                                                details) async {
-                                          if (context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .ableButton()) {
-                                            context
-                                                .read<SpellingCubit>()
-                                                .addTheCorrectAnswer(
-                                                    index: index,
-                                                    answer: details.data);
-                                            if (context
-                                                .read<SpellingCubit>()
-                                                .checkCurrentFinished()) {
-                                              if (await context
-                                                  .read<SpellingCubit>()
-                                                  .checkIsCorrectAnswer()) {
-                                                await context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .addSuccessAnswer(
-                                                        isArabic:
-                                                            gameState.isArabic,
-                                                        questions: gameState
-                                                            .allGames.length,
-                                                        correctAnswers:
-                                                            (gameState.index) +
-                                                                1)
-                                                    .whenComplete(() async {
-                                                  bool isLastQuestion = context
-                                                      .read<
-                                                          CurrentGamePhoneticsCubit>()
-                                                      .checkIfIsTheLastQuestionOfGame(
-                                                          queations: gameState
-                                                              .allGames.length);
-                                                  if (!isLastQuestion) {
-                                                    await context
-                                                        .read<
-                                                            CurrentGamePhoneticsCubit>()
-                                                        .updateIndexOfCurrentGame();
-                                                    await context
-                                                        .read<SpellingCubit>()
-                                                        .updateTheCurrentGame(
-                                                            index: context
-                                                                .read<
-                                                                    CurrentGamePhoneticsCubit>()
-                                                                .state
-                                                                .index);
-                                                  }
-                                                });
-                                              } else {
-                                                await context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .addWrongAnswer(
-                                                        isArabic:
-                                                            gameState.isArabic,
-                                                        actionOfWrongAnswer:
-                                                            () async {});
-                                                await context
-                                                    .read<SpellingCubit>()
-                                                    .clearAnswers();
-                                              }
-                                            }
-                                          }
-                                        },
-                                      )),
-                            ),
-                          ),
+                          _buildImage(gameState),
+                          _buildAnswerBoxes(gameState, context),
                           SizedBox(height: 45.h),
                         ],
                       ),
                     )),
-                SizedBox(width: 20),
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(right: 15.w),
-                    padding: EdgeInsets.symmetric(
-                      vertical:
-                          ((gameState.gameData)?.gameLetters?.length ?? 1) == 26
-                              ? 0
-                              : 20,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(
-                        color: AppColorPhonetics.darkBorderColor,
-                        width: 5,
-                      ),
-                    ),
-                    child: Center(
-                      child: Wrap(
-                        children: List.generate(
-                          (gameState.gameData?.gameLetters?.length ?? 1),
-                          (index) {
-                            return ItemCardWidget(
-                              id: ((gameState.gameData?.gameLetters)
-                                      ?.map((e) => e.id)
-                                      .toSet()
-                                      .toList()[index]) ??
-                                  0,
-                              body: (gameState.gameData?.gameLetters)
-                                      ?.map((e) => e.letter)
-                                      .toSet()
-                                      .toList()[index] ??
-                                  '',
-                              maxHeight:
-                                  ((gameState.gameData?.gameLetters?.length ??
-                                              1) ==
-                                          26
-                                      ? 40.h
-                                      : 60.h),
-                              maxWidth:
-                                  ((gameState.gameData?.gameLetters?.length ??
-                                              1) ==
-                                          26
-                                      ? 23.w
-                                      : 30.w),
-                              index: index,
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                _buildLetters(gameState),
               ],
             ),
           );
         });
+  }
+
+  Widget _buildLetters(SpellingInitial gameState) {
+    return Expanded(
+      flex: 4,
+      child: Container(
+        alignment: Alignment.center,
+        margin: EdgeInsets.only(right: 15.w),
+        padding: EdgeInsets.symmetric(
+          vertical:
+              ((gameState.gameData)?.gameLetters?.length ?? 1) == 26 ? 0 : 20,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            color: AppColorPhonetics.darkBorderColor,
+            width: 5,
+          ),
+        ),
+        child: Center(
+          child: Wrap(
+            children: List.generate(
+              (gameState.gameData?.gameLetters?.length ?? 1),
+              (index) {
+                return ItemCardWidget(
+                  id: ((gameState.gameData?.gameLetters)
+                          ?.map((e) => e.id)
+                          .toSet()
+                          .toList()[index]) ??
+                      0,
+                  body: (gameState.gameData?.gameLetters)
+                          ?.map((e) => e.letter)
+                          .toSet()
+                          .toList()[index] ??
+                      '',
+                  maxHeight:
+                      ((gameState.gameData?.gameLetters?.length ?? 1) == 26
+                          ? 40.h
+                          : 60.h),
+                  maxWidth:
+                      ((gameState.gameData?.gameLetters?.length ?? 1) == 26
+                          ? 23.w
+                          : 30.w),
+                  index: index,
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAnswerBoxes(SpellingInitial gameState, BuildContext context) {
+    final correctAnswers = gameState.correctAnswers;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List.generate(
+            correctAnswers.length,
+            (index) => DragTarget<String>(
+                  builder: (
+                    BuildContext context,
+                    List<dynamic> accepted,
+                    List<dynamic> rejected,
+                  ) {
+                    return DragTargetWidget(title: correctAnswers[index]);
+                  },
+                  onAcceptWithDetails:
+                      (DragTargetDetails<String> details) async {
+                    if (context
+                        .read<CurrentGamePhoneticsCubit>()
+                        .ableButton()) {
+                      context.read<SpellingCubit>().addTheCorrectAnswer(
+                          index: index, answer: details.data.substring(0, 1));
+                      if (context
+                          .read<SpellingCubit>()
+                          .checkCurrentFinished()) {
+                        if (await context
+                            .read<SpellingCubit>()
+                            .checkIsCorrectAnswer()) {
+                          await context
+                              .read<CurrentGamePhoneticsCubit>()
+                              .addSuccessAnswer(
+                                  isArabic: gameState.isArabic,
+                                  questions: gameState.allGames.length,
+                                  correctAnswers: (gameState.index) + 1)
+                              .whenComplete(() async {
+                            bool isLastQuestion = context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .checkIfIsTheLastQuestionOfGame(
+                                    queations: gameState.allGames.length);
+                            if (!isLastQuestion) {
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .updateIndexOfCurrentGame();
+                              await context
+                                  .read<SpellingCubit>()
+                                  .updateTheCurrentGame(
+                                      index: context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .state
+                                          .index);
+                            }
+                          });
+                        } else {
+                          await context
+                              .read<CurrentGamePhoneticsCubit>()
+                              .addWrongAnswer(
+                                  isArabic: gameState.isArabic,
+                                  actionOfWrongAnswer: () async {});
+                          await context.read<SpellingCubit>().clearAnswers();
+                        }
+                      }
+                    }
+                  },
+                )),
+      ),
+    );
+  }
+
+  Widget _buildImage(SpellingInitial gameState) {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: .05.sh),
+        child: GestureDetector(
+          onTap: TalkTts.data == StateOfTalk.talking
+              ? null
+              : () {
+                  TalkTts.startTalk(
+                      text: gameState.gameData?.correctAns ?? '',
+                      isArabic: gameState.isArabic);
+                },
+          child: CachedNetworkImage(
+            imageUrl: gameState.gameData?.gameImages?.first.image ?? '',
+            height: 1,
+            placeholder: (context, url) => const Center(
+              child: CupertinoActivityIndicator(),
+            ),
+            errorWidget: (context, url, error) => Center(
+              child: Text('${gameState.gameData?.gameImages?.first.word}'),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
