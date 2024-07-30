@@ -724,7 +724,7 @@ class MemoryCard implements BasicOfGameData {
   String? completeBasket;
 
   @override
-  bool isConnect = false;
+  bool isConnect = true;
 
   @override
   String? titleImageAr;

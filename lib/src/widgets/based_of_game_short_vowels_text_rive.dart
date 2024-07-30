@@ -17,6 +17,9 @@ import '../games/drag_word_to_pic/page/drag_pic_to_word.dart';
 import '../games/family_word/pages/family_word_game.dart';
 import '../games/listen_and_choose/manager/listen_choose_cubit.dart';
 import '../games/listen_and_choose/page/listen_and_choose_screen.dart';
+import '../games/magic_card/manger/magic_card_cubit.dart';
+import '../games/magic_card/screen/magic_card_screen.dart';
+import '../games/match/page/match_screen.dart';
 import '../games/sorting_game/manager/sorting_cubit.dart';
 import '../games/sorting_game/pages/sorting_game.dart';
 import '../games/spelling_game/manager/spelling_cubit.dart';
@@ -89,6 +92,15 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                         create: (_) => ListenChooseCubit(
                             index: stateOfGame.index, listGameData: gamesData),
                         child: ListenAndChooseScreen())
+                  } else if ((stateOfGame.basicData?.gameData
+                      is MemoryCard)) ...{
+                    BlocProvider<MagicCardCubit>(
+                        create: (_) => MagicCardCubit(
+                              gameData: gamesData[stateOfGame.index],
+                              mainBloc:
+                                  context.read<CurrentGamePhoneticsCubit>(),
+                            ),
+                        child: MagicCardScreen())
                   }
                 ],
               ),
@@ -103,62 +115,62 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: context
-                          .read<CurrentGamePhoneticsCubit>()
-                          .ableButton()
+                              .read<CurrentGamePhoneticsCubit>()
+                              .ableButton()
                           ? () async {
-                        await context
-                            .read<CurrentGamePhoneticsCubit>()
-                            .beeTalkingTrue();
-                        await TalkTts.startTalk(
-                          text: gamesData[stateOfGame.index].inst ?? '',
-                        );
-                        TalkTts.flutterTts.setCompletionHandler(() async {
-                          if (stateOfGame.stateOfStringIsWord !=
-                              StateOfSubWord.stopTalk) {
-                            if (stateOfGame.stateOfStringIsWord ==
-                                StateOfSubWord.isWord) {
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .beeTalkingTrue();
                               await TalkTts.startTalk(
-                                text: stateOfGame.stateOfStringWillSay ??
-                                    '',
+                                text: gamesData[stateOfGame.index].inst ?? '',
                               );
-                            } else {
-                              await AudioPlayerLetters.startPlaySound(
-                                  soundPath:
-                                  AssetsSoundLetters.getSoundOfLetter(
-                                      mainGameLetter: stateOfGame
-                                          .stateOfStringWillSay ??
-                                          ''));
-                            }
-                          }
-                        });
+                              TalkTts.flutterTts.setCompletionHandler(() async {
+                                if (stateOfGame.stateOfStringIsWord !=
+                                    StateOfSubWord.stopTalk) {
+                                  if (stateOfGame.stateOfStringIsWord ==
+                                      StateOfSubWord.isWord) {
+                                    await TalkTts.startTalk(
+                                      text: stateOfGame.stateOfStringWillSay ??
+                                          '',
+                                    );
+                                  } else {
+                                    await AudioPlayerLetters.startPlaySound(
+                                        soundPath:
+                                            AssetsSoundLetters.getSoundOfLetter(
+                                                mainGameLetter: stateOfGame
+                                                        .stateOfStringWillSay ??
+                                                    ''));
+                                  }
+                                }
+                              });
 
-                        await context
-                            .read<CurrentGamePhoneticsCubit>()
-                            .beeTalkingFalse();
-                      }
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .beeTalkingFalse();
+                            }
                           : null,
                       child: Container(
                           alignment: Alignment.center,
                           child: stateOfGame.avatarCurrentArtboard == null
                               ? SizedBox(
-                            height: 75.h,
-                            width: 80.w,
-                          )
+                                  height: 75.h,
+                                  width: 80.w,
+                                )
                               : Container(
-                            margin: EdgeInsets.only(
-                              left: 7.w,
-                            ),
-                            child: SizedBox(
-                                height: 100.h,
-                                // width: 65.w,
-                                child: Rive(
-                                  artboard:
-                                  stateOfGame.avatarCurrentArtboard!,
-                                  fit: BoxFit.fill,
-                                  useArtboardSize: true,
-                                  alignment: Alignment.center,
+                                  margin: EdgeInsets.only(
+                                    left: 7.w,
+                                  ),
+                                  child: SizedBox(
+                                      height: 100.h,
+                                      // width: 65.w,
+                                      child: Rive(
+                                        artboard:
+                                            stateOfGame.avatarCurrentArtboard!,
+                                        fit: BoxFit.fill,
+                                        useArtboardSize: true,
+                                        alignment: Alignment.center,
+                                      )),
                                 )),
-                          )),
                     ),
                   ],
                 ),
