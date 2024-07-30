@@ -43,76 +43,6 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
           children: [
             /////////////////////game title//////////////////
 
-            Positioned(
-              top: 0,
-              left: -20,
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: context
-                              .read<CurrentGamePhoneticsCubit>()
-                              .ableButton()
-                          ? () async {
-                              await context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .beeTalkingTrue();
-                              await TalkTts.startTalk(
-                                text: gamesData[stateOfGame.index].inst ?? '',
-                              );
-                              TalkTts.flutterTts.setCompletionHandler(() async {
-                                if (stateOfGame.stateOfStringIsWord !=
-                                    StateOfSubWord.stopTalk) {
-                                  if (stateOfGame.stateOfStringIsWord ==
-                                      StateOfSubWord.isWord) {
-                                    await TalkTts.startTalk(
-                                      text: stateOfGame.stateOfStringWillSay ??
-                                          '',
-                                    );
-                                  } else {
-                                    await AudioPlayerLetters.startPlaySound(
-                                        soundPath:
-                                            AssetsSoundLetters.getSoundOfLetter(
-                                                mainGameLetter: stateOfGame
-                                                        .stateOfStringWillSay ??
-                                                    ''));
-                                  }
-                                }
-                              });
-
-                              await context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .beeTalkingFalse();
-                            }
-                          : null,
-                      child: Container(
-                          alignment: Alignment.center,
-                          child: stateOfGame.avatarCurrentArtboard == null
-                              ? SizedBox(
-                                  height: 75.h,
-                                  width: 80.w,
-                                )
-                              : Container(
-                                  margin: EdgeInsets.only(
-                                    left: 7.w,
-                                  ),
-                                  child: SizedBox(
-                                      height: 100.h,
-                                      // width: 65.w,
-                                      child: Rive(
-                                        artboard:
-                                            stateOfGame.avatarCurrentArtboard!,
-                                        fit: BoxFit.fill,
-                                        useArtboardSize: true,
-                                        alignment: Alignment.center,
-                                      )),
-                                )),
-                    ),
-                  ],
-                ),
-              ),
-            ),
             /////////////////////game//////////////////
             Center(
               child: Column(
@@ -163,16 +93,90 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                 ],
               ),
             ),
+
+            Positioned(
+              top: 0,
+              left: -20,
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: context
+                          .read<CurrentGamePhoneticsCubit>()
+                          .ableButton()
+                          ? () async {
+                        await context
+                            .read<CurrentGamePhoneticsCubit>()
+                            .beeTalkingTrue();
+                        await TalkTts.startTalk(
+                          text: gamesData[stateOfGame.index].inst ?? '',
+                        );
+                        TalkTts.flutterTts.setCompletionHandler(() async {
+                          if (stateOfGame.stateOfStringIsWord !=
+                              StateOfSubWord.stopTalk) {
+                            if (stateOfGame.stateOfStringIsWord ==
+                                StateOfSubWord.isWord) {
+                              await TalkTts.startTalk(
+                                text: stateOfGame.stateOfStringWillSay ??
+                                    '',
+                              );
+                            } else {
+                              await AudioPlayerLetters.startPlaySound(
+                                  soundPath:
+                                  AssetsSoundLetters.getSoundOfLetter(
+                                      mainGameLetter: stateOfGame
+                                          .stateOfStringWillSay ??
+                                          ''));
+                            }
+                          }
+                        });
+
+                        await context
+                            .read<CurrentGamePhoneticsCubit>()
+                            .beeTalkingFalse();
+                      }
+                          : null,
+                      child: Container(
+                          alignment: Alignment.center,
+                          child: stateOfGame.avatarCurrentArtboard == null
+                              ? SizedBox(
+                            height: 75.h,
+                            width: 80.w,
+                          )
+                              : Container(
+                            margin: EdgeInsets.only(
+                              left: 7.w,
+                            ),
+                            child: SizedBox(
+                                height: 100.h,
+                                // width: 65.w,
+                                child: Rive(
+                                  artboard:
+                                  stateOfGame.avatarCurrentArtboard!,
+                                  fit: BoxFit.fill,
+                                  useArtboardSize: true,
+                                  alignment: Alignment.center,
+                                )),
+                          )),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             PositionedDirectional(
               top: 0,
               start: 35.w,
               child: Padding(
                 padding: EdgeInsets.only(left: 10.w, top: 10.h),
-                child: Image.asset(
-                  stateOfGame.basicData?.gameData?.titleImageEn ?? '',
-                  height: 75.h,
-                  width: 120.w,
-                  // fit: BoxFit.fill,
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Image.asset(
+                    stateOfGame.basicData?.gameData?.titleImageEn ?? '',
+                    height: 75.h,
+                    // width: 120.w,
+                    // fit: BoxFit.fill,
+                  ),
                 ),
               ),
             ),
