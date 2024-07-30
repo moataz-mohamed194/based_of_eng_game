@@ -91,8 +91,12 @@ class SpellingCubit extends Cubit<SpellingInitial> {
   }
 
   bool checkCurrentFinished() {
-    return state.gameData?.correctAns?.length ==
-        state.correctAnswers.join('').length;
+    final lengthOfCorrectAnswer = state.gameData?.correctAns?.length;
+    final lengthOfCurrentAnswer = state.correctAnswers.join('').length;
+    final isCurrentAnswerFinished =
+        lengthOfCurrentAnswer == lengthOfCorrectAnswer;
+
+    return isCurrentAnswerFinished;
   }
 
   updateTheCurrentGame({required int index}) async {
