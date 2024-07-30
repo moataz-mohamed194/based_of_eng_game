@@ -70,6 +70,8 @@ abstract class BasicOfGameData {
       return MatchGame();
     } else if (gameType == GameTypes.listenAndChoose.text()) {
       return ListenAndChooseGame();
+    } else if (gameType == GameTypes.completeTheSentence.text()) {
+      return CompleteTheSentenceGame();
     } else if (gameType == GameTypes.clickTheWord.text()) {
       return ClickTheWordGame();
     } else if (gameType == GameTypes.chooseTheSentence.text()) {
@@ -640,6 +642,26 @@ class ListenAndChooseGame implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesPhonetics.listenAndChooseGame;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = true;
+
+  @override
+  String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class CompleteTheSentenceGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = AppImagesPhonetics.completeTheSentence;
 
   @override
   String? completeBasket;

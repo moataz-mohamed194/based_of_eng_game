@@ -87,7 +87,9 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                             listGameData: gamesData),
                         child: FamilyWordGameScreen())
                   } else if ((stateOfGame.basicData?.gameData
-                      is ListenAndChooseGame)) ...{
+                          is ListenAndChooseGame) ||
+                      (stateOfGame.basicData?.gameData
+                          is CompleteTheSentenceGame)) ...{
                     BlocProvider<ListenChooseCubit>(
                         create: (_) => ListenChooseCubit(
                             index: stateOfGame.index, listGameData: gamesData),
@@ -186,7 +188,7 @@ class BasedOfGameShortVowelsTextNextRive extends StatelessWidget {
                   child: Image.asset(
                     stateOfGame.basicData?.gameData?.titleImageEn ?? '',
                     height: 75.h,
-                    // width: 120.w,
+                    width: 120.w,
                     // fit: BoxFit.fill,
                   ),
                 ),

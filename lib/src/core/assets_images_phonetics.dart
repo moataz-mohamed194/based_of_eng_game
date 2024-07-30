@@ -54,6 +54,8 @@ abstract class AppImagesPhonetics {
   static const String matchGame = "${mainPathOfImages}matchGame.png";
   static const String listenAndChooseGame =
       "${mainPathOfImages}listenAndChooseGame.png";
+  static const String completeTheSentence =
+      "${mainPathOfImages}completeTheSentenceGame.png";
   static const String clickTheWordGame =
       "${mainPathOfImages}clickTheWordGame.png";
   static const String chooseTheSentenceGame =

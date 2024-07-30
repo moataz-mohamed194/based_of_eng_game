@@ -57,7 +57,8 @@ enum GameTypes {
   bingoArabic,
   completeTheWord,
   chooseTheStretchedLetter,
-  memoryCards
+  memoryCards,
+  completeTheSentence
 }
 
 extension TypeExtension on GameTypes {
@@ -181,6 +182,8 @@ extension TypeExtension on GameTypes {
         return 'اختر الحرف الممدود'.toLowerCase();
       case GameTypes.memoryCards:
         return 'Memory Cards'.toLowerCase();
+      case GameTypes.completeTheSentence:
+        return 'Complete the sentence'.toLowerCase();
     }
   }
 }
