@@ -42,7 +42,7 @@ class _BingoArabicGameScreen extends State<BingoArabicGameScreen> {
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(8.r),
             border:
                 Border.all(color: AppColorPhonetics.darkBorderColor, width: 5)),
         child: BlocConsumer<BingoArabicCubit, BingoArabicState>(
@@ -137,6 +137,7 @@ class _BingoArabicGameScreen extends State<BingoArabicGameScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: Colors.blue.withOpacity(0.5), width: 1),
+        borderRadius: BorderRadius.circular(8.r),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
