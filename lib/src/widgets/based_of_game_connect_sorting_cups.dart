@@ -60,7 +60,7 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
                   isArabic
                       ? stateOfGame.basicData?.gameData?.titleImageAr ?? ''
                       : stateOfGame.basicData?.gameData?.titleImageEn ?? '',
-                  // height: 50.h,
+                  height: 50.h,
                   width: 120.w,
                   fit: isArabic ? BoxFit.contain : BoxFit.fill,
                 )),
