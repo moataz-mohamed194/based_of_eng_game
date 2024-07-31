@@ -28,7 +28,7 @@ class ChooseSticksScreen extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border:
-                Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
+                Border.all(color: AppColorPhonetics.darkBlueColor, width: 5)),
         child: BlocConsumer<ChooseSticksCubit, ChooseSticksInitial>(
             listener: (context, state) {},
             builder: (context, gameState) {
@@ -36,7 +36,6 @@ class ChooseSticksScreen extends StatelessWidget {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height -
                       (90.h + 50.h + 5 + 20.h),
-
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -45,7 +44,8 @@ class ChooseSticksScreen extends StatelessWidget {
                         number: "${gameState.mainNumber ?? ''}",
                       ),
                       10.pw,
-                      if (((gameState.basicData as MathChooseSticksOrBeadsOrBlocks)
+                      if (((gameState.basicData
+                                  as MathChooseSticksOrBeadsOrBlocks)
                               .tools !=
                           ToolsOfMath.domino)) ...{
                         Column(
@@ -58,8 +58,9 @@ class ChooseSticksScreen extends StatelessWidget {
                                         CardOfSelected(
                                           onTap: () async {
                                             if (context
-                                                .read<CurrentGamePhoneticsCubit>()
-                                                .ableButton() &&
+                                                    .read<
+                                                        CurrentGamePhoneticsCubit>()
+                                                    .ableButton() &&
                                                 gameState.isCorrect != true) {
                                               bool stateOfAnswer = context
                                                   .read<ChooseSticksCubit>()
@@ -86,7 +87,8 @@ class ChooseSticksScreen extends StatelessWidget {
                                                           CurrentGamePhoneticsCubit>()
                                                       .checkIfIsTheLastQuestionOfGame(
                                                           queations: gameState
-                                                              .allGameData.length);
+                                                              .allGameData
+                                                              .length);
 
                                                   if (isLastQuestion) {
                                                     // Future.delayed(const Duration(seconds: 2),
@@ -95,14 +97,16 @@ class ChooseSticksScreen extends StatelessWidget {
                                                     // });
                                                   } else {
                                                     Future.delayed(
-                                                        const Duration(seconds: 2),
+                                                        const Duration(
+                                                            seconds: 2),
                                                         () async {
                                                       await context
                                                           .read<
                                                               CurrentGamePhoneticsCubit>()
                                                           .updateIndexOfCurrentGame();
                                                       context
-                                                          .read<ChooseSticksCubit>()
+                                                          .read<
+                                                              ChooseSticksCubit>()
                                                           .updateTheCurrentGame(
                                                               index: context
                                                                   .read<
@@ -122,13 +126,16 @@ class ChooseSticksScreen extends StatelessWidget {
                                               }
                                             }
                                           },
-                                          itsId:
-                                              gameState.gameChoices?[index].id ?? 0,
-                                          isCorrect: (gameState.isCorrect ==
-                                                  true) &&
-                                              (gameState.gameChoices?[index].choice)
-                                                      .toString() ==
-                                                  gameState.mainNumber.toString(),
+                                          itsId: gameState
+                                                  .gameChoices?[index].id ??
+                                              0,
+                                          isCorrect:
+                                              (gameState.isCorrect == true) &&
+                                                  (gameState.gameChoices?[index]
+                                                              .choice)
+                                                          .toString() ==
+                                                      gameState.mainNumber
+                                                          .toString(),
                                         ),
                                         10.pw,
                                         if ((gameState.basicData
@@ -137,7 +144,8 @@ class ChooseSticksScreen extends StatelessWidget {
                                             ToolsOfMath.sticks) ...{
                                           Slick(
                                             count: int.parse(gameState
-                                                    .gameChoices?[index].choice ??
+                                                    .gameChoices?[index]
+                                                    .choice ??
                                                 '0'),
                                           )
                                         } else if ((gameState.basicData
@@ -146,7 +154,8 @@ class ChooseSticksScreen extends StatelessWidget {
                                             ToolsOfMath.beads) ...{
                                           GetTheBeads(
                                             countOfBalls: int.parse(gameState
-                                                    .gameChoices?[index].choice ??
+                                                    .gameChoices?[index]
+                                                    .choice ??
                                                 '0'),
                                           )
                                         } else if ((gameState.basicData
@@ -155,7 +164,8 @@ class ChooseSticksScreen extends StatelessWidget {
                                             ToolsOfMath.blocks) ...{
                                           GetTheBlocks(
                                             countOfBoxes: int.parse(gameState
-                                                    .gameChoices?[index].choice ??
+                                                    .gameChoices?[index]
+                                                    .choice ??
                                                 '0'),
                                           )
                                         }
@@ -176,8 +186,9 @@ class ChooseSticksScreen extends StatelessWidget {
                                         CardOfSelected(
                                           onTap: () async {
                                             if (context
-                                                .read<CurrentGamePhoneticsCubit>()
-                                                .ableButton() &&
+                                                    .read<
+                                                        CurrentGamePhoneticsCubit>()
+                                                    .ableButton() &&
                                                 gameState.isCorrect != true) {
                                               bool stateOfAnswer = context
                                                   .read<ChooseSticksCubit>()
@@ -204,7 +215,8 @@ class ChooseSticksScreen extends StatelessWidget {
                                                           CurrentGamePhoneticsCubit>()
                                                       .checkIfIsTheLastQuestionOfGame(
                                                           queations: gameState
-                                                              .allGameData.length);
+                                                              .allGameData
+                                                              .length);
 
                                                   if (isLastQuestion) {
                                                     // Future.delayed(const Duration(seconds: 2),
@@ -213,14 +225,16 @@ class ChooseSticksScreen extends StatelessWidget {
                                                     // });
                                                   } else {
                                                     Future.delayed(
-                                                        const Duration(seconds: 2),
+                                                        const Duration(
+                                                            seconds: 2),
                                                         () async {
                                                       await context
                                                           .read<
                                                               CurrentGamePhoneticsCubit>()
                                                           .updateIndexOfCurrentGame();
                                                       context
-                                                          .read<ChooseSticksCubit>()
+                                                          .read<
+                                                              ChooseSticksCubit>()
                                                           .updateTheCurrentGame(
                                                               index: context
                                                                   .read<
@@ -240,13 +254,16 @@ class ChooseSticksScreen extends StatelessWidget {
                                               }
                                             }
                                           },
-                                          itsId:
-                                              gameState.gameChoices?[index].id ?? 0,
-                                          isCorrect: (gameState.isCorrect ==
-                                                  true) &&
-                                              (gameState.gameChoices?[index].choice)
-                                                      .toString() ==
-                                                  gameState.mainNumber.toString(),
+                                          itsId: gameState
+                                                  .gameChoices?[index].id ??
+                                              0,
+                                          isCorrect:
+                                              (gameState.isCorrect == true) &&
+                                                  (gameState.gameChoices?[index]
+                                                              .choice)
+                                                          .toString() ==
+                                                      gameState.mainNumber
+                                                          .toString(),
                                         ),
                                         10.pw,
                                         if ((gameState.basicData
@@ -255,12 +272,12 @@ class ChooseSticksScreen extends StatelessWidget {
                                             ToolsOfMath.domino) ...{
                                           DominoWidget(
                                             count: int.parse(gameState
-                                                    .gameChoices?[index].choice ??
+                                                    .gameChoices?[index]
+                                                    .choice ??
                                                 '0'),
                                           )
                                         },
                                         20.pw
-
                                       ],
                                     ))),
                       },

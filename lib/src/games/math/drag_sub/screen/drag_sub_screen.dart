@@ -34,7 +34,7 @@ class DragSubScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
-                    color: AppColorPhonetics.boarderColor, width: 5)),
+                    color: AppColorPhonetics.darkBlueColor, width: 5)),
             child: FittedBox(
               child: Column(
                 children: [
@@ -72,8 +72,9 @@ class DragSubScreen extends StatelessWidget {
                         );
                       }, onAcceptWithDetails: (item) async {
                         if (context
-                            .read<CurrentGamePhoneticsCubit>()
-                            .ableButton()&& gameState.isCorrect!=true) {
+                                .read<CurrentGamePhoneticsCubit>()
+                                .ableButton() &&
+                            gameState.isCorrect != true) {
                           bool stateOfAnswer = context
                               .read<DragSubCubit>()
                               .addAnswer(userChoose: item.data);
@@ -130,18 +131,18 @@ class DragSubScreen extends StatelessWidget {
                       children: List.generate(
                           gameState.gameChoices?.length ?? 0,
                           (index) => Row(
-                            children: [
-                              _answer(
-                                answer: gameState.gameChoices![index],
-                                tools: gameState.tools,
-                                gameState: gameState,
-                                mainBloc:
-                                context.read<CurrentGamePhoneticsCubit>(),
-                                bloc: context.read<DragSubCubit>(),
-                              ),
-                              20.pw
-                            ],
-                          )),
+                                children: [
+                                  _answer(
+                                    answer: gameState.gameChoices![index],
+                                    tools: gameState.tools,
+                                    gameState: gameState,
+                                    mainBloc: context
+                                        .read<CurrentGamePhoneticsCubit>(),
+                                    bloc: context.read<DragSubCubit>(),
+                                  ),
+                                  20.pw
+                                ],
+                              )),
                     ),
                   ),
                   5.ph
@@ -226,44 +227,49 @@ class DragSubScreen extends StatelessWidget {
               )
             : SizedBox(),
         child: Opacity(
-
-            opacity: gameState.isCorrect == true && ((int.parse("${gameState.subQuestion?.letter??0}")-int.parse("${gameState.mainQuestion?.letter??0}"))== int.parse("${answer?.choice??0}"))?(.3):1 ,
-            child:Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            if (tools == ToolsOfMath.blocks) ...{
-              GetTheBlocks(
-                countOfBoxes: int.parse("${answer?.choice ?? 0}"),
-              )
-            } else if (tools == ToolsOfMath.beads) ...{
-              GetTheBeads(
-                countOfBalls: int.parse("${answer?.choice ?? 0}"),
-              )
-            },
-            5.ph,
-             Container(
-                width: 20.w,
-                height: 20.w,
-                padding: const EdgeInsets.all(5),
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(AppImagesMath.woodBgNumber))),
-                child: FittedBox(
-                  child: Text(
-                    "${answer?.choice ?? 0}",
-                    style: TextStyle(
-                      color: int.parse("${answer?.choice ?? 0}") % 2 != 0
-                          ? AppColorPhonetics.redColor
-                          : AppColorPhonetics.darkBlueColor,
-                      fontSize: 20.sp,
-                      fontFamily: AppTheme.getFontFamily5(),
-                      fontWeight: FontWeight.w400,
-                      height: 0,
+            opacity: gameState.isCorrect == true &&
+                    ((int.parse("${gameState.subQuestion?.letter ?? 0}") -
+                            int.parse(
+                                "${gameState.mainQuestion?.letter ?? 0}")) ==
+                        int.parse("${answer?.choice ?? 0}"))
+                ? (.3)
+                : 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                if (tools == ToolsOfMath.blocks) ...{
+                  GetTheBlocks(
+                    countOfBoxes: int.parse("${answer?.choice ?? 0}"),
+                  )
+                } else if (tools == ToolsOfMath.beads) ...{
+                  GetTheBeads(
+                    countOfBalls: int.parse("${answer?.choice ?? 0}"),
+                  )
+                },
+                5.ph,
+                Container(
+                  width: 20.w,
+                  height: 20.w,
+                  padding: const EdgeInsets.all(5),
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(AppImagesMath.woodBgNumber))),
+                  child: FittedBox(
+                    child: Text(
+                      "${answer?.choice ?? 0}",
+                      style: TextStyle(
+                        color: int.parse("${answer?.choice ?? 0}") % 2 != 0
+                            ? AppColorPhonetics.redColor
+                            : AppColorPhonetics.darkBlueColor,
+                        fontSize: 20.sp,
+                        fontFamily: AppTheme.getFontFamily5(),
+                        fontWeight: FontWeight.w400,
+                        height: 0,
+                      ),
                     ),
                   ),
                 ),
-            ),
-          ],
-        )));
+              ],
+            )));
   }
 }

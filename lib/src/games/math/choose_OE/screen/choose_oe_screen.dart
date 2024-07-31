@@ -27,7 +27,7 @@ class ChooseOeScreen extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border:
-                Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
+                Border.all(color: AppColorPhonetics.darkBlueColor, width: 5)),
         child: BlocConsumer<ChooseOeCubit, ChooseOeInitial>(
             listener: (context, state) {},
             builder: (context, gameState) {
@@ -46,7 +46,8 @@ class ChooseOeScreen extends StatelessWidget {
                               gameState.gameChoices?.length ?? 0,
                               (index) => Row(
                                     children: [
-                                      if ((gameState.basicData as MathChooseOEDomino)
+                                      if ((gameState.basicData
+                                                  as MathChooseOEDomino)
                                               .tools ==
                                           ToolsOfMath.domino) ...{
                                         Row(
@@ -54,30 +55,37 @@ class ChooseOeScreen extends StatelessWidget {
                                             CardOfSelected(
                                               onTap: () async {
                                                 if (context
-                                                    .read<CurrentGamePhoneticsCubit>()
-                                                    .ableButton() && gameState.isCorrect!=true) {
+                                                        .read<
+                                                            CurrentGamePhoneticsCubit>()
+                                                        .ableButton() &&
+                                                    gameState.isCorrect !=
+                                                        true) {
                                                   bool stateOfAnswer = context
                                                       .read<ChooseOeCubit>()
                                                       .addAnswer(
                                                           userChoose: gameState
-                                                              .gameChoices?[index]);
+                                                                  .gameChoices?[
+                                                              index]);
                                                   if (stateOfAnswer == true) {
                                                     await context
                                                         .read<
                                                             CurrentGamePhoneticsCubit>()
                                                         .addSuccessAnswer(
                                                             questions: gameState
-                                                                .allGameData.length,
-                                                            correctAnswers: gameState
-                                                                    .correctAnswers +
-                                                                1)
+                                                                .allGameData
+                                                                .length,
+                                                            correctAnswers:
+                                                                gameState
+                                                                        .correctAnswers +
+                                                                    1)
                                                         .whenComplete(() {
                                                       bool isLastQuestion = context
                                                           .read<
                                                               CurrentGamePhoneticsCubit>()
                                                           .checkIfIsTheLastQuestionOfGame(
                                                               queations: gameState
-                                                                  .allGameData.length);
+                                                                  .allGameData
+                                                                  .length);
 
                                                       if (isLastQuestion) {
                                                         // Future.delayed(const Duration(seconds: 2),
@@ -86,14 +94,16 @@ class ChooseOeScreen extends StatelessWidget {
                                                         // });
                                                       } else {
                                                         Future.delayed(
-                                                            const Duration(seconds: 2),
+                                                            const Duration(
+                                                                seconds: 2),
                                                             () async {
                                                           await context
                                                               .read<
                                                                   CurrentGamePhoneticsCubit>()
                                                               .updateIndexOfCurrentGame();
                                                           context
-                                                              .read<ChooseOeCubit>()
+                                                              .read<
+                                                                  ChooseOeCubit>()
                                                               .updateTheCurrentGame(
                                                                   index: context
                                                                       .read<
@@ -113,34 +123,36 @@ class ChooseOeScreen extends StatelessWidget {
                                                   }
                                                 }
                                               },
-                                              itsId:
-                                                  gameState.gameChoices?[index].id ?? 0,
-                                              isCorrect:
-                                                  (gameState.isCorrect == true) &&
-                                                      (gameState.gameChoices?[index]
-                                                              .isCorrect ==
-                                                          1),
+                                              itsId: gameState
+                                                      .gameChoices?[index].id ??
+                                                  0,
+                                              isCorrect: (gameState.isCorrect ==
+                                                      true) &&
+                                                  (gameState.gameChoices?[index]
+                                                          .isCorrect ==
+                                                      1),
                                             ),
                                             10.pw,
                                             Column(
                                               children: [
                                                 Text(
-                                                  gameState
-                                                          .gameChoices?[index].choice ??
+                                                  gameState.gameChoices?[index]
+                                                          .choice ??
                                                       '0',
                                                   style: TextStyle(
-                                                    color:
-                                                        AppColorPhonetics.darkBlueColor,
+                                                    color: AppColorPhonetics
+                                                        .darkBlueColor,
                                                     fontSize: 20.sp,
-                                                    fontFamily:
-                                                        AppTheme.getFontFamily5(),
+                                                    fontFamily: AppTheme
+                                                        .getFontFamily5(),
                                                     fontWeight: FontWeight.w400,
                                                     height: 0,
                                                   ),
                                                 ),
                                                 DominoWidget(
                                                   count: int.parse(gameState
-                                                          .gameChoices?[index].choice ??
+                                                          .gameChoices?[index]
+                                                          .choice ??
                                                       '0'),
                                                 )
                                               ],
@@ -151,7 +163,6 @@ class ChooseOeScreen extends StatelessWidget {
                                     ],
                                   ))),
                       10.ph,
-
                     ],
                   ),
                 ),

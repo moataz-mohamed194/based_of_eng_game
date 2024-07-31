@@ -30,7 +30,7 @@ class ChooseAddLineScreen extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border:
-                Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
+                Border.all(color: AppColorPhonetics.darkBlueColor, width: 5)),
         child: BlocConsumer<ChooseAddLineCubit, ChooseAddLineInitial>(
             listener: (context, state) {},
             builder: (context, gameState) {
@@ -40,9 +40,9 @@ class ChooseAddLineScreen extends StatelessWidget {
                   10.pw,
                   Expanded(
                       child: FittedBox(
-                        child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         _question(
                             question: gameState.mainQuestion,
                             tools: gameState.tools),
@@ -50,9 +50,9 @@ class ChooseAddLineScreen extends StatelessWidget {
                         _question(
                             question: gameState.subQuestion,
                             tools: gameState.tools),
-                                            ],
-                                          ),
-                      )),
+                      ],
+                    ),
+                  )),
                   10.pw,
                   Expanded(
                       child: FittedBox(
@@ -65,17 +65,19 @@ class ChooseAddLineScreen extends StatelessWidget {
                           children: List.generate(
                               gameState.gameChoices?.length ?? 0,
                               (index) => Column(
-                                children: [
-                                  _answer(
-                                      gameState: gameState,
-                                      question: gameState.gameChoices![index],
-                                      mainBloc:
-                                      context.read<CurrentGamePhoneticsCubit>(),
-                                      bloc: context.read<ChooseAddLineCubit>(),
-                                      tools: gameState.tools),
-                                  10.ph
-                                ],
-                              ))),
+                                    children: [
+                                      _answer(
+                                          gameState: gameState,
+                                          question:
+                                              gameState.gameChoices![index],
+                                          mainBloc: context.read<
+                                              CurrentGamePhoneticsCubit>(),
+                                          bloc: context
+                                              .read<ChooseAddLineCubit>(),
+                                          tools: gameState.tools),
+                                      10.ph
+                                    ],
+                                  ))),
                     ),
                   )),
                   10.pw,

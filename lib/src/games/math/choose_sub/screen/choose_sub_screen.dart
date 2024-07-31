@@ -32,7 +32,7 @@ class ChooseSubScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
-                    color: AppColorPhonetics.boarderColor, width: 5)),
+                    color: AppColorPhonetics.darkBlueColor, width: 5)),
             child: Column(
               children: [
                 Expanded(
@@ -80,19 +80,20 @@ class ChooseSubScreen extends StatelessWidget {
                     )),
                 Expanded(
                     child: FittedBox(
-                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        children: List.generate(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: List.generate(
                         gameState.gameChoices?.length ?? 0,
                         (index) => _answer(
                               answer: gameState.gameChoices![index],
                               tools: gameState.tools,
                               gameState: gameState,
-                              mainBloc: context.read<CurrentGamePhoneticsCubit>(),
+                              mainBloc:
+                                  context.read<CurrentGamePhoneticsCubit>(),
                               bloc: context.read<ChooseSubCubit>(),
                             )),
-                                      ),
-                    )),
+                  ),
+                )),
               ],
             ),
           );

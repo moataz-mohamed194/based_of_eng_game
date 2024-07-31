@@ -27,7 +27,7 @@ class SortingBlocksScreen extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border:
-                Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
+                Border.all(color: AppColorPhonetics.darkBlueColor, width: 5)),
         child: BlocConsumer<SortingBlocksCubit, SortingBlocksInitial>(
             listener: (context, state) {
           print('listener2');
@@ -47,7 +47,8 @@ class SortingBlocksScreen extends StatelessWidget {
                           Row(
                             children: [
                               CardOfNumber(
-                                number: gameState.gameChoices?[index].choice ?? '0',
+                                number:
+                                    gameState.gameChoices?[index].choice ?? '0',
                                 size: 65.h,
                               ),
                               10.pw,
@@ -59,8 +60,9 @@ class SortingBlocksScreen extends StatelessWidget {
                                 return CardOfBlocks(
                                   number: gameState.correctAnswers.contains(
                                           gameState.gameChoices?[index].id ?? 0)
-                                      ? int.parse(
-                                          gameState.gameChoices?[index].choice ?? '0')
+                                      ? int.parse(gameState
+                                              .gameChoices?[index].choice ??
+                                          '0')
                                       : 0,
                                   tools: ToolsOfMath.blocks,
                                 );
@@ -71,15 +73,16 @@ class SortingBlocksScreen extends StatelessWidget {
                                   bool stateOfAnswer = context
                                       .read<SortingBlocksCubit>()
                                       .addAnswer(
-                                          userChoose:
-                                              gameState.gameChoices?[index].id ?? 0,
+                                          userChoose: gameState
+                                                  .gameChoices?[index].id ??
+                                              0,
                                           secondChoose: item.data);
                                   if (stateOfAnswer == true) {
                                     await context
                                         .read<CurrentGamePhoneticsCubit>()
                                         .addSuccessAnswer(
-                                            questions: gameState
-                                                    .gameData.gameChoices?.length ??
+                                            questions: gameState.gameData
+                                                    .gameChoices?.length ??
                                                 0,
                                             correctAnswers:
                                                 gameState.correctAnswers.length)
@@ -87,8 +90,8 @@ class SortingBlocksScreen extends StatelessWidget {
                                       bool isLastQuestion = context
                                           .read<CurrentGamePhoneticsCubit>()
                                           .checkIfIsTheLastQuestionOfGame(
-                                              queations: gameState
-                                                      .gameData.gameChoices?.length ??
+                                              queations: gameState.gameData
+                                                      .gameChoices?.length ??
                                                   0);
                                       if (isLastQuestion) {
                                         // Future.delayed(const Duration(seconds: 2),
@@ -148,7 +151,9 @@ class SortingBlocksScreen extends StatelessWidget {
                                         "${gameState.secondGameChoices?[index].choice ?? 0}"),
                                   ),
                                   // childWhenDragging: ,
-                                  data: gameState.secondGameChoices?[index].id ?? 0,
+                                  data:
+                                      gameState.secondGameChoices?[index].id ??
+                                          0,
                                   child: GetTheBlocks(
                                     // isSolid: true,
                                     countOfBoxes: int.parse(

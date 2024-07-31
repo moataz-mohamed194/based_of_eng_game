@@ -30,7 +30,7 @@ class DragAddScreen extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border:
-                Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
+                Border.all(color: AppColorPhonetics.darkBlueColor, width: 5)),
         child: BlocConsumer<DragAddCubit, DragAddInitial>(
             listener: (context, state) {},
             builder: (context, gameState) {
@@ -39,8 +39,7 @@ class DragAddScreen extends StatelessWidget {
                   children: [
                     5.ph,
                     SizedBox(
-                      width: MediaQuery.of(context).size.width-100.w,
-
+                      width: MediaQuery.of(context).size.width - 100.w,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -94,7 +93,8 @@ class DragAddScreen extends StatelessWidget {
                                         //   Navigator.of(context).pop();
                                         // });
                                       } else {
-                                        Future.delayed(const Duration(seconds: 2),
+                                        Future.delayed(
+                                            const Duration(seconds: 2),
                                             () async {
                                           await context
                                               .read<CurrentGamePhoneticsCubit>()
@@ -126,7 +126,6 @@ class DragAddScreen extends StatelessWidget {
                     5.ph,
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
-
                       child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,

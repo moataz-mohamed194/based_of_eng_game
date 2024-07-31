@@ -30,7 +30,7 @@ class ChooseAddScreen extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border:
-                Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
+                Border.all(color: AppColorPhonetics.darkBlueColor, width: 5)),
         child: BlocConsumer<ChooseAddCubit, ChooseAddInitial>(
             listener: (context, state) {},
             builder: (context, gameState) {

@@ -31,7 +31,7 @@ class ChooseAddBeadsLineScreen extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border:
-                Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
+                Border.all(color: AppColorPhonetics.darkBlueColor, width: 5)),
         child: BlocConsumer<ChooseAddBeadsLineCubit, ChooseAddBeadsLineInitial>(
             listener: (context, state) {},
             builder: (context, gameState) {

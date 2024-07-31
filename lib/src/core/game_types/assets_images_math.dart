@@ -7,6 +7,8 @@ abstract class AppImagesMath {
   static const String sub = "${mainPathOfImages}sub.png";
   static const String clickTheChoose =
       "${mainPathOfImages}click_the_choose.png";
+  static const String countTypeTheNumber =
+      "${mainPathOfImages}count_type_the_number.png";
   static const String ball1 = "${mainPathOfImages}ball1.svg";
   static const String ball2 = "${mainPathOfImages}ball2.svg";
   static const String ball3 = "${mainPathOfImages}ball3.svg";

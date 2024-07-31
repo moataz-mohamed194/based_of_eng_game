@@ -27,7 +27,7 @@ class ChooseNumberScreen extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             border:
-                Border.all(color: AppColorPhonetics.boarderColor, width: 5)),
+                Border.all(color: AppColorPhonetics.darkBlueColor, width: 5)),
         child: BlocConsumer<ChooseNumberCubit, ChooseNumberInitial>(
             listener: (context, state) {},
             builder: (context, gameState) {
@@ -49,14 +49,16 @@ class ChooseNumberScreen extends StatelessWidget {
                             .tools ==
                         ToolsOfMath.beads) ...{
                       GetTheBeads(
-                        countOfBalls: int.parse("${gameState.mainNumber ?? '0'}"),
+                        countOfBalls:
+                            int.parse("${gameState.mainNumber ?? '0'}"),
                       )
                     } else if ((gameState.basicData
                                 as MathChooseNumberSticksOrBeadsOrBlocks)
                             .tools ==
                         ToolsOfMath.blocks) ...{
                       GetTheBlocks(
-                        countOfBoxes: int.parse("${gameState.mainNumber ?? '0'}"),
+                        countOfBoxes:
+                            int.parse("${gameState.mainNumber ?? '0'}"),
                       )
                     } else if ((gameState.basicData
                                 as MathChooseNumberSticksOrBeadsOrBlocks)
@@ -68,7 +70,6 @@ class ChooseNumberScreen extends StatelessWidget {
                       )
                     },
                     5.ph,
-
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 2,
                       child: Row(
@@ -91,7 +92,8 @@ class ChooseNumberScreen extends StatelessWidget {
                                   await context
                                       .read<CurrentGamePhoneticsCubit>()
                                       .addSuccessAnswer(
-                                          questions: gameState.allGameData.length,
+                                          questions:
+                                              gameState.allGameData.length,
                                           correctAnswers:
                                               gameState.correctAnswers + 1)
                                       .whenComplete(() {
@@ -134,7 +136,8 @@ class ChooseNumberScreen extends StatelessWidget {
                               isCorrect: gameState.isCorrect == true &&
                                   gameState.gameChoices?[index].choice ==
                                       gameState.mainNumber.toString(),
-                              number: gameState.gameChoices?[index].choice ?? '0',
+                              number:
+                                  gameState.gameChoices?[index].choice ?? '0',
                               size: 70.h,
                             ),
                           ),
