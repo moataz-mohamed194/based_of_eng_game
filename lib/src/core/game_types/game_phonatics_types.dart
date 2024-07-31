@@ -63,7 +63,8 @@ enum GameTypes {
   cTNumberLine,
   cTNumberSub,
   cTNumberSubLine,
-  dDTChange
+  dDTChange ,
+  clickOnTheFish
 }
 
 extension TypeExtension on GameTypes {
@@ -199,6 +200,8 @@ extension TypeExtension on GameTypes {
         return 'CT_number_sub'.toLowerCase();
       case GameTypes.cTNumberSubLine:
         return 'CT_number_sub_line'.toLowerCase();
+      case GameTypes.clickOnTheFish : 
+        return 'اختر السمكة';
     }
   }
 }

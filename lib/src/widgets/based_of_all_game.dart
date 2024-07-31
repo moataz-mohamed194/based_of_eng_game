@@ -131,13 +131,12 @@ class BasedOfAllGame extends StatelessWidget {
                 } else if (HandlingActionsAndDataOfChapters.isArabic(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
 
-                  if(stateOfGame.basicData?.gameData is CompleteTheWord )...{
- BasedOfFullBoardGamesAr(
+                  if(stateOfGame.basicData?.gameData is CompleteTheWord  ||  stateOfGame.basicData?.gameData is ClickOnTheFish )...{
+                  BasedOfFullBoardGamesAr(
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,
                   )
                   }else ...{
-
                   BasedOfGameArabic(
                     stateOfGame: stateOfGame,
                     gamesData: gamesData,

@@ -4,13 +4,17 @@ class ClickTheSoundInitial extends Equatable {
   final GameFinalModel gameData;
   List<GameLettersGameFinalModel>? letters;
   List<int>? correctIndexes = [];
+  List<String> ? correctStrings =  [] ;
   bool isArabic;
+  bool isFish ;
 
   ClickTheSoundInitial({
     required this.gameData,
     this.letters,
     this.correctIndexes,
     this.isArabic = false,
+    this.isFish = false, 
+    this.correctStrings ,
   });
 
   ClickTheSoundInitial copyWith({
@@ -18,7 +22,9 @@ class ClickTheSoundInitial extends Equatable {
     List<GameLettersGameFinalModel>? letters,
     int? correctAnswers,
     List<int>? correctIndexes,
+    List<String> ? correctStrings,
     bool? isArabic,
+    bool? isFish ,
     // bool? isInteracting,
   }) {
     return ClickTheSoundInitial(
@@ -27,6 +33,8 @@ class ClickTheSoundInitial extends Equatable {
       // correctAnswers: correctAnswers ?? this.correctAnswers,
       correctIndexes: correctIndexes ?? this.correctIndexes,
       isArabic: isArabic ?? this.isArabic,
+      isFish:  isFish ?? this.isFish ,
+      correctStrings : correctStrings ?? this.correctStrings ,
       // isInteracting: isInteracting ?? this.isInteracting,
     );
   }
@@ -37,6 +45,8 @@ class ClickTheSoundInitial extends Equatable {
         letters,
         correctIndexes,
         isArabic,
+        isFish ,
+        correctStrings
         // isInteracting,
       ];
 }

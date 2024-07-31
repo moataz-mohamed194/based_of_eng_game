@@ -34,8 +34,10 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPicture();
     } else if (gameType == GameTypes.clickTheSound.text()) {
-      return BasicClickTheSoundGame(isArabic: enumValues.contains(programName));
-    } else if (gameType == GameTypes.bingo.text()) {
+      return BasicClickTheSoundGame(isArabic: enumValues.contains(programName) );
+    } else if (gameType == GameTypes.clickOnTheFish.text()) {
+      return ClickOnTheFish(isArabic: enumValues.contains(programName));
+    }  else if (gameType == GameTypes.bingo.text()) {
       return BingoGame();
     } else if (gameType == GameTypes.sortingCups.text()) {
       return SortingCupsGame();
@@ -303,9 +305,11 @@ class Video implements BasicOfGameData {
 }
 
 class BasicClickTheSoundGame implements BasicOfGameData {
+  
   bool isArabic;
+  
 
-  BasicClickTheSoundGame({required this.isArabic});
+  BasicClickTheSoundGame({required this.isArabic }) ;
   @override
   bool isRound = false;
 
@@ -320,6 +324,30 @@ class BasicClickTheSoundGame implements BasicOfGameData {
 
   @override
   String? titleImageAr = AppImagesArabic.clickTheSound;
+
+  @override
+  int countOfMinimizeStar = 1;
+}
+class ClickOnTheFish implements BasicOfGameData {
+  
+  bool isArabic;
+  
+
+  ClickOnTheFish({required this.isArabic }) ;
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = AppImagesPhonetics.clickTheSound;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr = AppImagesArabic.a5tarElsamka;
 
   @override
   int countOfMinimizeStar = 1;
