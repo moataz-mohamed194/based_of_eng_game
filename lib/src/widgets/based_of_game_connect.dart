@@ -56,65 +56,7 @@ class BasedOfGameConnect extends StatelessWidget {
                     : Alignment.topLeft
                 : Alignment.topRight,
             children: [
-              if (stateOfGame.basicData!.gameData!.isRound) ...{
-                PositionedDirectional(
-                  top: -10,
-                  start: 90.w,
-                  child: GestureDetector(
-                    onTap: context
-                            .read<CurrentGamePhoneticsCubit>()
-                            .ableButton()
-                        ? () async {
-                            await context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .beeTalkingTrue();
-                            await TalkTts.startTalk(
-                                text: gamesData[stateOfGame.index].inst ?? '',
-                                isArabic: isArabic);
-                            TalkTts.flutterTts.setCompletionHandler(() async {
-                              if (stateOfGame.stateOfStringIsWord ==
-                                  StateOfSubWord.isWord) {
-                                await TalkTts.startTalk(
-                                    text:
-                                        stateOfGame.stateOfStringWillSay ?? '',
-                                    isArabic: isArabic);
-                              } else {
-                                await AudioPlayerLetters.startPlaySound(
-                                    soundPath:
-                                        AssetsSoundLetters.getSoundOfLetter(
-                                            mainGameLetter: stateOfGame
-                                                    .stateOfStringWillSay ??
-                                                ''));
-                              }
-                            });
-
-                            await context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .beeTalkingFalse();
-                          }
-                        : null,
-                    child: Container(
-                        alignment: Alignment.center,
-                        child: stateOfGame.avatarCurrentArtboard == null
-                            ? SizedBox(
-                                // stateOfGame.currentAvatar ?? '',
-                                // height:
-                                // MediaQuery.of(context).size.height - (70.h),
-                                height: 85.h,
-                                width: 80.w,
-                              )
-                            : SizedBox(
-                                height: 110.h,
-                                // width: 70.w,
-                                child: Rive(
-                                  artboard: stateOfGame.avatarCurrentArtboard!,
-                                  fit: BoxFit.fill,
-                                  useArtboardSize: true,
-                                  alignment: Alignment.center,
-                                ))),
-                  ),
-                ),
-              },
+             
               /////////////////////game//////////////////
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -175,7 +117,65 @@ class BasedOfGameConnect extends StatelessWidget {
                   }
                 ],
               ),
+ if (stateOfGame.basicData!.gameData!.isRound) ...{
+                PositionedDirectional(
+                  top: -10,
+                  start: 90.w,
+                  child: GestureDetector(
+                    onTap: context
+                            .read<CurrentGamePhoneticsCubit>()
+                            .ableButton()
+                        ? () async {
+                            await context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .beeTalkingTrue();
+                            await TalkTts.startTalk(
+                                text: gamesData[stateOfGame.index].inst ?? '',
+                                isArabic: isArabic);
+                            TalkTts.flutterTts.setCompletionHandler(() async {
+                              if (stateOfGame.stateOfStringIsWord ==
+                                  StateOfSubWord.isWord) {
+                                await TalkTts.startTalk(
+                                    text:
+                                        stateOfGame.stateOfStringWillSay ?? '',
+                                    isArabic: isArabic);
+                              } else {
+                                await AudioPlayerLetters.startPlaySound(
+                                    soundPath:
+                                        AssetsSoundLetters.getSoundOfLetter(
+                                            mainGameLetter: stateOfGame
+                                                    .stateOfStringWillSay ??
+                                                ''));
+                              }
+                            });
 
+                            await context
+                                .read<CurrentGamePhoneticsCubit>()
+                                .beeTalkingFalse();
+                          }
+                        : null,
+                    child: Container(
+                        alignment: Alignment.center,
+                        child: stateOfGame.avatarCurrentArtboard == null
+                            ? SizedBox(
+                                // stateOfGame.currentAvatar ?? '',
+                                // height:
+                                // MediaQuery.of(context).size.height - (70.h),
+                                height: 85.h,
+                                width: 80.w,
+                              )
+                            : SizedBox(
+                                height: 110.h,
+                                // width: 70.w,
+                                child: Rive(
+                                  artboard: stateOfGame.avatarCurrentArtboard!,
+                                  fit: BoxFit.fill,
+                                  useArtboardSize: true,
+                                  alignment: Alignment.center,
+                                ))),
+                  ),
+                ),
+              },
               /////////////////////game title//////////////////
               Positioned(
                 top: 0,
