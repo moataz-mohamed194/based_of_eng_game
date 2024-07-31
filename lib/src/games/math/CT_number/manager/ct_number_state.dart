@@ -2,29 +2,34 @@ part of 'ct_number_cubit.dart';
 
 @immutable
 class CtNumberInitial extends Equatable {
-  final List<GameLettersGameFinalModel>? gameLetters;
+  final GameLettersGameFinalModel? mainLetter;
+  final GameLettersGameFinalModel? subLetter;
   final GameFinalModel gameData;
   final List<GameFinalModel> allGameData;
   final int index;
   final SymbolsMath tools;
+  final bool showLineOfNumbers;
   final String? correctAnswer;
   final String? currentAnswer;
   final int? countOfCorrectAnswers;
   final bool? isCorrect;
 
   CtNumberInitial(
-      {this.gameLetters,
+      {this.mainLetter,
       required this.gameData,
       required this.allGameData,
       required this.index,
+      required this.showLineOfNumbers,
       required this.tools,
       this.correctAnswer,
+      this.subLetter,
       this.currentAnswer,
       this.countOfCorrectAnswers,
       this.isCorrect});
 
   CtNumberInitial copyWith(
-      {List<GameLettersGameFinalModel>? gameLetters,
+      {GameLettersGameFinalModel? mainLetter,
+      GameLettersGameFinalModel? subLetter,
       GameFinalModel? gameData,
       List<GameFinalModel>? allGameData,
       int? index,
@@ -36,7 +41,9 @@ class CtNumberInitial extends Equatable {
     return CtNumberInitial(
         gameData: gameData ?? this.gameData,
         index: index ?? this.index,
-        gameLetters: gameLetters ?? this.gameLetters,
+        showLineOfNumbers: showLineOfNumbers,
+        mainLetter: mainLetter ?? this.mainLetter,
+        subLetter: subLetter ?? this.subLetter,
         currentAnswer: currentAnswer ?? this.currentAnswer,
         tools: tools ?? this.tools,
         allGameData: allGameData ?? this.allGameData,
@@ -50,7 +57,9 @@ class CtNumberInitial extends Equatable {
     return CtNumberInitial(
         gameData: gameData,
         index: index,
-        gameLetters: gameLetters,
+        subLetter: subLetter,
+        mainLetter: mainLetter,
+        showLineOfNumbers: showLineOfNumbers,
         currentAnswer: null,
         tools: tools,
         allGameData: allGameData,
@@ -64,10 +73,12 @@ class CtNumberInitial extends Equatable {
         gameData,
         index,
         currentAnswer,
-        gameLetters,
+        mainLetter,
+        subLetter,
         tools,
         allGameData,
         isCorrect,
+        showLineOfNumbers,
         correctAnswer,
         countOfCorrectAnswers
       ];

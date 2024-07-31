@@ -139,7 +139,13 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.memoryCards.text()) {
       return MemoryCard();
     } else if (gameType == GameTypes.cTNumber.text()) {
-      return CTNumberGame(tools: SymbolsMath.sum);
+      return CTNumberGame(tools: SymbolsMath.sum, showLineOfNumbers: false);
+    } else if (gameType == GameTypes.cTNumberLine.text()) {
+      return CTNumberGame(tools: SymbolsMath.sum, showLineOfNumbers: true);
+    } else if (gameType == GameTypes.cTNumberSub.text()) {
+      return CTNumberGame(tools: SymbolsMath.sub, showLineOfNumbers: false);
+    } else if (gameType == GameTypes.cTNumberSubLine.text()) {
+      return CTNumberGame(tools: SymbolsMath.sub, showLineOfNumbers: true);
     }
   }
 
@@ -1121,7 +1127,7 @@ class MathChooseBeadsAddLine implements BasicOfGameData {
 class CTNumberGame implements BasicOfGameData {
   @override
   bool isRound = false;
-  CTNumberGame({required this.tools});
+  CTNumberGame({required this.tools, required this.showLineOfNumbers});
 
   @override
   String titleImageEn = AppImagesMath.countTypeTheNumber;
@@ -1135,6 +1141,7 @@ class CTNumberGame implements BasicOfGameData {
   @override
   String? titleImageAr;
   late SymbolsMath tools;
+  late bool showLineOfNumbers;
   @override
   int countOfMinimizeStar = 1;
 }

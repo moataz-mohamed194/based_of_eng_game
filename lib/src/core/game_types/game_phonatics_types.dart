@@ -61,6 +61,8 @@ enum GameTypes {
   completeTheSentence,
   cTNumber,
   cTNumberLine,
+  cTNumberSub,
+  cTNumberSubLine,
   dDTChange
 }
 
@@ -193,6 +195,10 @@ extension TypeExtension on GameTypes {
         return 'CT_number_line'.toLowerCase();
       case GameTypes.dDTChange:
         return 'DDT_change'.toLowerCase();
+      case GameTypes.cTNumberSub:
+        return 'CT_number_sub'.toLowerCase();
+      case GameTypes.cTNumberSubLine:
+        return 'CT_number_sub_line'.toLowerCase();
     }
   }
 }

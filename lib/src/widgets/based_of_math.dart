@@ -226,10 +226,13 @@ class BasedOfMath extends StatelessWidget {
         } else if (stateOfGame.basicData?.gameData is CTNumberGame) ...{
           BlocProvider<CtNumberCubit>(
             create: (_) => CtNumberCubit(
-                allGameData: gamesData,
-                subBloc: context.read<CurrentGamePhoneticsCubit>(),
-                tools:
-                    (stateOfGame.basicData!.gameData! as CTNumberGame).tools),
+              allGameData: gamesData,
+              subBloc: context.read<CurrentGamePhoneticsCubit>(),
+              tools: (stateOfGame.basicData!.gameData! as CTNumberGame).tools,
+              showLineOfNumbers:
+                  (stateOfGame.basicData!.gameData! as CTNumberGame)
+                      .showLineOfNumbers,
+            ),
             child: CtNumberScreen(),
           )
         } else if (stateOfGame.basicData?.gameData is MathChooseBlocksAdd) ...{
