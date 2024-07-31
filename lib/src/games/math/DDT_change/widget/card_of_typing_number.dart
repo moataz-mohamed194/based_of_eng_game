@@ -23,7 +23,7 @@ class CardOfTypingNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size ?? 99.h,
+      width: size ?? 75.h,
       height: size ?? 99.h,
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(

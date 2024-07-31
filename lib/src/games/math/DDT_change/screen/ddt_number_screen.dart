@@ -11,6 +11,7 @@ import '../../../../core/theme_text.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
 import '../../choose_from_obj/widget/card_of_number.dart';
 import '../manager/ddt_number_cubit.dart';
+import '../widget/card_of_number_of_ddt.dart';
 import '../widget/card_of_typing_number.dart';
 
 class DDtNumberScreen extends StatelessWidget {
@@ -46,120 +47,129 @@ class DDtNumberScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              CardOfNumber(
-                                number:
-                                    "${gameState.headOfQuestions?.first.word ?? 0}",
-                              ),
-                              Text(
-                                "+",
-                                style: TextStyle(
-                                  color: AppColorPhonetics.darkBlueColor,
-                                  fontSize: 30.sp,
-                                  fontFamily: AppTheme.getFontFamily5(),
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
-                                ),
-                              ),
-                              CardOfNumber(
-                                number:
-                                    "${gameState.headOfQuestions?.last.word ?? 0}",
-                              ),
-                              Text(
-                                "=",
-                                style: TextStyle(
-                                  color: AppColorPhonetics.darkBlueColor,
-                                  fontSize: 30.sp,
-                                  fontFamily: AppTheme.getFontFamily5(),
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
-                                ),
-                              ),
-                              CardOfTypingNumber(
-                                number: '',
-                                // number: '0',
-                                onTap: () => (context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .ableButton())
-                                    ? _openKeyboard(
-                                        context: context,
-                                        gameState: gameState,
-                                        bloc: context.read<DDTChangeCubit>(),
-                                        mainBloc: context
-                                            .read<CurrentGamePhoneticsCubit>())
-                                    : null,
-                              )
-                            ],
-                          ),
-                          5.ph,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              CardOfNumber(
-                                number:
-                                    "${gameState.headOfQuestions?.first.correct ?? 0}",
-                              ),
-                              Text(
-                                "+",
-                                style: TextStyle(
-                                  color: AppColorPhonetics.darkBlueColor,
-                                  fontSize: 30.sp,
-                                  fontFamily: AppTheme.getFontFamily5(),
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
-                                ),
-                              ),
-                              CardOfNumber(
-                                number:
-                                    "${gameState.headOfQuestions?.last.correct ?? 0}",
-                              ),
-                              Text(
-                                "=",
-                                style: TextStyle(
-                                  color: AppColorPhonetics.darkBlueColor,
-                                  fontSize: 30.sp,
-                                  fontFamily: AppTheme.getFontFamily5(),
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
-                                ),
-                              ),
-                              CardOfTypingNumber(
-                                number: '',
-                                // number: '0',
-                                onTap: () => (context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .ableButton())
-                                    ? _openKeyboard(
-                                        context: context,
-                                        gameState: gameState,
-                                        bloc: context.read<DDTChangeCubit>(),
-                                        mainBloc: context
-                                            .read<CurrentGamePhoneticsCubit>())
-                                    : null,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
                       Row(
                         children: [
-                          Image.asset(
-                            AppImagesMath.arrowOfDragDrop,
-                            height: 50.h,
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  CardOfNumberDDt(
+                                    number:
+                                        "${gameState.headOfQuestions?.first.word ?? 0}",
+                                  ),
+                                  Text(
+                                    "+",
+                                    style: TextStyle(
+                                      color: AppColorPhonetics.darkBlueColor,
+                                      fontSize: 30.sp,
+                                      fontFamily: AppTheme.getFontFamily5(),
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                    ),
+                                  ),
+                                  CardOfNumberDDt(
+                                    number:
+                                        "${gameState.headOfQuestions?.last.word ?? 0}",
+                                  ),
+                                  Text(
+                                    "=",
+                                    style: TextStyle(
+                                      color: AppColorPhonetics.darkBlueColor,
+                                      fontSize: 30.sp,
+                                      fontFamily: AppTheme.getFontFamily5(),
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                    ),
+                                  ),
+                                  CardOfTypingNumber(
+                                    number: '',
+                                    // number: '0',
+                                    onTap: () => (context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .ableButton())
+                                        ? _openKeyboard(
+                                            context: context,
+                                            gameState: gameState,
+                                            bloc:
+                                                context.read<DDTChangeCubit>(),
+                                            mainBloc: context.read<
+                                                CurrentGamePhoneticsCubit>())
+                                        : null,
+                                  )
+                                ],
+                              ),
+                              5.ph,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  CardOfNumberDDt(
+                                    number:
+                                        "${gameState.headOfQuestions?.first.correct ?? 0}",
+                                  ),
+                                  Text(
+                                    "+",
+                                    style: TextStyle(
+                                      color: AppColorPhonetics.darkBlueColor,
+                                      fontSize: 30.sp,
+                                      fontFamily: AppTheme.getFontFamily5(),
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                    ),
+                                  ),
+                                  CardOfNumberDDt(
+                                    number:
+                                        "${gameState.headOfQuestions?.last.correct ?? 0}",
+                                  ),
+                                  Text(
+                                    "=",
+                                    style: TextStyle(
+                                      color: AppColorPhonetics.darkBlueColor,
+                                      fontSize: 30.sp,
+                                      fontFamily: AppTheme.getFontFamily5(),
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                    ),
+                                  ),
+                                  CardOfTypingNumber(
+                                    number: '',
+                                    // number: '0',
+                                    onTap: () => (context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .ableButton())
+                                        ? _openKeyboard(
+                                            context: context,
+                                            gameState: gameState,
+                                            bloc:
+                                                context.read<DDTChangeCubit>(),
+                                            mainBloc: context.read<
+                                                CurrentGamePhoneticsCubit>())
+                                        : null,
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
-                          Text(
-                            "+${gameState.numberWillAddToAnswerFirstBox}",
-                            style: TextStyle(
-                              color: AppColorPhonetics.darkBlueColor,
-                              fontSize: 30.sp,
-                              fontFamily: AppTheme.getFontFamily5(),
-                              fontWeight: FontWeight.w400,
-                              height: 0,
-                            ),
+                          15.pw,
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppImagesMath.arrowOfDragDrop,
+                                height: 50.h,
+                              ),
+                              Text(
+                                "+${gameState.numberWillAddToAnswerFirstBox}",
+                                style: TextStyle(
+                                  color: AppColorPhonetics.darkBlueColor,
+                                  fontSize: 15.sp,
+                                  fontFamily: AppTheme.getFontFamily5(),
+                                  fontWeight: FontWeight.w400,
+                                  height: 0,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -168,7 +178,7 @@ class DDtNumberScreen extends StatelessWidget {
                             gameState.chooseOfQuestions?.length ?? 0,
                             (index) => Row(
                                   children: [
-                                    CardOfNumber(
+                                    CardOfNumberDDt(
                                       number:
                                           "${gameState.chooseOfQuestions?[index].choice ?? 0}",
                                     ),
