@@ -138,6 +138,8 @@ abstract class BasicOfGameData {
       return ChooseTheStretchedLetter();
     } else if (gameType == GameTypes.memoryCards.text()) {
       return MemoryCard();
+    } else if (gameType == GameTypes.cTNumber.text()) {
+      return CTNumberGame(tools: SymbolsMath.sum);
     }
   }
 
@@ -1112,6 +1114,27 @@ class MathChooseBeadsAddLine implements BasicOfGameData {
   @override
   String? titleImageAr;
   late ToolsOfMath tools;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class CTNumberGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  CTNumberGame({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.countTypeTheNumber;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  late SymbolsMath tools;
   @override
   int countOfMinimizeStar = 1;
 }

@@ -58,7 +58,10 @@ enum GameTypes {
   completeTheWord,
   chooseTheStretchedLetter,
   memoryCards,
-  completeTheSentence
+  completeTheSentence,
+  cTNumber,
+  cTNumberLine,
+  dDTChange
 }
 
 extension TypeExtension on GameTypes {
@@ -184,8 +187,16 @@ extension TypeExtension on GameTypes {
         return 'Memory Cards'.toLowerCase();
       case GameTypes.completeTheSentence:
         return 'Complete the sentence'.toLowerCase();
+      case GameTypes.cTNumber:
+        return 'CT_number'.toLowerCase();
+      case GameTypes.cTNumberLine:
+        return 'CT_number_line'.toLowerCase();
+      case GameTypes.dDTChange:
+        return 'DDT_change'.toLowerCase();
     }
   }
 }
 
 enum ToolsOfMath { sticks, beads, blocks, domino }
+
+enum SymbolsMath { sum, sub }

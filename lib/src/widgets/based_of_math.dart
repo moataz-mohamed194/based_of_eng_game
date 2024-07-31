@@ -9,6 +9,8 @@ import '../core/audio_player_letters.dart';
 import '../core/game_types/game_phonatics_types.dart';
 import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
+import '../games/math/CT_number/manager/ct_number_cubit.dart';
+import '../games/math/CT_number/screen/ct_number_screen.dart';
 import '../games/math/choose_OE/manager/choose_oe_cubit.dart';
 import '../games/math/choose_OE/screen/choose_oe_screen.dart';
 import '../games/math/choose_add/manager/choose_add_cubit.dart';
@@ -130,8 +132,7 @@ class BasedOfMath extends StatelessWidget {
                 },
                 child: ChooseSticksScreen()),
           )
-        }
-        else if (stateOfGame.basicData?.gameData
+        } else if (stateOfGame.basicData?.gameData
             is MathChooseNumberSticksOrBeadsOrBlocks) ...{
           BlocProvider<ChooseNumberCubit>(
             create: (_) => ChooseNumberCubit(
@@ -151,8 +152,7 @@ class BasedOfMath extends StatelessWidget {
                 },
                 child: ChooseNumberScreen()),
           )
-        }
-        else if (stateOfGame.basicData?.gameData
+        } else if (stateOfGame.basicData?.gameData
             is MathSortingSticksOrBeadsOrBlocks) ...{
           BlocProvider<SortingBlocksCubit>(
               create: (_) => SortingBlocksCubit(
@@ -222,6 +222,15 @@ class BasedOfMath extends StatelessWidget {
                 allGameData: gamesData,
                 subBloc: context.read<CurrentGamePhoneticsCubit>()),
             child: DragSticksScreen(),
+          )
+        } else if (stateOfGame.basicData?.gameData is CTNumberGame) ...{
+          BlocProvider<CtNumberCubit>(
+            create: (_) => CtNumberCubit(
+                allGameData: gamesData,
+                subBloc: context.read<CurrentGamePhoneticsCubit>(),
+                tools:
+                    (stateOfGame.basicData!.gameData! as CTNumberGame).tools),
+            child: CtNumberScreen(),
           )
         } else if (stateOfGame.basicData?.gameData is MathChooseBlocksAdd) ...{
           BlocProvider<ChooseAddCubit>(
