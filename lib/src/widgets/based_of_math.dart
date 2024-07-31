@@ -11,6 +11,8 @@ import '../core/talk_tts.dart';
 import '../cubit/current_game_phonetics_cubit.dart';
 import '../games/math/CT_number/manager/ct_number_cubit.dart';
 import '../games/math/CT_number/screen/ct_number_screen.dart';
+import '../games/math/DDT_change/manager/ddt_number_cubit.dart';
+import '../games/math/DDT_change/screen/ddt_number_screen.dart';
 import '../games/math/choose_OE/manager/choose_oe_cubit.dart';
 import '../games/math/choose_OE/screen/choose_oe_screen.dart';
 import '../games/math/choose_add/manager/choose_add_cubit.dart';
@@ -234,6 +236,14 @@ class BasedOfMath extends StatelessWidget {
                       .showLineOfNumbers,
             ),
             child: CtNumberScreen(),
+          )
+        } else if (stateOfGame.basicData?.gameData is DDTChangeGame) ...{
+          BlocProvider<DDTChangeCubit>(
+            create: (_) => DDTChangeCubit(
+              allGameData: gamesData,
+              subBloc: context.read<CurrentGamePhoneticsCubit>(),
+            ),
+            child: DDtNumberScreen(),
           )
         } else if (stateOfGame.basicData?.gameData is MathChooseBlocksAdd) ...{
           BlocProvider<ChooseAddCubit>(
