@@ -84,7 +84,22 @@ abstract class HandlingActionsAndDataOfChapters {
     } else if (programName.toLowerCase() ==
         MainDataOfChaptersTypes.firstUnitArabic.text()) {
       return FirstUnitArabic(mineGameData: gameData).background;
-    }
+    } else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.greenUnit.text()){
+      return GreenUnit(mineGameData: gameData).background;
+    }  else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.yellowUnit.text()){
+      return YellowUnit(mineGameData: gameData).background;
+    }  else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.violetUnit.text()){
+      return VioletUnit(mineGameData: gameData).background;
+    }  else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.orangeUnit.text()){
+      return OrangeUnit(mineGameData: gameData).background;
+    }   else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.blueUnit.text()){
+      return BlueUnit(mineGameData: gameData).background;
+    } 
     return null;
   }
 
