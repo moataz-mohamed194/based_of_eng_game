@@ -13,6 +13,8 @@ import '../games/math/CT_number/manager/ct_number_cubit.dart';
 import '../games/math/CT_number/screen/ct_number_screen.dart';
 import '../games/math/DDT_change/manager/ddt_number_cubit.dart';
 import '../games/math/DDT_change/screen/ddt_number_screen.dart';
+import '../games/math/add_rod_number_line/manager/add_rod_number_line_cubit.dart';
+import '../games/math/add_rod_number_line/screen/add_rod_number_line_screen.dart';
 import '../games/math/choose_OE/manager/choose_oe_cubit.dart';
 import '../games/math/choose_OE/screen/choose_oe_screen.dart';
 import '../games/math/choose_add/manager/choose_add_cubit.dart';
@@ -395,6 +397,27 @@ class BasedOfMath extends StatelessWidget {
                           stateOfStringWillSay: gameData.first.inst ?? '');
                 },
                 child: ChooseNumberFromWoodScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData is AddRodNumberLineGame) ...{
+          BlocProvider<AddRodNumberLineCubit>(
+            create: (_) => AddRodNumberLineCubit(
+              allGameData: gamesData,
+              tools: (stateOfGame.basicData!.gameData! as AddRodNumberLineGame)
+                  .tools,
+            ),
+            child: BlocListener<AddRodNumberLineCubit, AddRodNumberLineInitial>(
+                listener: (context, state) {
+                  final List<GameFinalModel> gameData = gamesData;
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .getStateOfStars(mainCountOfQuestion: gameData.length);
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .saveTheStringWillSay(
+                          stateOfStringIsWord: StateOfSubWord.stopTalk,
+                          stateOfStringWillSay: gameData.first.inst ?? '');
+                },
+                child: AddRodNumberLineScreen()),
           )
         } else if (stateOfGame.basicData?.gameData is CountTypeNumber) ...{
           BlocProvider<CountTypeNumberCubit>(

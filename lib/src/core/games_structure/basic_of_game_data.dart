@@ -152,6 +152,8 @@ abstract class BasicOfGameData {
       return MathChooseBoard(tools: ToolsOfMath.beads);
     } else if (gameType == GameTypes.countTypeNumber.text()) {
       return CountTypeNumber(tools: ToolsOfMath.beads);
+    } else if (gameType == GameTypes.addRodNumberLine.text()) {
+      return AddRodNumberLineGame(tools: ToolsOfMath.blocks);
     }
   }
 
@@ -1223,6 +1225,28 @@ class CountTypeNumber implements BasicOfGameData {
   late ToolsOfMath tools;
 
   CountTypeNumber({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.countTypeTheNumber;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class AddRodNumberLineGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  late ToolsOfMath tools;
+
+  AddRodNumberLineGame({required this.tools});
 
   @override
   String titleImageEn = AppImagesMath.countTypeTheNumber;

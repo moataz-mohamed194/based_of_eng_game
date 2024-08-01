@@ -208,7 +208,7 @@ extension TypeExtension on GameTypes {
       case GameTypes.countTypeNumber:
         return 'Count_Type_Number'.toLowerCase();
       case GameTypes.addRodNumberLine:
-        return 'Add_Rod_Number_Line';
+        return 'add_rod_number_line';
       case GameTypes.clickOnTheFish:
         return 'اختر السمكة';
     }

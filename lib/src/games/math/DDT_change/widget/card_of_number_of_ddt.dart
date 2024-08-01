@@ -9,11 +9,13 @@ class CardOfNumberDDt extends StatelessWidget {
   final double? width;
   final double? height;
   final bool? isCorrect;
+  final bool? showNumber;
 
   const CardOfNumberDDt(
       {super.key,
       required this.number,
       this.height,
+      this.showNumber,
       this.width,
       this.isCorrect});
   @override
@@ -47,18 +49,20 @@ class CardOfNumberDDt extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.28),
           ),
         ),
-        child: Text(
-          number,
-          style: TextStyle(
-            color: isCorrect == true
-                ? Colors.white
-                : AppColorPhonetics.darkBlueColor,
-            fontSize: 25.sp,
-            fontFamily: AppTheme.getFontFamily5(),
-            fontWeight: FontWeight.w400,
-            height: 0,
-          ),
-        ),
+        child: showNumber == false
+            ? SizedBox()
+            : Text(
+                number,
+                style: TextStyle(
+                  color: isCorrect == true
+                      ? Colors.white
+                      : AppColorPhonetics.darkBlueColor,
+                  fontSize: 25.sp,
+                  fontFamily: AppTheme.getFontFamily5(),
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
       ),
     );
   }
