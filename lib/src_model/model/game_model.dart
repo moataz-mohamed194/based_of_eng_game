@@ -35,34 +35,37 @@ class GameFinalModel extends Equatable {
   final int? nextGameId;
   final int? previousGameId;
   final bool isHidden;
+  final int? isActive;
   // String? sectionInBook;
 
-  const GameFinalModel(
-      {this.id,
-      this.lessonId,
-      this.gameTypeId,
-      this.audioFlag,
-      this.numOfLetters,
-      this.numOfLetterRepeat,
-      this.video,
-      this.mainLetter,
-      this.gameChoices,
-      this.name,
-      this.inst,
-      this.sentence,
-      this.numOfTrials,
-      this.lesson,
-      this.gameTypes,
-      this.createdAt,
-      this.updatedAt,
-      this.gameLetters,
-      this.stars,
-      this.nextGameId,
-      this.correctAns,
-      this.previousGameId,
-      this.isEdited,
-      this.isHidden = false,
-      this.gameImages});
+  const GameFinalModel({
+    this.id,
+    this.lessonId,
+    this.gameTypeId,
+    this.audioFlag,
+    this.numOfLetters,
+    this.numOfLetterRepeat,
+    this.video,
+    this.mainLetter,
+    this.gameChoices,
+    this.name,
+    this.inst,
+    this.sentence,
+    this.numOfTrials,
+    this.lesson,
+    this.gameTypes,
+    this.createdAt,
+    this.updatedAt,
+    this.gameLetters,
+    this.stars,
+    this.nextGameId,
+    this.correctAns,
+    this.previousGameId,
+    this.isEdited,
+    this.isHidden = false,
+    this.gameImages,
+    this.isActive,
+  });
   factory GameFinalModel.fromJson(Map<String, dynamic> json) {
     return _$GameFinalModelFromJson(json);
   }
@@ -75,11 +78,12 @@ class GameFinalModel extends Equatable {
         lessonId,
         gameTypeId,
         mainLetter,
-        name,gameChoices,
+        name,
+        gameChoices,
         audioFlag,
         video,
         numOfLetters,
-    sentence,
+        sentence,
         numOfLetterRepeat,
         inst,
         numOfTrials,
@@ -93,6 +97,7 @@ class GameFinalModel extends Equatable {
         nextGameId,
         correctAns,
         isEdited,
-        previousGameId
+        previousGameId,
+        isActive,
       ];
 }
