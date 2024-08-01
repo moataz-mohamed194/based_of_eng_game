@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../game_types/assets_images_math.dart';
 
 class GetTheBeads extends StatelessWidget {
   final int countOfBalls;
+  final bool? showTheCircle;
 
-  const GetTheBeads({super.key, required this.countOfBalls});
+  const GetTheBeads(
+      {super.key, required this.countOfBalls, this.showTheCircle});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,12 +17,18 @@ class GetTheBeads extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: countOfBalls != 0
           ? [
-              SvgPicture.asset(AppImagesMath.circle),
+              showTheCircle == true || countOfBalls == 10
+                  ? SvgPicture.asset(AppImagesMath.circle)
+                  : SizedBox(),
               ...List.generate(
                   countOfBalls,
                   (index) => SvgPicture.asset(
-                      selectedBall(countOfBalls: countOfBalls))),
-              SvgPicture.asset(AppImagesMath.circle),
+                        selectedBall(countOfBalls: countOfBalls),
+                        width: 10.w,
+                      )),
+              showTheCircle == true || countOfBalls == 10
+                  ? SvgPicture.asset(AppImagesMath.circle)
+                  : SizedBox(),
             ]
           : [],
     );
@@ -46,7 +55,7 @@ class GetTheBeads extends StatelessWidget {
       case 9:
         return AppImagesMath.ball9;
       default:
-        return AppImagesMath.ball9;
+        return AppImagesMath.ball10;
     }
   }
 }
