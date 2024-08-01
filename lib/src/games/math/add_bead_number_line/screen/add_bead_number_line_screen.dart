@@ -33,211 +33,207 @@ class AddBeadNumberLineScreen extends StatelessWidget {
         child: BlocConsumer<AddBeadNumberLineCubit, AddBeadNumberLineInitial>(
             listener: (context, state) {},
             builder: (context, gameState) {
-              return FittedBox(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    children: [
-                      Expanded(
-                          flex: 3,
-                          child: Column(
-                            children: [
-                              FittedBox(
-                                child: Row(
-                                    // crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      SizedBox(),
-                                      ...List.generate(
+              return SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  children: [
+                    Expanded(
+                        flex: 3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FittedBox(
+                              child: Row(
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    SizedBox(),
+                                    ...List.generate(
+                                        gameState.finalGameLetters?.length ?? 0,
+                                        (index) => (gameState
+                                                    .finalGameLetters?[index]
+                                                    .id ==
+                                                null)
+                                            ? SizedBox()
+                                            : gameState.tools ==
+                                                    ToolsOfMath.beads
+                                                ? GetTheBeads(
+                                                    hideTheCircle: gameState
+                                                                .finalGameLetters?[
+                                                                    index]
+                                                                .mainQuestion ==
+                                                            1
+                                                        ? true
+                                                        : false,
+                                                    countOfBalls: int.parse(
+                                                        "${gameState.finalGameLetters?[index].letter}"),
+                                                  )
+                                                : GetTheBlocks(
+                                                    countOfBoxes: int.parse(
+                                                        "${gameState.finalGameLetters?[index].letter}"),
+                                                  )),
+                                    SizedBox(),
+                                    SizedBox(),
+                                  ]),
+                            ),
+                            10.ph,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SizedBox(
+                                  width: 75.h *
+                                          (gameState.finalGameLetters?.length ??
+                                              0) +
+                                      40.w,
+                                  child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: List.generate(
                                           gameState.finalGameLetters?.length ??
                                               0,
-                                          (index) => (gameState
-                                                      .finalGameLetters?[index]
-                                                      .id ==
-                                                  null)
-                                              ? SizedBox()
-                                              : gameState.tools ==
-                                                      ToolsOfMath.beads
-                                                  ? GetTheBeads(
-                                                      showTheCircle: true,
-                                                      countOfBalls: int.parse(
-                                                          "${gameState.finalGameLetters?[index].letter}"),
-                                                    )
-                                                  : GetTheBlocks(
-                                                      countOfBoxes: int.parse(
-                                                          "${gameState.finalGameLetters?[index].letter}"),
-                                                    )),
-                                      SizedBox(),
-                                      SizedBox(),
-                                    ]),
-                              ),
-                              10.ph,
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  SizedBox(
-                                    width: 75.h *
-                                            (gameState
-                                                    .finalGameLetters?.length ??
-                                                0) +
-                                        40.w,
-                                    child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: List.generate(
-                                            gameState
-                                                    .finalGameLetters?.length ??
-                                                0,
-                                            (index) => Container(
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      // if (index != 0) ...{
-                                                      //
-                                                      // },
-                                                      if (gameState
-                                                              .finalGameLetters?[
-                                                                  index]
-                                                              .id !=
-                                                          null) ...{
-                                                        CardOfNumberDDt(
-                                                          number: gameState
+                                          (index) => Container(
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    // if (index != 0) ...{
+                                                    //
+                                                    // },
+                                                    if (gameState
+                                                            .finalGameLetters?[
+                                                                index]
+                                                            .id !=
+                                                        null) ...{
+                                                      CardOfNumberDDt(
+                                                        number: gameState
+                                                                .finalGameLetters?[
+                                                                    index]
+                                                                .letter ??
+                                                            '0',
+                                                      ),
+                                                    } else ...{
+                                                      Container(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        height: 99.h,
+                                                        child: Text(
+                                                          gameState
                                                                   .finalGameLetters?[
                                                                       index]
                                                                   .letter ??
                                                               '0',
-                                                        ),
-                                                      } else ...{
-                                                        Container(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          height: 99.h,
-                                                          child: Text(
-                                                            gameState
-                                                                    .finalGameLetters?[
-                                                                        index]
-                                                                    .letter ??
-                                                                '0',
-                                                            style: TextStyle(
-                                                              color: AppColorPhonetics
-                                                                  .darkBlueColor,
-                                                              fontSize: 25.sp,
-                                                              fontFamily: AppTheme
-                                                                  .getFontFamily5(),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                            ),
+                                                          style: TextStyle(
+                                                            color: AppColorPhonetics
+                                                                .darkBlueColor,
+                                                            fontSize: 25.sp,
+                                                            fontFamily: AppTheme
+                                                                .getFontFamily5(),
+                                                            fontWeight:
+                                                                FontWeight.w400,
                                                           ),
-                                                        )
-                                                      }
-                                                    ],
-                                                  ),
-                                                ))),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )),
-                      Expanded(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            "=",
-                            style: TextStyle(
-                              color: AppColorPhonetics.darkBlueColor,
-                              fontSize: 30.sp,
-                              fontFamily: AppTheme.getFontFamily5(),
-                              fontWeight: FontWeight.w400,
-                              height: 0,
+                                                        ),
+                                                      )
+                                                    }
+                                                  ],
+                                                ),
+                                              ))),
+                                ),
+                              ],
                             ),
+                          ],
+                        )),
+                    Expanded(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "=",
+                          style: TextStyle(
+                            color: AppColorPhonetics.darkBlueColor,
+                            fontSize: 30.sp,
+                            fontFamily: AppTheme.getFontFamily5(),
+                            fontWeight: FontWeight.w400,
+                            height: 0,
                           ),
-                          CardOfTypingNumberDDT(
-                            number: gameState.isCorrect == true
-                                ? (gameState.correctAnswer ?? '')
-                                : '',
-                            // number: '0',
-                            onTap: () => (context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .ableButton())
-                                ? _openKeyboard(
-                                    context: context,
-                                    action: (String answer) async {
-                                      if (context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .ableButton()) {
-                                        bool stateOfAnswer = context
-                                            .read<AddBeadNumberLineCubit>()
-                                            .addAnswer(
-                                                userChoose: answer ?? '');
-                                        Navigator.of(context).pop();
-                                        if (stateOfAnswer == true) {
-                                          await context
+                        ),
+                        CardOfTypingNumberDDT(
+                          number: gameState.isCorrect == true
+                              ? (gameState.correctAnswer ?? '')
+                              : '',
+                          // number: '0',
+                          onTap: () => (context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .ableButton())
+                              ? _openKeyboard(
+                                  context: context,
+                                  action: (String answer) async {
+                                    if (context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .ableButton()) {
+                                      bool stateOfAnswer = context
+                                          .read<AddBeadNumberLineCubit>()
+                                          .addAnswer(userChoose: answer ?? '');
+                                      Navigator.of(context).pop();
+                                      if (stateOfAnswer == true) {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addSuccessAnswer(
+                                                questions: gameState
+                                                    .allGameData.length,
+                                                correctAnswers: ((gameState
+                                                            .correctAnswers ??
+                                                        0) +
+                                                    1))
+                                            .whenComplete(() {
+                                          bool isLastQuestion = context
                                               .read<CurrentGamePhoneticsCubit>()
-                                              .addSuccessAnswer(
-                                                  questions: gameState
-                                                      .allGameData.length,
-                                                  correctAnswers: ((gameState
-                                                              .correctAnswers ??
-                                                          0) +
-                                                      1))
-                                              .whenComplete(() {
-                                            bool isLastQuestion = context
-                                                .read<
-                                                    CurrentGamePhoneticsCubit>()
-                                                .checkIfIsTheLastQuestionOfGame(
-                                                    queations: gameState
-                                                        .allGameData.length);
-                                            print(
-                                                'isLastQuestion:$isLastQuestion');
-                                            if (isLastQuestion != true) {
-                                              Future.delayed(
-                                                  const Duration(seconds: 2),
-                                                  () async {
-                                                await context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .updateIndexOfCurrentGame();
-                                                context
-                                                    .read<
-                                                        AddBeadNumberLineCubit>()
-                                                    .updateTheCurrentGame(
-                                                        index: context
-                                                            .read<
-                                                                CurrentGamePhoneticsCubit>()
-                                                            .state
-                                                            .index);
-                                              });
-                                            }
-                                          });
-                                        } else {
-                                          await context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .addWrongAnswer(
-                                                  actionOfWrongAnswer:
-                                                      () async {});
-                                        }
+                                              .checkIfIsTheLastQuestionOfGame(
+                                                  queations: gameState
+                                                      .allGameData.length);
+                                          print(
+                                              'isLastQuestion:$isLastQuestion');
+                                          if (isLastQuestion != true) {
+                                            Future.delayed(
+                                                const Duration(seconds: 2),
+                                                () async {
+                                              await context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .updateIndexOfCurrentGame();
+                                              context
+                                                  .read<
+                                                      AddBeadNumberLineCubit>()
+                                                  .updateTheCurrentGame(
+                                                      index: context
+                                                          .read<
+                                                              CurrentGamePhoneticsCubit>()
+                                                          .state
+                                                          .index);
+                                            });
+                                          }
+                                        });
+                                      } else {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addWrongAnswer(
+                                                actionOfWrongAnswer:
+                                                    () async {});
                                       }
-                                    },
-                                  )
-                                : null,
-                          )
-                        ],
-                      ))
-                    ],
-                  ),
+                                    }
+                                  },
+                                )
+                              : null,
+                        )
+                      ],
+                    ))
+                  ],
                 ),
               );
             }));

@@ -20,6 +20,7 @@ GameFinalModel _$GameFinalModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) =>
               GameChoicesGameFinalModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      stageName: json['stage_name'] as String?,
       name: json['name'] as String?,
       inst: json['inst'] as String?,
       sentence: json['sentence'] as String?,
@@ -64,6 +65,7 @@ Map<String, dynamic> _$GameFinalModelToJson(GameFinalModel instance) =>
       'name': instance.name,
       'sentence': instance.sentence,
       'main_letter': instance.mainLetter,
+      'stage_name': instance.stageName,
       'updated_at': instance.updatedAt,
       'correct_ans': instance.correctAns,
       'lesson': instance.lesson?.toJson(),

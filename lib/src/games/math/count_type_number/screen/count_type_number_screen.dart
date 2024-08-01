@@ -42,7 +42,7 @@ class CountTypeNumberScreen extends StatelessWidget {
                                     countOfBalls: int.parse(
                                         gameState.gameLetters?[index].letter ??
                                             '0'),
-                                    showTheCircle: gameState.gameLetters?[index]
+                                    hideTheCircle: gameState.gameLetters?[index]
                                                 .mainQuestion ==
                                             1
                                         ? false

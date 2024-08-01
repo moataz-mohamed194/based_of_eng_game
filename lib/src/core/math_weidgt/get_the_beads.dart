@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,10 +7,10 @@ import '../game_types/assets_images_math.dart';
 
 class GetTheBeads extends StatelessWidget {
   final int countOfBalls;
-  final bool? showTheCircle;
+  final bool? hideTheCircle;
 
   const GetTheBeads(
-      {super.key, required this.countOfBalls, this.showTheCircle});
+      {super.key, required this.countOfBalls, this.hideTheCircle});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -17,18 +18,23 @@ class GetTheBeads extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: countOfBalls != 0
           ? [
-              showTheCircle == true || countOfBalls == 10
+              hideTheCircle != true
                   ? SvgPicture.asset(AppImagesMath.circle)
                   : SizedBox(),
               ...List.generate(
                   countOfBalls,
-                  (index) => SvgPicture.asset(
-                        selectedBall(
-                            countOfBalls: countOfBalls,
-                            showTheCircle: showTheCircle),
-                        width: 10.w,
+                  (index) => Row(
+                        children: [
+                          SvgPicture.asset(
+                            selectedBall(
+                                countOfBalls: countOfBalls,
+                                showTheCircle: hideTheCircle),
+                            width: 10.w,
+                          ),
+                          (hideTheCircle == true) ? 10.pw : 0.pw
+                        ],
                       )),
-              showTheCircle == true || countOfBalls == 10
+              hideTheCircle != true
                   ? SvgPicture.asset(AppImagesMath.circle)
                   : SizedBox(),
             ]
@@ -38,7 +44,7 @@ class GetTheBeads extends StatelessWidget {
 
   static String selectedBall(
       {required int countOfBalls, required bool? showTheCircle}) {
-    if (showTheCircle == false) {
+    if (showTheCircle == true) {
       return AppImagesMath.ball10;
     }
     switch (countOfBalls) {

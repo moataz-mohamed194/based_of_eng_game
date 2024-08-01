@@ -219,11 +219,11 @@ class DragBeadsBoardScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GetTheBeads(
-            showTheCircle: true,
+            hideTheCircle: gameLetters?.mainQuestion == 1 ? true : false,
             countOfBalls: int.parse("${gameLetters?.letter ?? 0}"),
           ),
           GetTheBeads(
-            showTheCircle: true,
+            hideTheCircle: gameLetters?.mainQuestion == 1 ? true : false,
             countOfBalls: int.parse("${gameLetters?.secLetter ?? 0}"),
           ),
         ],
