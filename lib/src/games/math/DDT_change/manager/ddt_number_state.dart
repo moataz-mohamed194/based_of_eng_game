@@ -9,8 +9,11 @@ class DDTChangeInitial extends Equatable {
   final GameChoicesGameFinalModel? secondChooseInDrag;
   final List<GameFinalModel> allGameData;
   final int index;
+  final List<GameChoicesGameFinalModel>? subHeadOfQuestions;
   final String? numberOfAnswerFirstBox;
   final String? numberWillAddToAnswerFirstBox;
+  final bool? showTheAnswerOfFirstTyping;
+  final bool? showTheAnswerOfSecondTyping;
   final String? correctAns;
   final int? countOfCorrectAnswers;
   final bool? isCorrect;
@@ -21,7 +24,10 @@ class DDTChangeInitial extends Equatable {
       required this.allGameData,
       required this.index,
       this.headOfQuestions,
+      this.subHeadOfQuestions,
       this.firstChooseInDrag,
+      this.showTheAnswerOfFirstTyping,
+      this.showTheAnswerOfSecondTyping,
       this.secondChooseInDrag,
       this.numberWillAddToAnswerFirstBox,
       this.correctAns,
@@ -41,10 +47,18 @@ class DDTChangeInitial extends Equatable {
       String? numberWillAddToAnswerFirstBox,
       String? correctAns,
       int? countOfCorrectAnswers,
+      bool? showTheAnswerOfSecondTyping,
+      bool? showTheAnswerOfFirstTyping,
       bool? isCorrect}) {
+    print('${showTheAnswerOfFirstTyping}'
+        '${this.showTheAnswerOfFirstTyping} , ${showTheAnswerOfFirstTyping ?? this.showTheAnswerOfFirstTyping}');
     return DDTChangeInitial(
         gameData: gameData ?? this.gameData,
         index: index ?? this.index,
+        showTheAnswerOfFirstTyping:
+            showTheAnswerOfFirstTyping ?? this.showTheAnswerOfFirstTyping,
+        showTheAnswerOfSecondTyping:
+            showTheAnswerOfSecondTyping ?? this.showTheAnswerOfSecondTyping,
         headOfQuestions: headOfQuestions ?? this.headOfQuestions,
         firstChooseInDrag: firstChooseInDrag ?? this.firstChooseInDrag,
         secondChooseInDrag: secondChooseInDrag ?? this.secondChooseInDrag,
@@ -66,6 +80,8 @@ class DDTChangeInitial extends Equatable {
         index: index,
         headOfQuestions: headOfQuestions ?? headOfQuestions,
         firstChooseInDrag: null,
+        showTheAnswerOfSecondTyping: null,
+        showTheAnswerOfFirstTyping: null,
         secondChooseInDrag: null,
         chooseOfQuestions: chooseOfQuestions ?? chooseOfQuestions,
         numberOfAnswerFirstBox:
@@ -87,6 +103,10 @@ class DDTChangeInitial extends Equatable {
         headOfQuestions,
         chooseOfQuestions,
         numberOfAnswerFirstBox,
+        showTheAnswerOfSecondTyping,
+        showTheAnswerOfSecondTyping,
+        showTheAnswerOfFirstTyping,
+        showTheAnswerOfSecondTyping,
         allGameData,
         isCorrect,
         countOfCorrectAnswers,

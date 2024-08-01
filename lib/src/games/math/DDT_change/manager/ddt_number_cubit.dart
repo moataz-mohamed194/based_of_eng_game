@@ -28,6 +28,7 @@ class DDTChangeCubit extends Cubit<DDTChangeInitial> {
     List<GameImagesGameFinalModel> headOfQuestions = gameData.gameImages ?? [];
     List<GameChoicesGameFinalModel> chooseOfQuestions =
         gameData.gameChoices ?? [];
+    List<GameChoicesGameFinalModel> subHeadOfQuestions = [];
     String numberOfAnswerFirstBox = gameData.gameLetters?.first.letter ?? "";
     String numberWillAddToAnswerFirstBox =
         gameData.gameLetters?.first.secLetter ?? "";
@@ -42,22 +43,30 @@ class DDTChangeCubit extends Cubit<DDTChangeInitial> {
     await TalkTts.startTalk(text: state.gameData.inst ?? '');
   }
 
-  addAnswerOfDrag({required GameChoicesGameFinalModel? userChoose}) {
-    if (userChoose?.isCorrect == 1) {
-      GameChoicesGameFinalModel? first;
-      GameChoicesGameFinalModel? second;
+  bool addTheDragAnswer(
+      {required GameChoicesGameFinalModel answer, required bool isFirst}) {
+    bool result = mainAddTheDragAnswer(answer: answer, isFirst: isFirst);
+    if (result == false) {
+      emit(state.clearTheDataOfChoose());
+    }
+    return result;
+  }
 
-      if (state.firstChooseInDrag == null) {
-        first = userChoose;
-        emit(state.copyWith(firstChooseInDrag: userChoose));
-      } else if (state.secondChooseInDrag == null) {
-        second = userChoose;
-        emit(state.copyWith(secondChooseInDrag: userChoose));
-      }
-      if (first != null && second != null) {
-        int resultOfDrag =
-            int.parse(first.choice ?? '0') + int.parse(second.choice ?? '0');
-        if (resultOfDrag == int.parse(state.numberOfAnswerFirstBox ?? '0')) {
+  bool mainAddTheDragAnswer(
+      {required GameChoicesGameFinalModel answer, required bool isFirst}) {
+    if (answer.isCorrect == 1) {
+      if (isFirst == true) {
+        emit(state.copyWith(firstChooseInDrag: answer));
+        return true;
+      } else if (isFirst == false) {
+        int result = int.parse("${state.firstChooseInDrag?.choice ?? 0}") +
+            int.parse("${answer.choice ?? 0}");
+        if ("$result" == state.numberOfAnswerFirstBox) {
+          int countOfCorrectAnswers = state.countOfCorrectAnswers ?? 0;
+          countOfCorrectAnswers = countOfCorrectAnswers + 1;
+          emit(state.copyWith(
+              secondChooseInDrag: answer,
+              countOfCorrectAnswers: countOfCorrectAnswers));
           return true;
         } else {
           return false;
@@ -66,6 +75,42 @@ class DDTChangeCubit extends Cubit<DDTChangeInitial> {
     } else {
       return false;
     }
+    return false;
+  }
+
+  bool addTheTypingAnswer({required String answer, required bool isFirst}) {
+    bool result = mainAddTheTypingAnswer(answer: answer, isFirst: isFirst);
+    if (result == false) {
+      emit(state.clearTheDataOfChoose());
+    }
+    return result;
+  }
+
+  bool mainAddTheTypingAnswer({required String answer, required bool isFirst}) {
+    if (state.firstChooseInDrag == null && state.secondChooseInDrag == null) {
+      return false;
+    }
+    if (isFirst == true) {
+      if (answer == state.numberOfAnswerFirstBox) {
+        emit(state.copyWith(showTheAnswerOfFirstTyping: true));
+        return true;
+      }
+      return false;
+    } else if (isFirst == false) {
+      if (state.firstChooseInDrag == null &&
+          state.secondChooseInDrag == null &&
+          state.showTheAnswerOfFirstTyping == true) {
+        return false;
+      }
+      if (answer == state.correctAns) {
+        emit(state.copyWith(showTheAnswerOfSecondTyping: true));
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    return false;
   }
 
   updateTheCurrentGame({required int newIndex}) {

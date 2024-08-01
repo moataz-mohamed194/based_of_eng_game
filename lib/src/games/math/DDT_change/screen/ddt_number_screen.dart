@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../src_model/model/game_choices_model.dart';
 import '../../../../core/game_types/assets_images_math.dart';
 import '../../../../core/game_types/game_phonatics_types.dart';
 import '../../../../core/phonetics_color.dart';
@@ -84,18 +85,83 @@ class DDtNumberScreen extends StatelessWidget {
                                     ),
                                   ),
                                   CardOfTypingNumber(
-                                    number: '',
+                                    number:
+                                        gameState.showTheAnswerOfSecondTyping ==
+                                                true
+                                            ? (gameState.correctAns ?? '')
+                                            : '',
                                     // number: '0',
                                     onTap: () => (context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .ableButton())
                                         ? _openKeyboard(
                                             context: context,
-                                            gameState: gameState,
-                                            bloc:
-                                                context.read<DDTChangeCubit>(),
-                                            mainBloc: context.read<
-                                                CurrentGamePhoneticsCubit>())
+                                            action: (String answer) async {
+                                              if (context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .ableButton()) {
+                                                bool stateOfAnswer = context
+                                                    .read<DDTChangeCubit>()
+                                                    .addTheTypingAnswer(
+                                                        answer: answer ?? '',
+                                                        isFirst: false);
+                                                Navigator.of(context).pop();
+                                                if (stateOfAnswer == true) {
+                                                  await context
+                                                      .read<
+                                                          CurrentGamePhoneticsCubit>()
+                                                      .addSuccessAnswer(
+                                                          questions: gameState
+                                                              .allGameData
+                                                              .length,
+                                                          correctAnswers:
+                                                              ((gameState
+                                                                      .countOfCorrectAnswers ??
+                                                                  0)))
+                                                      .whenComplete(() {
+                                                    bool isLastQuestion = context
+                                                        .read<
+                                                            CurrentGamePhoneticsCubit>()
+                                                        .checkIfIsTheLastQuestionOfGame(
+                                                            queations: gameState
+                                                                .allGameData
+                                                                .length);
+                                                    print(
+                                                        'isLastQuestion:$isLastQuestion');
+                                                    if (isLastQuestion !=
+                                                        true) {
+                                                      Future.delayed(
+                                                          const Duration(
+                                                              seconds: 2),
+                                                          () async {
+                                                        await context
+                                                            .read<
+                                                                CurrentGamePhoneticsCubit>()
+                                                            .updateIndexOfCurrentGame();
+                                                        context
+                                                            .read<
+                                                                DDTChangeCubit>()
+                                                            .updateTheCurrentGame(
+                                                                newIndex: context
+                                                                    .read<
+                                                                        CurrentGamePhoneticsCubit>()
+                                                                    .state
+                                                                    .index);
+                                                      });
+                                                    }
+                                                  });
+                                                } else {
+                                                  await context
+                                                      .read<
+                                                          CurrentGamePhoneticsCubit>()
+                                                      .addWrongAnswer(
+                                                          actionOfWrongAnswer:
+                                                              () async {});
+                                                }
+                                              }
+                                            },
+                                          )
                                         : null,
                                   )
                                 ],
@@ -105,10 +171,35 @@ class DDtNumberScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  CardOfNumberDDt(
-                                    number:
-                                        "${gameState.headOfQuestions?.first.correct ?? 0}",
-                                  ),
+                                  DragTarget<GameChoicesGameFinalModel>(
+                                      builder: (
+                                    BuildContext context,
+                                    List<dynamic> accepted,
+                                    List<dynamic> rejected,
+                                  ) {
+                                    return CardOfNumberDDt(
+                                      number:
+                                          gameState.firstChooseInDrag?.choice ??
+                                              '',
+                                    );
+                                  }, onAcceptWithDetails: (item) async {
+                                    if (context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .ableButton()) {
+                                      bool? stateOfAnswer = context
+                                          .read<DDTChangeCubit>()
+                                          .addTheDragAnswer(
+                                              answer: item.data, isFirst: true);
+                                      print("stateOfAnswer:$stateOfAnswer");
+                                      if (stateOfAnswer != true) {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addWrongAnswer(
+                                                actionOfWrongAnswer:
+                                                    () async {});
+                                      }
+                                    }
+                                  }),
                                   Text(
                                     "+",
                                     style: TextStyle(
@@ -119,10 +210,35 @@ class DDtNumberScreen extends StatelessWidget {
                                       height: 0,
                                     ),
                                   ),
-                                  CardOfNumberDDt(
-                                    number:
-                                        "${gameState.headOfQuestions?.last.correct ?? 0}",
-                                  ),
+                                  DragTarget<GameChoicesGameFinalModel>(
+                                      builder: (
+                                    BuildContext context,
+                                    List<dynamic> accepted,
+                                    List<dynamic> rejected,
+                                  ) {
+                                    return CardOfNumberDDt(
+                                      number: gameState
+                                              .secondChooseInDrag?.choice ??
+                                          '',
+                                    );
+                                  }, onAcceptWithDetails: (item) async {
+                                    if (context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .ableButton()) {
+                                      bool? stateOfAnswer = context
+                                          .read<DDTChangeCubit>()
+                                          .addTheDragAnswer(
+                                              answer: item.data,
+                                              isFirst: false);
+                                      if (stateOfAnswer != true) {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addWrongAnswer(
+                                                actionOfWrongAnswer:
+                                                    () async {});
+                                      }
+                                    }
+                                  }),
                                   Text(
                                     "=",
                                     style: TextStyle(
@@ -134,18 +250,41 @@ class DDtNumberScreen extends StatelessWidget {
                                     ),
                                   ),
                                   CardOfTypingNumber(
-                                    number: '',
+                                    number: gameState
+                                                .showTheAnswerOfFirstTyping ==
+                                            true
+                                        ? (gameState.numberOfAnswerFirstBox ??
+                                            '')
+                                        : '',
                                     // number: '0',
                                     onTap: () => (context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .ableButton())
                                         ? _openKeyboard(
                                             context: context,
-                                            gameState: gameState,
-                                            bloc:
-                                                context.read<DDTChangeCubit>(),
-                                            mainBloc: context.read<
-                                                CurrentGamePhoneticsCubit>())
+                                            action: (String answer) async {
+                                              if (context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .ableButton()) {
+                                                bool? stateOfAnswer = context
+                                                    .read<DDTChangeCubit>()
+                                                    .addTheTypingAnswer(
+                                                        answer: answer,
+                                                        isFirst: true);
+                                                if (stateOfAnswer != true) {
+                                                  await context
+                                                      .read<
+                                                          CurrentGamePhoneticsCubit>()
+                                                      .addWrongAnswer(
+                                                          actionOfWrongAnswer:
+                                                              () async {});
+                                                } else {
+                                                  Navigator.pop(context);
+                                                }
+                                              }
+                                            },
+                                          )
                                         : null,
                                   )
                                 ],
@@ -178,10 +317,22 @@ class DDtNumberScreen extends StatelessWidget {
                             gameState.chooseOfQuestions?.length ?? 0,
                             (index) => Row(
                                   children: [
-                                    CardOfNumberDDt(
-                                      number:
-                                          "${gameState.chooseOfQuestions?[index].choice ?? 0}",
-                                    ),
+                                    Draggable<GameChoicesGameFinalModel>(
+                                        maxSimultaneousDrags: 1,
+                                        data:
+                                            gameState.chooseOfQuestions?[index],
+                                        feedback: CardOfNumberDDt(
+                                          number:
+                                              "${gameState.chooseOfQuestions?[index].choice ?? 0}",
+                                        ),
+                                        childWhenDragging: CardOfNumberDDt(
+                                          number:
+                                              "${gameState.chooseOfQuestions?[index].choice ?? 0}",
+                                        ),
+                                        child: CardOfNumberDDt(
+                                          number:
+                                              "${gameState.chooseOfQuestions?[index].choice ?? 0}",
+                                        )),
                                     5.pw,
                                   ],
                                 )),
@@ -200,9 +351,7 @@ class DDtNumberScreen extends StatelessWidget {
 
   void _openKeyboard({
     required context,
-    required DDTChangeCubit bloc,
-    required DDTChangeInitial gameState,
-    required CurrentGamePhoneticsCubit mainBloc,
+    required void Function(String answer) action,
   }) {
     showModalBottomSheet(
       context: context,
@@ -219,33 +368,7 @@ class DDtNumberScreen extends StatelessWidget {
             focusNode: _focusNode,
             keyboardType: TextInputType.number,
             onSubmitted: (value) async {
-              // if (mainBloc.ableButton()) {
-              //   bool stateOfAnswer = bloc.addAnswer(userChoose: value ?? '');
-              //   Navigator.of(context).pop();
-              //   if (stateOfAnswer == true) {
-              //     await mainBloc
-              //         .addSuccessAnswer(
-              //             questions: gameState.allGameData.length,
-              //             correctAnswers:
-              //                 ((gameState.countOfCorrectAnswers ?? 0) + 1))
-              //         .whenComplete(() {
-              //       bool isLastQuestion =
-              //           mainBloc.checkIfIsTheLastQuestionOfGame(
-              //               queations: gameState.allGameData.length);
-              //       print('isLastQuestion:$isLastQuestion');
-              //       if (isLastQuestion != true) {
-              //         Future.delayed(const Duration(seconds: 2), () async {
-              //           await mainBloc.updateIndexOfCurrentGame();
-              //           bloc.updateTheCurrentGame(
-              //               newIndex: mainBloc.state.index);
-              //         });
-              //       }
-              //     });
-              //   } else {
-              //     await mainBloc.addWrongAnswer(
-              //         actionOfWrongAnswer: () async {});
-              //   }
-              // }
+              action(value);
             },
             decoration: InputDecoration(
               prefixIcon: IconButton(

@@ -56,7 +56,7 @@ class CardOfTypingNumber extends StatelessWidget {
               number,
               style: TextStyle(
                 color: AppColorPhonetics.darkBlueColor,
-                fontSize: 30.sp,
+                fontSize: 20.sp,
                 fontFamily: AppTheme.getFontFamily5(),
                 fontWeight: FontWeight.w400,
                 height: 0,
