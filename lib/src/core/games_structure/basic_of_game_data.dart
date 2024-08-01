@@ -148,6 +148,8 @@ abstract class BasicOfGameData {
       return CTNumberGame(tools: SymbolsMath.sub, showLineOfNumbers: false);
     } else if (gameType == GameTypes.cTNumberSubLine.text()) {
       return CTNumberGame(tools: SymbolsMath.sub, showLineOfNumbers: true);
+    } else if (gameType == GameTypes.dDTChange.text()) {
+      return DDTChangeGame();
     }
   }
 
@@ -1170,6 +1172,26 @@ class CTNumberGame implements BasicOfGameData {
   String? titleImageAr;
   late SymbolsMath tools;
   late bool showLineOfNumbers;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class DDTChangeGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  // DDTChangeGame({required this.tools, required this.showLineOfNumbers});
+
+  @override
+  String titleImageEn = AppImagesMath.countTypeTheNumber;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
   @override
   int countOfMinimizeStar = 1;
 }
