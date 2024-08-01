@@ -67,7 +67,12 @@ enum GameTypes {
   mathChooseBoard,
   clickOnTheFish,
   countTypeNumber,
-  addRodNumberLine
+  addRodNumberLine,
+  addBeadNumberLine,
+  addRodsType,
+  add3beadsType,
+  add3rodsChoose,
+  subRodsChooseNumber
 }
 
 extension TypeExtension on GameTypes {
@@ -211,6 +216,16 @@ extension TypeExtension on GameTypes {
         return 'add_rod_number_line';
       case GameTypes.clickOnTheFish:
         return 'اختر السمكة';
+      case GameTypes.addBeadNumberLine:
+        return 'Add_Bead_Number_Line';
+      case GameTypes.addRodsType:
+        return 'Add_Rods_Type';
+      case GameTypes.add3rodsChoose:
+        return 'Add_3rods_Choose';
+      case GameTypes.add3beadsType:
+        return 'Add_3beads_type';
+      case GameTypes.subRodsChooseNumber:
+        return 'Sub_Rods_Choose_Number';
     }
   }
 }

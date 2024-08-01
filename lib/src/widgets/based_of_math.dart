@@ -13,6 +13,8 @@ import '../games/math/CT_number/manager/ct_number_cubit.dart';
 import '../games/math/CT_number/screen/ct_number_screen.dart';
 import '../games/math/DDT_change/manager/ddt_number_cubit.dart';
 import '../games/math/DDT_change/screen/ddt_number_screen.dart';
+import '../games/math/add_bead_number_line/manager/add_bead_number_line_cubit.dart';
+import '../games/math/add_bead_number_line/screen/add_bead_number_line_screen.dart';
 import '../games/math/add_rod_number_line/manager/add_rod_number_line_cubit.dart';
 import '../games/math/add_rod_number_line/screen/add_rod_number_line_screen.dart';
 import '../games/math/choose_OE/manager/choose_oe_cubit.dart';
@@ -439,6 +441,28 @@ class BasedOfMath extends StatelessWidget {
                           stateOfStringWillSay: gameData.first.inst ?? '');
                 },
                 child: CountTypeNumberScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData
+            is AddBeadNumberLineGame) ...{
+          BlocProvider<AddBeadNumberLineCubit>(
+            create: (_) => AddBeadNumberLineCubit(
+              allGameData: gamesData,
+              tools: (stateOfGame.basicData!.gameData! as AddBeadNumberLineGame)
+                  .tools,
+            ),
+            child:
+                BlocListener<AddBeadNumberLineCubit, AddBeadNumberLineInitial>(
+                    listener: (context, state) {
+                      final List<GameFinalModel> gameData = gamesData;
+                      context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
+                          mainCountOfQuestion: gameData.length);
+                      context
+                          .read<CurrentGamePhoneticsCubit>()
+                          .saveTheStringWillSay(
+                              stateOfStringIsWord: StateOfSubWord.stopTalk,
+                              stateOfStringWillSay: gameData.first.inst ?? '');
+                    },
+                    child: AddBeadNumberLineScreen()),
           )
         }
       ],

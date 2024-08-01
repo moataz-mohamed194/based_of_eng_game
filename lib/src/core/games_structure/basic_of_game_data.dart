@@ -152,8 +152,22 @@ abstract class BasicOfGameData {
       return MathChooseBoard(tools: ToolsOfMath.beads);
     } else if (gameType == GameTypes.countTypeNumber.text()) {
       return CountTypeNumber(tools: ToolsOfMath.beads);
-    } else if (gameType == GameTypes.addRodNumberLine.text()) {
+    } else if ((gameType.toLowerCase() ==
+            GameTypes.addRodNumberLine.text().toLowerCase()) ||
+        (gameType.toLowerCase() ==
+            GameTypes.add3rodsChoose.text().toLowerCase())) {
       return AddRodNumberLineGame(tools: ToolsOfMath.blocks);
+    } else if ((gameType.toLowerCase() ==
+            GameTypes.addBeadNumberLine.text().toLowerCase()) ||
+        (gameType.toLowerCase() ==
+            GameTypes.add3beadsType.text().toLowerCase())) {
+      return AddBeadNumberLineGame(tools: ToolsOfMath.beads);
+    } else if (gameType.toLowerCase() ==
+        GameTypes.addRodsType.text().toLowerCase()) {
+      return AddBeadNumberLineGame(tools: ToolsOfMath.blocks);
+    } else if (gameType.toLowerCase() ==
+        GameTypes.subRodsChooseNumber.text().toLowerCase()) {
+      return SubRodsChooseNumberGame(tools: ToolsOfMath.blocks);
     }
   }
 
@@ -1250,6 +1264,50 @@ class AddRodNumberLineGame implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesMath.countTypeTheNumber;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class AddBeadNumberLineGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  late ToolsOfMath tools;
+
+  AddBeadNumberLineGame({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.addTypeTheNumber;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class SubRodsChooseNumberGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  late ToolsOfMath tools;
+
+  SubRodsChooseNumberGame({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.addTypeTheNumber;
 
   @override
   String? completeBasket;
