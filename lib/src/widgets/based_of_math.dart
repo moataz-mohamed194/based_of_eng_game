@@ -49,6 +49,8 @@ import '../games/math/sorting_beads/manager/sorting_blocks_cubit.dart';
 import '../games/math/sorting_beads/screen/sorting_blocks_screen.dart';
 import '../games/math/sorting_blocks/manager/sorting_blocks_cubit.dart';
 import '../games/math/sorting_blocks/screen/sorting_blocks_screen.dart';
+import '../games/math/sub_rods_choose_number/manager/sub_rods_choose_number_cubit.dart';
+import '../games/math/sub_rods_choose_number/screen/sub_rods_choose_number_screen.dart';
 
 class BasedOfMath extends StatelessWidget {
   final CurrentGamePhoneticsState stateOfGame;
@@ -441,6 +443,30 @@ class BasedOfMath extends StatelessWidget {
                           stateOfStringWillSay: gameData.first.inst ?? '');
                 },
                 child: CountTypeNumberScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData
+            is SubRodsChooseNumberGame) ...{
+          BlocProvider<SubRodsChooseNumberCubit>(
+            create: (_) => SubRodsChooseNumberCubit(
+              allGameData: gamesData,
+              tools:
+                  (stateOfGame.basicData!.gameData! as SubRodsChooseNumberGame)
+                      .tools,
+            ),
+            child: BlocListener<SubRodsChooseNumberCubit,
+                    SubRodsChooseNumberInitial>(
+                listener: (context, state) {
+                  final List<GameFinalModel> gameData = gamesData;
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .getStateOfStars(mainCountOfQuestion: gameData.length);
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .saveTheStringWillSay(
+                          stateOfStringIsWord: StateOfSubWord.stopTalk,
+                          stateOfStringWillSay: gameData.first.inst ?? '');
+                },
+                child: SubRodsChooseNumberScreen()),
           )
         } else if (stateOfGame.basicData?.gameData
             is AddBeadNumberLineGame) ...{

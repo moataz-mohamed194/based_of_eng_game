@@ -1307,7 +1307,7 @@ class SubRodsChooseNumberGame implements BasicOfGameData {
   SubRodsChooseNumberGame({required this.tools});
 
   @override
-  String titleImageEn = AppImagesMath.addTypeTheNumber;
+  String titleImageEn = AppImagesMath.clickTheChoose;
 
   @override
   String? completeBasket;
