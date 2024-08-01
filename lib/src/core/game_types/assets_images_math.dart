@@ -2,6 +2,7 @@ abstract class AppImagesMath {
   static const String mainPathOfImages = 'assets/math/';
 
   static const String mathBg = "${mainPathOfImages}math_bg.png";
+  static const String mathBgEC2 = "${mainPathOfImages}math_bg_ec2.png";
   static const String mathDragDrop = "${mainPathOfImages}drag_drop.png";
   static const String woodBgNumber = "${mainPathOfImages}wood_bg_number.png";
   static const String sub = "${mainPathOfImages}sub.png";

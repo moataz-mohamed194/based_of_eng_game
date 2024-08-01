@@ -1,3 +1,4 @@
+import '../game_types/assets_images_math.dart';
 import '../game_types/game_phonatics_types.dart';
 import 'basic_of_chapter.dart';
 import 'basic_of_game_data.dart';
@@ -85,21 +86,21 @@ abstract class HandlingActionsAndDataOfChapters {
         MainDataOfChaptersTypes.firstUnitArabic.text()) {
       return FirstUnitArabic(mineGameData: gameData).background;
     } else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.greenUnit.text()){
+        MainDataOfChaptersTypes.greenUnit.text()) {
       return GreenUnit(mineGameData: gameData).background;
-    }  else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.yellowUnit.text()){
+    } else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.yellowUnit.text()) {
       return YellowUnit(mineGameData: gameData).background;
-    }  else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.violetUnit.text()){
+    } else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.violetUnit.text()) {
       return VioletUnit(mineGameData: gameData).background;
-    }  else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.orangeUnit.text()){
+    } else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.orangeUnit.text()) {
       return OrangeUnit(mineGameData: gameData).background;
-    }   else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.blueUnit.text()){
+    } else if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.blueUnit.text()) {
       return BlueUnit(mineGameData: gameData).background;
-    } 
+    }
     return null;
   }
 
@@ -110,17 +111,37 @@ abstract class HandlingActionsAndDataOfChapters {
     required String programName,
     required int audioFlag,
     required String lessonName,
+    required String stageName,
     required String gameName,
   }) {
     print(
         'subLetter:$subLetter , subGame:$subGame , unitName:$unitName , programName:$programName , audioFlag:$audioFlag , ${(unitName.contains(MainDataOfChaptersTypes.consonant.text()))}');
     if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.math.toString().toLowerCase()) {
-      return MathProgram(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName));
+        MainDataOfChaptersTypes.math.text().toLowerCase()) {
+      if (stageName == MainDataOfChaptersTypes.mathEc1.text().toLowerCase()) {
+        return MathProgram(
+            mineGameData: BasicOfGameData.getTheGameType(
+                gameType: subGame.toLowerCase(),
+                audioFlag: audioFlag,
+                programName: programName),
+            background: AppImagesMath.mathBg);
+      } else if (stageName.toLowerCase() ==
+          MainDataOfChaptersTypes.mathEc2.text().toLowerCase()) {
+        return MathProgram(
+            mineGameData: BasicOfGameData.getTheGameType(
+                gameType: subGame.toLowerCase(),
+                audioFlag: audioFlag,
+                programName: programName),
+            background: AppImagesMath.mathBgEC2);
+      } else if (stageName.toLowerCase() ==
+          MainDataOfChaptersTypes.mathEc3.text().toLowerCase()) {
+        return MathProgram(
+            background: AppImagesMath.mathBgEC2,
+            mineGameData: BasicOfGameData.getTheGameType(
+                gameType: subGame.toLowerCase(),
+                audioFlag: audioFlag,
+                programName: programName));
+      }
     } else if (unitName
         .toLowerCase()
         .contains(MainDataOfChaptersTypes.shortVowels.text())) {
@@ -284,7 +305,7 @@ abstract class HandlingActionsAndDataOfChapters {
               gameType: subGame.toLowerCase(),
               audioFlag: audioFlag,
               programName: programName,
-              gameName: gameName ));
+              gameName: gameName));
     } else if (unitName.toLowerCase() == MainDataOfChaptersTypes.orangeUnit.text() ||
         lessonName.contains(MainDataOfChaptersTypes.orangeUnit.text())) {
       return OrangeUnit(
@@ -355,11 +376,10 @@ abstract class HandlingActionsAndDataOfChapters {
         lessonName.contains(MainDataOfChaptersTypes.greenUnit.text())) {
       return GreenUnit(
           mineGameData: BasicOfGameData.getTheGameType(
-        gameType: subGame.toLowerCase(),
-        audioFlag: audioFlag,
-        programName: programName,
-              gameName: gameName
-      ));
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName,
+              gameName: gameName));
     } else if (unitName.toLowerCase() ==
             MainDataOfChaptersTypes.violetUnit.text() ||
         lessonName.contains(MainDataOfChaptersTypes.violetUnit.text())) {
@@ -369,13 +389,6 @@ abstract class HandlingActionsAndDataOfChapters {
               audioFlag: audioFlag,
               programName: programName,
               gameName: gameName));
-    } else if (programName.toLowerCase() == math) {
-      return MathProgram(
-          mineGameData: BasicOfGameData.getTheGameType(
-        gameType: subGame.toLowerCase(),
-        audioFlag: audioFlag,
-        programName: programName,
-      ));
     } else if (unitName.toLowerCase() ==
         MainDataOfChaptersTypes.rUnitArabic.text()) {
       return RUnitArabic(

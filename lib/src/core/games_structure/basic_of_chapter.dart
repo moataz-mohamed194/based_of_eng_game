@@ -47,7 +47,10 @@ enum MainDataOfChaptersTypes {
   consonant,
   rUnitArabic,
   rUnitPhonics,
-  firstUnitArabic
+  firstUnitArabic,
+  mathEc1,
+  mathEc3,
+  mathEc2,
 }
 
 extension TypeExtension on MainDataOfChaptersTypes {
@@ -133,6 +136,12 @@ extension TypeExtension on MainDataOfChaptersTypes {
         return "المجموعة البنفسجية".toLowerCase();
       case MainDataOfChaptersTypes.yellowUnit:
         return "المجموعة الصفراء".toLowerCase();
+      case MainDataOfChaptersTypes.mathEc1:
+        return "EC1".toLowerCase();
+      case MainDataOfChaptersTypes.mathEc2:
+        return "EC2".toLowerCase();
+      case MainDataOfChaptersTypes.mathEc3:
+        return "EC3".toLowerCase();
     }
   }
 }
@@ -1445,8 +1454,9 @@ class MathProgram implements MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
 
-  MathProgram({required this.mineGameData}) {
+  MathProgram({required this.mineGameData, required this.background}) {
     gameData = mineGameData;
+    background = background;
   }
 
   @override
