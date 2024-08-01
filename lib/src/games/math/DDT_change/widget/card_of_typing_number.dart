@@ -7,11 +7,12 @@ import '../../../../core/phonetics_color.dart';
 import '../../../../core/theme_text.dart';
 import '../manager/ddt_number_cubit.dart';
 
-class CardOfTypingNumber extends StatelessWidget {
+class CardOfTypingNumberDDT extends StatelessWidget {
   final String number;
   final double? size;
   final void Function()? onTap;
-  CardOfTypingNumber({super.key, this.size, required this.number, this.onTap});
+  CardOfTypingNumberDDT(
+      {super.key, this.size, required this.number, this.onTap});
 
 //   @override
 //   State<StatefulWidget> createState() {

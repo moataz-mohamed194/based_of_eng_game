@@ -84,7 +84,7 @@ class DDtNumberScreen extends StatelessWidget {
                                       height: 0,
                                     ),
                                   ),
-                                  CardOfTypingNumber(
+                                  CardOfTypingNumberDDT(
                                     number:
                                         gameState.showTheAnswerOfSecondTyping ==
                                                 true
@@ -249,7 +249,7 @@ class DDtNumberScreen extends StatelessWidget {
                                       height: 0,
                                     ),
                                   ),
-                                  CardOfTypingNumber(
+                                  CardOfTypingNumberDDT(
                                     number: gameState
                                                 .showTheAnswerOfFirstTyping ==
                                             true
