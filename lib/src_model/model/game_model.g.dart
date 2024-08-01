@@ -48,6 +48,7 @@ GameFinalModel _$GameFinalModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) =>
               GameImagesGameFinalModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isActive: (json['is_active'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$GameFinalModelToJson(GameFinalModel instance) =>
@@ -77,4 +78,5 @@ Map<String, dynamic> _$GameFinalModelToJson(GameFinalModel instance) =>
       'next_game_id': instance.nextGameId,
       'previous_game_id': instance.previousGameId,
       'is_hidden': instance.isHidden,
+      'is_active': instance.isActive,
     };
