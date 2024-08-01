@@ -1,5 +1,7 @@
 import 'package:based_of_eng_game/src/games/choose_the_sentence/manager/listen_choose_cubit.dart';
 import 'package:based_of_eng_game/src/games/choose_the_sentence/page/listen_and_choose_screen.dart';
+import 'package:based_of_eng_game/src/games/click_on_the_fish/page/click_on_the_fish_game.dart';
+import 'package:based_of_eng_game/src/games/click_the_sound/manager/click_the_sound_cubit.dart';
 import 'package:based_of_eng_game/src/games/complete_the_word/manager/complete_the_word_cubit.dart';
 import 'package:based_of_eng_game/src/games/complete_the_word/page/complete_the_word_game.dart';
 import 'package:based_of_eng_game/src/games/drag_pic_to_word/manager/drag_pic_to_word_cubit.dart';
@@ -54,7 +56,20 @@ class BasedOfFullBoardGamesAr extends StatelessWidget {
                           isArabic: true,
                         ),
                     child: DragPicToWordGameScreen())
-              } else ...{
+              } else if((stateOfGame.basicData?.gameData is ClickOnTheFish)) ... {
+                     BlocProvider<ClickTheSoundCubit>(
+                      create: (_) => ClickTheSoundCubit(
+                            gameData: gamesData[stateOfGame.index],
+                            isArabic: true,
+                            isFish: true,
+                          ),
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 12.w),
+                        child: const Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: ClickOnTheFishGame()),
+                      )),
+                }else ...{
                 const Text('no game')
               },
             ],

@@ -31,6 +31,7 @@ abstract class AppImagesArabic {
   static const String regularBalon = '${mainPathOfImages}balon_regular.png';
   static const String wrongBalon = '${mainPathOfImages}balon_wrong.png';
   static const String correctBalon = '${mainPathOfImages}balon_correct.png';
+  static const String a5tarElsamka = '${mainPathOfImages}a5tar_samka.png';
 
   static const String titleOfSortingCups =
       '${mainPathOfImages}sorting_cups.png';
@@ -51,4 +52,6 @@ abstract class AppImagesArabic {
   static const String titleOfDragAndDrop =
       '${mainPathOfImages}drag_and_drop.png';
   static const String correctImage = '${mainPathOfImages}correct_image.png';
+  static const String correctFish = '${mainPathOfImages}correct_fish.png';
+  static const String regularFish = '${mainPathOfImages}regular_fish.png';
 }
