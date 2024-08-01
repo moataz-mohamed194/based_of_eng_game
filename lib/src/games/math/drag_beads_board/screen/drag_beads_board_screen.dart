@@ -73,84 +73,101 @@ class DragBeadsBoardScreen extends StatelessWidget {
                                                   .toList()
                                                   .isEmpty
                                               ? SizedBox()
-                                              : _bodyOfTheDragTarget(
-                                                  gameLetters: gameState
-                                                      .correctAnswers
-                                                      .where((ele) =>
-                                                          ele.id ==
-                                                          gameState
-                                                              .gameImages?[
-                                                                  index]
-                                                              .gameLetterId)
-                                                      .toList()
-                                                      .first),
-                                          number: 1,
-                                          tools: ToolsOfMath.beads,
+                                              : FittedBox(
+                                                  child: _bodyOfTheDragTarget(
+                                                      gameLetters: gameState
+                                                          .correctAnswers
+                                                          .where((ele) =>
+                                                              ele.id ==
+                                                              gameState
+                                                                  .gameImages?[
+                                                                      index]
+                                                                  .gameLetterId)
+                                                          .toList()
+                                                          .first)),
+                                          number: 100,
+                                          tools: ToolsOfMath.blocks,
                                         );
+                                        // return CardOfBlocks(
+                                        //   number: gameState.correctAnswers
+                                        //           .contains(gameState
+                                        //                   .gameImages?[index]
+                                        //                   .gameLetterId ??
+                                        //               0)
+                                        //       ? int.parse(gameState
+                                        //               .gameImages?[index]
+                                        //               .word ??
+                                        //           '0')
+                                        //       : 0,
+                                        //   tools: ToolsOfMath.blocks,
+                                        // );
                                       }, onAcceptWithDetails: (item) async {
-                                        print(
-                                            '##:${context.read<CurrentGamePhoneticsCubit>().ableButton()}');
-                                        log('##:${context.read<CurrentGamePhoneticsCubit>().ableButton()}');
-                                        // if (context
-                                        //     .read<CurrentGamePhoneticsCubit>()
-                                        //     .ableButton()) {
-                                        bool stateOfAnswer = context
-                                            .read<DragBeadsBoardCubit>()
-                                            .addAnswer(
-                                                userChoose: gameState
-                                                        .gameImages?[index]
-                                                        .gameLetterId ??
-                                                    0,
-                                                secondChoose: item.data);
-                                        if (stateOfAnswer == true) {
-                                          await context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .addSuccessAnswer(
-                                                  questions: gameState.gameData
-                                                          .gameImages?.length ??
+                                        print('##:${item.data}');
+                                        log('##:${item.data}');
+                                        if (context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .ableButton()) {
+                                          bool stateOfAnswer = context
+                                              .read<DragBeadsBoardCubit>()
+                                              .addAnswer(
+                                                  userChoose: gameState
+                                                          .gameImages?[index]
+                                                          .gameLetterId ??
                                                       0,
-                                                  correctAnswers: gameState
-                                                      .correctAnswers.length)
-                                              .whenComplete(() {
-                                            bool isLastQuestion = context
+                                                  secondChoose: item.data);
+                                          if (stateOfAnswer == true) {
+                                            await context
                                                 .read<
                                                     CurrentGamePhoneticsCubit>()
-                                                .checkIfIsTheLastQuestionOfGame(
-                                                    queations: gameState
+                                                .addSuccessAnswer(
+                                                    questions: gameState
                                                             .gameData
-                                                            .gameLetters
+                                                            .gameImages
                                                             ?.length ??
-                                                        0);
-                                            if (isLastQuestion) {
-                                              // Future.delayed(const Duration(seconds: 2),
-                                              //     () async {
-                                              //   Navigator.of(context).pop();
-                                              // });
-                                            } else {
-                                              // Future.delayed(const Duration(seconds: 2),
-                                              //     () async {
-                                              //   await context
-                                              //       .read<CurrentGamePhoneticsCubit>()
-                                              //       .updateIndexOfCurrentGame();
-                                              //   context
-                                              //       .read<DragBeadsBoardCubit>()
-                                              //       .updateTheCurrentGame(
-                                              //           index: context
-                                              //               .read<
-                                              //                   CurrentGamePhoneticsCubit>()
-                                              //               .state
-                                              //               .index);
-                                              // });
-                                            }
-                                          });
-                                        } else {
-                                          await context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .addWrongAnswer(
-                                                  actionOfWrongAnswer:
-                                                      () async {});
+                                                        0,
+                                                    correctAnswers: gameState
+                                                        .correctAnswers.length)
+                                                .whenComplete(() {
+                                              bool isLastQuestion = context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .checkIfIsTheLastQuestionOfGame(
+                                                      queations: gameState
+                                                              .gameData
+                                                              .gameLetters
+                                                              ?.length ??
+                                                          0);
+                                              if (isLastQuestion) {
+                                                // Future.delayed(const Duration(seconds: 2),
+                                                //     () async {
+                                                //   Navigator.of(context).pop();
+                                                // });
+                                              } else {
+                                                // Future.delayed(const Duration(seconds: 2),
+                                                //     () async {
+                                                //   await context
+                                                //       .read<CurrentGamePhoneticsCubit>()
+                                                //       .updateIndexOfCurrentGame();
+                                                //   context
+                                                //       .read<DragBeadsBoardCubit>()
+                                                //       .updateTheCurrentGame(
+                                                //           index: context
+                                                //               .read<
+                                                //                   CurrentGamePhoneticsCubit>()
+                                                //               .state
+                                                //               .index);
+                                                // });
+                                              }
+                                            });
+                                          } else {
+                                            await context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .addWrongAnswer(
+                                                    actionOfWrongAnswer:
+                                                        () async {});
+                                          }
                                         }
-                                        // }
                                       })),
                             ),
                           ),
@@ -167,22 +184,19 @@ class DragBeadsBoardScreen extends StatelessWidget {
                         (index) => gameState.correctAnswers
                                 .where((element) =>
                                     element.id ==
-                                    (gameState.gameImages?[index].id ?? 0))
+                                    (gameState.gameLetters?[index].id ?? 0))
                                 .isNotEmpty
                             ? Opacity(
                                 opacity: .5,
-                                child: GetTheBeads(
-                                  countOfBalls: int.parse(
-                                      gameState.gameImages?[index].word ?? '0'),
-                                  // size: 65.h,
-                                ),
+                                child: _bodyOfTheDragTarget(
+                                    gameLetters: gameState.gameLetters?[index]),
                               )
-                            : Draggable<GameImagesGameFinalModel>(
+                            : Draggable<GameLettersGameFinalModel>(
                                 maxSimultaneousDrags: 1,
                                 feedback: _bodyOfTheDragTarget(
                                     gameLetters: gameState.gameLetters?[index]),
                                 // childWhenDragging: ,
-                                data: gameState.gameImages?[index],
+                                data: gameState.gameLetters?[index],
                                 child: _bodyOfTheDragTarget(
                                     gameLetters: gameState.gameLetters?[index]),
                               )),
@@ -202,6 +216,7 @@ class DragBeadsBoardScreen extends StatelessWidget {
           border: Border.all(color: AppColorPhonetics.lightYellow2),
           borderRadius: BorderRadius.circular(8)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GetTheBeads(
             showTheCircle: true,
