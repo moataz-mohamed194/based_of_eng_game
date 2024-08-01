@@ -17,6 +17,8 @@ import '../games/math/add_bead_number_line/manager/add_bead_number_line_cubit.da
 import '../games/math/add_bead_number_line/screen/add_bead_number_line_screen.dart';
 import '../games/math/add_rod_number_line/manager/add_rod_number_line_cubit.dart';
 import '../games/math/add_rod_number_line/screen/add_rod_number_line_screen.dart';
+import '../games/math/chart_sub_type/manager/chart_sub_type_cubit.dart';
+import '../games/math/chart_sub_type/screen/chart_sub_type_screen.dart';
 import '../games/math/choose_OE/manager/choose_oe_cubit.dart';
 import '../games/math/choose_OE/screen/choose_oe_screen.dart';
 import '../games/math/choose_add/manager/choose_add_cubit.dart';
@@ -489,6 +491,25 @@ class BasedOfMath extends StatelessWidget {
                               stateOfStringWillSay: gameData.first.inst ?? '');
                     },
                     child: AddBeadNumberLineScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData is ChartSubType) ...{
+          BlocProvider<ChartSubTypeCubit>(
+            create: (_) => ChartSubTypeCubit(
+              allGameData: gamesData,
+            ),
+            child: BlocListener<ChartSubTypeCubit, ChartSubTypeInitial>(
+                listener: (context, state) {
+                  final List<GameFinalModel> gameData = gamesData;
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .getStateOfStars(mainCountOfQuestion: gameData.length);
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .saveTheStringWillSay(
+                          stateOfStringIsWord: StateOfSubWord.stopTalk,
+                          stateOfStringWillSay: gameData.first.inst ?? '');
+                },
+                child: ChartSubTypeScreen()),
           )
         }
       ],

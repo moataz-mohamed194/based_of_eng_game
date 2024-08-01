@@ -168,6 +168,9 @@ abstract class BasicOfGameData {
     } else if (gameType.toLowerCase() ==
         GameTypes.subRodsChooseNumber.text().toLowerCase()) {
       return SubRodsChooseNumberGame(tools: ToolsOfMath.blocks);
+    } else if (gameType.toLowerCase() ==
+        GameTypes.chartSubType.text().toLowerCase()) {
+      return ChartSubType();
     }
   }
 
@@ -1308,6 +1311,27 @@ class SubRodsChooseNumberGame implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesMath.clickTheChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class ChartSubType implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  ChartSubType();
+
+  @override
+  String titleImageEn = AppImagesMath.typeTheNumber;
 
   @override
   String? completeBasket;

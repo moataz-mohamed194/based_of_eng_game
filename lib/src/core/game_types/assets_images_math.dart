@@ -9,6 +9,9 @@ abstract class AppImagesMath {
   static const String woodBox = "${mainPathOfImages}wood_box.png";
   static const String woodBoxMid = "${mainPathOfImages}wood_box_mid.png";
   static const String woodBoxLast = "${mainPathOfImages}last_wood_box.png";
+  static const String typeTheNumber = "${mainPathOfImages}type_the_number.png";
+  static const String tableOfChartSubType =
+      "${mainPathOfImages}table_of_Chart_Sub_Type.png";
   static const String addTypeTheNumber =
       "${mainPathOfImages}add_type_the_number.png";
   static const String woodBoxForNumber =
