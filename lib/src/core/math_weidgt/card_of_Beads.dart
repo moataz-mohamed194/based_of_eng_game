@@ -10,9 +10,14 @@ class CardOfBeads extends StatelessWidget {
   final int number;
   final ToolsOfMath tools;
   final double? size;
+  final Widget? newWidget;
 
   const CardOfBeads(
-      {super.key, required this.number, this.size, required this.tools});
+      {super.key,
+      required this.number,
+      this.size,
+      required this.tools,
+      this.newWidget});
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -57,10 +62,12 @@ class CardOfBeads extends StatelessWidget {
               //         GetTheBeads(
               //           countOfBalls: number,
               //         )
-              //       } else if (tools == ToolsOfMath.blocks) ...{
-              GetTheBeads(
-            countOfBalls: number,
-          )
+              //       } else
+              (newWidget != null)
+                  ? newWidget
+                  : GetTheBeads(
+                      countOfBalls: number,
+                    )
           //       }
           //     ],
           //   ),

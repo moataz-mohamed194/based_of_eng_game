@@ -73,6 +73,7 @@ enum GameTypes {
   add3beadsType,
   add3rodsChoose,
   chartSubType,
+  dragBeadsBoard,
   subRodsChooseNumber
 }
 
@@ -229,6 +230,8 @@ extension TypeExtension on GameTypes {
         return 'Sub_Rods_Choose_Number';
       case GameTypes.chartSubType:
         return 'Chart_Sub_Type';
+      case GameTypes.dragBeadsBoard:
+        return 'Drag_Beads_Board';
     }
   }
 }

@@ -41,6 +41,8 @@ import '../games/math/count_type_number/manager/count_type_number_cubit.dart';
 import '../games/math/count_type_number/screen/count_type_number_screen.dart';
 import '../games/math/drag_add/manager/drag_add_cubit.dart';
 import '../games/math/drag_add/screen/drag_add_screen.dart';
+import '../games/math/drag_beads_board/manager/drag_beads_board_cubit.dart';
+import '../games/math/drag_beads_board/screen/drag_beads_board_screen.dart';
 import '../games/math/drag_oe/manager/drag_oe_cubit.dart';
 import '../games/math/drag_oe/screen/drag_oe_screen.dart';
 import '../games/math/drag_sticks/manager/drag_sticks_cubit.dart';
@@ -170,6 +172,14 @@ class BasedOfMath extends StatelessWidget {
                   tools: (stateOfGame.basicData?.gameData as MathSortingBeads)
                       .tools),
               child: SortingBeadsScreen())
+        } else if (stateOfGame.basicData?.gameData is DragBeadsBoard) ...{
+          BlocProvider<DragBeadsBoardCubit>(
+              create: (_) => DragBeadsBoardCubit(
+                  gameData: gamesData[0],
+                  subBloc: context.read<CurrentGamePhoneticsCubit>(),
+                  tools: (stateOfGame.basicData?.gameData as DragBeadsBoard)
+                      .tools),
+              child: DragBeadsBoardScreen())
         } else if (stateOfGame.basicData?.gameData is MathChooseOEDomino) ...{
           BlocProvider<ChooseOeCubit>(
               create: (_) => ChooseOeCubit(

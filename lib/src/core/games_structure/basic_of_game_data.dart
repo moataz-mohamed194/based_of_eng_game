@@ -171,6 +171,9 @@ abstract class BasicOfGameData {
     } else if (gameType.toLowerCase() ==
         GameTypes.chartSubType.text().toLowerCase()) {
       return ChartSubType();
+    } else if (gameType.toLowerCase() ==
+        GameTypes.dragBeadsBoard.text().toLowerCase()) {
+      return DragBeadsBoard(tools: ToolsOfMath.beads);
     }
   }
 
@@ -1332,6 +1335,28 @@ class ChartSubType implements BasicOfGameData {
 
   @override
   String titleImageEn = AppImagesMath.typeTheNumber;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class DragBeadsBoard implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  late ToolsOfMath tools;
+
+  DragBeadsBoard({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.mathDragDrop;
 
   @override
   String? completeBasket;
