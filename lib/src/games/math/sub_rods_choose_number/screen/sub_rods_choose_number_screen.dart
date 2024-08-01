@@ -64,7 +64,7 @@ class SubRodsChooseNumberScreen extends StatelessWidget {
                                             : gameState.tools ==
                                                     ToolsOfMath.beads
                                                 ? GetTheBeads(
-                                                    showTheCircle: true,
+                                                    hideTheCircle: true,
                                                     countOfBalls: int.parse(
                                                         "${gameState.finalGameLetters?[index].letter}"),
                                                   )
