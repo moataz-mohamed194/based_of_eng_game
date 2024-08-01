@@ -134,15 +134,8 @@ class BasedOfMath extends StatelessWidget {
                 basicData: stateOfGame.basicData!.gameData!),
             child: BlocListener<ChooseSticksCubit, ChooseSticksInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: ChooseSticksScreen()),
           )
@@ -154,15 +147,8 @@ class BasedOfMath extends StatelessWidget {
                 basicData: stateOfGame.basicData!.gameData!),
             child: BlocListener<ChooseNumberCubit, ChooseNumberInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: ChooseNumberScreen()),
           )
@@ -191,15 +177,8 @@ class BasedOfMath extends StatelessWidget {
                   basicData: stateOfGame.basicData!.gameData!),
               child: BlocListener<ChooseOeCubit, ChooseOeInitial>(
                   listener: (context, state) {
-                    final List<GameFinalModel> gameData = gamesData;
-                    context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .getStateOfStars(mainCountOfQuestion: gameData.length);
-                    context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .saveTheStringWillSay(
-                            stateOfStringIsWord: StateOfSubWord.stopTalk,
-                            stateOfStringWillSay: gameData.first.inst ?? '');
+                    _handlingDataOfGame(
+                        mainBloc: context.read<CurrentGamePhoneticsCubit>());
                   },
                   child: ChooseOeScreen()))
         } else if (stateOfGame.basicData?.gameData is MathDragDominoOE) ...{
@@ -218,15 +197,8 @@ class BasedOfMath extends StatelessWidget {
                 basicData: stateOfGame.basicData!.gameData!),
             child: BlocListener<ChooseNumberOECubit, ChooseNumberOEInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: ChooseNumberOEScreen()),
           )
@@ -265,15 +237,8 @@ class BasedOfMath extends StatelessWidget {
                     .tools),
             child: BlocListener<ChooseAddCubit, ChooseAddInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: ChooseAddScreen()),
           )
@@ -285,15 +250,8 @@ class BasedOfMath extends StatelessWidget {
                     .tools),
             child: BlocListener<ChooseSubCubit, ChooseSubInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: ChooseSubScreen()),
           )
@@ -305,15 +263,8 @@ class BasedOfMath extends StatelessWidget {
                     .tools),
             child: BlocListener<DragSubCubit, DragSubInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: DragSubScreen()),
           )
@@ -327,15 +278,8 @@ class BasedOfMath extends StatelessWidget {
                     .tools),
             child: BlocListener<ChooseAddLineCubit, ChooseAddLineInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: ChooseAddLineScreen()),
           )
@@ -350,15 +294,8 @@ class BasedOfMath extends StatelessWidget {
             child: BlocListener<ChooseAddBeadsLineCubit,
                     ChooseAddBeadsLineInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: ChooseAddBeadsLineScreen()),
           )
@@ -370,15 +307,8 @@ class BasedOfMath extends StatelessWidget {
                     .tools),
             child: BlocListener<DragAddCubit, DragAddInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: DragAddScreen()),
           )
@@ -392,15 +322,8 @@ class BasedOfMath extends StatelessWidget {
             child: BlocListener<ChooseNumberFromWoodCubit,
                     ChooseNumberFromWoodInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: ChooseNumberFromWoodScreen()),
           )
@@ -413,15 +336,8 @@ class BasedOfMath extends StatelessWidget {
             ),
             child: BlocListener<AddRodNumberLineCubit, AddRodNumberLineInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: AddRodNumberLineScreen()),
           )
@@ -434,15 +350,8 @@ class BasedOfMath extends StatelessWidget {
             ),
             child: BlocListener<CountTypeNumberCubit, CountTypeNumberInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: CountTypeNumberScreen()),
           )
@@ -458,15 +367,8 @@ class BasedOfMath extends StatelessWidget {
             child: BlocListener<SubRodsChooseNumberCubit,
                     SubRodsChooseNumberInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: SubRodsChooseNumberScreen()),
           )
@@ -481,14 +383,8 @@ class BasedOfMath extends StatelessWidget {
             child:
                 BlocListener<AddBeadNumberLineCubit, AddBeadNumberLineInitial>(
                     listener: (context, state) {
-                      final List<GameFinalModel> gameData = gamesData;
-                      context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
-                          mainCountOfQuestion: gameData.length);
-                      context
-                          .read<CurrentGamePhoneticsCubit>()
-                          .saveTheStringWillSay(
-                              stateOfStringIsWord: StateOfSubWord.stopTalk,
-                              stateOfStringWillSay: gameData.first.inst ?? '');
+                      _handlingDataOfGame(
+                          mainBloc: context.read<CurrentGamePhoneticsCubit>());
                     },
                     child: AddBeadNumberLineScreen()),
           )
@@ -499,20 +395,21 @@ class BasedOfMath extends StatelessWidget {
             ),
             child: BlocListener<ChartSubTypeCubit, ChartSubTypeInitial>(
                 listener: (context, state) {
-                  final List<GameFinalModel> gameData = gamesData;
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .getStateOfStars(mainCountOfQuestion: gameData.length);
-                  context
-                      .read<CurrentGamePhoneticsCubit>()
-                      .saveTheStringWillSay(
-                          stateOfStringIsWord: StateOfSubWord.stopTalk,
-                          stateOfStringWillSay: gameData.first.inst ?? '');
+                  _handlingDataOfGame(
+                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: ChartSubTypeScreen()),
           )
         }
       ],
     );
+  }
+
+  _handlingDataOfGame({required CurrentGamePhoneticsCubit mainBloc}) {
+    final List<GameFinalModel> gameData = gamesData;
+    mainBloc.getStateOfStars(mainCountOfQuestion: gameData.length);
+    mainBloc.saveTheStringWillSay(
+        stateOfStringIsWord: StateOfSubWord.stopTalk,
+        stateOfStringWillSay: gameData.first.inst ?? '');
   }
 }
