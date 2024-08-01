@@ -25,10 +25,14 @@ import '../games/math/choose_from_obj/manager/choose_sticks_cubit.dart';
 import '../games/math/choose_from_obj/screen/choose_sticks_screen.dart';
 import '../games/math/choose_number/manager/choose_number_cubit.dart';
 import '../games/math/choose_number/screen/choose_numbers_screen.dart';
+import '../games/math/choose_number_from_wood/manager/choose_number_from_wood_cubit.dart';
+import '../games/math/choose_number_from_wood/screen/choose_number_from_wood_screen.dart';
 import '../games/math/choose_number_oe/manager/choose_number_oe_cubit.dart';
 import '../games/math/choose_number_oe/screen/choose_numbers_oe_screen.dart';
 import '../games/math/choose_sub/manager/choose_sub_cubit.dart';
 import '../games/math/choose_sub/screen/choose_sub_screen.dart';
+import '../games/math/count_type_number/manager/count_type_number_cubit.dart';
+import '../games/math/count_type_number/screen/count_type_number_screen.dart';
 import '../games/math/drag_add/manager/drag_add_cubit.dart';
 import '../games/math/drag_add/screen/drag_add_screen.dart';
 import '../games/math/drag_oe/manager/drag_oe_cubit.dart';
@@ -369,6 +373,49 @@ class BasedOfMath extends StatelessWidget {
                           stateOfStringWillSay: gameData.first.inst ?? '');
                 },
                 child: DragAddScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData is MathChooseBoard) ...{
+          BlocProvider<ChooseNumberFromWoodCubit>(
+            create: (_) => ChooseNumberFromWoodCubit(
+              allGameData: gamesData,
+              tools:
+                  (stateOfGame.basicData!.gameData! as MathChooseBoard).tools,
+            ),
+            child: BlocListener<ChooseNumberFromWoodCubit,
+                    ChooseNumberFromWoodInitial>(
+                listener: (context, state) {
+                  final List<GameFinalModel> gameData = gamesData;
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .getStateOfStars(mainCountOfQuestion: gameData.length);
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .saveTheStringWillSay(
+                          stateOfStringIsWord: StateOfSubWord.stopTalk,
+                          stateOfStringWillSay: gameData.first.inst ?? '');
+                },
+                child: ChooseNumberFromWoodScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData is CountTypeNumber) ...{
+          BlocProvider<CountTypeNumberCubit>(
+            create: (_) => CountTypeNumberCubit(
+              allGameData: gamesData,
+              tools:
+                  (stateOfGame.basicData!.gameData! as CountTypeNumber).tools,
+            ),
+            child: BlocListener<CountTypeNumberCubit, CountTypeNumberInitial>(
+                listener: (context, state) {
+                  final List<GameFinalModel> gameData = gamesData;
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .getStateOfStars(mainCountOfQuestion: gameData.length);
+                  context
+                      .read<CurrentGamePhoneticsCubit>()
+                      .saveTheStringWillSay(
+                          stateOfStringIsWord: StateOfSubWord.stopTalk,
+                          stateOfStringWillSay: gameData.first.inst ?? '');
+                },
+                child: CountTypeNumberScreen()),
           )
         }
       ],
