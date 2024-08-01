@@ -34,10 +34,10 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.clickPicture.text() && audioFlag == 0) {
       return ClickPicture();
     } else if (gameType == GameTypes.clickTheSound.text()) {
-      return BasicClickTheSoundGame(isArabic: enumValues.contains(programName) );
+      return BasicClickTheSoundGame(isArabic: enumValues.contains(programName));
     } else if (gameType == GameTypes.clickOnTheFish.text()) {
       return ClickOnTheFish(isArabic: enumValues.contains(programName));
-    }  else if (gameType == GameTypes.bingo.text()) {
+    } else if (gameType == GameTypes.bingo.text()) {
       return BingoGame();
     } else if (gameType == GameTypes.sortingCups.text()) {
       return SortingCupsGame();
@@ -148,8 +148,10 @@ abstract class BasicOfGameData {
       return CTNumberGame(tools: SymbolsMath.sub, showLineOfNumbers: false);
     } else if (gameType == GameTypes.cTNumberSubLine.text()) {
       return CTNumberGame(tools: SymbolsMath.sub, showLineOfNumbers: true);
-    } else if (gameType == GameTypes.dDTChange.text()) {
-      return DDTChangeGame();
+    } else if (gameType == GameTypes.mathChooseBoard.text()) {
+      return MathChooseBoard(tools: ToolsOfMath.beads);
+    } else if (gameType == GameTypes.countTypeNumber.text()) {
+      return CountTypeNumber(tools: ToolsOfMath.beads);
     }
   }
 
@@ -307,11 +309,9 @@ class Video implements BasicOfGameData {
 }
 
 class BasicClickTheSoundGame implements BasicOfGameData {
-  
   bool isArabic;
-  
 
-  BasicClickTheSoundGame({required this.isArabic }) ;
+  BasicClickTheSoundGame({required this.isArabic});
   @override
   bool isRound = false;
 
@@ -330,12 +330,11 @@ class BasicClickTheSoundGame implements BasicOfGameData {
   @override
   int countOfMinimizeStar = 1;
 }
-class ClickOnTheFish implements BasicOfGameData {
-  
-  bool isArabic;
-  
 
-  ClickOnTheFish({required this.isArabic }) ;
+class ClickOnTheFish implements BasicOfGameData {
+  bool isArabic;
+
+  ClickOnTheFish({required this.isArabic});
   @override
   bool isRound = false;
 
@@ -1180,6 +1179,50 @@ class DDTChangeGame implements BasicOfGameData {
   @override
   bool isRound = false;
   // DDTChangeGame({required this.tools, required this.showLineOfNumbers});
+
+  @override
+  String titleImageEn = AppImagesMath.countTypeTheNumber;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class MathChooseBoard implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  late ToolsOfMath tools;
+
+  MathChooseBoard({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.clickTheChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class CountTypeNumber implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  late ToolsOfMath tools;
+
+  CountTypeNumber({required this.tools});
 
   @override
   String titleImageEn = AppImagesMath.countTypeTheNumber;

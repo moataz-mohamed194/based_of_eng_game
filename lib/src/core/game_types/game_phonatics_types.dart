@@ -63,8 +63,11 @@ enum GameTypes {
   cTNumberLine,
   cTNumberSub,
   cTNumberSubLine,
-  dDTChange ,
-  clickOnTheFish
+  dDTChange,
+  mathChooseBoard,
+  clickOnTheFish,
+  countTypeNumber,
+  addRodNumberLine
 }
 
 extension TypeExtension on GameTypes {
@@ -200,7 +203,13 @@ extension TypeExtension on GameTypes {
         return 'CT_number_sub'.toLowerCase();
       case GameTypes.cTNumberSubLine:
         return 'CT_number_sub_line'.toLowerCase();
-      case GameTypes.clickOnTheFish : 
+      case GameTypes.mathChooseBoard:
+        return 'Math_Choose_Board'.toLowerCase();
+      case GameTypes.countTypeNumber:
+        return 'Count_Type_Number'.toLowerCase();
+      case GameTypes.addRodNumberLine:
+        return 'Add_Rod_Number_Line';
+      case GameTypes.clickOnTheFish:
         return 'اختر السمكة';
     }
   }
