@@ -23,7 +23,9 @@ class GetTheBeads extends StatelessWidget {
               ...List.generate(
                   countOfBalls,
                   (index) => SvgPicture.asset(
-                        selectedBall(countOfBalls: countOfBalls),
+                        selectedBall(
+                            countOfBalls: countOfBalls,
+                            showTheCircle: showTheCircle),
                         width: 10.w,
                       )),
               showTheCircle == true || countOfBalls == 10
@@ -34,7 +36,11 @@ class GetTheBeads extends StatelessWidget {
     );
   }
 
-  static String selectedBall({required int countOfBalls}) {
+  static String selectedBall(
+      {required int countOfBalls, required bool? showTheCircle}) {
+    if (showTheCircle == false) {
+      return AppImagesMath.ball10;
+    }
     switch (countOfBalls) {
       case 1:
         return AppImagesMath.ball1;
