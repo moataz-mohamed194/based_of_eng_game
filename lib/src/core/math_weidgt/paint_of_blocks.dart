@@ -1,61 +1,14 @@
 import 'package:flutter/material.dart';
 
-class PaintOfBlocks extends CustomPainter {
-  final Color color;
-  final Color boarderColor;
-
-  PaintOfBlocks({required this.color, required this.boarderColor});
-  @override
-  void paint(Canvas canvas, Size size) {
-    Path path_0 = Path();
-    path_0.moveTo(size.width * 0.9999985, size.height * 0.1853693);
-    path_0.lineTo(size.width * 0.09392831, size.height * 0.1853693);
-    path_0.lineTo(size.width * 0.09392831, size.height * 0.9959500);
-    path_0.lineTo(size.width * 0.9999985, size.height * 0.9959500);
-    path_0.lineTo(size.width * 0.9999985, size.height * 0.1853693);
-    path_0.close();
-
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = Colors.green; //.withOpacity(1.0);
-    canvas.drawPath(path_0, paint_0_fill);
-
-    Path path_1 = Path();
-    path_1.moveTo(size.width * 0.9060708, 0);
-    path_1.lineTo(size.width, size.height * 0.1853475);
-    path_1.lineTo(size.width, size.height * 0.9959273);
-    path_1.lineTo(size.width * 0.9060708, size.height * 0.8105818);
-    path_1.lineTo(size.width * 0.9060708, 0);
-    path_1.close();
-
-    Paint paint_1_fill = Paint()..style = PaintingStyle.fill;
-    paint_1_fill.color = boarderColor;
-    canvas.drawPath(path_1, paint_1_fill);
-
-    Path path_2 = Path();
-    path_2.moveTo(size.width * 0.09392938, size.height * 0.9959409);
-    path_2.lineTo(size.width * 0.9968246, size.height);
-    path_2.lineTo(size.width * 0.9028954, size.height * 0.8148455);
-    path_2.lineTo(0, size.height * 0.8105932);
-
-    Paint paint_2_fill = Paint()..style = PaintingStyle.fill;
-    paint_2_fill.color = boarderColor;
-    canvas.drawPath(path_2, paint_2_fill);
-
-    Path path_3 = Path();
-    path_3.moveTo(size.width * 0.9060708, 0);
-    path_3.lineTo(0, 0);
-    path_3.lineTo(0, size.height * 0.8105818);
-    path_3.lineTo(size.width * 0.9060708, size.height * 0.8105818);
-    path_3.lineTo(size.width * 0.9060708, 0);
-    path_3.close();
-
-    Paint paint_3_fill = Paint()..style = PaintingStyle.fill;
-    paint_3_fill.color = color;
-    canvas.drawPath(path_3, paint_3_fill);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+abstract class PaintOfBlocks {
+  static body({required String color, required String boarderColor}) {
+    return """<svg width="41" height="19" viewBox="0 0 41 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M1 6.57358V17.6343H34.5255L40.0703 12.0897V1.02319H6.55044L1 6.57358Z" fill="${color}"/>
+  <path d="M6.55044 1.02319L1 6.57358V17.6343H34.5255L40.0703 12.0897V1.02319H6.55044Z" fill="${color}"/>
+  <path d="M34.1941 6.95611L40.1447 0.999878" stroke="${boarderColor}" stroke-width="1.26328" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M34.2912 6.79651H1V17.6343H34.2912V6.79651Z" stroke="${boarderColor}" stroke-width="1.26328" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1 6.57358V17.6343H34.5255L40.0703 12.0897V1.02319H6.55044L1 6.57358Z" stroke="${boarderColor}" stroke-width="1.26328" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  """;
   }
 }

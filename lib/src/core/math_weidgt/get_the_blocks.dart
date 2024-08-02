@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'paint_of_blocks.dart';
 
@@ -7,12 +9,8 @@ class GetTheBlocks extends StatelessWidget {
   final bool? isSolid;
   final bool? isHide;
   final List<ColorModel> colors = [
-    ColorModel(
-        colorMain: const Color(0xffEE1D23),
-        colorBoarder: const Color(0xff930B0F)),
-    ColorModel(
-        colorMain: const Color(0xff406AB4),
-        colorBoarder: const Color(0xff173372)),
+    ColorModel(colorMain: '#EE1D23', colorBoarder: '#930B0F'),
+    ColorModel(colorMain: '#406AB4', colorBoarder: '#173372'),
   ];
 
   GetTheBlocks(
@@ -24,13 +22,14 @@ class GetTheBlocks extends StatelessWidget {
     final sizeOfOne = Size(width / 15, (width / 22).toDouble());
     return SizedBox(
       height: sizeOfOne.height,
-      width: countOfBoxes == 1
-          ? (sizeOfOne.width * countOfBoxes)
-          : countOfBoxes == 2
-              ? (sizeOfOne.width * countOfBoxes) - (2 * countOfBoxes)
-              : countOfBoxes == 5
-                  ? (sizeOfOne.width * countOfBoxes) - (6 * countOfBoxes)
-                  : (sizeOfOne.width * countOfBoxes) - (5 * countOfBoxes),
+      width: (sizeOfOne.width * countOfBoxes),
+      // countOfBoxes == 1
+      //   ? (sizeOfOne.width * countOfBoxes)
+      //   : countOfBoxes == 2
+      //       ? (sizeOfOne.width * countOfBoxes) - (2 * countOfBoxes)
+      //       : countOfBoxes == 5
+      //           ? (sizeOfOne.width * countOfBoxes) - (6 * countOfBoxes)
+      //           : (sizeOfOne.width * countOfBoxes) - (5 * countOfBoxes),
       child: isHide == true
           ? SizedBox()
           : Stack(
@@ -41,31 +40,23 @@ class GetTheBlocks extends StatelessWidget {
                 ...List.generate(countOfBoxes, (index) {
                   if (index == 0 || index % 2 == 0) {
                     return Positioned(
-                      left: index == 0
-                          ? 0
-                          : (sizeOfOne.width * index) - (7 * index),
-                      child: CustomPaint(
-                          size: sizeOfOne,
-                          painter: PaintOfBlocks(
-                              color: isSolid == true
-                                  ? Colors.grey
-                                  : colors.first.colorMain,
-                              boarderColor: isSolid == true
-                                  ? Colors.grey.shade400
-                                  : colors.first.colorBoarder)),
+                      left: (sizeOfOne.width * index) - (10 * index),
+                      child: SvgPicture.string(
+                        PaintOfBlocks.body(
+                            color: colors.first.colorMain,
+                            boarderColor: colors.first.colorBoarder),
+                        width: sizeOfOne.width + 0.w,
+                      ),
                     );
                   } else {
                     return Positioned(
-                      left: (sizeOfOne.width * index) - (7 * index),
-                      child: CustomPaint(
-                          size: sizeOfOne,
-                          painter: PaintOfBlocks(
-                              color: isSolid == true
-                                  ? Colors.grey
-                                  : colors.last.colorMain,
-                              boarderColor: isSolid == true
-                                  ? Colors.grey.shade400
-                                  : colors.last.colorBoarder)),
+                      left: (sizeOfOne.width * index) - (10 * index),
+                      child: SvgPicture.string(
+                        PaintOfBlocks.body(
+                            color: colors.last.colorMain,
+                            boarderColor: colors.last.colorBoarder),
+                        width: sizeOfOne.width + 0.w,
+                      ),
                     );
                   }
                 })
@@ -76,8 +67,8 @@ class GetTheBlocks extends StatelessWidget {
 }
 
 class ColorModel {
-  final Color colorMain;
-  final Color colorBoarder;
+  final String colorMain;
+  final String colorBoarder;
 
   ColorModel({required this.colorMain, required this.colorBoarder});
 }
