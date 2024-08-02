@@ -175,7 +175,7 @@ abstract class BasicOfGameData {
         GameTypes.dragBeadsBoard.text().toLowerCase()) {
       return DragBeadsBoard(tools: ToolsOfMath.beads);
     } else if (gameType.toLowerCase() ==
-        GameTypes.dragBeadType.text().toLowerCase()) {
+        GameTypes.addRodDragNumber.text().toLowerCase()) {
       return DragAddRodNumberLineGame(tools: ToolsOfMath.blocks);
     }
   }
