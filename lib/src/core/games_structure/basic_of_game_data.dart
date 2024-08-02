@@ -174,6 +174,9 @@ abstract class BasicOfGameData {
     } else if (gameType.toLowerCase() ==
         GameTypes.dragBeadsBoard.text().toLowerCase()) {
       return DragBeadsBoard(tools: ToolsOfMath.beads);
+    } else if (gameType.toLowerCase() ==
+        GameTypes.dragBeadType.text().toLowerCase()) {
+      return DragAddRodNumberLineGame(tools: ToolsOfMath.blocks);
     }
   }
 
@@ -1269,7 +1272,29 @@ class AddRodNumberLineGame implements BasicOfGameData {
   AddRodNumberLineGame({required this.tools});
 
   @override
-  String titleImageEn = AppImagesMath.countTypeTheNumber;
+  String titleImageEn = AppImagesMath.clickTheChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class DragAddRodNumberLineGame implements BasicOfGameData {
+  @override
+  bool isRound = false;
+  late ToolsOfMath tools;
+
+  DragAddRodNumberLineGame({required this.tools});
+
+  @override
+  String titleImageEn = AppImagesMath.mathDragDrop;
 
   @override
   String? completeBasket;

@@ -45,6 +45,8 @@ import '../games/math/drag_beads_board/manager/drag_beads_board_cubit.dart';
 import '../games/math/drag_beads_board/screen/drag_beads_board_screen.dart';
 import '../games/math/drag_oe/manager/drag_oe_cubit.dart';
 import '../games/math/drag_oe/screen/drag_oe_screen.dart';
+import '../games/math/drag_rod_number_line/manager/drag_rod_number_line_cubit.dart';
+import '../games/math/drag_rod_number_line/screen/drag_rod_number_line_screen.dart';
 import '../games/math/drag_sticks/manager/drag_sticks_cubit.dart';
 import '../games/math/drag_sticks/screen/drag_sticks_screen.dart';
 import '../games/math/drag_sub/manager/choose_sub_cubit.dart';
@@ -350,6 +352,23 @@ class BasedOfMath extends StatelessWidget {
                       mainBloc: context.read<CurrentGamePhoneticsCubit>());
                 },
                 child: AddRodNumberLineScreen()),
+          )
+        } else if (stateOfGame.basicData?.gameData
+            is DragAddRodNumberLineGame) ...{
+          BlocProvider<DragRodNumberLineCubit>(
+            create: (_) => DragRodNumberLineCubit(
+              allGameData: gamesData,
+              tools:
+                  (stateOfGame.basicData!.gameData! as DragAddRodNumberLineGame)
+                      .tools,
+            ),
+            child:
+                BlocListener<DragRodNumberLineCubit, DragRodNumberLineInitial>(
+                    listener: (context, state) {
+                      _handlingDataOfGame(
+                          mainBloc: context.read<CurrentGamePhoneticsCubit>());
+                    },
+                    child: DragRodNumberLineScreen()),
           )
         } else if (stateOfGame.basicData?.gameData is CountTypeNumber) ...{
           BlocProvider<CountTypeNumberCubit>(
