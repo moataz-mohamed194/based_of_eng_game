@@ -49,7 +49,8 @@ class DragBeadsBoardScreen extends StatelessWidget {
                         WoodRowDrag(
                           gameState: gameState,
                         ),
-                        SizedBox(
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 5.h),
                           height: MediaQuery.of(context).size.height,
                           child: FittedBox(
                             child: Column(

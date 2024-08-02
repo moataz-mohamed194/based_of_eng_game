@@ -31,7 +31,6 @@ class CountTypeNumberCubit extends Cubit<CountTypeNumberInitial> {
     GameFinalModel newData = state.allGameData[newIndex];
     List<GameLettersGameFinalModel> gameLetters = newData.gameLetters ?? [];
     String correctAns = newData.correctAns ?? '';
-    gameLetters.shuffle();
     emit(state.copyWith(
         gameData: newData, gameLetters: gameLetters, correctAns: correctAns));
     _sayLetter();

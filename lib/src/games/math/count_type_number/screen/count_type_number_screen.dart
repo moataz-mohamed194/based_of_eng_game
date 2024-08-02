@@ -45,8 +45,8 @@ class CountTypeNumberScreen extends StatelessWidget {
                                     hideTheCircle: gameState.gameLetters?[index]
                                                 .mainQuestion ==
                                             1
-                                        ? false
-                                        : true,
+                                        ? true
+                                        : false,
                                   ),
                                   10.ph,
                                 ],

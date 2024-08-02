@@ -19,6 +19,7 @@ class DragTypeRodLineCubit extends Cubit<DragTypeRodLineInitial> {
             allGameData: allGameData,
             tools: tools)) {
     reFormatGameData();
+    _sayLetter();
   }
 
   reStartIsCorrect() {
@@ -52,7 +53,6 @@ class DragTypeRodLineCubit extends Cubit<DragTypeRodLineInitial> {
         gameChoices: gameChoices,
         finalGameLetters: finalGameLetters,
         correctAnswer: correctAnswer));
-    _sayLetter();
   }
 
   addAnswer({required GameChoicesGameFinalModel? userChoose}) {

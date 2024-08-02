@@ -55,14 +55,14 @@ class CardOfNumberDDt extends StatelessWidget {
                 child: Text(
                   number,
                   style: TextStyle(
-                    color: isCorrect == true
-                        ? Colors.white
-                        : AppColorPhonetics.darkBlueColor,
-                    fontSize: 25.sp,
-                    fontFamily: AppTheme.getFontFamily5(),
-                    fontWeight: FontWeight.w400,
-                    height: 0,
-                  ),
+                      color: isCorrect == true
+                          ? Colors.white
+                          : AppColorPhonetics.darkBlueColor,
+                      fontSize: 25.sp,
+                      fontFamily: AppTheme.getFontFamily5(),
+                      fontWeight: FontWeight.w400,
+                      height: 0,
+                      decoration: TextDecoration.none),
                 ),
               ),
       ),

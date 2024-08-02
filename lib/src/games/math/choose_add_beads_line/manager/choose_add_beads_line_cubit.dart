@@ -22,6 +22,7 @@ class ChooseAddBeadsLineCubit extends Cubit<ChooseAddBeadsLineInitial> {
             gameData: allGameData[0],
             index: 0)) {
     reFormatGameData();
+    _sayLetter();
   }
 
   reFormatGameData() {
@@ -43,7 +44,6 @@ class ChooseAddBeadsLineCubit extends Cubit<ChooseAddBeadsLineInitial> {
         gameChoices: gameChoices,
         mainQuestion: mainQuestion,
         subQuestion: subQuestion));
-    _sayLetter();
   }
 
   addAnswer({required GameChoicesGameFinalModel? userChoose}) {

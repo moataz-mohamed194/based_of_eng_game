@@ -19,31 +19,47 @@ class WoodRowDrag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 5.h),
-        child: Column(
-          children: List.generate(
-              gameState.gameLetters?.length ?? 0,
-              (index) => Container(
-                    width: 70.w,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: index == 0
-                                ? const AssetImage(AppImagesMath.woodBox)
-                                : index ==
-                                        ((gameState.gameImages?.length ?? 0) -
-                                            1)
-                                    ? const AssetImage(
-                                        AppImagesMath.woodBoxLast)
-                                    : const AssetImage(
-                                        AppImagesMath.woodBoxMid),
-                            fit: BoxFit.fill)),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          gameState.gameImages?[index].word?.split('').first ??
+      child: Column(
+        children: List.generate(
+            gameState.gameLetters?.length ?? 0,
+            (index) => Container(
+                  width: 70.w,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: index == 0
+                              ? const AssetImage(AppImagesMath.woodBox)
+                              : index ==
+                                      ((gameState.gameImages?.length ?? 0) - 1)
+                                  ? const AssetImage(AppImagesMath.woodBoxLast)
+                                  : const AssetImage(AppImagesMath.woodBoxMid),
+                          fit: BoxFit.fill)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        gameState.gameImages?[index].word?.split('').first ??
+                            '',
+                        style: TextStyle(
+                          color: AppColorPhonetics.darkBlueColor,
+                          fontSize: 20.sp,
+                          fontFamily: AppTheme.getFontFamily5(),
+                          fontWeight: FontWeight.w400,
+                          // height: 0,
+                        ),
+                      ),
+                      10.pw,
+                      Container(
+                        width: 20.w,
+                        margin: const EdgeInsets.symmetric(vertical: 5),
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                    AssetImage(AppImagesMath.woodBoxForNumber),
+                                fit: BoxFit.fill)),
+                        alignment: Alignment.center,
+                        child: Text(
+                          gameState.gameImages?[index].word?.split('').last ??
                               '',
                           style: TextStyle(
                             color: AppColorPhonetics.darkBlueColor,
@@ -53,32 +69,10 @@ class WoodRowDrag extends StatelessWidget {
                             // height: 0,
                           ),
                         ),
-                        10.pw,
-                        Container(
-                          width: 20.w,
-                          margin: const EdgeInsets.symmetric(vertical: 5),
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      AppImagesMath.woodBoxForNumber),
-                                  fit: BoxFit.fill)),
-                          alignment: Alignment.center,
-                          child: Text(
-                            gameState.gameImages?[index].word?.split('').last ??
-                                '',
-                            style: TextStyle(
-                              color: AppColorPhonetics.darkBlueColor,
-                              fontSize: 20.sp,
-                              fontFamily: AppTheme.getFontFamily5(),
-                              fontWeight: FontWeight.w400,
-                              // height: 0,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  )),
-        ),
+                      )
+                    ],
+                  ),
+                )),
       ),
     );
   }

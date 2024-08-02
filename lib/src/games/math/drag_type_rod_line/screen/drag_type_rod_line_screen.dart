@@ -39,14 +39,14 @@ class DragTypeNumberLineScreen extends StatelessWidget {
                 children: [
                   Expanded(
                       flex: 2,
-                      child: FittedBox(
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width / 2,
-                          height: MediaQuery.of(context).size.height,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: MediaQuery.of(context).size.height,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FittedBox(
+                              child: Row(
                                   // crossAxisAlignment: CrossAxisAlignment.start,
                                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   mainAxisSize: MainAxisSize.max,
@@ -61,82 +61,76 @@ class DragTypeNumberLineScreen extends StatelessWidget {
                                               countOfBoxes: int.parse(
                                                   "${gameState.finalGameLetters?[index].letter}"),
                                             ))),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  SizedBox(
-                                    width: 75.h *
-                                            (gameState
-                                                    .finalGameLetters?.length ??
-                                                0) +
-                                        40.w,
-                                    child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: List.generate(
-                                            gameState
-                                                    .finalGameLetters?.length ??
-                                                0,
-                                            (index) => Container(
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      // if (index != 0) ...{
-                                                      //
-                                                      // },
-                                                      if (gameState
-                                                              .finalGameLetters?[
-                                                                  index]
-                                                              .id !=
-                                                          null) ...{
-                                                        CardOfNumberDDt(
-                                                          number: gameState
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SizedBox(
+                                  width: 75.h *
+                                          (gameState.finalGameLetters?.length ??
+                                              0) +
+                                      40.w,
+                                  child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: List.generate(
+                                          gameState.finalGameLetters?.length ??
+                                              0,
+                                          (index) => Container(
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    // if (index != 0) ...{
+                                                    //
+                                                    // },
+                                                    if (gameState
+                                                            .finalGameLetters?[
+                                                                index]
+                                                            .id !=
+                                                        null) ...{
+                                                      CardOfNumberDDt(
+                                                        number: gameState
+                                                                .finalGameLetters?[
+                                                                    index]
+                                                                .letter ??
+                                                            '0',
+                                                      ),
+                                                    } else ...{
+                                                      Container(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        height: 99.h,
+                                                        child: Text(
+                                                          gameState
                                                                   .finalGameLetters?[
                                                                       index]
                                                                   .letter ??
                                                               '0',
-                                                        ),
-                                                      } else ...{
-                                                        Container(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          height: 99.h,
-                                                          child: Text(
-                                                            gameState
-                                                                    .finalGameLetters?[
-                                                                        index]
-                                                                    .letter ??
-                                                                '0',
-                                                            style: TextStyle(
-                                                              color: AppColorPhonetics
-                                                                  .darkBlueColor,
-                                                              fontSize: 25.sp,
-                                                              fontFamily: AppTheme
-                                                                  .getFontFamily5(),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                            ),
+                                                          style: TextStyle(
+                                                            color: AppColorPhonetics
+                                                                .darkBlueColor,
+                                                            fontSize: 25.sp,
+                                                            fontFamily: AppTheme
+                                                                .getFontFamily5(),
+                                                            fontWeight:
+                                                                FontWeight.w400,
                                                           ),
-                                                        )
-                                                      }
-                                                    ],
-                                                  ),
-                                                ))),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                                        ),
+                                                      )
+                                                    }
+                                                  ],
+                                                ),
+                                              ))),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       )),
                   Expanded(
@@ -159,6 +153,8 @@ class DragTypeNumberLineScreen extends StatelessWidget {
                                 ),
                               ),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   DragTarget<GameChoicesGameFinalModel>(
                                     builder: (
@@ -193,6 +189,7 @@ class DragTypeNumberLineScreen extends StatelessWidget {
                                       }
                                     },
                                   ),
+                                  10.ph,
                                   CardOfTypingNumberDDT(
                                     number: gameState.isCorrect == true
                                         ? (gameState.correctAnswer?.choice ??
