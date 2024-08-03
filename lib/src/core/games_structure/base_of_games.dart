@@ -1,7 +1,12 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import '../game_types/assets_images_math.dart';
 import '../game_types/game_phonatics_types.dart';
 import 'basic_of_chapter.dart';
 import 'basic_of_game_data.dart';
+import 'enum_chapters.dart';
+import 'enum_levels_for_students.dart';
+import 'enum_programs.dart';
 
 abstract class HandlingActionsAndDataOfChapters {
   static List<int> getTheStarsAddState(int number) {
@@ -26,8 +31,6 @@ abstract class HandlingActionsAndDataOfChapters {
       }
     }
   }
-
-  static String math = 'math';
 
   static List<Type> listOfChapterOfPhonetics = [
     SPhonetics,
@@ -83,7 +86,7 @@ abstract class HandlingActionsAndDataOfChapters {
     if (programName.toLowerCase() == MainDataOfChaptersTypes.redUnit.text()) {
       return RedPhonetics(mineGameData: gameData).background;
     } else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.firstUnitArabic.text()) {
+        MainDataOfChaptersTypes.longVowelsArabic.text()) {
       return FirstUnitArabic(mineGameData: gameData).background;
     } else if (programName.toLowerCase() ==
         MainDataOfChaptersTypes.greenUnit.text()) {
@@ -104,6 +107,121 @@ abstract class HandlingActionsAndDataOfChapters {
     return null;
   }
 
+  static chooseTheMathChapter(
+      {required String stageName,
+      required String subGame,
+      required int audioFlag,
+      required String programName}) {
+    if (stageName == LevelsForStudents.ec1.text().toLowerCase()) {
+      return MathProgram(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName),
+          background: AppImagesMath.mathBg);
+    } else if (stageName.toLowerCase() ==
+        LevelsForStudents.ec2.text().toLowerCase()) {
+      return MathProgram(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName),
+          background: AppImagesMath.mathBgEC2);
+    } else if (stageName.toLowerCase() ==
+        LevelsForStudents.ec3.text().toLowerCase()) {
+      return MathProgram(
+          background: AppImagesMath.mathBgEC2,
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName));
+    }
+    return null;
+  }
+
+  static Map<String, Type> mapOfPhonetics = {
+    MainDataOfChaptersTypes.s.text(): SPhonetics,
+    MainDataOfChaptersTypes.k.text(): KPhonetics,
+    MainDataOfChaptersTypes.q.text(): QPhonetics,
+    MainDataOfChaptersTypes.v.text(): VPhonetics,
+    MainDataOfChaptersTypes.x.text(): XPhonetics,
+    MainDataOfChaptersTypes.y.text(): YPhonetics,
+    MainDataOfChaptersTypes.z.text(): ZPhonetics,
+    MainDataOfChaptersTypes.a.text(): FPhonetics,
+    MainDataOfChaptersTypes.f.text(): ZPhonetics,
+    MainDataOfChaptersTypes.m.text(): MPhonetics,
+    MainDataOfChaptersTypes.t.text(): TPhonetics,
+    MainDataOfChaptersTypes.c.text(): CPhonetics,
+    MainDataOfChaptersTypes.r.text(): RPhonetics,
+    MainDataOfChaptersTypes.i.text(): IPhonetics,
+    MainDataOfChaptersTypes.p.text(): PPhonetics,
+    MainDataOfChaptersTypes.h.text(): HPhonetics,
+    MainDataOfChaptersTypes.j.text(): JPhonetics,
+    MainDataOfChaptersTypes.u.text(): UPhonetics,
+    MainDataOfChaptersTypes.l.text(): LPhonetics,
+    MainDataOfChaptersTypes.b.text(): BPhonetics,
+    MainDataOfChaptersTypes.o.text(): OPhonetics,
+    MainDataOfChaptersTypes.g.text(): GPhonetics,
+    MainDataOfChaptersTypes.d.text(): DPhonetics,
+    MainDataOfChaptersTypes.n.text(): NPhonetics,
+    MainDataOfChaptersTypes.w.text(): WPhonetics,
+    MainDataOfChaptersTypes.e.text(): EPhonetics,
+    MainDataOfChaptersTypes.up.text(): UpVowels,
+    MainDataOfChaptersTypes.rUnitPhonics.text(): RUnitPhonics,
+    MainDataOfChaptersTypes.consonant.text(): ConsonantVowels
+  };
+  static chooseThePhoneticsChapter(
+      {required String subLetter,
+      required String subGame,
+      required String unitName,
+      required int audioFlag,
+      required String programName}) {
+    Type? foundValue;
+    if ((unitName.contains(
+            MainDataOfChaptersTypes.rUnitPhonics.text().toLowerCase())) ||
+        (unitName.contains(MainDataOfChaptersTypes.up.text().toLowerCase())) ||
+        (unitName.contains(
+            MainDataOfChaptersTypes.consonant.text().toLowerCase()))) {
+      foundValue = mapOfPhonetics.entries
+          .firstWhere((entry) => unitName.contains(entry.key))
+          .value;
+    } else {
+      foundValue = mapOfArabic[subLetter];
+    }
+    return foundValue;
+  }
+
+  static Map<String, Type> mapOfArabic = {
+    MainDataOfChaptersTypes.redUnit.text(): RedPhonetics,
+    MainDataOfChaptersTypes.greenUnit.text(): GreenUnit,
+    MainDataOfChaptersTypes.blueUnit.text(): BlueUnit,
+    MainDataOfChaptersTypes.violetUnit.text(): VioletUnit,
+    MainDataOfChaptersTypes.orangeUnit.text(): OrangeUnit,
+    MainDataOfChaptersTypes.yellowUnit.text(): YellowUnit,
+    MainDataOfChaptersTypes.longVowelsArabic.text(): FirstUnitArabic
+  };
+
+  ///todo remove the game name
+  static chooseTheArabicChapter(
+      {required String unitName,
+      required int audioFlag,
+      required String subGame,
+      required String gameName}) {
+    Type? foundValue;
+    if (unitName.toLowerCase().contains(
+            MainDataOfChaptersTypes.rUnitArabic.text().toLowerCase()) ||
+        unitName
+            .toLowerCase()
+            .contains(MainDataOfChaptersTypes.longVowelsArabic.text())) {
+      foundValue = mapOfArabic.entries
+          .firstWhere((entry) => unitName.contains(entry.key))
+          .value;
+    } else {
+      foundValue = (mapOfArabic[unitName]);
+    }
+    return foundValue;
+  }
+
   static getTheChapterDataType({
     required String subLetter,
     required String subGame,
@@ -114,34 +232,13 @@ abstract class HandlingActionsAndDataOfChapters {
     required String stageName,
     required String gameName,
   }) {
-    print(
-        'subLetter:$subLetter , subGame:$subGame , unitName:$unitName , programName:$programName , audioFlag:$audioFlag , ${(unitName.contains(MainDataOfChaptersTypes.consonant.text()))}');
     if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.math.text().toLowerCase()) {
-      if (stageName == MainDataOfChaptersTypes.mathEc1.text().toLowerCase()) {
-        return MathProgram(
-            mineGameData: BasicOfGameData.getTheGameType(
-                gameType: subGame.toLowerCase(),
-                audioFlag: audioFlag,
-                programName: programName),
-            background: AppImagesMath.mathBg);
-      } else if (stageName.toLowerCase() ==
-          MainDataOfChaptersTypes.mathEc2.text().toLowerCase()) {
-        return MathProgram(
-            mineGameData: BasicOfGameData.getTheGameType(
-                gameType: subGame.toLowerCase(),
-                audioFlag: audioFlag,
-                programName: programName),
-            background: AppImagesMath.mathBgEC2);
-      } else if (stageName.toLowerCase() ==
-          MainDataOfChaptersTypes.mathEc3.text().toLowerCase()) {
-        return MathProgram(
-            background: AppImagesMath.mathBgEC2,
-            mineGameData: BasicOfGameData.getTheGameType(
-                gameType: subGame.toLowerCase(),
-                audioFlag: audioFlag,
-                programName: programName));
-      }
+        ProgramsForStudents.math.text().toLowerCase()) {
+      return chooseTheMathChapter(
+          stageName: stageName,
+          subGame: subGame,
+          audioFlag: audioFlag,
+          programName: programName);
     } else if (unitName
         .toLowerCase()
         .contains(MainDataOfChaptersTypes.shortVowels.text())) {
@@ -152,22 +249,6 @@ abstract class HandlingActionsAndDataOfChapters {
               programName: unitName,
               gameData: BasicOfGameData.getTheGameType(
                   gameType: subGame.toLowerCase(), audioFlag: audioFlag)),
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (unitName.contains(MainDataOfChaptersTypes.up.text())) {
-      return UpVowels(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (unitName
-        .toLowerCase()
-        .contains(MainDataOfChaptersTypes.rUnitPhonics.text().toLowerCase())) {
-      return RUnitPhonics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (unitName
-        .toLowerCase()
-        .contains(MainDataOfChaptersTypes.consonant.text().toLowerCase())) {
-      return ConsonantVowels(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (BasicOfGameData.isConnectGame(game: subGame.toLowerCase()) ==
@@ -190,223 +271,20 @@ abstract class HandlingActionsAndDataOfChapters {
             mineGameData: BasicOfGameData.getTheGameType(
                 gameType: subGame.toLowerCase(), audioFlag: audioFlag));
       }
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
-      return SPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
-      return SPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.k.text()) {
-      return KPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.q.text()) {
-      return QPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.v.text()) {
-      return VPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.x.text()) {
-      return XPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.y.text()) {
-      return YPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.z.text()) {
-      return ZPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.a.text()) {
-      return APhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.f.text()) {
-      return FPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.m.text()) {
-      return MPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.t.text()) {
-      return TPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.c.text()) {
-      return CPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.r.text()) {
-      return RPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.i.text()) {
-      return IPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.p.text()) {
-      return PPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.h.text()) {
-      return HPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.j.text()) {
-      return JPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.u.text()) {
-      return UPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.l.text()) {
-      return LPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.b.text()) {
-      return BPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.o.text()) {
-      return OPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.g.text()) {
-      return GPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.d.text()) {
-      return DPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.n.text()) {
-      return NPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.w.text()) {
-      return WPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.e.text()) {
-      return EPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (unitName.toLowerCase() == MainDataOfChaptersTypes.redUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.redUnit.text())) {
-      return RedPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() == MainDataOfChaptersTypes.orangeUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.orangeUnit.text())) {
-      return OrangeUnit(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() == MainDataOfChaptersTypes.yellowUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.yellowUnit.text())) {
-      return YellowUnit(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() == MainDataOfChaptersTypes.blueUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.blueUnit.text())) {
-      return BlueUnit(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() == MainDataOfChaptersTypes.greenUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.greenUnit.text())) {
-      return GreenUnit(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() == MainDataOfChaptersTypes.violetUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.violetUnit.text())) {
-      return VioletUnit(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() ==
-            MainDataOfChaptersTypes.orangeUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.orangeUnit.text())) {
-      return OrangeUnit(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() ==
-            MainDataOfChaptersTypes.yellowUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.yellowUnit.text())) {
-      return YellowUnit(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() == MainDataOfChaptersTypes.blueUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.blueUnit.text())) {
-      return BlueUnit(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() == MainDataOfChaptersTypes.greenUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.greenUnit.text())) {
-      return GreenUnit(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() ==
-            MainDataOfChaptersTypes.violetUnit.text() ||
-        lessonName.contains(MainDataOfChaptersTypes.violetUnit.text())) {
-      return VioletUnit(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              programName: programName,
-              gameName: gameName));
-    } else if (unitName.toLowerCase() ==
-        MainDataOfChaptersTypes.rUnitArabic.text()) {
-      return RUnitArabic(
-          subBackGround: detectTheArabicChapter(
-              programName: unitName,
-              gameData: BasicOfGameData.getTheGameType(
-                  gameType: subGame.toLowerCase(),
-                  audioFlag: audioFlag,
-                  gameName: gameName)),
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (unitName.toLowerCase() ==
-        MainDataOfChaptersTypes.firstUnitArabic.text()) {
-      return FirstUnitArabic(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(),
-              audioFlag: audioFlag,
-              gameName: gameName));
+    } else if (programName.toLowerCase() ==
+        ProgramsForStudents.phonics.text()) {
+      return chooseThePhoneticsChapter(
+          subLetter: subLetter,
+          subGame: subGame,
+          audioFlag: audioFlag,
+          unitName: unitName,
+          programName: programName);
+    } else if (programName.toLowerCase() == ProgramsForStudents.arabic.text()) {
+      return chooseTheArabicChapter(
+          unitName: unitName,
+          audioFlag: audioFlag,
+          subGame: subGame,
+          gameName: gameName);
     }
     return null;
   }
