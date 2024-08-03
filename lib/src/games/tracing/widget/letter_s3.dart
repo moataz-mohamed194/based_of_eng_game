@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/games/tracing/path_helper/path_helper.dart';
 import 'package:flutter/material.dart';
 import '../../../core/phonetics_color.dart';
 
@@ -1779,122 +1780,36 @@ class FlipBookPainterLetterS extends CustomPainter {
   final List<Offset> points;
   @override
   void paint(Canvas canvas, Size size) {
-    //parts of letters
-    Path path_1 = path0(size).$1;
-    Paint paint2Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[0] == null) {
-      paint2Fill.color = colorsOfPaths?[0] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_1, paint2Fill);
+    // List of path functions and their corresponding colors
+    final List pathFunctions = [
+      path0,
+      path3,
+      path12,
+      path13,
+      path4,
+      path2,
+      path5,
+      path6,
+      path7,
+      path8,
+      path9,
+      path10,
+      path11,
+      path1
+    ];
+
+    final Paint defaultPaint = Paint()..style = PaintingStyle.fill;
+
+    // Draw all paths with default or provided colors
+
+    for (int i = 0; i < pathFunctions.length; i++) {
+      Path path = pathFunctions[i]!(size).$1;
+      Paint paint = defaultPaint
+        ..color = AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
+      canvas.drawPath(path, paint);
     }
 
-    Path path_2 = path3(size).$1;
-    Paint paint3Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[1] == null) {
-      paint3Fill.color = colorsOfPaths?[1] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_2, paint3Fill);
-    }
-
-    Path path_3 = path12(size).$1;
-    Paint paint12Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[2] == null) {
-      paint12Fill.color = colorsOfPaths?[2] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_3, paint12Fill);
-    }
-
-    Path path_4 = path13(size).$1;
-    Paint paint13Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[3] == null) {
-      paint13Fill.color = colorsOfPaths?[3] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_4, paint13Fill);
-    }
-
-    Path path_5 = path4(size).$1;
-    Paint paint4Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[4] == null) {
-      paint4Fill.color = colorsOfPaths?[4] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_5, paint4Fill);
-    }
-
-    Path path_6 = path2(size).$1;
-    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[5] == null) {
-      paint0Fill.color = colorsOfPaths?[5] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_6, paint0Fill);
-    }
-
-    Path path_7 = path5(size).$1;
-    Paint paint5Fill = Paint()..style = PaintingStyle.fill;
-
-    ///
-    if (colorsOfPaths?[6] == null) {
-      paint5Fill.color = colorsOfPaths?[6] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_7, paint5Fill);
-    }
-
-    Path path_8 = path6(size).$1;
-    Paint paint6Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[7] == null) {
-      paint6Fill.color = colorsOfPaths?[7] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_8, paint6Fill);
-    }
-
-    Path path_9 = path7(size).$1;
-    Paint paint7Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[8] == null) {
-      paint7Fill.color = colorsOfPaths?[8] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_9, paint7Fill);
-    }
-
-    Path path_10 = path8(size).$1;
-    Paint paint8Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[9] == null) {
-      paint8Fill.color = colorsOfPaths?[9] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_10, paint8Fill);
-    }
-
-    Path path_11 = path9(size).$1;
-    Paint paint9Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[10] == null) {
-      paint9Fill.color = colorsOfPaths?[10] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_11, paint9Fill);
-    }
-
-    Path path_12 = path10(size).$1;
-    Paint paint10Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[11] == null) {
-      paint10Fill.color = colorsOfPaths?[11] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_12, paint10Fill);
-    }
-
-    Path path_13 = path11(size).$1;
-    Paint paint11Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[12] == null) {
-      paint11Fill.color = colorsOfPaths?[12] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_13, paint11Fill);
-    }
-
-    Path path_14 = path1(size).$1;
-    Paint paint1Fill = Paint()..style = PaintingStyle.fill;
-    if (colorsOfPaths?[13] == null) {
-      paint1Fill.color = colorsOfPaths?[13] ??
-          AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
-      canvas.drawPath(path_14, paint1Fill);
-    }
-
-    //path of how to draw letter
+    // Draw the letter paths
     Path allMainPath = mainPath(size);
     Path allPathOfLetter = pathOfLetter(Size(size.width, size.height));
     Rect bounds2 = allPathOfLetter.getBounds();
@@ -1911,86 +1826,49 @@ class FlipBookPainterLetterS extends CustomPainter {
     paintOfLetterFill.color = AppColorPhonetics.greyColor.withOpacity(1.0);
     canvas.drawPath(allMainPath, paintOfLetterFill);
 
-    Path path_22 = pathOfArrow(size);
-    Paint paint22Fill = Paint()..style = PaintingStyle.fill;
-    paint22Fill.color = AppColorPhonetics.whiteColor.withOpacity(1.0);
-    canvas.drawPath(path_22, paint22Fill);
+    // Draw additional paths
+    final List<Path Function(Size)> additionalPaths = [
+      pathOfArrow,
+      pathOfStart,
+      pathOfNumber
+    ];
 
-    Path path_33 = pathOfStart(size);
-    Paint paint33Fill = Paint()..style = PaintingStyle.fill;
-    paint33Fill.color = AppColorPhonetics.whiteColor.withOpacity(1.0);
-    canvas.drawPath(path_33, paint33Fill);
+    final List<Color> additionalColors = [
+      AppColorPhonetics.whiteColor,
+      AppColorPhonetics.whiteColor,
+      AppColorPhonetics.greyColor
+    ];
 
-    Path path_44 = pathOfNumber(size);
-
-    Paint paint44Fill = Paint()..style = PaintingStyle.fill;
-    paint44Fill.color = AppColorPhonetics.greyColor.withOpacity(1.0);
-    canvas.drawPath(path_44, paint44Fill);
-
-    // final part of letter
-    if (colorsOfPaths?[0] != null) {
-      paint2Fill.color = colorsOfPaths![0]!;
-      canvas.drawPath(path_1, paint2Fill);
-    }
-    if (colorsOfPaths?[1] != null) {
-      paint3Fill.color = colorsOfPaths![1]!;
-      canvas.drawPath(path_2, paint3Fill);
-    }
-    if (colorsOfPaths?[2] != null) {
-      paint12Fill.color = colorsOfPaths![2]!;
-      canvas.drawPath(path_3, paint12Fill);
-    }
-    if (colorsOfPaths?[3] != null) {
-      paint13Fill.color = colorsOfPaths![3]!;
-      canvas.drawPath(path_4, paint13Fill);
-    }
-    if (colorsOfPaths?[4] != null) {
-      paint4Fill.color = colorsOfPaths![4]!;
-      canvas.drawPath(path_5, paint4Fill);
-    }
-    if (colorsOfPaths?[5] != null) {
-      paint0Fill.color = colorsOfPaths![5]!;
-      canvas.drawPath(path_6, paint0Fill);
+    for (int i = 0; i < additionalPaths.length; i++) {
+      Path path = additionalPaths[i](size);
+      Paint paint = Paint()
+        ..style = PaintingStyle.fill
+        ..color = additionalColors[i].withOpacity(1.0);
+      canvas.drawPath(path, paint);
     }
 
-    if (colorsOfPaths?[6] != null) {
-      paint5Fill.color = colorsOfPaths![6]!;
-      canvas.drawPath(path_7, paint5Fill);
-    }
+    if (points.isNotEmpty && colorsOfPaths != null) {
+      int lastIndexcolor =
+          colorsOfPaths!.lastIndexWhere((color) => color != null);
 
-    if (colorsOfPaths?[7] != null) {
-      paint6Fill.color = colorsOfPaths![7]!;
-      canvas.drawPath(path_8, paint6Fill);
-    }
-
-    if (colorsOfPaths?[8] != null) {
-      paint7Fill.color = colorsOfPaths![8]!;
-      canvas.drawPath(path_9, paint7Fill);
-    }
-
-    if (colorsOfPaths?[9] != null) {
-      paint8Fill.color = colorsOfPaths![9]!;
-      canvas.drawPath(path_10, paint8Fill);
-    }
-
-    if (colorsOfPaths?[10] != null) {
-      paint9Fill.color = colorsOfPaths![10]!;
-      canvas.drawPath(path_11, paint9Fill);
-    }
-
-    if (colorsOfPaths?[11] != null) {
-      paint10Fill.color = colorsOfPaths![11]!;
-      canvas.drawPath(path_12, paint10Fill);
-    }
-
-    if (colorsOfPaths?[12] != null) {
-      paint11Fill.color = colorsOfPaths![12]!;
-      canvas.drawPath(path_13, paint11Fill);
-    }
-
-    if (colorsOfPaths?[13] != null) {
-      paint1Fill.color = colorsOfPaths![13]!;
-      canvas.drawPath(path_14, paint1Fill);
+      if (lastIndexcolor != -1) {
+        for (int i = 0; i < pathFunctions.length; i++) {
+          Path path = pathFunctions[i]!(size).$1;
+          Paint paint = defaultPaint
+            ..color = colorsOfPaths?[i] ??
+                AppColorPhonetics.lightBlueColor2.withOpacity(1.0);
+          if (i == lastIndexcolor) {
+            // PathHelper.paintPathUntilOffset(
+            //     canvas, path, points, paint, i == pathFunctions.length - 1);
+          } else {
+            if (colorsOfPaths![i] != null) {
+              Paint paint = defaultPaint
+                ..color = colorsOfPaths![i] ?? Colors.transparent;
+              canvas.drawPath(path, paint);
+            }
+          }
+        }
+      }
     }
   }
 

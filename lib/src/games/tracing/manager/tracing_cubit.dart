@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/games/tracing/model/path_provider_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +14,6 @@ class TracingCubit extends Cubit<TracingInitial> {
       {required GameFinalModel gameData,
       required CurrentGamePhoneticsState stateOfGame})
       : super(TracingInitial(
-          colorsOfPaths: [],
           gameData: gameData,
           stateOfGame: stateOfGame,
           paths: [],
@@ -28,6 +28,7 @@ class TracingCubit extends Cubit<TracingInitial> {
       colorsOfPaths: bgOfPaths,
     ));
   }
+
   // Future<List<Offset>> getOffsetsFromPath(Path path) {
   //   // Get the path metrics
   //   List<Offset> offsets = [];
@@ -48,63 +49,76 @@ class TracingCubit extends Cubit<TracingInitial> {
   //   return Future.value(offsets);
   // }
 
-  checkTheLocationOfPoint({required Offset point, required Size size}) async {
-    try {
-      if (state.stateOfGame.basicData?.checkTheIndexOfPath != null) {
-        List<Offset> subOffest = state.paths;
-        subOffest.add(point);
-        emit(state.copyWith(paths: subOffest));
-        (Path, int)? mainDataOfPath = state
-            .stateOfGame.basicData?.checkTheIndexOfPath!(point, size, false);
-        // Path? finalPath = mainDataOfPath?.$1;
-        // if (finalPath != null) {
-        List<Offset> subPaths = state.paths;
-        //   List<Offset> newSubPaths = await getOffsetsFromPath(finalPath);
-        //   subPaths.addAll(newSubPaths);
-        subPaths.add(point);
-        emit(state.copyWith(paths: subPaths));
-        // }
-        int indexOfPoint = mainDataOfPath?.$2 ?? 0;
-        // debugPrint('before:${state.paths.length}');
+  // checkTheLocationOfPoint({required Offset point, required Size size}) async {
+  //   try {
+  //     if (state.stateOfGame.basicData?.checkTheIndexOfPath != null) {
+  //       List<Offset> subOffest = state.paths;
+  //       subOffest.add(point);
+  //       emit(state.copyWith(paths: subOffest));
+  //       (Path, int)? mainDataOfPath = state
+  //           .stateOfGame.basicData?.checkTheIndexOfPath!(point, size, false);
+  //       // Path? finalPath = mainDataOfPath?.$1;
+  //       // if (finalPath != null) {
+  //       List<Offset> subPaths = state.paths;
+  //       //   List<Offset> newSubPaths = await getOffsetsFromPath(finalPath);
+  //       //   subPaths.addAll(newSubPaths);
+  //       subPaths.add(point);
+  //       emit(state.copyWith(paths: subPaths));
+  //       // }
+  //       int indexOfPoint = mainDataOfPath?.$2 ?? 0;
+  //       // debugPrint('before:${state.paths.length}');
 
-        if (indexOfPoint == 1 &&
-            state.colorsOfPaths
-                .where((element) => element == null)
-                .isNotEmpty) {
-          indexOfPoint = indexOfPoint - 1;
-          List<Color?> tempColors = state.colorsOfPaths;
-          tempColors[indexOfPoint] = AppColorPhonetics.lightBlueColor4;
-          emit(state.copyWith(colorsOfPaths: tempColors));
-        } else if (state.colorsOfPaths[indexOfPoint - 2] != null) {
-          indexOfPoint = indexOfPoint - 1;
-          List<Color?> tempColors = state.colorsOfPaths;
-          tempColors[indexOfPoint] = AppColorPhonetics.lightBlueColor4;
-          emit(state.copyWith(colorsOfPaths: tempColors));
-        }
-        // debugPrint('after:${state.colorsOfPaths}');
-      }
+  //       if (indexOfPoint == 1 &&
+  //           state.colorsOfPaths
+  //               .where((element) => element == null)
+  //               .isNotEmpty) {
+  //         indexOfPoint = indexOfPoint - 1;
+  //         List<Color?> tempColors = state.colorsOfPaths;
+  //         tempColors[indexOfPoint] = AppColorPhonetics.lightBlueColor4;
+  //         emit(state.copyWith(colorsOfPaths: tempColors));
+  //       } else if (state.colorsOfPaths[indexOfPoint - 2] != null) {
+  //         indexOfPoint = indexOfPoint - 1;
+  //         List<Color?> tempColors = state.colorsOfPaths;
+  //         tempColors[indexOfPoint] = AppColorPhonetics.lightBlueColor4;
+  //         emit(state.copyWith(colorsOfPaths: tempColors));
+  //       }
+  //       // debugPrint('after:${state.colorsOfPaths}');
+  //     }
+  //   } catch (e) {
+  //     debugPrint('check:$e');
+  //   }
+  // }
+
+  saveCurrentPosition({
+    required PathProviderModel currentModel,
+    required Offset point,
+  }) {
+    try {
+      currentModel.points.add(point);
+
+      emit(state.copyWith(currentPosition: point));
     } catch (e) {
       debugPrint('check:$e');
     }
   }
 
-  saveCurrentPosition(
-      {required Offset? position, required Offset point, required Size size}) {
-    try {
-      if (position != null) {
-        int indexOfPoint = state.stateOfGame.basicData
-                ?.checkTheIndexOfPath!(point, size, true)?.$2 ??
-            0;
-        indexOfPoint = indexOfPoint - 1;
-        List<Color?> tempColors = state.colorsOfPaths;
-        if (tempColors[indexOfPoint] == null) {
-          emit(state.copyWith(currentPosition: position));
-        }
-      } else {
-        emit(state.clearPosition());
-      }
-    } catch (e) {
-      debugPrint('check:$e');
+  shiftIndex({
+    required int index,
+  }) {
+    if (index < state.stateOfGame.basicData!.pathsModels.length) {
+      state.stateOfGame.basicData!.setdrawingShapeCurrentIndex = index;
+
+      emit(state.copyWith(currentDrawingIndex: index));
+      print('index' +
+          state.stateOfGame.basicData!.getdrawingShapeCurrentIndex.toString());
     }
+  }
+
+  gameFinished({
+    required int index,
+  }) {
+          state.stateOfGame.basicData!.setdrawingShapeCurrentIndex = index;
+
+    emit(state.copyWith(currentDrawingIndex: index));
   }
 }

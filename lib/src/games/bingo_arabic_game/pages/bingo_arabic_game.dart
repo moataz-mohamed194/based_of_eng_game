@@ -62,6 +62,7 @@ class _BingoArabicGameScreen extends State<BingoArabicGameScreen> {
 
   Widget _buildGridViewOfLetters(
       {required BingoArabicState gameState, required BuildContext context}) {
+        print('here');
     final cardsLetters = gameState.cardsLetters ?? [];
     final correctIndexes = gameState.correctAnswersIds;
     final chooseWord = gameState.chooseWord;

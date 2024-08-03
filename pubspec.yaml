@@ -25,6 +25,8 @@ dependencies:
   cubixd: ^0.1.1
   json_annotation: ^4.9.0
   dotted_border: ^2.1.0
+  svg_path_parser: ^1.1.2
+  vector_math: ^2.1.4
 
 dev_dependencies:
   flutter_test:

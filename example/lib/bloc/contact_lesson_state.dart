@@ -13,7 +13,7 @@ class GetContactInitial extends ContactLessonState {
 
   GetContactInitial({required this.data});
 
-  MainDataOfChapters? getMainContactData({required int index}) {
+  MainDataOfChapters? getMainContactData({required int index,required BuildContext context}) {
     String subLetter = data[index].mainLetter ?? '';
     String unitName = data[index].lesson?.unit?.name ?? '';
     String subGame = data[index].gameTypes?.name ?? '';
@@ -25,6 +25,7 @@ class GetContactInitial extends ContactLessonState {
         "subLetter:$subLetter ,subGame:$subGame, audioFlag:$audioFlag, unitName:$unitName");
     MainDataOfChapters? x =
         HandlingActionsAndDataOfChapters.getTheChapterDataType(
+          parentContext: context,
             subLetter: subLetter,
             subGame: subGame,
             unitName: unitName,
