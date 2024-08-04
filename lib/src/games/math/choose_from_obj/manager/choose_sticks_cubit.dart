@@ -50,12 +50,17 @@ class ChooseSticksCubit extends Cubit<ChooseSticksInitial> {
 
   updateTheCurrentGame({required int index}) {
     TalkTts.reBackTheDefaultValue();
-    reStartIsCorrect();
-    int newIndex = state.index;
-    newIndex++;
-    emit(state.copyWith(index: index));
-    reFormatGameData();
-    TalkTts.reStopTheDefaultValue();
+    try {
+      reStartIsCorrect();
+      int newIndex = state.index;
+      newIndex++;
+      emit(state.copyWith(index: index));
+      reFormatGameData();
+      TalkTts.reStopTheDefaultValue();
+    } catch (e) {
+      reFormatGameData();
+      TalkTts.reStopTheDefaultValue();
+    }
   }
 
   _sayLetter() async {

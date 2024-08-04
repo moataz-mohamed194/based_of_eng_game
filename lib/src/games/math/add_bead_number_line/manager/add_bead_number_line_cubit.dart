@@ -58,11 +58,17 @@ class AddBeadNumberLineCubit extends Cubit<AddBeadNumberLineInitial> {
 
   updateTheCurrentGame({required int index}) {
     TalkTts.reBackTheDefaultValue();
-    int newIndex = state.index;
-    newIndex++;
-    emit(state.copyWith(index: index));
-    reFormatGameData();
-    TalkTts.reStopTheDefaultValue();
+    try {
+      int newIndex = state.index;
+      newIndex++;
+      emit(state.copyWith(index: index));
+      reFormatGameData();
+      TalkTts.reStopTheDefaultValue();
+    } catch (e) {
+      reFormatGameData();
+
+      TalkTts.reStopTheDefaultValue();
+    }
   }
 
   _sayLetter() async {

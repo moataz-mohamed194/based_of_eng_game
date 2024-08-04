@@ -115,13 +115,18 @@ class DDTChangeCubit extends Cubit<DDTChangeInitial> {
 
   updateTheCurrentGame({required int newIndex}) {
     TalkTts.reBackTheDefaultValue();
-    print('updateTheCurrentGame:$newIndex');
-    // int newIndex = state.index;
-    // newIndex++;
-    emit(state.copyWith(index: newIndex));
-    emit(state.clearTheDataOfChoose());
-    reFormatGame();
-    TalkTts.reStopTheDefaultValue();
+    try {
+      print('updateTheCurrentGame:$newIndex');
+      // int newIndex = state.index;
+      // newIndex++;
+      emit(state.copyWith(index: newIndex));
+      emit(state.clearTheDataOfChoose());
+      reFormatGame();
+      TalkTts.reStopTheDefaultValue();
+    } catch (e) {
+      reFormatGame();
+      TalkTts.reStopTheDefaultValue();
+    }
   }
 
   subAction({required CurrentGamePhoneticsCubit subBloc}) {

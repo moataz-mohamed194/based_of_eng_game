@@ -67,12 +67,17 @@ class DragRodNumberLineCubit extends Cubit<DragRodNumberLineInitial> {
   }
 
   updateTheCurrentGame({required int index}) {
-    TalkTts.reBackTheDefaultValue();
-    int newIndex = state.index;
-    newIndex++;
-    emit(state.copyWith(index: index));
-    reFormatGameData();
-    TalkTts.reStopTheDefaultValue();
+    try {
+      TalkTts.reBackTheDefaultValue();
+      int newIndex = state.index;
+      newIndex++;
+      emit(state.copyWith(index: index));
+      reFormatGameData();
+      TalkTts.reStopTheDefaultValue();
+    } catch (e) {
+      reFormatGameData();
+      TalkTts.reStopTheDefaultValue();
+    }
   }
 
   _sayLetter() async {

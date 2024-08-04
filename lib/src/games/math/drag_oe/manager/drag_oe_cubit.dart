@@ -49,12 +49,17 @@ class DragOeCubit extends Cubit<DragOeInitial> {
   }
 
   updateTheCurrentGame({required int newIndex}) {
-    TalkTts.reBackTheDefaultValue();
-    // int newIndex = state.index;
-    // newIndex++;
-    emit(state.copyWith(index: newIndex));
-    reFormatGameData();
-    TalkTts.reStopTheDefaultValue();
+    try {
+      TalkTts.reBackTheDefaultValue();
+      // int newIndex = state.index;
+      // newIndex++;
+      emit(state.copyWith(index: newIndex));
+      reFormatGameData();
+      TalkTts.reStopTheDefaultValue();
+    } catch (e) {
+      reFormatGameData();
+      TalkTts.reStopTheDefaultValue();
+    }
   }
 
   _sayLetter() async {

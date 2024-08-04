@@ -81,13 +81,18 @@ class CtNumberCubit extends Cubit<CtNumberInitial> {
 
   updateTheCurrentGame({required int newIndex}) {
     TalkTts.reBackTheDefaultValue();
-    print('updateTheCurrentGame:$newIndex');
-    // int newIndex = state.index;
-    // newIndex++;
-    emit(state.copyWith(index: newIndex));
-    emit(state.clearCurrentAnswer());
-    reFormatGame();
-    TalkTts.reStopTheDefaultValue();
+    try {
+      print('updateTheCurrentGame:$newIndex');
+      // int newIndex = state.index;
+      // newIndex++;
+      emit(state.copyWith(index: newIndex));
+      emit(state.clearCurrentAnswer());
+      reFormatGame();
+      TalkTts.reStopTheDefaultValue();
+    } catch (e) {
+      reFormatGame();
+      TalkTts.reStopTheDefaultValue();
+    }
   }
 
   subAction({required CurrentGamePhoneticsCubit subBloc}) {

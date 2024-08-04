@@ -78,6 +78,7 @@ class DragSticksCubit extends Cubit<DragSticksInitial> {
       reFormatGameData();
       TalkTts.reStopTheDefaultValue();
     } catch (e) {
+      reFormatGameData();
       TalkTts.reStopTheDefaultValue();
     }
   }

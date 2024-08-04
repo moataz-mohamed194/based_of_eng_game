@@ -36,7 +36,8 @@ class ChooseNumberOECubit extends Cubit<ChooseNumberOEInitial> {
   addAnswer({required GameChoicesGameFinalModel userChoose}) {
     if (userChoose.isCorrect == 1) {
       int countCorrectAnswers = state.correctAnswers + 1;
-      emit(state.copyWith(correctAnswers: countCorrectAnswers, isCorrect:true));
+      emit(
+          state.copyWith(correctAnswers: countCorrectAnswers, isCorrect: true));
       return true;
     } else {
       return false;
@@ -49,11 +50,16 @@ class ChooseNumberOECubit extends Cubit<ChooseNumberOEInitial> {
 
   updateTheCurrentGame({required int index}) {
     TalkTts.reBackTheDefaultValue();
-    int newIndex = state.index;
-    newIndex++;
-    emit(state.copyWith(index: index));
-    reFormatGameData();
-    TalkTts.reStopTheDefaultValue();
+    try {
+      int newIndex = state.index;
+      newIndex++;
+      emit(state.copyWith(index: index));
+      reFormatGameData();
+      TalkTts.reStopTheDefaultValue();
+    } catch (e) {
+      reFormatGameData();
+      TalkTts.reStopTheDefaultValue();
+    }
   }
 
   _sayLetter() async {
