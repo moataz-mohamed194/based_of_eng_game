@@ -49,6 +49,8 @@ abstract class AppImagesArabic {
       '${mainPathOfImages}complete_the_word.png';
   static const String titleOfChooseTheStretchedLetter =
       '${mainPathOfImages}choose_the_stretched_letter.png';
+  static const String titleOfChooseTheStretchedWord =
+      '${mainPathOfImages}choose_the_stretched_word.png';
   static const String titleOfDragAndDrop =
       '${mainPathOfImages}drag_and_drop.png';
   static const String correctImage = '${mainPathOfImages}correct_image.png';
