@@ -138,6 +138,10 @@ abstract class BasicOfGameData {
       return CompleteTheWord();
     } else if (gameType == GameTypes.chooseTheStretchedLetter.text()) {
       return ChooseTheStretchedLetter();
+    } else if (gameType == GameTypes.chooseTheStretchedWord.text()) {
+      return ChooseTheStretchedWord();
+    } else if (gameType == GameTypes.completeTheStretchedLetter.text()) {
+      return CompleteTheStretchedLetter();
     } else if (gameType == GameTypes.memoryCards.text()) {
       return MemoryCard();
     } else if (gameType == GameTypes.cTNumber.text()) {
@@ -778,6 +782,44 @@ class ChooseTheSentenceGame implements BasicOfGameData {
   String? titleImageAr;
 
   @override
+  int countOfMinimizeStar = 2;
+}
+
+class ChooseTheStretchedWord implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = '';
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr = AppImagesArabic.titleOfChooseTheStretchedWord;
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class CompleteTheStretchedLetter implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = '';
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr = AppImagesArabic.titleOfChooseTheStretchedLetter;
+  @override
   int countOfMinimizeStar = 1;
 }
 
@@ -797,7 +839,7 @@ class ChooseTheStretchedLetter implements BasicOfGameData {
   @override
   String? titleImageAr = AppImagesArabic.titleOfChooseTheStretchedLetter;
   @override
-  int countOfMinimizeStar = 1;
+  int countOfMinimizeStar = 2;
 }
 
 class MemoryCard implements BasicOfGameData {

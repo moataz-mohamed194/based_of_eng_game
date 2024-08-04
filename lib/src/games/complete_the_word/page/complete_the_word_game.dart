@@ -49,8 +49,12 @@ class _CompleteTheWordGame extends State<CompleteTheWordGame> {
     }, builder: (context, gameState) {
       final currentGamePhoneticsCubit =
           context.read<CurrentGamePhoneticsCubit>();
+      final isChooseTheStretchedWord = currentGamePhoneticsCubit
+          .state.basicData?.gameData is ChooseTheStretchedWord;
       final isCompletedLetter = currentGamePhoneticsCubit
-          .state.basicData?.gameData is CompleteTheWord;
+              .state.basicData?.gameData is CompleteTheWord ||
+          currentGamePhoneticsCubit.state.basicData?.gameData
+              is CompleteTheStretchedLetter;
       return Container(
         margin: EdgeInsets.symmetric(vertical: 30.h),
         padding: EdgeInsets.all(20.w),
@@ -69,7 +73,8 @@ class _CompleteTheWordGame extends State<CompleteTheWordGame> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _buildChoices(gameState, context),
-                  if (gameState.images.first.word != null) ...[
+                  if (gameState.images.first.word != null &&
+                      !isChooseTheStretchedWord) ...[
                     50.pw,
                     _buildGuessingWord(
                         gameState: gameState,

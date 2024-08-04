@@ -130,20 +130,24 @@ class BasedOfAllGame extends StatelessWidget {
                   ),
                 } else if (HandlingActionsAndDataOfChapters.isArabic(
                     chapter: stateOfGame.basicData.runtimeType)) ...{
-
-                  if(stateOfGame.basicData?.gameData is CompleteTheWord  ||  stateOfGame.basicData?.gameData is ClickOnTheFish )...{
-                  BasedOfFullBoardGamesAr(
-                    stateOfGame: stateOfGame,
-                    gamesData: gamesData,
-                  )
-                  }else ...{
-                  BasedOfGameArabic(
-                    stateOfGame: stateOfGame,
-                    gamesData: gamesData,
-                  ),
-     
-                 
-                  } 
+                  if (stateOfGame.basicData?.gameData is CompleteTheWord ||
+                      stateOfGame.basicData?.gameData is ClickOnTheFish ||
+                      stateOfGame.basicData?.gameData
+                          is ChooseTheStretchedLetter ||
+                      stateOfGame.basicData?.gameData
+                          is ChooseTheStretchedWord ||
+                      stateOfGame.basicData?.gameData
+                          is CompleteTheStretchedLetter) ...{
+                    BasedOfFullBoardGamesAr(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    )
+                  } else ...{
+                    BasedOfGameArabic(
+                      stateOfGame: stateOfGame,
+                      gamesData: gamesData,
+                    ),
+                  }
                 } else if (stateOfGame.basicData is MathProgram) ...{
                   if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
                     if (stateOfGame.basicData?.gameData is SortingCupsGame) ...{
