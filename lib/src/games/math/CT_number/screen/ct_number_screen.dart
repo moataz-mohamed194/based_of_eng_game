@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/game_types/assets_images_math.dart';
 import '../../../../core/game_types/game_phonatics_types.dart';
+import '../../../../core/math_weidgt/open_key_board.dart';
 import '../../../../core/phonetics_color.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
@@ -75,12 +76,60 @@ class CtNumberScreen extends StatelessWidget {
                       onTap: () => (context
                               .read<CurrentGamePhoneticsCubit>()
                               .ableButton())
-                          ? _openKeyboard(
+                          ? openKeyboard(
                               context: context,
-                              gameState: gameState,
-                              bloc: context.read<CtNumberCubit>(),
-                              mainBloc:
-                                  context.read<CurrentGamePhoneticsCubit>())
+                              action: (value) async {
+                                if (context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .ableButton()) {
+                                  bool stateOfAnswer = context
+                                      .read<CtNumberCubit>()
+                                      .addAnswer(userChoose: value ?? '');
+                                  Navigator.of(context).pop();
+                                  if (stateOfAnswer == true) {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addSuccessAnswer(
+                                            questions:
+                                                gameState.allGameData.length,
+                                            correctAnswers: ((gameState
+                                                        .countOfCorrectAnswers ??
+                                                    0) +
+                                                1))
+                                        .whenComplete(() {
+                                      bool isLastQuestion = context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .checkIfIsTheLastQuestionOfGame(
+                                              queations:
+                                                  gameState.allGameData.length);
+                                      print('isLastQuestion:$isLastQuestion');
+                                      if (isLastQuestion != true) {
+                                        Future.delayed(
+                                            const Duration(seconds: 2),
+                                            () async {
+                                          await context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .updateIndexOfCurrentGame();
+                                          context
+                                              .read<CtNumberCubit>()
+                                              .updateTheCurrentGame(
+                                                  newIndex: context
+                                                      .read<
+                                                          CurrentGamePhoneticsCubit>()
+                                                      .state
+                                                      .index);
+                                        });
+                                      }
+                                    });
+                                  } else {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addWrongAnswer(
+                                            actionOfWrongAnswer: () async {});
+                                  }
+                                }
+                              },
+                            )
                           : null,
                     )
                   ],
@@ -89,77 +138,5 @@ class CtNumberScreen extends StatelessWidget {
             ),
           );
         });
-  }
-
-  final TextEditingController _controller = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
-
-  void _openKeyboard({
-    required context,
-    required CtNumberCubit bloc,
-    required CtNumberInitial gameState,
-    required CurrentGamePhoneticsCubit mainBloc,
-  }) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return Container(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          width: MediaQuery.of(context).size.width,
-          child: TextField(
-            controller: _controller,
-            autofocus: true,
-            focusNode: _focusNode,
-            keyboardType: TextInputType.number,
-            onSubmitted: (value) async {
-              if (mainBloc.ableButton()) {
-                bool stateOfAnswer = bloc.addAnswer(userChoose: value ?? '');
-                Navigator.of(context).pop();
-                if (stateOfAnswer == true) {
-                  await mainBloc
-                      .addSuccessAnswer(
-                          questions: gameState.allGameData.length,
-                          correctAnswers:
-                              ((gameState.countOfCorrectAnswers ?? 0) + 1))
-                      .whenComplete(() {
-                    bool isLastQuestion =
-                        mainBloc.checkIfIsTheLastQuestionOfGame(
-                            queations: gameState.allGameData.length);
-                    print('isLastQuestion:$isLastQuestion');
-                    if (isLastQuestion != true) {
-                      Future.delayed(const Duration(seconds: 2), () async {
-                        await mainBloc.updateIndexOfCurrentGame();
-                        bloc.updateTheCurrentGame(
-                            newIndex: mainBloc.state.index);
-                      });
-                    }
-                  });
-                } else {
-                  await mainBloc.addWrongAnswer(
-                      actionOfWrongAnswer: () async {});
-                }
-              }
-            },
-            decoration: InputDecoration(
-              prefixIcon: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.close)),
-              border: OutlineInputBorder(),
-            ),
-          ),
-        );
-      },
-    ).whenComplete(() {
-      print('_focusNode:$_focusNode');
-
-      _focusNode.unfocus();
-      // Restore the system UI overlays when the modal is closed
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    });
   }
 }

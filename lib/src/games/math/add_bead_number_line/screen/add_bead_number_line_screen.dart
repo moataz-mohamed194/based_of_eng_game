@@ -9,6 +9,7 @@ import '../../../../core/game_types/game_phonatics_types.dart';
 import '../../../../core/math_weidgt/card_of_blocks.dart';
 import '../../../../core/math_weidgt/get_the_beads.dart';
 import '../../../../core/math_weidgt/get_the_blocks.dart';
+import '../../../../core/math_weidgt/open_key_board.dart';
 import '../../../../core/phonetics_color.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
@@ -171,7 +172,7 @@ class AddBeadNumberLineScreen extends StatelessWidget {
                           onTap: () => (context
                                   .read<CurrentGamePhoneticsCubit>()
                                   .ableButton())
-                              ? _openKeyboard(
+                              ? openKeyboard(
                                   context: context,
                                   action: (String answer) async {
                                     if (context
@@ -239,47 +240,4 @@ class AddBeadNumberLineScreen extends StatelessWidget {
             }));
   }
 
-  final TextEditingController _controller = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
-
-  void _openKeyboard({
-    required context,
-    required void Function(String answer) action,
-  }) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return Container(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          width: MediaQuery.of(context).size.width,
-          child: TextField(
-            controller: _controller,
-            autofocus: true,
-            focusNode: _focusNode,
-            keyboardType: TextInputType.number,
-            onSubmitted: (value) async {
-              action(value);
-            },
-            decoration: InputDecoration(
-              prefixIcon: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.close)),
-              border: OutlineInputBorder(),
-            ),
-          ),
-        );
-      },
-    ).whenComplete(() {
-      print('_focusNode:$_focusNode');
-
-      _focusNode.unfocus();
-      // Restore the system UI overlays when the modal is closed
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    });
-  }
 }

@@ -254,48 +254,4 @@ class SubRodsChooseNumberScreen extends StatelessWidget {
               );
             }));
   }
-
-  final TextEditingController _controller = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
-
-  void _openKeyboard({
-    required context,
-    required void Function(String answer) action,
-  }) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return Container(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          width: MediaQuery.of(context).size.width,
-          child: TextField(
-            controller: _controller,
-            autofocus: true,
-            focusNode: _focusNode,
-            keyboardType: TextInputType.number,
-            onSubmitted: (value) async {
-              action(value);
-            },
-            decoration: InputDecoration(
-              prefixIcon: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.close)),
-              border: OutlineInputBorder(),
-            ),
-          ),
-        );
-      },
-    ).whenComplete(() {
-      print('_focusNode:$_focusNode');
-
-      _focusNode.unfocus();
-      // Restore the system UI overlays when the modal is closed
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    });
-  }
 }

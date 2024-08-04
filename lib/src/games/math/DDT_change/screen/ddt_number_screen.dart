@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../src_model/model/game_choices_model.dart';
 import '../../../../core/game_types/assets_images_math.dart';
 import '../../../../core/game_types/game_phonatics_types.dart';
+import '../../../../core/math_weidgt/open_key_board.dart';
 import '../../../../core/phonetics_color.dart';
 import '../../../../core/theme_text.dart';
 import '../../../../cubit/current_game_phonetics_cubit.dart';
@@ -94,7 +95,7 @@ class DDtNumberScreen extends StatelessWidget {
                                     onTap: () => (context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .ableButton())
-                                        ? _openKeyboard(
+                                        ? openKeyboard(
                                             context: context,
                                             action: (String answer) async {
                                               if (context
@@ -260,7 +261,7 @@ class DDtNumberScreen extends StatelessWidget {
                                     onTap: () => (context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .ableButton())
-                                        ? _openKeyboard(
+                                        ? openKeyboard(
                                             context: context,
                                             action: (String answer) async {
                                               if (context
@@ -344,49 +345,5 @@ class DDtNumberScreen extends StatelessWidget {
             ),
           );
         });
-  }
-
-  final TextEditingController _controller = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
-
-  void _openKeyboard({
-    required context,
-    required void Function(String answer) action,
-  }) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return Container(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          width: MediaQuery.of(context).size.width,
-          child: TextField(
-            controller: _controller,
-            autofocus: true,
-            focusNode: _focusNode,
-            keyboardType: TextInputType.number,
-            onSubmitted: (value) async {
-              action(value);
-            },
-            decoration: InputDecoration(
-              prefixIcon: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.close)),
-              border: OutlineInputBorder(),
-            ),
-          ),
-        );
-      },
-    ).whenComplete(() {
-      print('_focusNode:$_focusNode');
-
-      _focusNode.unfocus();
-      // Restore the system UI overlays when the modal is closed
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    });
   }
 }
