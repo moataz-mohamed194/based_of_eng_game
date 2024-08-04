@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -28,7 +27,7 @@ void openKeyboard({required context, required void Function(String) action}) {
             prefixIcon: IconButton(
                 onPressed: () {
                   _controller.clear();
-
+                  // to re-show bars
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.close)),
@@ -41,9 +40,6 @@ void openKeyboard({required context, required void Function(String) action}) {
     _controller.clear();
     FocusScope.of(context).unfocus();
     _focusNode.unfocus();
-    // Restore the system UI overlays when the modal is closed
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
   });
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
 }
