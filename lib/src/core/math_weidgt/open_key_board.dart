@@ -2,16 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../cubit/current_game_phonetics_cubit.dart';
+import '../../games/math/CT_number/manager/ct_number_cubit.dart';
+
 final TextEditingController _controller = TextEditingController();
 final FocusNode _focusNode = FocusNode();
 
 void openKeyboard({required context, required void Function(String) action}) {
-  _focusNode.addListener(() {
-    if (!_focusNode.hasFocus) {
-      Navigator.pop(context);
-    }
-  });
-
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -31,6 +28,7 @@ void openKeyboard({required context, required void Function(String) action}) {
             prefixIcon: IconButton(
                 onPressed: () {
                   _controller.clear();
+
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.close)),
@@ -39,6 +37,7 @@ void openKeyboard({required context, required void Function(String) action}) {
       );
     },
   ).whenComplete(() {
+    print('_focusNode:$_focusNode');
     _controller.clear();
     FocusScope.of(context).unfocus();
     _focusNode.unfocus();
