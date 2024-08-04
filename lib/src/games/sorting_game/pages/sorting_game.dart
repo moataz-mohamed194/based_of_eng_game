@@ -119,6 +119,12 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     StrokeText(
+                                      color: gameState.isArabic
+                                          ? AppColorPhonetics.darkBlueColor
+                                          : null,
+                                      strokeColor: gameState.isArabic
+                                          ? AppColorPhonetics.darkBlueColor
+                                          : null,
                                       text: gameState.gameData
                                               .gameLetters![index].letter ??
                                           '',
