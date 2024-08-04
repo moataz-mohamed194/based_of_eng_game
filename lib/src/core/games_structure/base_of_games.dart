@@ -134,7 +134,11 @@ abstract class HandlingActionsAndDataOfChapters {
           background: (stageName ==
                   MainDataOfChaptersTypes.mathEc1.text().toLowerCase())
               ? AppImagesMath.mathBg
-              : AppImagesMath.mathBgEC2);
+              : AppImagesMath.mathBgEC2,
+          isEc1: (stageName ==
+                  MainDataOfChaptersTypes.mathEc1.text().toLowerCase())
+              ? true
+              : false);
       // } else if (stageName.toLowerCase() ==
       //     MainDataOfChaptersTypes.mathEc2.text().toLowerCase()) {
       //   return MathProgram(

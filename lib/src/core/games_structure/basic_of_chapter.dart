@@ -1448,50 +1448,17 @@ class MathProgram implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
+  late bool isEc1;
   @override
   String background = AppImagesMath.mathBg;
 
   @override
   BasicOfGameData? gameData;
 
-  MathProgram({required this.mineGameData, String? background}) {
+  MathProgram(
+      {required this.mineGameData, String? background, required this.isEc1}) {
     gameData = mineGameData;
     this.background = background ?? AppImagesMath.mathBg;
-  }
-
-  @override
-  int? countOfPartsOfLettersForTracing = 14;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
-
-  @override
-  bool? isArabic;
-}
-
-class MathProgramEC1 implements MainDataOfChapters {
-  final BasicOfGameData mineGameData;
-  @override
-  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
-
-  @override
-  String background = AppImagesMath.mathBg;
-
-  @override
-  BasicOfGameData? gameData;
-
-  MathProgramEC1({required this.mineGameData}) {
-    gameData = mineGameData;
   }
 
   @override

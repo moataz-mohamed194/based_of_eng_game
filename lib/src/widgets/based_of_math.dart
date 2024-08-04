@@ -69,386 +69,463 @@ class BasedOfMath extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            GestureDetector(
-              onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()
-                  ? () async {
-                      await context
-                          .read<CurrentGamePhoneticsCubit>()
-                          .beeTalkingTrue();
-                      await TalkTts.startTalk(
-                          text: gamesData[stateOfGame.index].inst ?? '');
+    return Expanded(
+      child: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          Positioned(
+              top: (stateOfGame.basicData as MathProgram).isEc1 ? 92.h : 60.h,
+              // start: 0,
+              // start: 55.w,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  if (stateOfGame.basicData?.gameData
+                      is MathChooseSticksOrBeadsOrBlocks) ...{
+                    BlocProvider<ChooseSticksCubit>(
+                      create: (_) => ChooseSticksCubit(
+                          allGameData: gamesData,
+                          basicData: stateOfGame.basicData!.gameData!),
+                      child:
+                          BlocListener<ChooseSticksCubit, ChooseSticksInitial>(
+                              listener: (context, state) {
+                                _handlingDataOfGame(
+                                    mainBloc: context
+                                        .read<CurrentGamePhoneticsCubit>());
+                              },
+                              child: ChooseSticksScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathChooseNumberSticksOrBeadsOrBlocks) ...{
+                    BlocProvider<ChooseNumberCubit>(
+                      create: (_) => ChooseNumberCubit(
+                          allGameData: gamesData,
+                          basicData: stateOfGame.basicData!.gameData!),
+                      child:
+                          BlocListener<ChooseNumberCubit, ChooseNumberInitial>(
+                              listener: (context, state) {
+                                _handlingDataOfGame(
+                                    mainBloc: context
+                                        .read<CurrentGamePhoneticsCubit>());
+                              },
+                              child: ChooseNumberScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathSortingSticksOrBeadsOrBlocks) ...{
+                    BlocProvider<SortingBlocksCubit>(
+                        create: (_) => SortingBlocksCubit(
+                            gameData: gamesData[0],
+                            subBloc: context.read<CurrentGamePhoneticsCubit>(),
+                            tools: (stateOfGame.basicData?.gameData
+                                    as MathSortingSticksOrBeadsOrBlocks)
+                                .tools),
+                        child: SortingBlocksScreen())
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathSortingBeads) ...{
+                    BlocProvider<SortingBeadsCubit>(
+                        create: (_) => SortingBeadsCubit(
+                            gameData: gamesData[0],
+                            subBloc: context.read<CurrentGamePhoneticsCubit>(),
+                            tools: (stateOfGame.basicData?.gameData
+                                    as MathSortingBeads)
+                                .tools),
+                        child: SortingBeadsScreen())
+                  } else if (stateOfGame.basicData?.gameData
+                      is DragBeadsBoard) ...{
+                    BlocProvider<DragBeadsBoardCubit>(
+                        create: (_) => DragBeadsBoardCubit(
+                            gameData: gamesData[0],
+                            subBloc: context.read<CurrentGamePhoneticsCubit>(),
+                            tools: (stateOfGame.basicData?.gameData
+                                    as DragBeadsBoard)
+                                .tools),
+                        child: DragBeadsBoardScreen())
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathChooseOEDomino) ...{
+                    BlocProvider<ChooseOeCubit>(
+                        create: (_) => ChooseOeCubit(
+                            allGameData: gamesData,
+                            basicData: stateOfGame.basicData!.gameData!),
+                        child: BlocListener<ChooseOeCubit, ChooseOeInitial>(
+                            listener: (context, state) {
+                              _handlingDataOfGame(
+                                  mainBloc: context
+                                      .read<CurrentGamePhoneticsCubit>());
+                            },
+                            child: ChooseOeScreen()))
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathDragDominoOE) ...{
+                    BlocProvider<DragOeCubit>(
+                        create: (_) => DragOeCubit(
+                            allGameData: gamesData,
+                            subBloc: context.read<CurrentGamePhoneticsCubit>(),
+                            tools: (stateOfGame.basicData?.gameData
+                                    as MathDragDominoOE)
+                                .tools),
+                        child: BlocListener<DragOeCubit, DragOeInitial>(
+                            listener: (context, state) {},
+                            child: DragOeScreen()))
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathChooseBeadsOE) ...{
+                    BlocProvider<ChooseNumberOECubit>(
+                      create: (_) => ChooseNumberOECubit(
+                          allGameData: gamesData,
+                          basicData: stateOfGame.basicData!.gameData!),
+                      child: BlocListener<ChooseNumberOECubit,
+                              ChooseNumberOEInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: ChooseNumberOEScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathDragSticks) ...{
+                    BlocProvider<DragSticksCubit>(
+                      create: (_) => DragSticksCubit(
+                          allGameData: gamesData,
+                          subBloc: context.read<CurrentGamePhoneticsCubit>()),
+                      child: DragSticksScreen(),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is CTNumberGame) ...{
+                    BlocProvider<CtNumberCubit>(
+                      create: (_) => CtNumberCubit(
+                        allGameData: gamesData,
+                        subBloc: context.read<CurrentGamePhoneticsCubit>(),
+                        tools:
+                            (stateOfGame.basicData!.gameData! as CTNumberGame)
+                                .tools,
+                        showLineOfNumbers:
+                            (stateOfGame.basicData!.gameData! as CTNumberGame)
+                                .showLineOfNumbers,
+                      ),
+                      child: CtNumberScreen(),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is DDTChangeGame) ...{
+                    BlocProvider<DDTChangeCubit>(
+                      create: (_) => DDTChangeCubit(
+                        allGameData: gamesData,
+                        subBloc: context.read<CurrentGamePhoneticsCubit>(),
+                      ),
+                      child: DDtNumberScreen(),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathChooseBlocksAdd) ...{
+                    BlocProvider<ChooseAddCubit>(
+                      create: (_) => ChooseAddCubit(
+                          allGameData: gamesData,
+                          tools: (stateOfGame.basicData!.gameData!
+                                  as MathChooseBlocksAdd)
+                              .tools),
+                      child: BlocListener<ChooseAddCubit, ChooseAddInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: ChooseAddScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathChooseBlocksSub) ...{
+                    BlocProvider<ChooseSubCubit>(
+                      create: (_) => ChooseSubCubit(
+                          allGameData: gamesData,
+                          tools: (stateOfGame.basicData!.gameData!
+                                  as MathChooseBlocksSub)
+                              .tools),
+                      child: BlocListener<ChooseSubCubit, ChooseSubInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: ChooseSubScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathDragBlocksSub) ...{
+                    BlocProvider<DragSubCubit>(
+                      create: (_) => DragSubCubit(
+                          allGameData: gamesData,
+                          tools: (stateOfGame.basicData!.gameData!
+                                  as MathDragBlocksSub)
+                              .tools),
+                      child: BlocListener<DragSubCubit, DragSubInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: DragSubScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathChooseBlocksAddLine) ...{
+                    BlocProvider<ChooseAddLineCubit>(
+                      create: (_) => ChooseAddLineCubit(
+                          allGameData: gamesData,
+                          tools: (stateOfGame.basicData!.gameData!
+                                  as MathChooseBlocksAddLine)
+                              .tools),
+                      child: BlocListener<ChooseAddLineCubit,
+                              ChooseAddLineInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: ChooseAddLineScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathChooseBeadsAddLine) ...{
+                    BlocProvider<ChooseAddBeadsLineCubit>(
+                      create: (_) => ChooseAddBeadsLineCubit(
+                          allGameData: gamesData,
+                          tools: (stateOfGame.basicData!.gameData!
+                                  as MathChooseBeadsAddLine)
+                              .tools),
+                      child: BlocListener<ChooseAddBeadsLineCubit,
+                              ChooseAddBeadsLineInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: ChooseAddBeadsLineScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathDragBlocksAdd) ...{
+                    BlocProvider<DragAddCubit>(
+                      create: (_) => DragAddCubit(
+                          allGameData: gamesData,
+                          tools: (stateOfGame.basicData!.gameData!
+                                  as MathDragBlocksAdd)
+                              .tools),
+                      child: BlocListener<DragAddCubit, DragAddInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: DragAddScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is MathChooseBoard) ...{
+                    BlocProvider<ChooseNumberFromWoodCubit>(
+                      create: (_) => ChooseNumberFromWoodCubit(
+                        allGameData: gamesData,
+                        tools: (stateOfGame.basicData!.gameData!
+                                as MathChooseBoard)
+                            .tools,
+                      ),
+                      child: BlocListener<ChooseNumberFromWoodCubit,
+                              ChooseNumberFromWoodInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: ChooseNumberFromWoodScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is AddRodNumberLineGame) ...{
+                    BlocProvider<AddRodNumberLineCubit>(
+                      create: (_) => AddRodNumberLineCubit(
+                        allGameData: gamesData,
+                        tools: (stateOfGame.basicData!.gameData!
+                                as AddRodNumberLineGame)
+                            .tools,
+                      ),
+                      child: BlocListener<AddRodNumberLineCubit,
+                              AddRodNumberLineInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: AddRodNumberLineScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is DragAddRodNumberLineGame) ...{
+                    BlocProvider<DragRodNumberLineCubit>(
+                      create: (_) => DragRodNumberLineCubit(
+                        allGameData: gamesData,
+                        tools: (stateOfGame.basicData!.gameData!
+                                as DragAddRodNumberLineGame)
+                            .tools,
+                      ),
+                      child: BlocListener<DragRodNumberLineCubit,
+                              DragRodNumberLineInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: DragRodNumberLineScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is DragTypeRodNumberLineGame) ...{
+                    BlocProvider<DragTypeRodLineCubit>(
+                      create: (_) => DragTypeRodLineCubit(
+                        allGameData: gamesData,
+                        tools: (stateOfGame.basicData!.gameData!
+                                as DragTypeRodNumberLineGame)
+                            .tools,
+                      ),
+                      child: BlocListener<DragTypeRodLineCubit,
+                              DragTypeRodLineInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: DragTypeNumberLineScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is CountTypeNumber) ...{
+                    BlocProvider<CountTypeNumberCubit>(
+                      create: (_) => CountTypeNumberCubit(
+                        allGameData: gamesData,
+                        tools: (stateOfGame.basicData!.gameData!
+                                as CountTypeNumber)
+                            .tools,
+                      ),
+                      child: BlocListener<CountTypeNumberCubit,
+                              CountTypeNumberInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: CountTypeNumberScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is SubRodsChooseNumberGame) ...{
+                    BlocProvider<SubRodsChooseNumberCubit>(
+                      create: (_) => SubRodsChooseNumberCubit(
+                        allGameData: gamesData,
+                        tools: (stateOfGame.basicData!.gameData!
+                                as SubRodsChooseNumberGame)
+                            .tools,
+                      ),
+                      child: BlocListener<SubRodsChooseNumberCubit,
+                              SubRodsChooseNumberInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: SubRodsChooseNumberScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is AddBeadNumberLineGame) ...{
+                    BlocProvider<AddBeadNumberLineCubit>(
+                      create: (_) => AddBeadNumberLineCubit(
+                        allGameData: gamesData,
+                        tools: (stateOfGame.basicData!.gameData!
+                                as AddBeadNumberLineGame)
+                            .tools,
+                      ),
+                      child: BlocListener<AddBeadNumberLineCubit,
+                              AddBeadNumberLineInitial>(
+                          listener: (context, state) {
+                            _handlingDataOfGame(
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>());
+                          },
+                          child: AddBeadNumberLineScreen()),
+                    )
+                  } else if (stateOfGame.basicData?.gameData
+                      is ChartSubType) ...{
+                    BlocProvider<ChartSubTypeCubit>(
+                      create: (_) => ChartSubTypeCubit(
+                        allGameData: gamesData,
+                      ),
+                      child:
+                          BlocListener<ChartSubTypeCubit, ChartSubTypeInitial>(
+                              listener: (context, state) {
+                                _handlingDataOfGame(
+                                    mainBloc: context
+                                        .read<CurrentGamePhoneticsCubit>());
+                              },
+                              child: ChartSubTypeScreen()),
+                    )
+                  }
+                ],
+              )),
+          Positioned(
+            top: 0.h,
+            right: 0,
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: context.read<CurrentGamePhoneticsCubit>().ableButton()
+                      ? () async {
+                          await context
+                              .read<CurrentGamePhoneticsCubit>()
+                              .beeTalkingTrue();
+                          await TalkTts.startTalk(
+                              text: gamesData[stateOfGame.index].inst ?? '');
 
-                      if (stateOfGame.stateOfStringIsWord !=
-                          StateOfSubWord.stopTalk) {
-                        TalkTts.flutterTts.setCompletionHandler(() async {
-                          if (stateOfGame.stateOfStringIsWord ==
-                              StateOfSubWord.isWord) {
-                            await TalkTts.startTalk(
-                                text: stateOfGame.stateOfStringWillSay ?? '');
-                          } else {
-                            await AudioPlayerLetters.startPlaySound(
-                                soundPath: AssetsSoundLetters.getSoundOfLetter(
-                                    mainGameLetter:
-                                        stateOfGame.stateOfStringWillSay ??
-                                            ''));
+                          if (stateOfGame.stateOfStringIsWord !=
+                              StateOfSubWord.stopTalk) {
+                            TalkTts.flutterTts.setCompletionHandler(() async {
+                              if (stateOfGame.stateOfStringIsWord ==
+                                  StateOfSubWord.isWord) {
+                                await TalkTts.startTalk(
+                                    text:
+                                        stateOfGame.stateOfStringWillSay ?? '');
+                              } else {
+                                await AudioPlayerLetters.startPlaySound(
+                                    soundPath:
+                                        AssetsSoundLetters.getSoundOfLetter(
+                                            mainGameLetter: stateOfGame
+                                                    .stateOfStringWillSay ??
+                                                ''));
+                              }
+                            });
                           }
-                        });
-                      }
-                      await context
-                          .read<CurrentGamePhoneticsCubit>()
-                          .beeTalkingFalse();
-                    }
-                  : null,
-              child: Container(
-                  alignment: Alignment.center,
-                  child: stateOfGame.avatarCurrentArtboard == null
-                      ? SizedBox(
-                          height: 90.h,
-                          // width: 100.w,
-                        )
-                      : Container(
-                          margin: EdgeInsets.only(left: 7.w),
-                          child: SizedBox(
+                          await context
+                              .read<CurrentGamePhoneticsCubit>()
+                              .beeTalkingFalse();
+                        }
+                      : null,
+                  child: Container(
+                      alignment: Alignment.center,
+                      child: stateOfGame.avatarCurrentArtboard == null
+                          ? SizedBox(
                               height: 90.h,
-                              // width: 50.w,
-                              child: Rive(
-                                artboard: stateOfGame.avatarCurrentArtboard!,
-                                fit: BoxFit.fill,
-                                useArtboardSize: true,
-                                alignment: Alignment.center,
-                              )),
-                        )),
-            ),
-            Image.asset(
-              stateOfGame.basicData?.gameData?.titleImageEn ?? '',
-              height: 50.h,
-              // width: 85.w,
+                              width: 100.w,
+                            )
+                          : Container(
+                              margin: EdgeInsets.only(left: 7.w),
+                              child: SizedBox(
+                                  height: 90.h,
+                                  // width: 50.w,
+                                  child: Rive(
+                                    artboard:
+                                        stateOfGame.avatarCurrentArtboard!,
+                                    fit: BoxFit.fill,
+                                    useArtboardSize: true,
+                                    alignment: Alignment.center,
+                                  )),
+                            )),
+                ),
+                Image.asset(
+                  stateOfGame.basicData?.gameData?.titleImageEn ?? '',
+                  height: 50.h,
+                  // width: 85.w,
 
-              // fit: BoxFit.fill,
-            )
-          ],
-        ),
-        if (stateOfGame.basicData?.gameData
-            is MathChooseSticksOrBeadsOrBlocks) ...{
-          BlocProvider<ChooseSticksCubit>(
-            create: (_) => ChooseSticksCubit(
-                allGameData: gamesData,
-                basicData: stateOfGame.basicData!.gameData!),
-            child: BlocListener<ChooseSticksCubit, ChooseSticksInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: ChooseSticksScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData
-            is MathChooseNumberSticksOrBeadsOrBlocks) ...{
-          BlocProvider<ChooseNumberCubit>(
-            create: (_) => ChooseNumberCubit(
-                allGameData: gamesData,
-                basicData: stateOfGame.basicData!.gameData!),
-            child: BlocListener<ChooseNumberCubit, ChooseNumberInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: ChooseNumberScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData
-            is MathSortingSticksOrBeadsOrBlocks) ...{
-          BlocProvider<SortingBlocksCubit>(
-              create: (_) => SortingBlocksCubit(
-                  gameData: gamesData[0],
-                  subBloc: context.read<CurrentGamePhoneticsCubit>(),
-                  tools: (stateOfGame.basicData?.gameData
-                          as MathSortingSticksOrBeadsOrBlocks)
-                      .tools),
-              child: SortingBlocksScreen())
-        } else if (stateOfGame.basicData?.gameData is MathSortingBeads) ...{
-          BlocProvider<SortingBeadsCubit>(
-              create: (_) => SortingBeadsCubit(
-                  gameData: gamesData[0],
-                  subBloc: context.read<CurrentGamePhoneticsCubit>(),
-                  tools: (stateOfGame.basicData?.gameData as MathSortingBeads)
-                      .tools),
-              child: SortingBeadsScreen())
-        } else if (stateOfGame.basicData?.gameData is DragBeadsBoard) ...{
-          BlocProvider<DragBeadsBoardCubit>(
-              create: (_) => DragBeadsBoardCubit(
-                  gameData: gamesData[0],
-                  subBloc: context.read<CurrentGamePhoneticsCubit>(),
-                  tools: (stateOfGame.basicData?.gameData as DragBeadsBoard)
-                      .tools),
-              child: DragBeadsBoardScreen())
-        } else if (stateOfGame.basicData?.gameData is MathChooseOEDomino) ...{
-          BlocProvider<ChooseOeCubit>(
-              create: (_) => ChooseOeCubit(
-                  allGameData: gamesData,
-                  basicData: stateOfGame.basicData!.gameData!),
-              child: BlocListener<ChooseOeCubit, ChooseOeInitial>(
-                  listener: (context, state) {
-                    _handlingDataOfGame(
-                        mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                  },
-                  child: ChooseOeScreen()))
-        } else if (stateOfGame.basicData?.gameData is MathDragDominoOE) ...{
-          BlocProvider<DragOeCubit>(
-              create: (_) => DragOeCubit(
-                  allGameData: gamesData,
-                  subBloc: context.read<CurrentGamePhoneticsCubit>(),
-                  tools: (stateOfGame.basicData?.gameData as MathDragDominoOE)
-                      .tools),
-              child: BlocListener<DragOeCubit, DragOeInitial>(
-                  listener: (context, state) {}, child: DragOeScreen()))
-        } else if (stateOfGame.basicData?.gameData is MathChooseBeadsOE) ...{
-          BlocProvider<ChooseNumberOECubit>(
-            create: (_) => ChooseNumberOECubit(
-                allGameData: gamesData,
-                basicData: stateOfGame.basicData!.gameData!),
-            child: BlocListener<ChooseNumberOECubit, ChooseNumberOEInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: ChooseNumberOEScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData is MathDragSticks) ...{
-          BlocProvider<DragSticksCubit>(
-            create: (_) => DragSticksCubit(
-                allGameData: gamesData,
-                subBloc: context.read<CurrentGamePhoneticsCubit>()),
-            child: DragSticksScreen(),
-          )
-        } else if (stateOfGame.basicData?.gameData is CTNumberGame) ...{
-          BlocProvider<CtNumberCubit>(
-            create: (_) => CtNumberCubit(
-              allGameData: gamesData,
-              subBloc: context.read<CurrentGamePhoneticsCubit>(),
-              tools: (stateOfGame.basicData!.gameData! as CTNumberGame).tools,
-              showLineOfNumbers:
-                  (stateOfGame.basicData!.gameData! as CTNumberGame)
-                      .showLineOfNumbers,
+                  // fit: BoxFit.fill,
+                )
+              ],
             ),
-            child: CtNumberScreen(),
-          )
-        } else if (stateOfGame.basicData?.gameData is DDTChangeGame) ...{
-          BlocProvider<DDTChangeCubit>(
-            create: (_) => DDTChangeCubit(
-              allGameData: gamesData,
-              subBloc: context.read<CurrentGamePhoneticsCubit>(),
-            ),
-            child: DDtNumberScreen(),
-          )
-        } else if (stateOfGame.basicData?.gameData is MathChooseBlocksAdd) ...{
-          BlocProvider<ChooseAddCubit>(
-            create: (_) => ChooseAddCubit(
-                allGameData: gamesData,
-                tools: (stateOfGame.basicData!.gameData! as MathChooseBlocksAdd)
-                    .tools),
-            child: BlocListener<ChooseAddCubit, ChooseAddInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: ChooseAddScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData is MathChooseBlocksSub) ...{
-          BlocProvider<ChooseSubCubit>(
-            create: (_) => ChooseSubCubit(
-                allGameData: gamesData,
-                tools: (stateOfGame.basicData!.gameData! as MathChooseBlocksSub)
-                    .tools),
-            child: BlocListener<ChooseSubCubit, ChooseSubInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: ChooseSubScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData is MathDragBlocksSub) ...{
-          BlocProvider<DragSubCubit>(
-            create: (_) => DragSubCubit(
-                allGameData: gamesData,
-                tools: (stateOfGame.basicData!.gameData! as MathDragBlocksSub)
-                    .tools),
-            child: BlocListener<DragSubCubit, DragSubInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: DragSubScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData
-            is MathChooseBlocksAddLine) ...{
-          BlocProvider<ChooseAddLineCubit>(
-            create: (_) => ChooseAddLineCubit(
-                allGameData: gamesData,
-                tools: (stateOfGame.basicData!.gameData!
-                        as MathChooseBlocksAddLine)
-                    .tools),
-            child: BlocListener<ChooseAddLineCubit, ChooseAddLineInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: ChooseAddLineScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData
-            is MathChooseBeadsAddLine) ...{
-          BlocProvider<ChooseAddBeadsLineCubit>(
-            create: (_) => ChooseAddBeadsLineCubit(
-                allGameData: gamesData,
-                tools:
-                    (stateOfGame.basicData!.gameData! as MathChooseBeadsAddLine)
-                        .tools),
-            child: BlocListener<ChooseAddBeadsLineCubit,
-                    ChooseAddBeadsLineInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: ChooseAddBeadsLineScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData is MathDragBlocksAdd) ...{
-          BlocProvider<DragAddCubit>(
-            create: (_) => DragAddCubit(
-                allGameData: gamesData,
-                tools: (stateOfGame.basicData!.gameData! as MathDragBlocksAdd)
-                    .tools),
-            child: BlocListener<DragAddCubit, DragAddInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: DragAddScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData is MathChooseBoard) ...{
-          BlocProvider<ChooseNumberFromWoodCubit>(
-            create: (_) => ChooseNumberFromWoodCubit(
-              allGameData: gamesData,
-              tools:
-                  (stateOfGame.basicData!.gameData! as MathChooseBoard).tools,
-            ),
-            child: BlocListener<ChooseNumberFromWoodCubit,
-                    ChooseNumberFromWoodInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: ChooseNumberFromWoodScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData is AddRodNumberLineGame) ...{
-          BlocProvider<AddRodNumberLineCubit>(
-            create: (_) => AddRodNumberLineCubit(
-              allGameData: gamesData,
-              tools: (stateOfGame.basicData!.gameData! as AddRodNumberLineGame)
-                  .tools,
-            ),
-            child: BlocListener<AddRodNumberLineCubit, AddRodNumberLineInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: AddRodNumberLineScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData
-            is DragAddRodNumberLineGame) ...{
-          BlocProvider<DragRodNumberLineCubit>(
-            create: (_) => DragRodNumberLineCubit(
-              allGameData: gamesData,
-              tools:
-                  (stateOfGame.basicData!.gameData! as DragAddRodNumberLineGame)
-                      .tools,
-            ),
-            child:
-                BlocListener<DragRodNumberLineCubit, DragRodNumberLineInitial>(
-                    listener: (context, state) {
-                      _handlingDataOfGame(
-                          mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                    },
-                    child: DragRodNumberLineScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData
-            is DragTypeRodNumberLineGame) ...{
-          BlocProvider<DragTypeRodLineCubit>(
-            create: (_) => DragTypeRodLineCubit(
-              allGameData: gamesData,
-              tools: (stateOfGame.basicData!.gameData!
-                      as DragTypeRodNumberLineGame)
-                  .tools,
-            ),
-            child: BlocListener<DragTypeRodLineCubit, DragTypeRodLineInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: DragTypeNumberLineScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData is CountTypeNumber) ...{
-          BlocProvider<CountTypeNumberCubit>(
-            create: (_) => CountTypeNumberCubit(
-              allGameData: gamesData,
-              tools:
-                  (stateOfGame.basicData!.gameData! as CountTypeNumber).tools,
-            ),
-            child: BlocListener<CountTypeNumberCubit, CountTypeNumberInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: CountTypeNumberScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData
-            is SubRodsChooseNumberGame) ...{
-          BlocProvider<SubRodsChooseNumberCubit>(
-            create: (_) => SubRodsChooseNumberCubit(
-              allGameData: gamesData,
-              tools:
-                  (stateOfGame.basicData!.gameData! as SubRodsChooseNumberGame)
-                      .tools,
-            ),
-            child: BlocListener<SubRodsChooseNumberCubit,
-                    SubRodsChooseNumberInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: SubRodsChooseNumberScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData
-            is AddBeadNumberLineGame) ...{
-          BlocProvider<AddBeadNumberLineCubit>(
-            create: (_) => AddBeadNumberLineCubit(
-              allGameData: gamesData,
-              tools: (stateOfGame.basicData!.gameData! as AddBeadNumberLineGame)
-                  .tools,
-            ),
-            child:
-                BlocListener<AddBeadNumberLineCubit, AddBeadNumberLineInitial>(
-                    listener: (context, state) {
-                      _handlingDataOfGame(
-                          mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                    },
-                    child: AddBeadNumberLineScreen()),
-          )
-        } else if (stateOfGame.basicData?.gameData is ChartSubType) ...{
-          BlocProvider<ChartSubTypeCubit>(
-            create: (_) => ChartSubTypeCubit(
-              allGameData: gamesData,
-            ),
-            child: BlocListener<ChartSubTypeCubit, ChartSubTypeInitial>(
-                listener: (context, state) {
-                  _handlingDataOfGame(
-                      mainBloc: context.read<CurrentGamePhoneticsCubit>());
-                },
-                child: ChartSubTypeScreen()),
-          )
-        }
-      ],
+          ),
+        ],
+      ),
     );
   }
 
