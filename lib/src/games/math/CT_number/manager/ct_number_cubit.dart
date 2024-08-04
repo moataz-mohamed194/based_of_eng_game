@@ -24,6 +24,11 @@ class CtNumberCubit extends Cubit<CtNumberInitial> {
         )) {
     subAction(subBloc: subBloc);
     reFormatGame();
+    _sayLetter();
+  }
+
+  _sayLetter() async {
+    await TalkTts.startTalk(text: state.gameData.inst ?? '');
   }
 
   reFormatGame() async {
@@ -56,8 +61,6 @@ class CtNumberCubit extends Cubit<CtNumberInitial> {
           correctAnswer: correctAns,
           gameData: gameData));
     }
-
-    await TalkTts.startTalk(text: state.gameData.inst ?? '');
   }
 
   addAnswer({required String? userChoose}) {
