@@ -48,9 +48,9 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   bool ableButton() {
     print(
         'state.stateOfAvatar:${((state.stateOfAvatar == BasicOfGameData.stateOIdle) || (state.stateOfAvatar == null))}');
-    log('state.stateOfAvatar:${state.stateOfAvatar}');
+    // log('state.stateOfAvatar:${state.stateOfAvatar}');
     print('state.stateOfAvatar:${(AudioPlayerLetters.player.state)}');
-    log('state.stateOfAvatar:${(TalkTts.data)}');
+    print('state.stateOfAvatar:${(TalkTts.data)}');
     return ((state.stateOfAvatar == BasicOfGameData.stateOIdle) ||
             (state.stateOfAvatar == null)) &&
         (AudioPlayerLetters.player.state != PlayerState.playing) &&
@@ -268,7 +268,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
   getStateOfStars({required int mainCountOfQuestion}) {
     print('getStateOfStars:$mainCountOfQuestion');
     List<int> stateOfStarsAdd =
-        HandlingActionsAndDataOfChapters.getTheStarsAddState(mainCountOfQuestion);
+        HandlingActionsAndDataOfChapters.getTheStarsAddState(
+            mainCountOfQuestion);
     emit(state.copyWith(statesOfAddStars: stateOfStarsAdd));
   }
 

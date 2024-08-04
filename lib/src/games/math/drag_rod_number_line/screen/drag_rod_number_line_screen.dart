@@ -34,6 +34,7 @@ class DragRodNumberLineScreen extends StatelessWidget {
             builder: (context, gameState) {
               return Row(
                 children: [
+                  10.pw,
                   Expanded(
                       flex: 2,
                       child: SizedBox(
@@ -44,8 +45,9 @@ class DragRodNumberLineScreen extends StatelessWidget {
                           children: [
                             FittedBox(
                               child: Row(
-                                  // crossAxisAlignment: CrossAxisAlignment.start,
-                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  // crossAxisAlignment: CrossAxisAlignment.,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   mainAxisSize: MainAxisSize.max,
                                   children: List.generate(
                                       gameState.finalGameLetters?.length ?? 0,
@@ -159,6 +161,8 @@ class DragRodNumberLineScreen extends StatelessWidget {
                                     showNumber: gameState.isCorrect,
                                     number:
                                         "${gameState.correctAnswer?.choice ?? 0}",
+                                    height: 150.h,
+                                    width: 50.w,
                                   );
                                 },
                                 onAcceptWithDetails: (item) async {

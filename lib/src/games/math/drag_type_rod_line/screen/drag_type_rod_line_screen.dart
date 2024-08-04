@@ -183,9 +183,16 @@ class DragTypeNumberLineScreen extends StatelessWidget {
                                               .read<CurrentGamePhoneticsCubit>()
                                               .ableButton() &&
                                           gameState.isCorrect != true) {
-                                        context
+                                        bool stateAction = context
                                             .read<DragTypeRodLineCubit>()
                                             .addAnswer(userChoose: item.data);
+                                        if (stateAction != true) {
+                                          await context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .addWrongAnswer(
+                                                  actionOfWrongAnswer:
+                                                      () async {});
+                                        }
                                       }
                                     },
                                   ),

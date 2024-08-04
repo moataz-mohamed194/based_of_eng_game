@@ -23,7 +23,7 @@ class DragTypeRodLineCubit extends Cubit<DragTypeRodLineInitial> {
   }
 
   reStartIsCorrect() {
-    emit(state.copyWith(isCorrect: false));
+    emit(state.copyWith(isCorrect: false, isCorrectDrag: false));
   }
 
   reFormatGameData() {

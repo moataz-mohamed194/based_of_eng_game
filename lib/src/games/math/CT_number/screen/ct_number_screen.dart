@@ -21,9 +21,9 @@ class CtNumberScreen extends StatelessWidget {
         builder: (context, gameState) {
           return Container(
             padding: EdgeInsets.symmetric(vertical: 20.h),
-            // height: MediaQuery.of(context).size.height -
+            // height: MediaQuery.of(context).size.height -,
             //     (90.h + 50.h + 5 + 20.h), // < 760
-            margin: EdgeInsets.only(left: 40.w, right: 40.w, bottom: 20.h),
+            margin: EdgeInsets.only(left: 40.w, right: 40.w, bottom: 0.h),
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -38,7 +38,7 @@ class CtNumberScreen extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     child: Image.asset(AppImagesMath.lineOfNumbers),
                   ),
-                  15.ph,
+                  4.ph,
                 },
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
