@@ -7,7 +7,7 @@ class MatchArabicInitial extends Equatable {
   final int countCorrectAnswers;
   final int countQuestions;
   final List<GameLettersGameFinalModel> answers;
-  // final Offset? start;
+  final List<int> idsOfCorrectAnswers;
   // final Offset? end;
   final List<GameImagesGameFinalModel> imageAnswers;
   // final int index;
@@ -18,6 +18,7 @@ class MatchArabicInitial extends Equatable {
       {required this.gameData,
       this.countCorrectAnswers = 0,
       required this.countQuestions,
+      required this.idsOfCorrectAnswers,
       required this.answers,
       required this.widgetKey,
       required this.positions,
@@ -30,6 +31,7 @@ class MatchArabicInitial extends Equatable {
       List<String>? correctAnswers,
       List<List<Offset?>>? positions,
       int? countCorrectAnswers,
+      List<int>? idsOfCorrectAnswers,
       int? countQuestions,
       List<GlobalKey>? widgetKey,
       List<GameLettersGameFinalModel>? answers,
@@ -37,6 +39,7 @@ class MatchArabicInitial extends Equatable {
     return MatchArabicInitial(
         gameData: gameData ?? this.gameData,
         positions: positions ?? this.positions,
+        idsOfCorrectAnswers: idsOfCorrectAnswers ?? this.idsOfCorrectAnswers,
         countQuestions: countQuestions ?? this.countQuestions,
         countCorrectAnswers: countCorrectAnswers ?? this.countCorrectAnswers,
         answers: answers ?? this.answers,
@@ -48,6 +51,7 @@ class MatchArabicInitial extends Equatable {
   List<Object?> get props => [
         gameData,
         imageAnswers,
+        idsOfCorrectAnswers,
         widgetKey,
         answers,
         positions,

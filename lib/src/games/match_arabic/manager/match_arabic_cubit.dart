@@ -12,7 +12,7 @@ class MatchArabicCubit extends Cubit<MatchArabicInitial> {
     required GameFinalModel gameData,
   }) : super(MatchArabicInitial(
           gameData: gameData,
-          // listGameData: listGameData,
+          idsOfCorrectAnswers: [],
           answers: gameData.gameLetters ?? [],
           positions: [],
           countQuestions: gameData.gameImages?.length ?? 0,
@@ -30,11 +30,10 @@ class MatchArabicCubit extends Cubit<MatchArabicInitial> {
     emit(state.copyWith(
       imageAnswers: imageAnswers,
       answers: answers,
+      idsOfCorrectAnswers: [],
       positions: List.generate(answers.length, (index) => [null, null]),
       widgetKey: List.generate(answers.length * 3, (index) => GlobalKey()),
     ));
-    print('reFormatAnswers:${state.answers.first.id}');
-    print('reFormatAnswers:${data.gameImages?.first.id}');
   }
 
   int addCorrectAnswer(
@@ -48,13 +47,15 @@ class MatchArabicCubit extends Cubit<MatchArabicInitial> {
     positions.insert((countOfCorrect - 1), [startPosition, endPosition]);
     emit(state.copyWith(
         countCorrectAnswers: countOfCorrect, positions: positions));
-    List<GameLettersGameFinalModel> answers = state.answers;
+    // List<GameLettersGameFinalModel> answers = state.answers;
     List<GameImagesGameFinalModel> imageAnswers = state.imageAnswers;
-    GameLettersGameFinalModel answer2 =
-        answers.where((test) => test.id == answerId).first;
-    int indexAnswer = answers.indexOf(answer2);
-    answers[indexAnswer] =
-        GameLettersGameFinalModel(letter: answers[indexAnswer].letter);
+    // GameLettersGameFinalModel answer2 =
+    //     answers.where((test) => test.id == answerId).first;
+    List<int> idsOfCorrectAnswers =
+        state.idsOfCorrectAnswers; //.indexOf(answer2);
+    idsOfCorrectAnswers.add(answerId);
+    // answers[indexAnswer] =
+    //     GameLettersGameFinalModel(letter: answers[indexAnswer].letter);
     GameImagesGameFinalModel answerImageAnswers2 =
         imageAnswers.where((test) => test.id == imageAnswerId).first;
     int indexImageAnswers = imageAnswers.indexOf(answerImageAnswers2);
@@ -63,7 +64,7 @@ class MatchArabicCubit extends Cubit<MatchArabicInitial> {
         image: imageAnswers[indexImageAnswers].image);
     emit(state.copyWith(
       imageAnswers: imageAnswers,
-      answers: answers,
+      idsOfCorrectAnswers: idsOfCorrectAnswers,
     ));
     return countOfCorrect;
   }

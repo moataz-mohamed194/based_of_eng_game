@@ -7,7 +7,7 @@ class MatchInitial extends Equatable {
   final int countCorrectAnswers;
   final int countQuestions;
   final List<GameLettersGameFinalModel> answers;
-  // final Offset? start;
+  final List<int> idsOfCorrectAnswers;
   // final Offset? end;
   final List<GameImagesGameFinalModel> imageAnswers;
   // final int index;
@@ -18,6 +18,7 @@ class MatchInitial extends Equatable {
       {required this.gameData,
       this.countCorrectAnswers = 0,
       required this.countQuestions,
+      required this.idsOfCorrectAnswers,
       required this.answers,
       required this.widgetKey,
       required this.positions,
@@ -26,17 +27,18 @@ class MatchInitial extends Equatable {
       required this.imageAnswers});
 
   MatchInitial copyWith(
-      {GameFinalModel? gameData,
-      List<String>? correctAnswers,
+      {List<String>? correctAnswers,
       List<List<Offset?>>? positions,
       int? countCorrectAnswers,
       int? countQuestions,
       List<GlobalKey>? widgetKey,
+      List<int>? idsOfCorrectAnswers,
       List<GameLettersGameFinalModel>? answers,
       List<GameImagesGameFinalModel>? imageAnswers}) {
     return MatchInitial(
-        gameData: gameData ?? this.gameData,
+        gameData: gameData,
         positions: positions ?? this.positions,
+        idsOfCorrectAnswers: idsOfCorrectAnswers ?? this.idsOfCorrectAnswers,
         countQuestions: countQuestions ?? this.countQuestions,
         countCorrectAnswers: countCorrectAnswers ?? this.countCorrectAnswers,
         answers: answers ?? this.answers,
@@ -49,6 +51,7 @@ class MatchInitial extends Equatable {
         gameData,
         imageAnswers,
         widgetKey,
+        idsOfCorrectAnswers,
         answers,
         positions,
         countCorrectAnswers

@@ -84,7 +84,8 @@ class _MatchScreen extends State<MatchScreen> {
                 ),
                 SizedBox(
                     width: MediaQuery.of(context).size.width - (100.w),
-                    height: MediaQuery.of(context).size.height - (50.h + 5 + 120.h),
+                    height:
+                        MediaQuery.of(context).size.height - (50.h + 5 + 120.h),
                     child: CustomPaint(
                       size: Size.infinite,
                       painter: FinalMatchingPainter(gameState.positions),
@@ -97,7 +98,15 @@ class _MatchScreen extends State<MatchScreen> {
                                 gameState.answers.length,
                                 (index) => Listener(
                                     onPointerMove: (event) {
-                                      if (gameState.answers[index].id != null) {
+                                      print(
+                                          'gameState.answers[index]:${gameState.answers[index].id}');
+                                      gameState.answers.forEach((action) {
+                                        print(action.id);
+                                        print(action.letter);
+                                      });
+                                      if (!gameState.idsOfCorrectAnswers
+                                          .contains(
+                                              gameState.answers[index].id)) {
                                         var tempHeight =
                                             MediaQuery.of(context).size.height;
                                         if (tempHeight > 500) {
@@ -134,8 +143,7 @@ class _MatchScreen extends State<MatchScreen> {
                                         }
                                       }
                                     },
-                                    child:Draggable<
-                                        GameLettersGameFinalModel>(
+                                    child: Draggable<GameLettersGameFinalModel>(
                                         data: gameState.answers[index],
                                         feedback: const SizedBox(),
                                         onDragEnd: (e) {
@@ -146,10 +154,8 @@ class _MatchScreen extends State<MatchScreen> {
                                         },
                                         onDragStarted: () {
                                           RenderBox renderBox = gameState
-                                              .widgetKey[index]
-                                              .currentContext!
-                                              .findRenderObject()
-                                          as RenderBox;
+                                              .widgetKey[index].currentContext!
+                                              .findRenderObject() as RenderBox;
                                           Offset offset = renderBox
                                               .localToGlobal(Offset.zero);
                                           gestureDetector.onPanStart!(
@@ -166,61 +172,60 @@ class _MatchScreen extends State<MatchScreen> {
                                         childWhenDragging: Container(
                                             height: 60.h,
                                             width: ((MediaQuery.of(context)
-                                                .size
-                                                .width -
-                                                (100.w)) /
-                                                6) *
+                                                            .size
+                                                            .width -
+                                                        (100.w)) /
+                                                    6) *
                                                 2,
                                             margin: const EdgeInsets.symmetric(
                                                 horizontal: 5),
-                                            child:Row(
-                                          children: [
-                                            SizedBox(
-                                              width: (((MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                                  (100.w)) /
-                                                  6) *
-                                                  2) -
-                                                  (20 + 17),
-                                              child: Text(
-                                                gameState.answers[index]
-                                                    .letter ??
-                                                    '',
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontFamily: AppTheme
-                                                        .getFontFamily5(),
-                                                    color: AppColorPhonetics
-                                                        .darkBorderColor),
-                                                textAlign: TextAlign.start,
-                                              ),
-                                            ),
-                                            20.pw,
-                                            Container(
-                                              height: 17,
-                                              width: 17,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      17),
-                                                  color: AppColorPhonetics
-                                                      .lightYellowColor),
-                                            )
-                                          ],
-                                        )),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: (((MediaQuery.of(context)
+                                                                      .size
+                                                                      .width -
+                                                                  (100.w)) /
+                                                              6) *
+                                                          2) -
+                                                      (20 + 17),
+                                                  child: Text(
+                                                    gameState.answers[index]
+                                                            .letter ??
+                                                        '',
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontFamily: AppTheme
+                                                            .getFontFamily5(),
+                                                        color: AppColorPhonetics
+                                                            .darkBorderColor),
+                                                    textAlign: TextAlign.start,
+                                                  ),
+                                                ),
+                                                20.pw,
+                                                Container(
+                                                  height: 17,
+                                                  width: 17,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              17),
+                                                      color: AppColorPhonetics
+                                                          .lightYellowColor),
+                                                )
+                                              ],
+                                            )),
                                         child: Container(
-                                        height: 60.h,
-                                        width: ((MediaQuery.of(context)
-                                                        .size
-                                                        .width -
-                                                    (100.w)) /
-                                                6) *
-                                            2,
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5),
-                                        child:
-                                           Row(
+                                          height: 60.h,
+                                          width: ((MediaQuery.of(context)
+                                                          .size
+                                                          .width -
+                                                      (100.w)) /
+                                                  6) *
+                                              2,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          child: Row(
                                             children: [
                                               SizedBox(
                                                 width: (((MediaQuery.of(context)
@@ -256,7 +261,6 @@ class _MatchScreen extends State<MatchScreen> {
                                               )
                                             ],
                                           ),
-
                                         )))),
                           ),
                           FittedBox(
@@ -264,8 +268,10 @@ class _MatchScreen extends State<MatchScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: List.generate(
                                 gameState.imageAnswers.length,
-                                (index) => DragTarget<GameLettersGameFinalModel>(
-                                    onAcceptWithDetails: isInteracting != null &&
+                                (index) => DragTarget<
+                                        GameLettersGameFinalModel>(
+                                    onAcceptWithDetails: isInteracting !=
+                                                null &&
                                             isInteracting !=
                                                 BasicOfGameData.stateOIdle
                                         ? null
@@ -273,9 +279,11 @@ class _MatchScreen extends State<MatchScreen> {
                                             print('####:${item.data.letter}');
                                             print(
                                                 '####:${gameState.imageAnswers[index].word}');
-                                            if (gameState.imageAnswers[index].word
+                                            if (gameState
+                                                    .imageAnswers[index].word
                                                     ?.toLowerCase() ==
-                                                item.data.letter?.toLowerCase()) {
+                                                item.data.letter
+                                                    ?.toLowerCase()) {
                                               int countCorrectAnswers =
                                                   await context
                                                       .read<MatchCubit>()
@@ -338,29 +346,28 @@ class _MatchScreen extends State<MatchScreen> {
                                             }
                                           },
                                     builder: (context, onAccepted, onRejected) {
-                                      return
-                                          FittedBox(
-                                            child: CachedNetworkImage(
-                                              imageUrl: gameState
-                                                      .imageAnswers[index].image ??
-                                                  '',
-                                              height: (MediaQuery.of(context)
-                                                      .size
-                                                      .height) /
-                                                  5,
+                                      return FittedBox(
+                                        child: CachedNetworkImage(
+                                          imageUrl: gameState
+                                                  .imageAnswers[index].image ??
+                                              '',
+                                          height: (MediaQuery.of(context)
+                                                  .size
+                                                  .height) /
+                                              5,
 
-                                              // height: 0.33.sh,
-                                              placeholder: (context, url) =>
-                                                  const Center(
-                                                child: CupertinoActivityIndicator(),
-                                              ),
-                                              errorWidget: (context, url, error) =>
-                                                  const Icon(
-                                                Icons.error,
-                                                color: Colors.red,
-                                              ),
-                                                                                ),
-                                          );
+                                          // height: 0.33.sh,
+                                          placeholder: (context, url) =>
+                                              const Center(
+                                            child: CupertinoActivityIndicator(),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(
+                                            Icons.error,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                      );
                                     }),
                               ),
                             ),

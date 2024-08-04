@@ -97,7 +97,8 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
                             gameState.answers.length,
                             (index) => Listener(
                                 onPointerMove: (event) {
-                                  if (gameState.answers[index].id != null) {
+                                  if (!gameState.idsOfCorrectAnswers
+                                      .contains(gameState.answers[index].id)) {
                                     var tempHeight =
                                         MediaQuery.of(context).size.height;
                                     if (tempHeight > 500) {
