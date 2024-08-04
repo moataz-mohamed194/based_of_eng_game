@@ -998,7 +998,7 @@ class MathDragBlocksSub implements BasicOfGameData {
   MathDragBlocksSub({required this.tools});
 
   @override
-  String titleImageEn = AppImagesMath.clickTheChoose;
+  String titleImageEn = AppImagesMath.mathDragDrop;
 
   @override
   String? completeBasket;
@@ -1040,7 +1040,7 @@ class MathDragDominoOE implements BasicOfGameData {
   MathDragDominoOE({required this.tools});
 
   @override
-  String titleImageEn = AppImagesMath.clickTheChoose;
+  String titleImageEn = AppImagesMath.mathDragDrop;
 
   @override
   String? completeBasket;
@@ -1187,7 +1187,7 @@ class CTNumberGame implements BasicOfGameData {
   CTNumberGame({required this.tools, required this.showLineOfNumbers});
 
   @override
-  String titleImageEn = AppImagesMath.countTypeTheNumber;
+  String titleImageEn = AppImagesMath.typeTheNumber;
 
   @override
   String? completeBasket;
@@ -1200,7 +1200,7 @@ class CTNumberGame implements BasicOfGameData {
   late SymbolsMath tools;
   late bool showLineOfNumbers;
   @override
-  int countOfMinimizeStar = 1;
+  int countOfMinimizeStar = 2;
 }
 
 class DDTChangeGame implements BasicOfGameData {
@@ -1220,7 +1220,7 @@ class DDTChangeGame implements BasicOfGameData {
   @override
   String? titleImageAr;
   @override
-  int countOfMinimizeStar = 1;
+  int countOfMinimizeStar = 2;
 }
 
 class MathChooseBoard implements BasicOfGameData {
