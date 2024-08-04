@@ -28,7 +28,8 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
         context.read<ClickTheSoundCubit>().state.gameData;
     context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
         mainCountOfQuestion: gameData.gameLetters
-                ?.where((element) => element.letter == gameData.mainLetter)
+                ?.where((element) =>
+                    element.letter!.contains(gameData.mainLetter ?? ''))
                 .toList()
                 .length ??
             0);
@@ -123,9 +124,9 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                                 .addSuccessAnswer(
                                     isArabic: stateOfGame.isArabic,
                                     questions: stateOfGame.letters
-                                            ?.where((element) =>
-                                                element.letter ==
-                                                stateOfGame.gameData.mainLetter)
+                                            ?.where((element) => element.letter!
+                                                .contains(stateOfGame
+                                                    .gameData.mainLetter!))
                                             .length ??
                                         0,
                                     subAction: () {
