@@ -29,14 +29,21 @@ class DragSubCubit extends Cubit<DragSubInitial> {
     GameFinalModel newData = state.allGameData[newIndex];
     List<GameChoicesGameFinalModel> gameChoices = newData.gameChoices ?? [];
     gameChoices.shuffle();
-    GameLettersGameFinalModel mainQuestion = newData.gameLetters!
-        .where((element) => element.mainQuestion == 1)
-        .toList()
-        .first;
-    GameLettersGameFinalModel subQuestion = newData.gameLetters!
-        .where((element) => element.mainQuestion == 0)
-        .toList()
-        .first;
+    GameLettersGameFinalModel mainQuestion;
+    GameLettersGameFinalModel subQuestion;
+    try {
+      mainQuestion = newData.gameLetters!
+          .where((element) => element.mainQuestion == 1)
+          .toList()
+          .first;
+      subQuestion = newData.gameLetters!
+          .where((element) => element.mainQuestion == 0)
+          .toList()
+          .first;
+    } catch (e) {
+      mainQuestion = newData.gameLetters!.first;
+      subQuestion = newData.gameLetters!.last;
+    }
     emit(state.copyWith(
         gameData: newData,
         gameChoices: gameChoices,
