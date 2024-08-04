@@ -44,4 +44,6 @@ void openKeyboard({required context, required void Function(String) action}) {
     // Restore the system UI overlays when the modal is closed
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   });
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
 }
