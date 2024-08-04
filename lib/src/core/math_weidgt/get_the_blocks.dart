@@ -40,7 +40,7 @@ class GetTheBlocks extends StatelessWidget {
                 ...List.generate(countOfBoxes, (index) {
                   if (index == 0 || index % 2 == 0) {
                     return Positioned(
-                      left: (sizeOfOne.width * index) - (10 * index),
+                      left: (sizeOfOne.width * index) - (15 * index),
                       child: SvgPicture.string(
                         PaintOfBlocks.body(
                             color: colors.first.colorMain,
@@ -50,7 +50,7 @@ class GetTheBlocks extends StatelessWidget {
                     );
                   } else {
                     return Positioned(
-                      left: (sizeOfOne.width * index) - (10 * index),
+                      left: (sizeOfOne.width * index) - (15 * index),
                       child: SvgPicture.string(
                         PaintOfBlocks.body(
                             color: colors.last.colorMain,
