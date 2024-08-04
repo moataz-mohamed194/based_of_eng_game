@@ -835,7 +835,7 @@ class CompleteTheWord implements BasicOfGameData {
   @override
   String? titleImageAr = AppImagesArabic.titleOfCompleteTheWord;
   @override
-  int countOfMinimizeStar = 1;
+  int countOfMinimizeStar = 2;
 }
 
 class ChooseTheCorrectGame implements BasicOfGameData {
