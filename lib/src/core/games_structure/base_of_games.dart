@@ -131,11 +131,11 @@ abstract class HandlingActionsAndDataOfChapters {
               gameType: subGame.toLowerCase(),
               audioFlag: audioFlag,
               programName: programName),
-          background: (stageName ==
+          background: (stageName.toLowerCase() ==
                   MainDataOfChaptersTypes.mathEc1.text().toLowerCase())
               ? AppImagesMath.mathBg
               : AppImagesMath.mathBgEC2,
-          isEc1: (stageName ==
+          isEc1: (stageName.toLowerCase() ==
                   MainDataOfChaptersTypes.mathEc1.text().toLowerCase())
               ? true
               : false);
