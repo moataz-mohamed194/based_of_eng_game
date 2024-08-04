@@ -80,25 +80,32 @@ abstract class HandlingActionsAndDataOfChapters {
 
   static String? detectTheArabicChapter(
       {required String programName, required BasicOfGameData gameData}) {
-    if (programName.toLowerCase() == MainDataOfChaptersTypes.redUnit.text()) {
+    if (programName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.redUnit.text())) {
       return RedPhonetics(mineGameData: gameData).background;
-    } else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.firstUnitArabic.text()) {
+    } else if (programName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.firstUnitArabic.text())) {
       return FirstUnitArabic(mineGameData: gameData).background;
     } else if (programName.toLowerCase() ==
         MainDataOfChaptersTypes.greenUnit.text()) {
       return GreenUnit(mineGameData: gameData).background;
-    } else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.yellowUnit.text()) {
+    } else if (programName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.yellowUnit.text())) {
       return YellowUnit(mineGameData: gameData).background;
-    } else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.violetUnit.text()) {
+    } else if (programName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.violetUnit.text())) {
       return VioletUnit(mineGameData: gameData).background;
-    } else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.orangeUnit.text()) {
+    } else if (programName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.orangeUnit.text())) {
       return OrangeUnit(mineGameData: gameData).background;
-    } else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.blueUnit.text()) {
+    } else if (programName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.blueUnit.text())) {
       return BlueUnit(mineGameData: gameData).background;
     }
     return null;
@@ -184,7 +191,7 @@ abstract class HandlingActionsAndDataOfChapters {
             isArabicSub:
                 BasicOfGameData.enumValues.contains(programName.toLowerCase()),
             subBackGround: detectTheArabicChapter(
-                programName: unitName,
+                programName: lessonName,
                 gameData: BasicOfGameData.getTheGameType(
                     gameType: subGame.toLowerCase(), audioFlag: audioFlag)),
             mineGameData: BasicOfGameData.getTheGameType(
