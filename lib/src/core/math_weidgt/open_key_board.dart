@@ -32,7 +32,6 @@ void openKeyboard({required context, required void Function(String) action}) {
                   Navigator.pop(context);
                 },
                 icon: Icon(Icons.close)),
-            border: OutlineInputBorder(),
           ),
         ),
       );
@@ -40,6 +39,7 @@ void openKeyboard({required context, required void Function(String) action}) {
   ).whenComplete(() {
     print('_focusNode:$_focusNode');
     _controller.clear();
+    FocusScope.of(context).unfocus();
     _focusNode.unfocus();
     // Restore the system UI overlays when the modal is closed
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);

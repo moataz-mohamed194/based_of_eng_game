@@ -22,7 +22,8 @@ class CtNumberScreen extends StatelessWidget {
         builder: (context, gameState) {
           return Container(
             padding: EdgeInsets.symmetric(vertical: 20.h),
-            // height: MediaQuery.of(context).size.height -,
+            height: MediaQuery.of(context).size.height /
+                ((gameState.showLineOfNumbers == true) ? 1.6 : 2),
             //     (90.h + 50.h + 5 + 20.h), // < 760
             margin: EdgeInsets.only(left: 40.w, right: 40.w, bottom: 0.h),
             alignment: Alignment.center,
@@ -33,6 +34,7 @@ class CtNumberScreen extends StatelessWidget {
                     color: AppColorPhonetics.darkBlueColor, width: 5)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.max,
               children: [
                 if (gameState.showLineOfNumbers == true) ...{
                   Container(

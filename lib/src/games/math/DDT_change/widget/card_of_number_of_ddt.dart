@@ -49,7 +49,7 @@ class CardOfNumberDDt extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.28),
           ),
         ),
-        child: showNumber == false
+        child: showNumber == false || number == ''
             ? SizedBox()
             : FittedBox(
                 child: Text(

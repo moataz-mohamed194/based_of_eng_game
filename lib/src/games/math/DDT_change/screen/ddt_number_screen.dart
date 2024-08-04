@@ -23,6 +23,7 @@ class DDtNumberScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, gameState) {
           return Container(
+            height: MediaQuery.of(context).size.height / 1.6,
             padding: EdgeInsets.symmetric(vertical: 5.h),
             // height: MediaQuery.of(context).size.height -
             //     (90.h + 50.h + 5 + 20.h), // < 760

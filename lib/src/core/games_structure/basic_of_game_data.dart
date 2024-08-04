@@ -152,6 +152,8 @@ abstract class BasicOfGameData {
       return CTNumberGame(tools: SymbolsMath.sub, showLineOfNumbers: false);
     } else if (gameType == GameTypes.cTNumberSubLine.text()) {
       return CTNumberGame(tools: SymbolsMath.sub, showLineOfNumbers: true);
+    } else if (gameType == GameTypes.dDTChange.text()) {
+      return DDTChangeGame();
     } else if (gameType == GameTypes.mathChooseBoard.text()) {
       return MathChooseBoard(tools: ToolsOfMath.beads);
     } else if (gameType == GameTypes.countTypeNumber.text()) {
