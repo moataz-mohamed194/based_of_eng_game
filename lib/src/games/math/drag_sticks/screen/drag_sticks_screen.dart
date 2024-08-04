@@ -65,7 +65,6 @@ class DragSticksScreen extends StatelessWidget {
                     ),
                   ),
                   5.ph,
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: List.generate(
@@ -137,8 +136,8 @@ class DragSticksScreen extends StatelessWidget {
               const Divider(color: AppColorPhonetics.darkBlueColor),
               Expanded(
                   child: SizedBox(
-                    width: (25.w),
-                    height: 45.h,
+                width: (25.w),
+                height: 45.h,
                 child: ((gameState.gameAnswers != null) &&
                             (gameState.gameAnswers?.isNotEmpty ?? false) &&
                             gameState.gameAnswers!
@@ -147,11 +146,11 @@ class DragSticksScreen extends StatelessWidget {
                                 .isNotEmpty ??
                         false)
                     ? FittedBox(
-                      child: Slick(
-                          count: int.parse(
-                              gameState.gameLetters?[index].letter ?? '0'),
-                          mainAxisAlignment: MainAxisAlignment.center),
-                    )
+                        child: Slick(
+                            count: int.parse(
+                                gameState.gameLetters?[index].letter ?? '0'),
+                            mainAxisAlignment: MainAxisAlignment.center),
+                      )
                     : null,
               ))
             ],
@@ -225,12 +224,14 @@ class DragSticksScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
           ),
         ),
-        child:count==0?const SizedBox(): FittedBox(
-          child: Slick(
-              count: count,
-              mainAxisAlignment: MainAxisAlignment.center,
-              isDisable: isDisable ? Colors.grey : null),
-        ),
+        child: count == 0
+            ? const SizedBox()
+            : FittedBox(
+                child: Slick(
+                    count: count,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    isDisable: isDisable ? Colors.grey : null),
+              ),
       ),
     );
   }
