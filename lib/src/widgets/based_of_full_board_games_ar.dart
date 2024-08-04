@@ -38,8 +38,11 @@ class BasedOfFullBoardGamesAr extends StatelessWidget {
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (stateOfGame.basicData?.gameData is CompleteTheWord ||
+                  stateOfGame.basicData?.gameData is ChooseTheStretchedLetter ||
                   stateOfGame.basicData?.gameData
-                      is ChooseTheStretchedLetter) ...{
+                      is CompleteTheStretchedLetter ||
+                  stateOfGame.basicData?.gameData
+                      is ChooseTheStretchedWord) ...{
                 BlocProvider<CompleteTheWordCubit>(
                     create: (_) => CompleteTheWordCubit(
                           // gameData: stateOfGameData.data[stateOfGame.index],
@@ -56,20 +59,21 @@ class BasedOfFullBoardGamesAr extends StatelessWidget {
                           isArabic: true,
                         ),
                     child: DragPicToWordGameScreen())
-              } else if((stateOfGame.basicData?.gameData is ClickOnTheFish)) ... {
-                     BlocProvider<ClickTheSoundCubit>(
-                      create: (_) => ClickTheSoundCubit(
-                            gameData: gamesData[stateOfGame.index],
-                            isArabic: true,
-                            isFish: true,
-                          ),
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 12.w),
-                        child: const Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: ClickOnTheFishGame()),
-                      )),
-                }else ...{
+              } else if ((stateOfGame.basicData?.gameData
+                  is ClickOnTheFish)) ...{
+                BlocProvider<ClickTheSoundCubit>(
+                    create: (_) => ClickTheSoundCubit(
+                          gameData: gamesData[stateOfGame.index],
+                          isArabic: true,
+                          isFish: true,
+                        ),
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 12.w),
+                      child: const Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: ClickOnTheFishGame()),
+                    )),
+              } else ...{
                 const Text('no game')
               },
             ],

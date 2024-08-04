@@ -57,6 +57,8 @@ enum GameTypes {
   bingoArabic,
   completeTheWord,
   chooseTheStretchedLetter,
+  chooseTheStretchedWord,
+  completeTheStretchedLetter,
   memoryCards,
   completeTheSentence,
   cTNumber,
@@ -238,6 +240,10 @@ extension TypeExtension on GameTypes {
         return 'Add_Rod_Drag_Number';
       case GameTypes.dragBeadType:
         return 'Drag_Bead_Type';
+      case GameTypes.chooseTheStretchedWord:
+        return 'اختر الكلمة التي بها مد';
+      case GameTypes.completeTheStretchedLetter:
+        return 'أكمل الحرف الممدود';
     }
   }
 }
