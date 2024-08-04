@@ -34,16 +34,25 @@ class DragAddCubit extends Cubit<DragAddInitial> {
         .toList()
         .first;
     gameChoices.shuffle();
-    GameLettersGameFinalModel mainQuestion = newData.gameLetters!
-        .where((element) => element.mainQuestion == 1)
-        .toList()
-        .first;
     GameLettersGameFinalModel correctAnswer =
         GameLettersGameFinalModel(letter: subCorrectAnswer.choice);
-    GameLettersGameFinalModel subQuestion = newData.gameLetters!
-        .where((element) => element.mainQuestion == 0)
-        .toList()
-        .first;
+
+    GameLettersGameFinalModel mainQuestion;
+    GameLettersGameFinalModel subQuestion;
+    try {
+      mainQuestion = newData.gameLetters!
+          .where((element) => element.mainQuestion == 1)
+          .toList()
+          .first;
+      subQuestion = newData.gameLetters!
+          .where((element) => element.mainQuestion == 0)
+          .toList()
+          .first;
+    } catch (e) {
+      mainQuestion = newData.gameLetters!.first;
+      subQuestion = newData.gameLetters!.last;
+    }
+
     emit(state.copyWith(
         gameData: newData,
         isCorrect: false,

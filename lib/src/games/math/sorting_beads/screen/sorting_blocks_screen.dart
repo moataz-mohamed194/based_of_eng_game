@@ -33,18 +33,17 @@ class SortingBlocksScreen extends StatelessWidget {
           print('listener2');
         }, builder: (context, gameState) {
           return FittedBox(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: List.generate(
-                      gameState.gameChoices?.length ?? 0,
-                      (index) => Column(
-                        children: [
-                          Row(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(
+                    gameState.gameChoices?.length ?? 0,
+                    (index) => Column(
+                      children: [
+                        FittedBox(
+                          child: Row(
                             children: [
                               CardOfNumber(
                                 number:
@@ -125,44 +124,43 @@ class SortingBlocksScreen extends StatelessWidget {
                               })
                             ],
                           ),
-                          5.ph,
-                        ],
-                      ),
+                        ),
+                        5.ph,
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height -
-                        (90.h + 50.h + 5 + 20.h), // < 760
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: List.generate(
-                          gameState.secondGameChoices?.length ?? 0,
-                          (index) => gameState.correctAnswers.contains(
-                                  gameState.secondGameChoices?[index].id ?? 0)
-                              ? GetTheBlocks(
-                                  isSolid: true,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height -
+                      (90.h + 50.h + 5 + 20.h), // < 760
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: List.generate(
+                        gameState.secondGameChoices?.length ?? 0,
+                        (index) => gameState.correctAnswers.contains(
+                                gameState.secondGameChoices?[index].id ?? 0)
+                            ? GetTheBlocks(
+                                isSolid: true,
+                                countOfBoxes: int.parse(
+                                    "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                              )
+                            : Draggable<int>(
+                                maxSimultaneousDrags: 1,
+                                feedback: GetTheBlocks(
                                   countOfBoxes: int.parse(
                                       "${gameState.secondGameChoices?[index].choice ?? 0}"),
-                                )
-                              : Draggable<int>(
-                                  maxSimultaneousDrags: 1,
-                                  feedback: GetTheBlocks(
-                                    countOfBoxes: int.parse(
-                                        "${gameState.secondGameChoices?[index].choice ?? 0}"),
-                                  ),
-                                  // childWhenDragging: ,
-                                  data:
-                                      gameState.secondGameChoices?[index].id ??
-                                          0,
-                                  child: GetTheBlocks(
-                                    // isSolid: true,
-                                    countOfBoxes: int.parse(
-                                        "${gameState.secondGameChoices?[index].choice ?? 0}"),
-                                  ))),
-                    ),
-                  )
-                ],
-              ),
+                                ),
+                                // childWhenDragging: ,
+                                data:
+                                    gameState.secondGameChoices?[index].id ?? 0,
+                                child: GetTheBlocks(
+                                  // isSolid: true,
+                                  countOfBoxes: int.parse(
+                                      "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                                ))),
+                  ),
+                )
+              ],
             ),
           );
         }));

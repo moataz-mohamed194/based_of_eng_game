@@ -52,14 +52,16 @@ class CardOfTypingNumber extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.28),
               ),
             ),
-            child: Text(
-              number,
-              style: TextStyle(
-                color: AppColorPhonetics.darkBlueColor,
-                fontSize: 30.sp,
-                fontFamily: AppTheme.getFontFamily5(),
-                fontWeight: FontWeight.w400,
-                height: 0,
+            child: Center(
+              child: Text(
+                number,
+                style: TextStyle(
+                  color: AppColorPhonetics.darkBlueColor,
+                  fontSize: 30.sp,
+                  fontFamily: AppTheme.getFontFamily5(),
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
               ),
             )),
       ),
