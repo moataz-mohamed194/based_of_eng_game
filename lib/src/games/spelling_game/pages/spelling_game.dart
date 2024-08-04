@@ -127,67 +127,78 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
     final correctAnswers = gameState.correctAnswers;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List.generate(
-            correctAnswers.length,
-            (index) => DragTarget<String>(
-                  builder: (
-                    BuildContext context,
-                    List<dynamic> accepted,
-                    List<dynamic> rejected,
-                  ) {
-                    return DragTargetWidget(title: correctAnswers[index]);
-                  },
-                  onAcceptWithDetails:
-                      (DragTargetDetails<String> details) async {
-                    if (context
-                        .read<CurrentGamePhoneticsCubit>()
-                        .ableButton()) {
-                      context.read<SpellingCubit>().addTheCorrectAnswer(
-                          index: index, answer: details.data.substring(0, 1));
-                      if (context
-                          .read<SpellingCubit>()
-                          .checkCurrentFinished()) {
-                        if (await context
-                            .read<SpellingCubit>()
-                            .checkIsCorrectAnswer()) {
-                          await context
-                              .read<CurrentGamePhoneticsCubit>()
-                              .addSuccessAnswer(
-                                  isArabic: gameState.isArabic,
-                                  questions: gameState.allGames.length,
-                                  correctAnswers: (gameState.index) + 1)
-                              .whenComplete(() async {
-                            bool isLastQuestion = context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .checkIfIsTheLastQuestionOfGame(
-                                    queations: gameState.allGames.length);
-                            if (!isLastQuestion) {
+      child: FittedBox(
+        child: Container(
+          width: ((MediaQuery.of(context).size.width / 2.3)),
+
+          // width: ((30.w) * correctAnswers.length),
+          height: 70.h,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: List.generate(
+                correctAnswers.length,
+                (index) => DragTarget<String>(
+                      builder: (
+                        BuildContext context,
+                        List<dynamic> accepted,
+                        List<dynamic> rejected,
+                      ) {
+                        return DragTargetWidget(title: correctAnswers[index]);
+                      },
+                      onAcceptWithDetails:
+                          (DragTargetDetails<String> details) async {
+                        if (context
+                            .read<CurrentGamePhoneticsCubit>()
+                            .ableButton()) {
+                          context.read<SpellingCubit>().addTheCorrectAnswer(
+                              index: index,
+                              answer: details.data.substring(0, 1));
+                          if (context
+                              .read<SpellingCubit>()
+                              .checkCurrentFinished()) {
+                            if (await context
+                                .read<SpellingCubit>()
+                                .checkIsCorrectAnswer()) {
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
-                                  .updateIndexOfCurrentGame();
+                                  .addSuccessAnswer(
+                                      isArabic: gameState.isArabic,
+                                      questions: gameState.allGames.length,
+                                      correctAnswers: (gameState.index) + 1)
+                                  .whenComplete(() async {
+                                bool isLastQuestion = context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .checkIfIsTheLastQuestionOfGame(
+                                        queations: gameState.allGames.length);
+                                if (!isLastQuestion) {
+                                  await context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .updateIndexOfCurrentGame();
+                                  await context
+                                      .read<SpellingCubit>()
+                                      .updateTheCurrentGame(
+                                          index: context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .state
+                                              .index);
+                                }
+                              });
+                            } else {
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .addWrongAnswer(
+                                      isArabic: gameState.isArabic,
+                                      actionOfWrongAnswer: () async {});
                               await context
                                   .read<SpellingCubit>()
-                                  .updateTheCurrentGame(
-                                      index: context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .state
-                                          .index);
+                                  .clearAnswers();
                             }
-                          });
-                        } else {
-                          await context
-                              .read<CurrentGamePhoneticsCubit>()
-                              .addWrongAnswer(
-                                  isArabic: gameState.isArabic,
-                                  actionOfWrongAnswer: () async {});
-                          await context.read<SpellingCubit>().clearAnswers();
+                          }
                         }
-                      }
-                    }
-                  },
-                )),
+                      },
+                    )),
+          ),
+        ),
       ),
     );
   }

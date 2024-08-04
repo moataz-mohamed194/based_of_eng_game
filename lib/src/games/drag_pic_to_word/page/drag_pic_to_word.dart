@@ -41,39 +41,44 @@ class _DragPicToWordGameScreen extends State<DragPicToWordGameScreen> {
     return BlocConsumer<DragPicToWordCubit, DragPicToWordInitial>(
         listener: (context, state) {},
         builder: (context, stateOfGameData) {
-          return Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              10.ph,
-              10.ph,
-              Container(
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(24),
-                  decoration: ShapeDecoration(
-                    color: Colors.white.withOpacity(0.8199999928474426),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(4),
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(4),
+          return Expanded(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                10.ph,
+                10.ph,
+                FittedBox(
+                  child: Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(24),
+                      decoration: ShapeDecoration(
+                        color: Colors.white.withOpacity(0.8199999928474426),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(4),
+                            topRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(4),
+                          ),
+                        ),
+                        shadows: const [
+                          BoxShadow(
+                            color: Color(0x3F000000),
+                            blurRadius: 14,
+                            offset: Offset(0, 4),
+                            spreadRadius: 0,
+                          )
+                        ],
                       ),
-                    ),
-                    shadows: const [
-                      BoxShadow(
-                        color: Color(0x3F000000),
-                        blurRadius: 14,
-                        offset: Offset(0, 4),
-                        spreadRadius: 0,
-                      )
-                    ],
-                  ),
-                  child: _buildListOfImages(stateOfGameData: stateOfGameData)),
-              _buildListOfLetters(
-                  stateOfGameData: stateOfGameData, context: context),
-            ],
+                      child:
+                          _buildListOfImages(stateOfGameData: stateOfGameData)),
+                ),
+                _buildListOfLetters(
+                    stateOfGameData: stateOfGameData, context: context),
+              ],
+            ),
           );
         });
   }

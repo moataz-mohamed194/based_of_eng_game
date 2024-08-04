@@ -65,13 +65,15 @@ class ItemCardWordWidget extends StatelessWidget {
         // padding: const EdgeInsets.all(6),
         child: Container(
           alignment: Alignment.center,
-          child: Text(
-            body.word ?? '',
-            style: TextStyle(
-                fontSize: 45,
-                fontFamily: AppTheme.getFontFamily5(),
-                color: AppColorPhonetics.darkBorderColor),
-            textAlign: TextAlign.center,
+          child: FittedBox(
+            child: Text(
+              body.word ?? '',
+              style: TextStyle(
+                  fontSize: 45,
+                  fontFamily: AppTheme.getFontFamily5(),
+                  color: AppColorPhonetics.darkBorderColor),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),

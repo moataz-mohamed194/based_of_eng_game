@@ -169,12 +169,13 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                                   return Text(
                                                     image.word ?? '',
                                                     style: TextStyle(
-                                                        fontSize: 12.sp,
+                                                        fontSize: 10.sp,
                                                         fontFamily: AppTheme
                                                             .getFontFamily5(),
                                                         color: AppColorPhonetics
                                                             .darkBorderColor),
                                                     textAlign: TextAlign.center,
+                                                    maxLines: 1,
                                                   );
                                                 } catch (e) {
                                                   return const SizedBox();

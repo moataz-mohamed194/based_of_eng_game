@@ -51,19 +51,21 @@ class RowImage extends StatelessWidget {
                             color: AppColorPhonetics.lightBlueColor,
                             width: 25.w,
                             padding: EdgeInsets.symmetric(vertical: 5.h),
-                            child: Text(
-                              gameImages[index].word ?? '',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge
-                                  ?.copyWith(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                      color: stateOfGameData.correctedAnswers
-                                              .contains(gameImages[index].id)
-                                          ? AppColorPhonetics.darkBorderColor
-                                          : AppColorPhonetics.lightBlueColor,
-                                      fontFamily: AppTheme.getFontFamily5()),
+                            child: FittedBox(
+                              child: Text(
+                                gameImages[index].word ?? '',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge
+                                    ?.copyWith(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700,
+                                        color: stateOfGameData.correctedAnswers
+                                                .contains(gameImages[index].id)
+                                            ? AppColorPhonetics.darkBorderColor
+                                            : AppColorPhonetics.lightBlueColor,
+                                        fontFamily: AppTheme.getFontFamily5()),
+                              ),
                             ),
                           );
                         }, onAcceptWithDetails: (item) async {

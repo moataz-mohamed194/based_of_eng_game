@@ -138,7 +138,7 @@ class _DragWordToPicGameScreen extends State<DragWordToPicGameScreen> {
                 Expanded(
                   flex: 4,
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height - 0.4.sh,
+                    // height: MediaQuery.of(context).size.height - 0.4.sh,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
