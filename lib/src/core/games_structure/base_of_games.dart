@@ -125,30 +125,33 @@ abstract class HandlingActionsAndDataOfChapters {
         'subLetter:$subLetter , subGame:$subGame , unitName:$unitName , programName:$programName , audioFlag:$audioFlag , ${(unitName.contains(MainDataOfChaptersTypes.consonant.text()))}');
     if (programName.toLowerCase() ==
         MainDataOfChaptersTypes.math.text().toLowerCase()) {
-      if (stageName == MainDataOfChaptersTypes.mathEc1.text().toLowerCase()) {
-        return MathProgram(
-            mineGameData: BasicOfGameData.getTheGameType(
-                gameType: subGame.toLowerCase(),
-                audioFlag: audioFlag,
-                programName: programName),
-            background: AppImagesMath.mathBg);
-      } else if (stageName.toLowerCase() ==
-          MainDataOfChaptersTypes.mathEc2.text().toLowerCase()) {
-        return MathProgram(
-            mineGameData: BasicOfGameData.getTheGameType(
-                gameType: subGame.toLowerCase(),
-                audioFlag: audioFlag,
-                programName: programName),
-            background: AppImagesMath.mathBgEC2);
-      } else if (stageName.toLowerCase() ==
-          MainDataOfChaptersTypes.mathEc3.text().toLowerCase()) {
-        return MathProgram(
-            background: AppImagesMath.mathBgEC2,
-            mineGameData: BasicOfGameData.getTheGameType(
-                gameType: subGame.toLowerCase(),
-                audioFlag: audioFlag,
-                programName: programName));
-      }
+      // if (stageName == MainDataOfChaptersTypes.mathEc1.text().toLowerCase()) {
+      return MathProgram(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(),
+              audioFlag: audioFlag,
+              programName: programName),
+          background: (stageName ==
+                  MainDataOfChaptersTypes.mathEc1.text().toLowerCase())
+              ? AppImagesMath.mathBg
+              : AppImagesMath.mathBgEC2);
+      // } else if (stageName.toLowerCase() ==
+      //     MainDataOfChaptersTypes.mathEc2.text().toLowerCase()) {
+      //   return MathProgram(
+      //       mineGameData: BasicOfGameData.getTheGameType(
+      //           gameType: subGame.toLowerCase(),
+      //           audioFlag: audioFlag,
+      //           programName: programName),
+      //       background: AppImagesMath.mathBgEC2);
+      // } else if (stageName.toLowerCase() ==
+      //     MainDataOfChaptersTypes.mathEc3.text().toLowerCase()) {
+      //   return MathProgram(
+      //       background: AppImagesMath.mathBgEC2,
+      //       mineGameData: BasicOfGameData.getTheGameType(
+      //           gameType: subGame.toLowerCase(),
+      //           audioFlag: audioFlag,
+      //           programName: programName));
+      // }
     } else if (unitName
         .toLowerCase()
         .contains(MainDataOfChaptersTypes.shortVowels.text())) {

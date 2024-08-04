@@ -73,9 +73,13 @@ class DragSticksCubit extends Cubit<DragSticksInitial> {
 
   updateTheCurrentGame({required int newIndex}) {
     TalkTts.reBackTheDefaultValue();
-    emit(state.copyWith(index: newIndex));
-    reFormatGameData();
-    TalkTts.reStopTheDefaultValue();
+    try {
+      emit(state.copyWith(index: newIndex));
+      reFormatGameData();
+      TalkTts.reStopTheDefaultValue();
+    } catch (e) {
+      TalkTts.reStopTheDefaultValue();
+    }
   }
 
   _sayLetter() async {
