@@ -88,8 +88,9 @@ abstract class HandlingActionsAndDataOfChapters {
         .toLowerCase()
         .contains(MainDataOfChaptersTypes.firstUnitArabic.text())) {
       return FirstUnitArabic(mineGameData: gameData).background;
-    } else if (programName.toLowerCase() ==
-        MainDataOfChaptersTypes.greenUnit.text()) {
+    } else if (programName
+        .toLowerCase()
+        .contains(MainDataOfChaptersTypes.greenUnit.text())) {
       return GreenUnit(mineGameData: gameData).background;
     } else if (programName
         .toLowerCase()
