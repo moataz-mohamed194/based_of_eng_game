@@ -498,7 +498,7 @@ class BasedOfMath extends StatelessWidget {
                       child: stateOfGame.avatarCurrentArtboard == null
                           ? SizedBox(
                               height: 90.h,
-                              width: 100.w,
+                              width: 60.w,
                             )
                           : Container(
                               margin: EdgeInsets.only(left: 7.w),

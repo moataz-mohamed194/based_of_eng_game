@@ -1253,7 +1253,7 @@ class DDTChangeGame implements BasicOfGameData {
   // DDTChangeGame({required this.tools, required this.showLineOfNumbers});
 
   @override
-  String titleImageEn = AppImagesMath.countTypeTheNumber;
+  String titleImageEn = AppImagesMath.dragDropType;
 
   @override
   String? completeBasket;

@@ -4,6 +4,7 @@ abstract class AppImagesMath {
   static const String mathBg = "${mainPathOfImages}math_bg.png";
   static const String mathBgEC2 = "${mainPathOfImages}math_bg_ec2.png";
   static const String mathDragDrop = "${mainPathOfImages}drag_drop.png";
+  static const String dragDropType = "${mainPathOfImages}drag_drop_type.png";
   static const String woodBgNumber = "${mainPathOfImages}wood_bg_number.png";
   static const String sub = "${mainPathOfImages}sub.png";
   static const String lineOfNumbers = "${mainPathOfImages}line_of_numbers.png";

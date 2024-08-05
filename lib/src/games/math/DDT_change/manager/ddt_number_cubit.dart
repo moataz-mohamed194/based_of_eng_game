@@ -21,6 +21,7 @@ class DDTChangeCubit extends Cubit<DDTChangeInitial> {
         )) {
     subAction(subBloc: subBloc);
     reFormatGame();
+    _sayLetter();
   }
 
   reFormatGame() async {
@@ -40,9 +41,11 @@ class DDTChangeCubit extends Cubit<DDTChangeInitial> {
         numberWillAddToAnswerFirstBox: numberWillAddToAnswerFirstBox,
         correctAns: correctAns,
         gameData: gameData));
-    await TalkTts.startTalk(text: state.gameData.inst ?? '');
   }
 
+  _sayLetter() async {
+    await TalkTts.startTalk(text: state.gameData.inst ?? '');
+  }
   bool? addTheDragAnswer(
       {required GameChoicesGameFinalModel answer, required bool isFirst}) {
     bool? result = mainAddTheDragAnswer(answer: answer, isFirst: isFirst);
