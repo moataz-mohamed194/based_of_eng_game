@@ -23,7 +23,7 @@ class ChooseTheCorrectLetterOrImageCubit
     debugPrint('DragOutCubit');
     emit(state.copyWith(gameData: allGameData[index]));
     reFormatData();
-    sayLetter();
+    sayTheGameThenTheLetter();
   }
   Future<void> addSuccess() async {
     emit(state.copyWith(isCorrect: true));
@@ -39,15 +39,19 @@ class ChooseTheCorrectLetterOrImageCubit
     emit(state.copyWith(gameImages: gameImages));
   }
 
-  void updateTheCurrentGame({required int index}) {
+  Future<void> updateTheCurrentGame({required int index}) async {
     debugPrint('updateTheCurrentGame:${state.gameData.id}, $index');
     emit(state.copyWith(gameData: state.allGameData[index], index: index));
     debugPrint('updateTheCurrentGame:${state.gameData.id}');
     reFormatData();
   }
 
-  sayLetter() async {
+  Future<void> sayTheGameThenTheLetter() async {
     await TalkTts.startTalk(text: state.gameData.inst ?? '', isArabic: true);
+    await sayLetter();
+  }
+
+  Future<void> sayLetter() async {
     final isLetter = state.isLetter;
     if (isLetter) {
       await AudioPlayerLetters.startPlaySound(

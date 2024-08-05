@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/core/audio_player_letters.dart';
 import 'package:based_of_eng_game/src/core/theme_text.dart';
 import 'package:based_of_eng_game/src/games/choose_the_correct_letter_or_image/manager/choose_the_correct_letter_or_image_cubit.dart';
 import 'package:based_of_eng_game/src/games/choose_the_correct_letter_or_image/widgets/image_item.dart';
@@ -106,7 +107,7 @@ class _ChooseTheCorrectLetterOrImageGame
         ),
         child: GestureDetector(
             onTap: () async {
-              chooseTheCorrectLetterOrImageCubit.sayLetter();
+              chooseTheCorrectLetterOrImageCubit.sayTheGameThenTheLetter();
             },
             child: isLetter
                 ? Text(
@@ -196,7 +197,11 @@ class _ChooseTheCorrectLetterOrImageGame
                         .addSuccessAnswer(
                             isArabic: true,
                             questions: gameState.allGameData.length,
-                            correctAnswers: (gameState.index) + 1)
+                            correctAnswers: (gameState.index) + 1,
+                            subAction: () async {
+                              await chooseTheCorrectLetterOrImageCubit
+                                  .sayLetter();
+                            })
                         .whenComplete(() async {
                       bool isLastQuestion = context
                           .read<CurrentGamePhoneticsCubit>()
@@ -219,7 +224,11 @@ class _ChooseTheCorrectLetterOrImageGame
                     await context
                         .read<CurrentGamePhoneticsCubit>()
                         .addWrongAnswer(
-                            isArabic: true, actionOfWrongAnswer: () async {});
+                            isArabic: true,
+                            actionOfWrongAnswer: () async {
+                              await chooseTheCorrectLetterOrImageCubit
+                                  .sayLetter();
+                            });
                   }
                 }
               },
