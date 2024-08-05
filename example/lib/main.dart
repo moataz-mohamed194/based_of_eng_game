@@ -53,11 +53,11 @@ class MyApp extends StatelessWidget {
                       } else if (state is GetContactInitial) {
                         try {
                           MainDataOfChapters? dataType =
-                              state.getMainContactData(index: 0, context: context);
+                              state.getMainContactData(index: 0, );
 
                           debugPrint('dataType:$dataType');
                         } catch (e) {
-                          print('error data type');
+                          print('error data type'+e.toString());
                           context
                               .read<ContactLessonBloc>()
                               .add(ThisTypeNotSupportedRequest());
@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
                         return MainScreenOfGames(
                           stateOfGameData: stateOfGameData.data,
                           dataOfBasesGame:
-                              stateOfGameData.getMainContactData(index: 0, context: context),
+                              stateOfGameData.getMainContactData(index: 0,  ),
                           actionOfCompleteGame: (int countOfStars) {
                             // List<int> listOfIds = stateOfGameData.data;
                             List<int> listOfIds = stateOfGameData.data

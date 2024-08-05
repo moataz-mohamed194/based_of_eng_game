@@ -1,23 +1,20 @@
 import 'dart:math';
+import 'dart:ui';
+
+import 'package:based_of_eng_game/src/core/phonetics_color.dart';
+import 'package:based_of_eng_game/src/games/tracing/model/path_provider_model.dart';
+import 'package:based_of_eng_game/src/games/tracing/widget/letter_s4.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_path_parser/svg_path_parser.dart';
-import '../../../core/phonetics_color.dart';
-import 'package:based_of_eng_game/src/games/tracing/model/path_provider_model.dart';
 
-class FlipBookPainterLetterS4Test extends CustomPainter {
-  FlipBookPainterLetterS4Test({
-    required this.customPaths,
-    required this.currentPathIndex,
-  });
-
-  final List<PathProviderModel> customPaths;
-  final int currentPathIndex;
+class GemLetterPaint extends FlipBookPainterLetterS4Test {
+  GemLetterPaint({required super.customPaths, required super.currentPathIndex});
 
   @override
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < customPaths.length; i++) {
       var model = customPaths[i];
-
+      // print(model.points.toString());
       // Check if the indexPath is not null, and draw it if present
 
       // Parse and shift the outer path, applying the scaling factor
@@ -58,20 +55,14 @@ class FlipBookPainterLetterS4Test extends CustomPainter {
 
       // Check if the current path index is within valid bounds and points list is empty
       // model.points.clear();
-      if (i == currentPathIndex &&
-          i > 0 &&
-          currentPathIndex < customPaths.length &&
-          model.points.isEmpty) {
-        // Add a point at the start of the current path
-        model.points.add(model.exteraFillPoint!);
-      }
 
       // Draw the filled half-circle paths on top
       if (i <= currentPathIndex) {
         final drawingPaint = Paint()
           ..color = AppColorPhonetics.lightBlueColor4
           ..style = PaintingStyle.fill // Use fill style for the half-circle
-          ..strokeCap = StrokeCap.round;
+          ..strokeCap = StrokeCap.round
+          ..strokeWidth = bounds.width + 50; // Adjust stroke width as needed
 
         for (int j = 0; j < model.points.length; j++) {
           final point = model.points[j];
@@ -97,24 +88,6 @@ class FlipBookPainterLetterS4Test extends CustomPainter {
     }
   }
 
-  void drawStroke({
-    required Canvas canvas,
-    required double centerX,
-    required double centerY,
-    required Paint strokePaint,
-    required double pathHeight,
-  }) {
-    // Example of drawing a line stroke. Adjust as needed based on direction.
-    final startPoint = Offset(centerX - pathHeight / 2, centerY);
-    final endPoint = Offset(centerX + pathHeight / 2, centerY);
-
-    final strokePath = Path()
-      ..moveTo(startPoint.dx, startPoint.dy)
-      ..lineTo(endPoint.dx, endPoint.dy);
-
-    canvas.drawPath(strokePath, strokePaint);
-  }
-
   void drawHalfCircle({
     required Canvas canvas,
     required double centerX,
@@ -133,11 +106,19 @@ class FlipBookPainterLetterS4Test extends CustomPainter {
 
     switch (direction) {
       case Direction.arc:
-       drawingPath.addArc(
-          Rect.fromCircle(center: Offset(centerX, centerY), radius: radius+20),
-          -pi / 2, // Start angle (bottom of the circle)
+        drawingPath.addArc(
+          Rect.fromCircle(
+              center: Offset(centerX, centerY), radius: radius + 20),
+          pi / 2, // Start angle (top of the circle)
           pi, // Sweep angle (half-circle)
         );
+        oppositeDrawingPath.addArc(
+          Rect.fromCircle(
+              center: Offset(centerX, centerY), radius: smallerRadius),
+          -pi / 2, // Opposite half-circle (bottom of the circle)
+          pi, // Sweep angle (half-circle)
+        );
+        break;
         break;
       case Direction.xNegative:
         drawingPath.addArc(
@@ -205,12 +186,5 @@ class FlipBookPainterLetterS4Test extends CustomPainter {
 
     // Restore canvas
     canvas.restore();
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    final oldPainter = oldDelegate as FlipBookPainterLetterS4Test;
-    return oldPainter.currentPathIndex != currentPathIndex ||
-        oldPainter.customPaths != customPaths;
   }
 }

@@ -31,6 +31,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
       {super.key, required this.stateOfGame, required this.gamesData});
   @override
   Widget build(BuildContext context) {
+
+
     return Expanded(
         child: Stack(
       alignment: Alignment.topCenter,
@@ -93,6 +95,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                 } else if (stateOfGame.basicData?.gameData is Tracking) ...{
                   BlocProvider<TracingCubit>(
                       create: (_) {
+                        
                         return TracingCubit(
                           gameData: gamesData[stateOfGame.index],
                           stateOfGame: stateOfGame,

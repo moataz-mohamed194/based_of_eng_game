@@ -1,5 +1,12 @@
+import 'package:based_of_eng_game/src/core/phonetics_color.dart';
+import 'package:based_of_eng_game/src/games/tracing/manager/tracing_cubit.dart';
 import 'package:based_of_eng_game/src/games/tracing/model/path_provider_model.dart';
+import 'package:based_of_eng_game/src/games/tracing/widget/path_helper/a_shape_path_helper/a_shape_path_helper.dart';
+import 'package:based_of_eng_game/src/games/tracing/widget/path_helper/path_helper.dart';
 import 'package:based_of_eng_game/src/games/tracing/svg_strings/svg_strings.dart';
+import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_a_paint.dart';
+import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_t_paint.dart';
+import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/m_letter_paint.dart';
 import 'package:based_of_eng_game/src/games/tracing/widget/letter_s4.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -146,28 +153,31 @@ abstract class MainDataOfChapters {
   late String background;
   BasicOfGameData? gameData;
   late Color backGroundOfStarBar;
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)?
-      get tracingOfLetter;
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath;
 
-  // to get current swipe index
-
-  late int? countOfPartsOfLettersForTracing = 0;
-
+  // To get the current swipe index
   bool? isArabic = false;
 
   // Provide a default implementation that returns null
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+
   late List<PathProviderModel> pathsModels;
+
+  // Define the addPoint function as abstract so it can be overridden
+  void addPointmainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   int get getdrawingShapeCurrentIndex;
   set setdrawingShapeCurrentIndex(int index);
 }
 
-class SPhonetics implements MainDataOfChapters {
+class SPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
-  final BuildContext parentContext;
+
+
+
+
 
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -177,65 +187,54 @@ class SPhonetics implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  late BuildContext context;
-  late Size size;
   late Path dottedPath;
-  SPhonetics({required this.mineGameData, required this.parentContext}) {
-    context = parentContext;
+  SPhonetics({
+    required this.mineGameData,
+  }) {
     gameData = mineGameData;
-    size = size = Size(MediaQuery.of(context).size.width / 3,
-        MediaQuery.of(context).size.height - (70.h));
+
     dottedPath = parseSvgPath(SvgStrings.dottedS);
 
     pathsModels = [
       PathProviderModel(
-          fillDirection: Direction.xNegative,
-          startPaintingOffset: Offset(281.3, 66.5),
-          finishRatio: .33,
-          pointsLimitToRatio: 10,
+          startPointOfShape: Offset(221.2, 65.3),
+          indexPathModel: IndexPathModel(indexPathPath: SvgStrings.sIndex1),
+          endOffset: Offset(37.7, 85.0),
+          fillDirection: Direction.xPositive,
           index: 0,
           path: SvgStrings.s1,
-          startPoint: Offset(size.width / 4, 0),
+          startPoint: Offset(0, 0),
           strokeWidth: 150,
-          dottedPath: SvgStrings.dotteds1),
+          dottedPathModel: DottedPathModel(dottedPath: SvgStrings.dotteds1),
+          exteraFillPoint: null),
       PathProviderModel(
-          fillDirection: Direction.xPositive,
-          dottedPath: SvgStrings.dotteds2,
-          startPaintingOffset: Offset(90.3, 116.5),
-          finishRatio: .33,
-          pointsLimitToRatio: 10,
+          startPointOfShape: Offset(54.8, 127.5),
+          endOffset: Offset(195.0, 182.7),
+          exteraFillPoint: Offset(15.8, 110.5),
+          fillDirection: Direction.xNegative,
+          dottedPathModel: DottedPathModel(dottedPath: SvgStrings.dotteds2),
           index: 1,
           path: SvgStrings.s2,
-          startPoint: Offset(size.width / 4, 0),
+          startPoint: Offset(0, 0),
           strokeWidth: 150),
       PathProviderModel(
-          fillDirection: Direction.xNegative,
-          dottedPath: SvgStrings.dotteds3,
-          startPaintingOffset: Offset(232.8, 200.5),
-          finishRatio: .28,
-          pointsLimitToRatio: 10,
+          startPointOfShape: Offset(222.8, 199.5),
+          indexPathModel: IndexPathModel(indexPathPath: SvgStrings.sIndex2),
+          endOffset: Offset(51.0, 255.0),
+          exteraFillPoint: Offset(232.8, 200.5),
+          fillDirection: Direction.xPositive,
+          dottedPathModel: DottedPathModel(dottedPath: SvgStrings.dotteds3),
           index: 2,
           path: SvgStrings.s3,
-          startPoint: Offset(size.width / 4, 0),
+          startPoint: Offset(0, 0),
           strokeWidth: 150),
     ];
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing = 14;
 
   int drawingShapecurrentIndex = 0;
 
   @override
   late List<PathProviderModel> pathsModels;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter => throw UnimplementedError();
-
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath => throw UnimplementedError();
 
   @override
   int get getdrawingShapeCurrentIndex => drawingShapecurrentIndex;
@@ -246,10 +245,7 @@ class SPhonetics implements MainDataOfChapters {
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter =>
       (List<Offset> points) {
-        size = Size(MediaQuery.of(context).size.width / 3,
-            MediaQuery.of(context).size.height - (70.h));
         return FlipBookPainterLetterS4Test(
-            scalingFactor: 1,
             customPaths: pathsModels,
             currentPathIndex: drawingShapecurrentIndex);
       };
@@ -260,61 +256,100 @@ class SPhonetics implements MainDataOfChapters {
   }
 }
 
-class APhonetics implements MainDataOfChapters {
-  @override
-  int get getdrawingShapeCurrentIndex => 0;
-  @override
-  set setdrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
-  }
-  @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
-  @override
-  late List<PathProviderModel> pathsModels;
-
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class APhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
+
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  String background = AppImagesPhonetics.backGroundOfA;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  String background = AppImagesPhonetics.backGroundOfS;
 
   @override
   BasicOfGameData? gameData;
-
-  String winAvatar = AppImagesPhonetics.beeSuccess;
-
-  APhonetics({required this.mineGameData}) {
+  late Size size;
+  late Path dottedPath;
+  APhonetics({
+    required this.mineGameData,
+  }) {
     gameData = mineGameData;
+
+    pathsModels = [
+      PathProviderModel(
+          startPointOfShape: Offset(127.5, 27.8),
+          endOffset: Offset(102.5, 46.6),
+          fillDirection: Direction.xPositive,
+          index: 0,
+          
+          path: SvgStrings.a1,
+          startPoint: Offset(0, 0),
+          strokeWidth: 150,
+          indexPathModel: IndexPathModel(
+              indexPathPath: SvgStrings.a1Index, indexPathColor: Colors.white),
+          dottedPathModel: DottedPathModel(
+              dottedPath: SvgStrings.a1Dotted,
+              dottedPathColor: AppColorPhonetics.white),
+          exteraFillPoint: null),
+      PathProviderModel(
+          startPointOfShape:           Offset(102.5, 46.6)
+,
+          endOffset: Offset(127.5, 179.2),
+          exteraFillPoint: Offset(15.8, 110.5),
+       indexPathModel: IndexPathModel(
+              indexPathPath: SvgStrings.a1Index, indexPathColor: Colors.white),          fillDirection: Direction.xNegative,
+
+          dottedPathModel: DottedPathModel(
+
+              dottedPath: SvgStrings.a2Doted,
+              dottedPathColor: AppColorPhonetics.white),
+          index: 1,
+          path: SvgStrings.a2,
+          startPoint: Offset(0, 0),
+          strokeWidth: 150),
+      PathProviderModel(
+          startPointOfShape: Offset(168.7, 16.6),
+          endOffset: Offset(174.0, 201.0),
+          exteraFillPoint: null,
+          indexPathModel: IndexPathModel(indexPathPath: SvgStrings.a2Index,indexPathColor:  Colors.white),
+          fillDirection: Direction.yNegative,
+
+          dottedPathModel: DottedPathModel(
+
+              dottedPath: SvgStrings.a3Dotted,
+              dottedPathColor: AppColorPhonetics.white),
+          index: 1,
+          path: SvgStrings.a3,
+          startPoint: Offset(0, 0),
+          strokeWidth: 150),
+    ];
   }
 
+  int drawingShapecurrentIndex = 0;
+
   @override
-  int? countOfPartsOfLettersForTracing = 0;
+  late List<PathProviderModel> pathsModels;
+
+  @override
+  int get getdrawingShapeCurrentIndex => drawingShapecurrentIndex;
 
   @override
   bool? isArabic;
+
+  @override
+  CustomPainter? Function(List<Offset> points)? get newTracingLetter =>
+      (List<Offset> points) {
+        return ALetterPaint(
+            customPaths: pathsModels,
+            currentPathIndex: drawingShapecurrentIndex);
+      };
+
+  @override
+  set setdrawingShapeCurrentIndex(int index) {
+    drawingShapecurrentIndex = index;
+  }
 }
 
-class FPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class FPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -351,52 +386,93 @@ class FPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class MPhonetics implements MainDataOfChapters {
+class MPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
+
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  String background = AppImagesPhonetics.backGroundOfM;
+  String background = AppImagesPhonetics.backGroundOfS;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getdrawingShapeCurrentIndex => 0;
-  @override
-  set setdrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+  late Size size;
+  late Path dottedPath;
+  MPhonetics({
+    required this.mineGameData,
+  }) {
+    gameData = mineGameData;
+
+    pathsModels = [
+      PathProviderModel(
+          startPointOfShape: Offset(39.8, 12.8),
+          endOffset: Offset(36.6, 252.0),
+          fillDirection: Direction.yNegative,
+          index: 0,
+          path: SvgStrings.m1,
+          startPoint: Offset(0, 0),
+          strokeWidth: 150,
+          indexPathModel: IndexPathModel(
+              indexPathPath: SvgStrings.m1Index, indexPathColor: Colors.white),
+          dottedPathModel: DottedPathModel(
+              dottedPath: SvgStrings.m1Dotted, dottedPathColor: Colors.white),
+          exteraFillPoint: null),
+      PathProviderModel(
+          startPointOfShape: Offset(102.0, 45.1),
+          endOffset: Offset(190.3, 251.2),
+          exteraFillPoint: Offset(0.8, 0.5),
+          indexPathModel: IndexPathModel(
+              indexPathPath: SvgStrings.m2Index, indexPathColor: Colors.white),
+          fillDirection: Direction.yNegative,
+          dottedPathModel: DottedPathModel(
+              dottedPath: SvgStrings.m2Dotted, dottedPathColor: Colors.white),
+          index: 1,
+          path: SvgStrings.m2,
+          startPoint: Offset(0, 0),
+          strokeWidth: 150),
+      PathProviderModel(
+          startPointOfShape: Offset(230.7, 47.3),
+          endOffset: Offset(337.9, 244.5),
+          exteraFillPoint: Offset(15.8, 110.5),
+          indexPathModel: IndexPathModel(
+              indexPathPath: SvgStrings.m3Index, indexPathColor: Colors.white),
+          fillDirection: Direction.yNegative,
+          dottedPathModel: DottedPathModel(
+              dottedPath: SvgStrings.m3Dotted, dottedPathColor: Colors.white),
+          index: 2,
+          path: SvgStrings.m3,
+          startPoint: Offset(0, 0),
+          strokeWidth: 150),
+    ];
   }
-  @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+
+  int drawingShapecurrentIndex = 0;
+
   @override
   late List<PathProviderModel> pathsModels;
-  MPhonetics({required this.mineGameData}) {
-    gameData = mineGameData;
-  }
 
   @override
-  int? countOfPartsOfLettersForTracing = 16;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
-          };
-
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+  int get getdrawingShapeCurrentIndex => drawingShapecurrentIndex;
 
   @override
   bool? isArabic;
+
+  @override
+  CustomPainter? Function(List<Offset> points)? get newTracingLetter =>
+      (List<Offset> points) {
+        return MLetterPaint(
+            customPaths: pathsModels,
+            currentPathIndex: drawingShapecurrentIndex);
+      };
+
+  @override
+  set setdrawingShapeCurrentIndex(int index) {
+    drawingShapecurrentIndex = index;
+  }
 }
 
-class KPhonetics implements MainDataOfChapters {
+class KPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -431,17 +507,10 @@ class KPhonetics implements MainDataOfChapters {
           };
 
   @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
-
-  @override
   bool? isArabic;
 }
 
-class QPhonetics implements MainDataOfChapters {
+class QPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -476,17 +545,10 @@ class QPhonetics implements MainDataOfChapters {
           };
 
   @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
-
-  @override
   bool? isArabic;
 }
 
-class VPhonetics implements MainDataOfChapters {
+class VPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -521,17 +583,10 @@ class VPhonetics implements MainDataOfChapters {
           };
 
   @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
-
-  @override
   bool? isArabic;
 }
 
-class XPhonetics implements MainDataOfChapters {
+class XPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -566,17 +621,10 @@ class XPhonetics implements MainDataOfChapters {
           };
 
   @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
-
-  @override
   bool? isArabic;
 }
 
-class YPhonetics implements MainDataOfChapters {
+class YPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -611,17 +659,10 @@ class YPhonetics implements MainDataOfChapters {
           };
 
   @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
-
-  @override
   bool? isArabic;
 }
 
-class ZPhonetics implements MainDataOfChapters {
+class ZPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -656,67 +697,85 @@ class ZPhonetics implements MainDataOfChapters {
           };
 
   @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
-
-  @override
   bool? isArabic;
 }
 
-class TPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class TPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
+
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
-
-  @override
-  String background = AppImagesPhonetics.backGroundOfT;
+  String background = AppImagesPhonetics.backGroundOfS;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getdrawingShapeCurrentIndex => 0;
-  @override
-  set setdrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
-  }
-  @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
-  @override
-  late List<PathProviderModel> pathsModels;
-  TPhonetics({required this.mineGameData}) {
+  late Size size;
+  late Path dottedPath;
+  TPhonetics({
+    required this.mineGameData,
+  }) {
     gameData = mineGameData;
+
+    pathsModels = [
+      PathProviderModel(
+          startPointOfShape: Offset(89.3, 20.3),
+          endOffset: Offset(75.0, 284.2),
+          fillDirection: Direction.yNegative,
+          index: 0,
+          path: SvgStrings.t1,
+          startPoint: Offset(0, 0),
+          strokeWidth: 150,
+          indexPathModel: IndexPathModel(
+              indexPathPath: SvgStrings.t1Index, indexPathColor: Colors.white),
+          dottedPathModel: DottedPathModel(
+              dottedPath: SvgStrings.t1Dotted,
+              dottedPathColor: AppColorPhonetics.white),
+          exteraFillPoint: null),
+      PathProviderModel(
+          startPointOfShape: Offset(54.8, 127.5),
+          endOffset: Offset(102.8, 136.5),
+          exteraFillPoint: Offset(15.8, 110.5),
+          indexPathModel: IndexPathModel(
+              indexPathPath: SvgStrings.t2Index, indexPathColor: Colors.white),
+          fillDirection: Direction.xNegative,
+          dottedPathModel: DottedPathModel(
+              dottedPath: SvgStrings.t2Dotted,
+              dottedPathColor: AppColorPhonetics.white),
+          index: 1,
+          path: SvgStrings.t2,
+          startPoint: Offset(0, 0),
+          strokeWidth: 150),
+    ];
   }
 
+  int drawingShapecurrentIndex = 0;
+
   @override
-  int? countOfPartsOfLettersForTracing;
+  late List<PathProviderModel> pathsModels;
+
+  @override
+  int get getdrawingShapeCurrentIndex => drawingShapecurrentIndex;
 
   @override
   bool? isArabic;
+
+  @override
+  CustomPainter? Function(List<Offset> points)? get newTracingLetter =>
+      (List<Offset> points) {
+        return TLetterPaint(
+            customPaths: pathsModels,
+            currentPathIndex: drawingShapecurrentIndex);
+      };
+
+  @override
+  set setdrawingShapeCurrentIndex(int index) {
+    drawingShapecurrentIndex = index;
+  }
 }
 
-class CPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class CPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -754,13 +813,7 @@ class CPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class RPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class RPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -798,13 +851,7 @@ class RPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class IPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class IPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -842,13 +889,7 @@ class IPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class PPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class PPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -886,13 +927,7 @@ class PPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class HPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class HPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -930,13 +965,7 @@ class HPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class JPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class JPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -974,13 +1003,7 @@ class JPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class UPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class UPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1018,13 +1041,7 @@ class UPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class LPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class LPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1062,13 +1079,7 @@ class LPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class BPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class BPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1106,13 +1117,7 @@ class BPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class OPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class OPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = Colors.white.withOpacity(.1);
@@ -1150,13 +1155,7 @@ class OPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class GPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class GPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1194,13 +1193,7 @@ class GPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class DPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class DPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1238,13 +1231,7 @@ class DPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class WPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class WPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1282,13 +1269,7 @@ class WPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class EPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class EPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1326,13 +1307,7 @@ class EPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class NPhonetics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class NPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1370,13 +1345,7 @@ class NPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class ShortVowels implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class ShortVowels extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1419,13 +1388,7 @@ class ShortVowels implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class UpVowels implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class UpVowels extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1463,13 +1426,7 @@ class UpVowels implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class ConnectionWithoutSortingCups implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class ConnectionWithoutSortingCups extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1512,13 +1469,7 @@ class ConnectionWithoutSortingCups implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class ConnectionSortingCups implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class ConnectionSortingCups extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1560,7 +1511,7 @@ class ConnectionSortingCups implements MainDataOfChapters {
   int? countOfPartsOfLettersForTracing;
 }
 
-class RedPhonetics implements MainDataOfChapters {
+class RedPhonetics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1593,18 +1544,12 @@ class RedPhonetics implements MainDataOfChapters {
           (List<Color?>? colorsOfPaths, List<Offset> points) {
             return null;
           };
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
 
   @override
   bool? isArabic;
 }
 
-class BlueUnit implements MainDataOfChapters {
+class BlueUnit extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1637,18 +1582,12 @@ class BlueUnit implements MainDataOfChapters {
           (List<Color?>? colorsOfPaths, List<Offset> points) {
             return null;
           };
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
 
   @override
   bool? isArabic;
 }
 
-class GreenUnit implements MainDataOfChapters {
+class GreenUnit extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1681,18 +1620,12 @@ class GreenUnit implements MainDataOfChapters {
           (List<Color?>? colorsOfPaths, List<Offset> points) {
             return null;
           };
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
 
   @override
   bool? isArabic;
 }
 
-class YellowUnit implements MainDataOfChapters {
+class YellowUnit extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1725,18 +1658,12 @@ class YellowUnit implements MainDataOfChapters {
           (List<Color?>? colorsOfPaths, List<Offset> points) {
             return null;
           };
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
 
   @override
   bool? isArabic;
 }
 
-class VioletUnit implements MainDataOfChapters {
+class VioletUnit extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1769,18 +1696,12 @@ class VioletUnit implements MainDataOfChapters {
           (List<Color?>? colorsOfPaths, List<Offset> points) {
             return null;
           };
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
 
   @override
   bool? isArabic;
 }
 
-class OrangeUnit implements MainDataOfChapters {
+class OrangeUnit extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1813,18 +1734,12 @@ class OrangeUnit implements MainDataOfChapters {
           (List<Color?>? colorsOfPaths, List<Offset> points) {
             return null;
           };
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
 
   @override
   bool? isArabic;
 }
 
-class MathProgram implements MainDataOfChapters {
+class MathProgram extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1857,24 +1772,12 @@ class MathProgram implements MainDataOfChapters {
           (List<Color?>? colorsOfPaths, List<Offset> points) {
             return null;
           };
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
 
   @override
   bool? isArabic;
 }
 
-class FirstUnitArabic implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class FirstUnitArabic extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1912,13 +1815,7 @@ class FirstUnitArabic implements MainDataOfChapters {
   bool? isArabic = true;
 }
 
-class RUnitArabic implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class RUnitArabic extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1957,13 +1854,7 @@ class RUnitArabic implements MainDataOfChapters {
   bool? isArabic = true;
 }
 
-class RUnitPhonics implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class RUnitPhonics extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -2001,13 +1892,7 @@ class RUnitPhonics implements MainDataOfChapters {
   bool? isArabic = true;
 }
 
-class ConsonantVowels implements MainDataOfChapters {
-  @override
-  (Path, int)? Function(Offset point, Size size, bool isFingerPosition)?
-      get checkTheIndexOfPath =>
-          (Offset point, Size size, bool isFingerPosition) {
-            return null;
-          };
+class ConsonantVowels extends MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);

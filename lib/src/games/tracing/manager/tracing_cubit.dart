@@ -18,14 +18,11 @@ class TracingCubit extends Cubit<TracingInitial> {
           stateOfGame: stateOfGame,
           paths: [],
         )) {
-    List<Color?> bgOfPaths = List.generate(
-        state.stateOfGame.basicData?.countOfPartsOfLettersForTracing ?? 0,
-        (index) => null);
+  
     emit(state.clearData());
 
     TalkTts.startTalk(text: state.gameData.inst ?? '');
     emit(state.copyWith(
-      colorsOfPaths: bgOfPaths,
     ));
   }
 
@@ -104,11 +101,12 @@ class TracingCubit extends Cubit<TracingInitial> {
 
   shiftIndex({
     required int index,
+    required Offset point
   }) {
     if (index < state.stateOfGame.basicData!.pathsModels.length) {
       state.stateOfGame.basicData!.setdrawingShapeCurrentIndex = index;
 
-      emit(state.copyWith(currentDrawingIndex: index));
+      emit(state.copyWith(currentDrawingIndex: index,currentPosition:point));
       print('index' +
           state.stateOfGame.basicData!.getdrawingShapeCurrentIndex.toString());
     }
@@ -116,9 +114,10 @@ class TracingCubit extends Cubit<TracingInitial> {
 
   gameFinished({
     required int index,
+    required Offset endOffset
   }) {
           state.stateOfGame.basicData!.setdrawingShapeCurrentIndex = index;
 
-    emit(state.copyWith(currentDrawingIndex: index));
+    emit(state.copyWith(currentDrawingIndex: index,currentPosition: endOffset));
   }
 }

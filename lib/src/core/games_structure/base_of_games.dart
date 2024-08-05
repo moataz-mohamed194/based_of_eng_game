@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/core/games_structure/arabic_letters_phonetics/arabic_game_letter_base.dart';
 import 'package:flutter/material.dart';
 
 import '../game_types/game_phonatics_types.dart';
@@ -57,6 +58,11 @@ abstract class HandlingActionsAndDataOfChapters {
     XPhonetics,
     YPhonetics,
     ZPhonetics,
+    // arabiccccc
+
+GemPhonetics,
+
+
     // SpellTheWord,
     ConnectionSortingCups,
     ConnectionWithoutSortingCups
@@ -105,15 +111,15 @@ abstract class HandlingActionsAndDataOfChapters {
     return null;
   }
 
-  static getTheChapterDataType(
-      {required String subLetter,
-      required String subGame,
-      required String unitName,
-      required String programName,
-      required int audioFlag,
-      required String lessonName,
-      required String gameName,
-      required BuildContext parentContext}) {
+  static getTheChapterDataType({
+    required String subLetter,
+    required String subGame,
+    required String unitName,
+    required String programName,
+    required int audioFlag,
+    required String lessonName,
+    required String gameName,
+  }) {
     print(
         'subLetter:$subLetter , subGame:$subGame , unitName:$unitName , programName:$programName , audioFlag:$audioFlag , ${(unitName.contains(MainDataOfChaptersTypes.consonant.text()))}');
     if (programName.toLowerCase() ==
@@ -172,14 +178,25 @@ abstract class HandlingActionsAndDataOfChapters {
                 gameType: subGame.toLowerCase(), audioFlag: audioFlag));
       }
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
-
-      return SPhonetics(
-          parentContext: parentContext,
+          return GemPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+      // return SPhonetics(
+      //     mineGameData: BasicOfGameData.getTheGameType(
+      //         gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+
+      // return TPhonetics(
+      //     mineGameData: BasicOfGameData.getTheGameType(
+      //         gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+
+      // return APhonetics(
+      //     mineGameData: BasicOfGameData.getTheGameType(
+      //         gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+          //   return MPhonetics(
+          // mineGameData: BasicOfGameData.getTheGameType(
+          //     gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
       return SPhonetics(
-          parentContext: parentContext,
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.k.text()) {

@@ -19,7 +19,6 @@ class TracingInitial extends Equatable {
 
   TracingInitial copyWith({
     GameFinalModel? gameData,
-    List<Color?>? colorsOfPaths,
     List<Offset>? paths,
     CurrentGamePhoneticsState? stateOfGame,
     Offset? currentPosition,

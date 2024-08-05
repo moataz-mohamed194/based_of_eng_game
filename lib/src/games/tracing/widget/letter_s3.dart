@@ -1,4 +1,4 @@
-import 'package:based_of_eng_game/src/games/tracing/path_helper/path_helper.dart';
+import 'package:based_of_eng_game/src/games/tracing/widget/path_helper/path_helper.dart';
 import 'package:flutter/material.dart';
 import '../../../core/phonetics_color.dart';
 
