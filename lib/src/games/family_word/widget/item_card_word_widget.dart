@@ -69,7 +69,7 @@ class ItemCardWordWidget extends StatelessWidget {
             child: Text(
               body.word ?? '',
               style: TextStyle(
-                  fontSize: 45,
+                  fontSize: 14.sp,
                   fontFamily: AppTheme.getFontFamily5(),
                   color: AppColorPhonetics.darkBorderColor),
               textAlign: TextAlign.center,
