@@ -849,7 +849,7 @@ class MemoryCard implements BasicOfGameData {
   bool isRound = false;
 
   @override
-  String titleImageEn = AppImagesPhonetics.listenAndChooseGame;
+  String titleImageEn = AppImagesPhonetics.memoryCardTitle;
 
   @override
   String? completeBasket;
