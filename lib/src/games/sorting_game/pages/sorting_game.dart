@@ -23,14 +23,10 @@ class SortingGameScreen extends StatefulWidget {
 class _SortingGameScreen extends State<SortingGameScreen> {
   @override
   void initState() {
-    final List<GameFinalModel> gameData =
-        context.read<SortingCubit>().state.listGameData;
     context.read<CurrentGamePhoneticsCubit>().getStateOfStars(
         mainCountOfQuestion:
             context.read<SortingCubit>().state.countOfQuestion);
-    context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: StateOfSubWord.isWord,
-        stateOfStringWillSay: gameData.first.mainLetter ?? '');
+
     super.initState();
   }
 
