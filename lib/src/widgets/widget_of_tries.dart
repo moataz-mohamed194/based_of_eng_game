@@ -31,73 +31,77 @@ widgetOfTries(
           _buildBackground(),
           _buildExitButton(backButton),
           Positioned(
-              top: 0.h,
+              top: 70.h,
               right: 0,
               left: 0,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width, //300.w,
-                height: MediaQuery.of(context).size.height / 1.3, //300.w,
-                // height: 300.h,
-                // decoration: const BoxDecoration(
-                //     image: DecorationImage(
-                //         image: AssetImage(AppImagesPhonetics.popUpBackground))),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Row(
+              child: Center(
+                child: FittedBox(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width/1.3, //300.w,
+                    height: MediaQuery.of(context).size.height / 2.5, //300.w,
+                    // height: 300.h,
+                    // decoration: const BoxDecoration(
+                    //     image: DecorationImage(
+                    //         image: AssetImage(AppImagesPhonetics.popUpBackground))),
+                    child: Center(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                            3,
-                            (index) => countOfStar > (index)
-                                ? Image.asset(
-                                    AppImagesPhonetics.completeStar,
-                                    height: 40.h,
-                                  )
-                                : Image.asset(
-                                    AppImagesPhonetics.iconEmptyStar2,
-                                    height: 40.h,
-                                  )),
-                      ),
-                      // if(countOfStar==0){
-                      Text(
-                        countOfStar == 0
-                            ? '"Try again?"'
-                            : countOfStar == 3
-                                ? '"Excellent! Keep going?"'
-                                : countOfStar == 2
-                                    ? '"Very Good! Keep going?"'
-                                    : countOfStar == 1
-                                        ? '"Good! Keep going?"'
-                                        : '',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          color: AppColorPhonetics.darkBlueColor,
-                          fontFamily: AppTheme.getFontFamily5(),
-                        ),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
                         children: [
-                          ReTryButtton(
-                              dataFunction: () => actionOfRetry(),
-                              title: 'Retry',
-                              width: 100),
-                          actionOfDone != null
-                              ? Row(
-                                  children: [
-                                    5.pw,
-                                    ReTryButtton(
-                                        dataFunction: () => actionOfDone(),
-                                        title: 'Done',
-                                        width: 100),
-                                  ],
-                                )
-                              : const SizedBox(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                                3,
+                                (index) => countOfStar > (index)
+                                    ? Image.asset(
+                                        AppImagesPhonetics.completeStar,
+                                        height: 40.h,
+                                      )
+                                    : Image.asset(
+                                        AppImagesPhonetics.iconEmptyStar2,
+                                        height: 40.h,
+                                      )),
+                          ),
+                          // if(countOfStar==0){
+                          Text(
+                            countOfStar == 0
+                                ? '"Try again?"'
+                                : countOfStar == 3
+                                    ? '"Excellent! Keep going?"'
+                                    : countOfStar == 2
+                                        ? '"Very Good! Keep going?"'
+                                        : countOfStar == 1
+                                            ? '"Good! Keep going?"'
+                                            : '',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: AppColorPhonetics.darkBlueColor,
+                              fontFamily: AppTheme.getFontFamily5(),
+                            ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ReTryButtton(
+                                  dataFunction: () => actionOfRetry(),
+                                  title: 'Retry',
+                                  width: 100),
+                              actionOfDone != null
+                                  ? Row(
+                                      children: [
+                                        5.pw,
+                                        ReTryButtton(
+                                            dataFunction: () => actionOfDone(),
+                                            title: 'Done',
+                                            width: 100),
+                                      ],
+                                    )
+                                  : const SizedBox(),
+                            ],
+                          )
                         ],
-                      )
-                    ],
+                      ),
+                    ),
                   ),
                 ),
               )),
