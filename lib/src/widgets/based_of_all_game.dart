@@ -28,7 +28,7 @@ class BasedOfAllGame extends StatelessWidget {
       // alignment: Alignment.center,
       children: [
         GameBar(stateOfGame: stateOfGame),
-        if (stateOfGame.countOfTries == 0)
+        if (stateOfGame.countOfTries == 0 || stateOfGame.showAlert==true)
           ...{}
         else ...{
           SizedBox(

@@ -144,7 +144,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     emit(state.copyWith(
         basicData: basicData,
         // currentAvatar: basicData.basicAvatar,
-        index: gameIndex,
+        index: 0,
         gameData: gameData));
     _getTheBackGround();
     _getTheBackGroundSuccess();
@@ -164,7 +164,7 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
         'state.countOfTries:${state.countOfTries}, stars:${state.countOfStar}');
     if (state.countOfTries == 0) {
       BuildContext context = state.context;
-      emit(state.copyWith(countOfStar: 0));
+      emit(state.copyWith(countOfStar: 0, showAlert:true));
       showDialog(
         barrierDismissible: false,
         context: context,
@@ -229,6 +229,8 @@ class CurrentGamePhoneticsCubit extends Cubit<CurrentGamePhoneticsState> {
     print('_popUpOfGame:{state.theAlertOfShowDialog}');
     state.actionWhenTriesBeZero(state.countOfStar ?? 0);
     // if (state.theAlertOfShowDialog == false) {
+    emit(state.copyWith(showAlert:true));
+
     BuildContext context = state.context;
     // emit(state.copyWith(theAlertOfShowDialog: true));
     showDialog(

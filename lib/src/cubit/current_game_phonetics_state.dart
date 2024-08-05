@@ -9,6 +9,7 @@ class CurrentGamePhoneticsState extends Equatable {
   Artboard? avatarCurrentArtboard;
   bool? touchPositions = false;
   String? stateOfAvatar;
+  bool? showAlert;
   BuildContext context;
   String? stateOfStringWillSay;
   StateOfSubWord? stateOfStringIsWord;
@@ -44,6 +45,7 @@ class CurrentGamePhoneticsState extends Equatable {
       this.countOfWrongAnswers = 0,
       this.countOfCorrectAnswers = 0,
       this.statesOfAddStars,
+      this.showAlert,
       this.countOfTries,
       // this.currentAvatar,
       required this.index,
@@ -58,6 +60,7 @@ class CurrentGamePhoneticsState extends Equatable {
       StateOfSubWord? stateOfStringIsWord,
       BuildContext? context,
       bool? beeTalking,
+      bool? showAlert,
       Artboard? avatarCurrentArtboard,
       String? stateOfStringWillSay,
       String? currentStringOfDice,
@@ -80,6 +83,7 @@ class CurrentGamePhoneticsState extends Equatable {
         touchPositions: touchPositions ?? this.touchPositions,
         context: context ?? this.context,
         backButton: backButton ?? this.backButton,
+        showAlert: showAlert ?? this.showAlert,
         actionWhenTriesBeZero:
             actionWhenTriesBeZero ?? this.actionWhenTriesBeZero,
         stateOfStringWillSay: stateOfStringWillSay ?? this.stateOfStringWillSay,
@@ -112,6 +116,7 @@ class CurrentGamePhoneticsState extends Equatable {
         backButton: backButton,
         stateOfStringWillSay: stateOfStringWillSay ?? stateOfStringWillSay,
         context: context ?? context,
+        showAlert: showAlert ?? showAlert,
         avatarCurrentArtboard: avatarCurrentArtboard ?? avatarCurrentArtboard,
         gameData: gameData ?? gameData,
         countOfWrongAnswers: countOfWrongAnswers,
@@ -133,6 +138,7 @@ class CurrentGamePhoneticsState extends Equatable {
       index: 0,
       context: context,
       backButton: backButton,
+      showAlert: false,
       actionWhenTriesBeZero: actionWhenTriesBeZero,
     );
   }
@@ -143,7 +149,7 @@ class CurrentGamePhoneticsState extends Equatable {
         // currentAvatar,
         avatarArtboardIdle,
         context,
-        backButton,
+        backButton,showAlert,
         stateOfStringIsWord,
         stateOfStringWillSay,
         avatarArtboardSad,
