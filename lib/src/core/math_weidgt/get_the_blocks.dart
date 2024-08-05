@@ -22,14 +22,14 @@ class GetTheBlocks extends StatelessWidget {
     final sizeOfOne = Size(width / 15, (width / 22).toDouble());
     return SizedBox(
       height: sizeOfOne.height,
-      width: (sizeOfOne.width * countOfBoxes),
-      // countOfBoxes == 1
-      //   ? (sizeOfOne.width * countOfBoxes)
-      //   : countOfBoxes == 2
-      //       ? (sizeOfOne.width * countOfBoxes) - (2 * countOfBoxes)
-      //       : countOfBoxes == 5
-      //           ? (sizeOfOne.width * countOfBoxes) - (6 * countOfBoxes)
-      //           : (sizeOfOne.width * countOfBoxes) - (5 * countOfBoxes),
+      width:
+      countOfBoxes == 1
+        ? (sizeOfOne.width * countOfBoxes)
+        : countOfBoxes == 2
+            ? (sizeOfOne.width * countOfBoxes) - (2 * countOfBoxes)
+            : countOfBoxes == 5
+                ? (sizeOfOne.width * countOfBoxes) - (6.w * countOfBoxes)
+                : (sizeOfOne.width * countOfBoxes) - (5.w * countOfBoxes),
       child: isHide == true
           ? SizedBox()
           : Stack(

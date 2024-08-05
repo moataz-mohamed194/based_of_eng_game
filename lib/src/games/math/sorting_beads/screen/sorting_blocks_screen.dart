@@ -33,134 +33,138 @@ class SortingBlocksScreen extends StatelessWidget {
           print('listener2');
         }, builder: (context, gameState) {
           return FittedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                    gameState.gameChoices?.length ?? 0,
-                    (index) => Column(
-                      children: [
-                        FittedBox(
-                          child: Row(
-                            children: [
-                              CardOfNumber(
-                                number:
-                                    gameState.gameChoices?[index].choice ?? '0',
-                                size: 65.h,
-                              ),
-                              10.pw,
-                              DragTarget<int>(builder: (
-                                BuildContext context,
-                                List<dynamic> accepted,
-                                List<dynamic> rejected,
-                              ) {
-                                return CardOfBlocks(
-                                  number: gameState.correctAnswers.contains(
-                                          gameState.gameChoices?[index].id ?? 0)
-                                      ? int.parse(gameState
-                                              .gameChoices?[index].choice ??
-                                          '0')
-                                      : 0,
-                                  tools: ToolsOfMath.blocks,
-                                );
-                              }, onAcceptWithDetails: (item) async {
-                                if (context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .ableButton()) {
-                                  bool stateOfAnswer = context
-                                      .read<SortingBlocksCubit>()
-                                      .addAnswer(
-                                          userChoose: gameState
-                                                  .gameChoices?[index].id ??
-                                              0,
-                                          secondChoose: item.data);
-                                  if (stateOfAnswer == true) {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addSuccessAnswer(
-                                            questions: gameState.gameData
-                                                    .gameChoices?.length ??
-                                                0,
-                                            correctAnswers:
-                                                gameState.correctAnswers.length)
-                                        .whenComplete(() {
-                                      bool isLastQuestion = context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .checkIfIsTheLastQuestionOfGame(
-                                              queations: gameState.gameData
-                                                      .gameChoices?.length ??
-                                                  0);
-                                      if (isLastQuestion) {
-                                        // Future.delayed(const Duration(seconds: 2),
-                                        //     () async {
-                                        //   Navigator.of(context).pop();
-                                        // });
-                                      } else {
-                                        // Future.delayed(const Duration(seconds: 2),
-                                        //     () async {
-                                        //   await context
-                                        //       .read<CurrentGamePhoneticsCubit>()
-                                        //       .updateIndexOfCurrentGame();
-                                        //   context
-                                        //       .read<SortingBlocksCubit>()
-                                        //       .updateTheCurrentGame(
-                                        //           index: context
-                                        //               .read<
-                                        //                   CurrentGamePhoneticsCubit>()
-                                        //               .state
-                                        //               .index);
-                                        // });
-                                      }
-                                    });
-                                  } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                            actionOfWrongAnswer: () async {});
-                                  }
-                                }
-                              })
-                            ],
-                          ),
-                        ),
-                        5.ph,
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height -
-                      (90.h + 50.h + 5 + 20.h), // < 760
-                  child: Column(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: List.generate(
-                        gameState.secondGameChoices?.length ?? 0,
-                        (index) => gameState.correctAnswers.contains(
-                                gameState.secondGameChoices?[index].id ?? 0)
-                            ? GetTheBlocks(
-                                isSolid: true,
-                                countOfBoxes: int.parse(
-                                    "${gameState.secondGameChoices?[index].choice ?? 0}"),
-                              )
-                            : Draggable<int>(
-                                maxSimultaneousDrags: 1,
-                                feedback: GetTheBlocks(
-                                  countOfBoxes: int.parse(
-                                      "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                      gameState.gameChoices?.length ?? 0,
+                      (index) => Column(
+                        children: [
+                          FittedBox(
+                            child: Row(
+                              children: [
+                                CardOfNumber(
+                                  number:
+                                      gameState.gameChoices?[index].choice ?? '0',
+                                  size: 65.h,
                                 ),
-                                // childWhenDragging: ,
-                                data:
-                                    gameState.secondGameChoices?[index].id ?? 0,
-                                child: GetTheBlocks(
-                                  // isSolid: true,
+                                10.pw,
+                                DragTarget<int>(builder: (
+                                  BuildContext context,
+                                  List<dynamic> accepted,
+                                  List<dynamic> rejected,
+                                ) {
+                                  return CardOfBlocks(
+                                    number: gameState.correctAnswers.contains(
+                                            gameState.gameChoices?[index].id ?? 0)
+                                        ? int.parse(gameState
+                                                .gameChoices?[index].choice ??
+                                            '0')
+                                        : 0,
+                                    tools: ToolsOfMath.blocks,
+                                  );
+                                }, onAcceptWithDetails: (item) async {
+                                  if (context
+                                      .read<CurrentGamePhoneticsCubit>()
+                                      .ableButton()) {
+                                    bool stateOfAnswer = context
+                                        .read<SortingBlocksCubit>()
+                                        .addAnswer(
+                                            userChoose: gameState
+                                                    .gameChoices?[index].id ??
+                                                0,
+                                            secondChoose: item.data);
+                                    if (stateOfAnswer == true) {
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .addSuccessAnswer(
+                                              questions: gameState.gameData
+                                                      .gameChoices?.length ??
+                                                  0,
+                                              correctAnswers:
+                                                  gameState.correctAnswers.length)
+                                          .whenComplete(() {
+                                        bool isLastQuestion = context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .checkIfIsTheLastQuestionOfGame(
+                                                queations: gameState.gameData
+                                                        .gameChoices?.length ??
+                                                    0);
+                                        if (isLastQuestion) {
+                                          // Future.delayed(const Duration(seconds: 2),
+                                          //     () async {
+                                          //   Navigator.of(context).pop();
+                                          // });
+                                        } else {
+                                          // Future.delayed(const Duration(seconds: 2),
+                                          //     () async {
+                                          //   await context
+                                          //       .read<CurrentGamePhoneticsCubit>()
+                                          //       .updateIndexOfCurrentGame();
+                                          //   context
+                                          //       .read<SortingBlocksCubit>()
+                                          //       .updateTheCurrentGame(
+                                          //           index: context
+                                          //               .read<
+                                          //                   CurrentGamePhoneticsCubit>()
+                                          //               .state
+                                          //               .index);
+                                          // });
+                                        }
+                                      });
+                                    } else {
+                                      await context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .addWrongAnswer(
+                                              actionOfWrongAnswer: () async {});
+                                    }
+                                  }
+                                })
+                              ],
+                            ),
+                          ),
+                          5.ph,
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height -
+                        (90.h + 50.h + 5 + 20.h), // < 760
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                      children: List.generate(
+                          gameState.secondGameChoices?.length ?? 0,
+                          (index) => gameState.correctAnswers.contains(
+                                  gameState.secondGameChoices?[index].id ?? 0)
+                              ? GetTheBlocks(
+                                  isSolid: true,
                                   countOfBoxes: int.parse(
                                       "${gameState.secondGameChoices?[index].choice ?? 0}"),
-                                ))),
-                  ),
-                )
-              ],
+                                )
+                              : Draggable<int>(
+                                  maxSimultaneousDrags: 1,
+                                  feedback: GetTheBlocks(
+                                    countOfBoxes: int.parse(
+                                        "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                                  ),
+                                  // childWhenDragging: ,
+                                  data:
+                                      gameState.secondGameChoices?[index].id ?? 0,
+                                  child: GetTheBlocks(
+                                    // isSolid: true,
+                                    countOfBoxes: int.parse(
+                                        "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                                  ))),
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         }));
