@@ -27,14 +27,21 @@ class _ChooseTheCorrectLetterOrImageGame
     extends State<ChooseTheCorrectLetterOrImageGame> {
   @override
   void initState() {
+    final chooseTheCorrectLetterOrImageCubit =
+        context.read<ChooseTheCorrectLetterOrImageCubit>();
+    final state = chooseTheCorrectLetterOrImageCubit.state;
     final List<GameFinalModel> gameData =
-        context.read<ChooseTheCorrectLetterOrImageCubit>().state.allGameData;
+        chooseTheCorrectLetterOrImageCubit.state.allGameData;
+    final isLetter = chooseTheCorrectLetterOrImageCubit.state.isLetter;
     context
         .read<CurrentGamePhoneticsCubit>()
         .getStateOfStars(mainCountOfQuestion: gameData.length);
     context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
-        stateOfStringIsWord: StateOfSubWord.isLetter,
-        stateOfStringWillSay: gameData.first.mainLetter ?? '');
+        stateOfStringIsWord:
+            isLetter ? StateOfSubWord.isLetter : StateOfSubWord.isWord,
+        stateOfStringWillSay: isLetter
+            ? gameData.first.mainLetter ?? ''
+            : state.gameData.gameImages?.first.word ?? '');
     super.initState();
   }
 
