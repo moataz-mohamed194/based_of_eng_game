@@ -35,10 +35,11 @@ class MagicCardCubit extends Cubit<MagicCardInitial> {
   }
 
   addAnswer({required GameLettersGameFinalModel? userChoose}) {
-    print(
-        'state.chooseFirstWord:${state.chooseFirstWord.id}, ${state.chooseSecondWord.id}');
     if ((state.chooseFirstWord.id == null)) {
       emit(state.copyWith(chooseFirstWord: userChoose));
+      Future.delayed(const Duration(seconds: 2), () {
+        reStartCards();
+      });
       return;
     } else {
       emit(state.copyWith(chooseSecondWord: userChoose));

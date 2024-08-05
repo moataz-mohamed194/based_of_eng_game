@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/core/talk_tts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -23,6 +24,7 @@ class BasedOfGames extends StatelessWidget {
                 .state
                 .actionWhenTriesBeZero(stateOfGame.countOfStar ?? 0);
           }
+          await TalkTts.stopTalk();
         },
         canPop: false,
         child: Container(

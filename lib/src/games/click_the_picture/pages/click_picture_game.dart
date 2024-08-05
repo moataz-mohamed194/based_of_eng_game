@@ -54,8 +54,8 @@ class _ClickPictureGame extends State<ClickPictureGame> {
               margin: EdgeInsets.only(
                   bottom: (30),
                   top: 10,
-                  left: stateOfGameData.isArabic == true ? 0 : 20,
-                  right: stateOfGameData.isArabic == true ? 20 : 0),
+                  left: stateOfGameData.isArabic ? 0 : 20,
+                  right: stateOfGameData.isArabic ? 20 : 0),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               // width: MediaQuery.of(context).size.width - (130 + 50),
               // height: MediaQuery.of(context).size.height - (50.h + 55),
@@ -115,7 +115,8 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addSuccessAnswer(
                                                 // supportTheFirstWayOfCheckComplete:true,
-
+                                                isArabic:
+                                                    stateOfGameData.isArabic,
                                                 questions: stateOfGameData
                                                         .gameImages
                                                         ?.where((element) =>
@@ -150,11 +151,13 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                                         await context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addWrongAnswer(
+                                                isArabic:
+                                                    stateOfGameData.isArabic,
                                                 actionOfWrongAnswer: () async {
-                                          await context
-                                              .read<ClickPictureCubit>()
-                                              .sayTheLetter();
-                                        });
+                                                  await context
+                                                      .read<ClickPictureCubit>()
+                                                      .sayTheLetter();
+                                                });
                                       }
                                     }
                                   }
@@ -167,11 +170,18 @@ class _ClickPictureGame extends State<ClickPictureGame> {
                   ),
                   Positioned(
                       bottom: MediaQuery.of(context).size.height * 0.4,
-                      right: MediaQuery.of(context).size.height < 760
-                          ? (-80).h
-                          : (-150).h,
+                      right: stateOfGameData.isArabic
+                          ? null
+                          : MediaQuery.of(context).size.height < 760
+                              ? (-80).h
+                              : (-150).h,
+                      left: stateOfGameData.isArabic
+                          ? MediaQuery.of(context).size.height < 760
+                              ? (-80).h
+                              : (-150).h
+                          : null,
                       child: Container(
-                          alignment:Alignment.center,
+                          alignment: Alignment.center,
                           // height: .2.sh,
                           // width: 100.w,
                           padding: EdgeInsets.all(.1.sh),
