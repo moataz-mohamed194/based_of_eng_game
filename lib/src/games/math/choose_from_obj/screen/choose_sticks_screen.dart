@@ -34,6 +34,7 @@ class ChooseSticksScreen extends StatelessWidget {
             builder: (context, gameState) {
               return FittedBox(
                 child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height -
                       (90.h + 50.h + 5 + 20.h),
                   child: Row(
