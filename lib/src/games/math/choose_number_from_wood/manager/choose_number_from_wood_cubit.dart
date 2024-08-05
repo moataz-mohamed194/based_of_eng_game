@@ -19,6 +19,8 @@ class ChooseNumberFromWoodCubit extends Cubit<ChooseNumberFromWoodInitial> {
             allGameData: allGameData,
             tools: tools)) {
     reFormatGameData();
+    _sayLetter();
+
   }
 
   reStartIsCorrect() {
@@ -34,7 +36,6 @@ class ChooseNumberFromWoodCubit extends Cubit<ChooseNumberFromWoodInitial> {
     gameChoices.shuffle();
     emit(state.copyWith(
         gameData: newData, gameChoices: gameChoices, gameLetters: gameLetters));
-    _sayLetter();
   }
 
   addAnswer({required GameChoicesGameFinalModel userChoose}) {

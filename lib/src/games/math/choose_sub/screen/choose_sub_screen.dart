@@ -27,6 +27,7 @@ class ChooseSubScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height -
                 (90.h + 50.h + 5 + 20.h), // < 760
             margin: EdgeInsets.only(left: 40.w, right: 40.w, bottom: 20.h),
+            padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -210,7 +211,8 @@ class ChooseSubScreen extends StatelessWidget {
           GetTheBeads(
             countOfBalls: int.parse("${answer?.choice ?? 0}"),
           )
-        }
+        },
+        5.pw
       ],
     );
   }

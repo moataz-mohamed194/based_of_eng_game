@@ -19,6 +19,8 @@ class CountTypeNumberCubit extends Cubit<CountTypeNumberInitial> {
             allGameData: allGameData,
             tools: tools)) {
     reFormatGameData();
+    _sayLetter();
+
   }
 
   reStartIsCorrect() {
@@ -33,7 +35,6 @@ class CountTypeNumberCubit extends Cubit<CountTypeNumberInitial> {
     String correctAns = newData.correctAns ?? '';
     emit(state.copyWith(
         gameData: newData, gameLetters: gameLetters, correctAns: correctAns));
-    _sayLetter();
   }
 
   addAnswer({required String userChoose}) {

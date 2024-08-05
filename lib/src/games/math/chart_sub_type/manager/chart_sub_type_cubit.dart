@@ -15,6 +15,8 @@ class ChartSubTypeCubit extends Cubit<ChartSubTypeInitial> {
       : super(ChartSubTypeInitial(
             index: 0, gameData: allGameData.first, allGameData: allGameData)) {
     reFormatGameData();
+    _sayLetter();
+
   }
 
   reStartIsCorrect() {

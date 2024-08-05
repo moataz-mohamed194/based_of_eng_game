@@ -22,6 +22,8 @@ class DragAddCubit extends Cubit<DragAddInitial> {
             gameData: allGameData[0],
             index: 0)) {
     reFormatGameData();
+    _sayLetter();
+
   }
 
   reFormatGameData() {
@@ -60,7 +62,6 @@ class DragAddCubit extends Cubit<DragAddInitial> {
         gameChoices: gameChoices,
         mainQuestion: mainQuestion,
         subQuestion: subQuestion));
-    _sayLetter();
   }
 
   addAnswer({required GameChoicesGameFinalModel? userChoose}) {

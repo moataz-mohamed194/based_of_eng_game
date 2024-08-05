@@ -19,6 +19,8 @@ class AddBeadNumberLineCubit extends Cubit<AddBeadNumberLineInitial> {
             allGameData: allGameData,
             tools: tools)) {
     reFormatGameData();
+    _sayLetter();
+
   }
 
   reStartIsCorrect() {
@@ -42,7 +44,6 @@ class AddBeadNumberLineCubit extends Cubit<AddBeadNumberLineInitial> {
         gameData: newData,
         finalGameLetters: finalGameLetters,
         correctAnswer: correctAns));
-    _sayLetter();
   }
 
   addAnswer({required String? userChoose}) {

@@ -5,6 +5,16 @@ abstract class AppImagesMath {
   static const String mathBgEC2 = "${mainPathOfImages}math_bg_ec2.png";
   static const String mathDragDrop = "${mainPathOfImages}drag_drop.png";
   static const String dragDropType = "${mainPathOfImages}drag_drop_type.png";
+  static const String block1 = "${mainPathOfImages}block1.svg";
+  static const String block2 = "${mainPathOfImages}block2.svg";
+  static const String block3 = "${mainPathOfImages}block3.svg";
+  static const String block4 = "${mainPathOfImages}block4.svg";
+  static const String block5 = "${mainPathOfImages}block5.svg";
+  static const String block6 = "${mainPathOfImages}block6.svg";
+  static const String block7 = "${mainPathOfImages}block7.svg";
+  static const String block8 = "${mainPathOfImages}block8.svg";
+  static const String block9 = "${mainPathOfImages}block9.svg";
+  static const String block10 = "${mainPathOfImages}block10.svg";
   static const String woodBgNumber = "${mainPathOfImages}wood_bg_number.png";
   static const String sub = "${mainPathOfImages}sub.png";
   static const String lineOfNumbers = "${mainPathOfImages}line_of_numbers.png";

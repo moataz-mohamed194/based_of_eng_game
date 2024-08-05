@@ -74,7 +74,7 @@ class BasedOfMath extends StatelessWidget {
         alignment: Alignment.topRight,
         children: [
           Positioned(
-              top: (stateOfGame.basicData as MathProgram).isEc1 ? 92.h : 60.h,
+              top: 60.h,
               // start: 0,
               // start: 55.w,
               width: MediaQuery.of(context).size.width,

@@ -136,6 +136,7 @@ class CurrentGamePhoneticsState extends Equatable {
   CurrentGamePhoneticsState clearAllData() {
     return CurrentGamePhoneticsState(
       index: 0,
+      countOfCorrectAnswers: 0,
       context: context,
       backButton: backButton,
       showAlert: false,

@@ -19,6 +19,8 @@ class AddRodNumberLineCubit extends Cubit<AddRodNumberLineInitial> {
             allGameData: allGameData,
             tools: tools)) {
     reFormatGameData();
+    _sayLetter();
+
   }
 
   reStartIsCorrect() {
@@ -52,7 +54,6 @@ class AddRodNumberLineCubit extends Cubit<AddRodNumberLineInitial> {
         gameChoices: gameChoices,
         finalGameLetters: finalGameLetters,
         correctAnswer: correctAnswer));
-    _sayLetter();
   }
 
   addAnswer({required GameChoicesGameFinalModel? userChoose}) {

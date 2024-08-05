@@ -65,7 +65,8 @@ class DragAddScreen extends StatelessWidget {
                                     tools: gameState.tools,
                                     isUp: false,
                                     isHide: gameState.isCorrect != true);
-                              }, onAcceptWithDetails: (item) async {
+                              },
+                                  onAcceptWithDetails: (item) async {
                                 if (context
                                     .read<CurrentGamePhoneticsCubit>()
                                     .ableButton()) {

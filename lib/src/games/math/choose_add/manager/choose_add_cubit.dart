@@ -22,6 +22,8 @@ class ChooseAddCubit extends Cubit<ChooseAddInitial> {
             gameData: allGameData[0],
             index: 0)) {
     reFormatGameData();
+    _sayLetter();
+
   }
 
   reFormatGameData() {
@@ -50,7 +52,6 @@ class ChooseAddCubit extends Cubit<ChooseAddInitial> {
         gameChoices: gameChoices,
         mainQuestion: mainQuestion,
         subQuestion: subQuestion));
-    _sayLetter();
   }
 
   addAnswer({required GameChoicesGameFinalModel? userChoose}) {

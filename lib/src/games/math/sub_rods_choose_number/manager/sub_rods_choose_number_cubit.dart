@@ -19,6 +19,8 @@ class SubRodsChooseNumberCubit extends Cubit<SubRodsChooseNumberInitial> {
             allGameData: allGameData,
             tools: tools)) {
     reFormatGameData();
+    _sayLetter();
+
   }
 
   reStartIsCorrect() {
@@ -47,8 +49,7 @@ class SubRodsChooseNumberCubit extends Cubit<SubRodsChooseNumberInitial> {
         gameData: newData,
         finalGameLetters: finalGameLetters,
         gameChoices: gameChoices));
-    _sayLetter();
-  }
+   }
 
   addAnswer({required GameChoicesGameFinalModel? userChoose}) {
     if (userChoose?.isCorrect == 1) {

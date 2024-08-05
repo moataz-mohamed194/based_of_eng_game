@@ -22,6 +22,8 @@ class DragSticksCubit extends Cubit<DragSticksInitial> {
             countOfAnswers: 0)) {
     subAction(subBloc: subBloc);
     reFormatGameData();
+    _sayLetter();
+
   }
   addAnswer(
       {required GameImagesGameFinalModel userChoose,
@@ -68,7 +70,6 @@ class DragSticksCubit extends Cubit<DragSticksInitial> {
         gameAnswers: [],
         gameImages: gameImages,
         gameLetters: gameLetters));
-    _sayLetter();
   }
 
   updateTheCurrentGame({required int newIndex}) {

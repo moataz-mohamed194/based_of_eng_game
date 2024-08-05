@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:based_of_eng_game/src/core/theme_text.dart';
 import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +75,8 @@ class ChooseAddScreen extends StatelessWidget {
                                   _answer(
                                       gameState: gameState,
                                       question: gameState.gameChoices![index],
+                                      checkIfIsTheLastQuestionOfGame:()=> context.read<CurrentGamePhoneticsCubit>().checkIfIsTheLastQuestionOfGame(
+                                          queations: gameState.allGameData.length),
                                       mainBloc:
                                       context.read<CurrentGamePhoneticsCubit>(),
                                       bloc: context.read<ChooseAddCubit>(),
@@ -123,9 +127,9 @@ class ChooseAddScreen extends StatelessWidget {
         },
 
         if (tools == ToolsOfMath.blocks) ...{
-          GetTheBlocks(
+          FittedBox(child: GetTheBlocks(
             countOfBoxes: int.parse("${question?.letter ?? 0}"),
-          )
+          ),)
         } else if (tools == ToolsOfMath.beads) ...{
           GetTheBeads(
             countOfBalls: int.parse("${question?.letter ?? 0}"),
@@ -166,6 +170,7 @@ class ChooseAddScreen extends StatelessWidget {
     required ChooseAddInitial gameState,
     required CurrentGamePhoneticsCubit mainBloc,
     required ChooseAddCubit bloc,
+    required bool Function() checkIfIsTheLastQuestionOfGame,
     required ToolsOfMath tools,
   }) {
     return Row(
@@ -174,21 +179,18 @@ class ChooseAddScreen extends StatelessWidget {
           onTap: () async {
             if (mainBloc.ableButton()) {
               bool stateOfAnswer = bloc.addAnswer(userChoose: question);
+              print('stateOfAnswer:$stateOfAnswer');
+              log('stateOfAnswer:$stateOfAnswer');
               if (stateOfAnswer == true) {
                 await mainBloc
                     .addSuccessAnswer(
                         questions: gameState.allGameData.length,
                         correctAnswers: gameState.correctAnswers + 1)
                     .whenComplete(() {
-                  bool isLastQuestion = mainBloc.checkIfIsTheLastQuestionOfGame(
-                      queations: gameState.allGameData.length);
-
-                  if (isLastQuestion) {
-                    // Future.delayed(const Duration(seconds: 2),
-                    //     () async {
-                    //   Navigator.of(context).pop();
-                    // });
-                  } else {
+                  bool isLastQuestion = checkIfIsTheLastQuestionOfGame();
+                  print("isLastQuestion:$isLastQuestion");
+                  log("isLastQuestion:$isLastQuestion");
+                  if (isLastQuestion!=true){
                     Future.delayed(const Duration(seconds: 2), () async {
                       await mainBloc.updateIndexOfCurrentGame();
                       bloc.updateTheCurrentGame(index: mainBloc.state.index);
