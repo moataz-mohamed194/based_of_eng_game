@@ -43,39 +43,47 @@ class DDTChangeCubit extends Cubit<DDTChangeInitial> {
     await TalkTts.startTalk(text: state.gameData.inst ?? '');
   }
 
-  bool addTheDragAnswer(
+  bool? addTheDragAnswer(
       {required GameChoicesGameFinalModel answer, required bool isFirst}) {
-    bool result = mainAddTheDragAnswer(answer: answer, isFirst: isFirst);
+    bool? result = mainAddTheDragAnswer(answer: answer, isFirst: isFirst);
     if (result == false) {
       emit(state.clearTheDataOfChoose());
     }
     return result;
   }
 
-  bool mainAddTheDragAnswer(
+  bool? mainAddTheDragAnswer(
       {required GameChoicesGameFinalModel answer, required bool isFirst}) {
     if (answer.isCorrect == 1) {
       if (isFirst == true) {
         emit(state.copyWith(firstChooseInDrag: answer));
-        return true;
       } else if (isFirst == false) {
-        int result = int.parse("${state.firstChooseInDrag?.choice ?? 0}") +
-            int.parse("${answer.choice ?? 0}");
-        if ("$result" == state.numberOfAnswerFirstBox) {
-          int countOfCorrectAnswers = state.countOfCorrectAnswers ?? 0;
-          countOfCorrectAnswers = countOfCorrectAnswers + 1;
-          emit(state.copyWith(
-              secondChooseInDrag: answer,
-              countOfCorrectAnswers: countOfCorrectAnswers));
-          return true;
-        } else {
-          return false;
-        }
+        emit(state.copyWith(secondChooseInDrag: answer));
+      }
+      if(checkIs2DragCompleted()==true){
+        return checkAfterAddThe2Drag();
+      }else{
+        return null;
       }
     } else {
       return false;
     }
     return false;
+  }
+  checkIs2DragCompleted(){
+    return state.firstChooseInDrag!=null && state.secondChooseInDrag!=null;
+  }
+
+  checkAfterAddThe2Drag() {
+    GameChoicesGameFinalModel firstChoose = state.firstChooseInDrag!;
+    GameChoicesGameFinalModel secondChoose = state.secondChooseInDrag!;
+    int result = int.parse("${firstChoose.choice ?? 0}") +
+        int.parse("${secondChoose.choice ?? 0}");
+    if ("$result" == state.numberOfAnswerFirstBox) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   bool addTheTypingAnswer({required String answer, required bool isFirst}) {
@@ -87,27 +95,32 @@ class DDTChangeCubit extends Cubit<DDTChangeInitial> {
   }
 
   bool mainAddTheTypingAnswer({required String answer, required bool isFirst}) {
-    if (state.firstChooseInDrag == null && state.secondChooseInDrag == null) {
+    bool stateDrag = checkIs2DragCompleted();
+    print('stateDrag:$stateDrag');
+    if(stateDrag!=true){
       return false;
-    }
-    if (isFirst == true) {
-      if (answer == state.numberOfAnswerFirstBox) {
-        emit(state.copyWith(showTheAnswerOfFirstTyping: true));
-        return true;
-      }
-      return false;
-    } else if (isFirst == false) {
-      if (state.firstChooseInDrag == null &&
-          state.secondChooseInDrag == null &&
-          state.showTheAnswerOfFirstTyping == true) {
+    }else{
+      if (isFirst == true) {
+        if (answer == state.numberOfAnswerFirstBox) {
+          emit(state.copyWith(showTheAnswerOfFirstTyping: true));
+          return true;
+        }
         return false;
       }
-      if (answer == state.correctAns) {
-        emit(state.copyWith(showTheAnswerOfSecondTyping: true));
-        return true;
-      } else {
-        return false;
+      else if (isFirst == false) {
+        if (state.firstChooseInDrag == null ||
+            state.secondChooseInDrag == null ||
+            (state.showTheAnswerOfFirstTyping != true)) {
+          return false;
+        }
+        if (answer == state.correctAns) {
+          emit(state.copyWith(showTheAnswerOfSecondTyping: true));
+          return true;
+        } else {
+          return false;
+        }
       }
+
     }
 
     return false;

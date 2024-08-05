@@ -193,7 +193,7 @@ class DDtNumberScreen extends StatelessWidget {
                                           .addTheDragAnswer(
                                               answer: item.data, isFirst: true);
                                       print("stateOfAnswer:$stateOfAnswer");
-                                      if (stateOfAnswer != true) {
+                                      if (stateOfAnswer == false) {
                                         await context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addWrongAnswer(
@@ -232,7 +232,7 @@ class DDtNumberScreen extends StatelessWidget {
                                           .addTheDragAnswer(
                                               answer: item.data,
                                               isFirst: false);
-                                      if (stateOfAnswer != true) {
+                                      if (stateOfAnswer == false) {
                                         await context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addWrongAnswer(
