@@ -1,3 +1,6 @@
+import 'package:based_of_eng_game/src/core/games_structure/arabic_letters_phonetics/arabic_game_letter_base.dart';
+import 'package:flutter/material.dart';
+
 import '../game_types/assets_images_math.dart';
 import '../game_types/game_phonatics_types.dart';
 import 'basic_of_chapter.dart';
@@ -108,7 +111,7 @@ abstract class HandlingActionsAndDataOfChapters {
         .toLowerCase()
         .contains(MainDataOfChaptersTypes.blueUnit.text())) {
       return BlueUnit(mineGameData: gameData).background;
-    }
+    } 
     return null;
   }
 
@@ -199,7 +202,7 @@ abstract class HandlingActionsAndDataOfChapters {
             isArabicSub:
                 BasicOfGameData.enumValues.contains(programName.toLowerCase()),
             subBackGround: detectTheArabicChapter(
-                programName: lessonName,
+                programName: unitName,
                 gameData: BasicOfGameData.getTheGameType(
                     gameType: subGame.toLowerCase(), audioFlag: audioFlag)),
             mineGameData: BasicOfGameData.getTheGameType(

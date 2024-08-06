@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
                   //arabic
 // ..add(GetContactLessonRequest(lessonId: 151, gameId: 1951)),
 // ..add(GetContactLessonRequest(lessonId: 151, gameId: 1955)),
-..add(GetContactLessonRequest(lessonId: 151, gameId: 1360)),
+..add(GetContactLessonRequest(lessonId: 4, gameId: 167)),
 // ..add(GetContactLessonRequest(lessonId: 151, gameId: 1955)),
 // ..add(GetContactLessonRequest(lessonId: 151, gameId: 1936)),
 
@@ -53,10 +53,11 @@ class MyApp extends StatelessWidget {
                       } else if (state is GetContactInitial) {
                         try {
                           MainDataOfChapters? dataType =
-                              state.getMainContactData(index: 0);
+                              state.getMainContactData(index: 0, );
 
                           debugPrint('dataType:$dataType');
                         } catch (e) {
+                          print('error data type'+e.toString());
                           context
                               .read<ContactLessonBloc>()
                               .add(ThisTypeNotSupportedRequest());
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
                         return MainScreenOfGames(
                           stateOfGameData: stateOfGameData.data,
                           dataOfBasesGame:
-                              stateOfGameData.getMainContactData(index: 0),
+                              stateOfGameData.getMainContactData(index: 0,  ),
                           actionOfCompleteGame: (int countOfStars) {
                             // List<int> listOfIds = stateOfGameData.data;
                             List<int> listOfIds = stateOfGameData.data

@@ -31,6 +31,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
       {super.key, required this.stateOfGame, required this.gamesData});
   @override
   Widget build(BuildContext context) {
+
+
     return Expanded(
         child: Stack(
       alignment: Alignment.topCenter,
@@ -92,10 +94,13 @@ class BasedOfGamePhonetics extends StatelessWidget {
                   )
                 } else if (stateOfGame.basicData?.gameData is Tracking) ...{
                   BlocProvider<TracingCubit>(
-                      create: (_) => TracingCubit(
-                            gameData: gamesData[stateOfGame.index],
-                            stateOfGame: stateOfGame,
-                          ),
+                      create: (_) {
+                        
+                        return TracingCubit(
+                          gameData: gamesData[stateOfGame.index],
+                          stateOfGame: stateOfGame,
+                        );
+                      },
                       child: const TracingGame()),
                 }
               ],
@@ -106,7 +111,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
               left: 20,
               child: Image.asset(
                 stateOfGame.basicData?.gameData?.titleImageEn ?? '',
-                height:MediaQuery.of(context).size.height > 650 ? .15.sh:75.h,
+                height:
+                    MediaQuery.of(context).size.height > 650 ? .15.sh : 75.h,
                 fit: BoxFit.fill,
               )),
           Positioned(

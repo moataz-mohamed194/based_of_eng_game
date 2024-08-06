@@ -13,7 +13,7 @@ class GetContactInitial extends ContactLessonState {
 
   GetContactInitial({required this.data});
 
-  MainDataOfChapters? getMainContactData({required int index}) {
+  MainDataOfChapters? getMainContactData({required int index,}) {
     String subLetter = data[index].mainLetter ?? '';
     String unitName = data[index].lesson?.unit?.name ?? '';
     String subGame = data[index].gameTypes?.name ?? '';

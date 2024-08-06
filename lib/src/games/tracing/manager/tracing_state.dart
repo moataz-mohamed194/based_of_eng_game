@@ -3,33 +3,36 @@ part of 'tracing_cubit.dart';
 class TracingInitial extends Equatable {
   final GameFinalModel gameData;
   final CurrentGamePhoneticsState stateOfGame;
-  final List<Color?> colorsOfPaths;
   final List<Offset> paths;
   final Offset? currentPosition;
-  final int? countOfPaths;
+  final int currentDrawingIndex;
+  final List<Offset> points;
 
-  const TracingInitial(
-      {required this.gameData,
-      required this.paths,
-      required this.colorsOfPaths,
-      this.countOfPaths,
-      this.currentPosition,
-      required this.stateOfGame});
+  const TracingInitial({
+    required this.gameData,
+    required this.paths,
+    this.currentPosition,
+    required this.stateOfGame,
+    this.currentDrawingIndex = 0,
+    this.points = const [],
+  });
 
-  TracingInitial copyWith(
-      {GameFinalModel? gameData,
-      List<Color?>? colorsOfPaths,
-      List<Offset>? paths,
-      CurrentGamePhoneticsState? stateOfGame,
-      Offset? currentPosition,
-      int? countOfPaths}) {
+  TracingInitial copyWith({
+    GameFinalModel? gameData,
+    List<Offset>? paths,
+    CurrentGamePhoneticsState? stateOfGame,
+    Offset? currentPosition,
+    int? countOfPaths,
+    int? currentDrawingIndex,
+    List<Offset>? points,
+  }) {
     return TracingInitial(
       gameData: gameData ?? this.gameData,
       stateOfGame: stateOfGame ?? this.stateOfGame,
       paths: paths ?? this.paths,
-      colorsOfPaths: colorsOfPaths ?? this.colorsOfPaths,
       currentPosition: currentPosition ?? this.currentPosition,
-      countOfPaths: countOfPaths ?? this.countOfPaths,
+      currentDrawingIndex: currentDrawingIndex ?? this.currentDrawingIndex,
+      points: points ?? this.points,
     );
   }
 
@@ -37,31 +40,29 @@ class TracingInitial extends Equatable {
     return TracingInitial(
       gameData: gameData,
       stateOfGame: stateOfGame,
-      colorsOfPaths: colorsOfPaths,
       currentPosition: null,
       paths: paths,
-      countOfPaths: countOfPaths,
     );
   }
 
   clearData() {
     return TracingInitial(
       gameData: gameData,
-      countOfPaths: null,
       paths: paths,
       currentPosition: null,
       stateOfGame: stateOfGame,
-      colorsOfPaths: [],
+      points:  [],
+      currentDrawingIndex: 0
     );
   }
 
   @override
   List<Object?> get props => [
         gameData,
-        colorsOfPaths,
         paths,
         currentPosition,
-        countOfPaths,
-        stateOfGame
+        stateOfGame,
+        points,
+        currentDrawingIndex
       ];
 }
