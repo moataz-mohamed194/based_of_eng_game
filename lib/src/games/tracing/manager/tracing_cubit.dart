@@ -104,11 +104,11 @@ class TracingCubit extends Cubit<TracingInitial> {
     required Offset point
   }) {
     if (index < state.stateOfGame.basicData!.pathsModels.length) {
-      state.stateOfGame.basicData!.setdrawingShapeCurrentIndex = index;
+      state.stateOfGame.basicData!.setDrawingShapeCurrentIndex = index;
 
       emit(state.copyWith(currentDrawingIndex: index,currentPosition:point));
       print('index' +
-          state.stateOfGame.basicData!.getdrawingShapeCurrentIndex.toString());
+          state.stateOfGame.basicData!.getDrawingShapeCurrentIndex.toString());
     }
   }
 
@@ -116,7 +116,7 @@ class TracingCubit extends Cubit<TracingInitial> {
     required int index,
     required Offset endOffset
   }) {
-          state.stateOfGame.basicData!.setdrawingShapeCurrentIndex = index;
+          state.stateOfGame.basicData!.setDrawingShapeCurrentIndex = index;
 
     emit(state.copyWith(currentDrawingIndex: index,currentPosition: endOffset));
   }

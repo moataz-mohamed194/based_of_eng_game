@@ -23,9 +23,7 @@ class GemPhonetics extends MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfS;
 @override
-  void addPointmainAddPoint(DragUpdateDetails details, TracingCubit cubit, TracingInitial stateOfGame, BuildContext context) {
-    // TODO: implement addPointmainAddPoint
-    
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit, TracingInitial stateOfGame, BuildContext context) {
     ArabicShapePathHelper.mainAddPoint(details, cubit, stateOfGame, context);
   }
   @override
@@ -105,7 +103,7 @@ class GemPhonetics extends MainDataOfChapters {
   late List<PathProviderModel> pathsModels;
 
   @override
-  int get getdrawingShapeCurrentIndex => drawingShapecurrentIndex;
+  int get getDrawingShapeCurrentIndex => drawingShapecurrentIndex;
 
   @override
   bool? isArabic;
@@ -119,7 +117,7 @@ class GemPhonetics extends MainDataOfChapters {
       };
 
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
 }

@@ -43,7 +43,6 @@ class _TracingGame extends State<TracingGame> {
         Transform.scale(
           scale: (.1) * (MediaQuery.sizeOf(context).width / 100),
           child: Container(
-            color: Colors.amber,
             width: 400,
             height: 320,
             margin: EdgeInsets.only(
@@ -84,7 +83,7 @@ class _TracingGame extends State<TracingGame> {
                                   onPanUpdate: (details) {
                                     print('333344');
                                     stateOfGame.stateOfGame.basicData!
-                                        .addPointmainAddPoint(details,
+                                        .addPointMainAddPoint(details,
                                             tracingCubit, stateOfGame, context);
                                   },
                                   onPanEnd: (details) async {

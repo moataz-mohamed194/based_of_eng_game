@@ -162,13 +162,13 @@ abstract class MainDataOfChapters {
   late List<PathProviderModel> pathsModels;
 
   // Define the addPoint function as abstract so it can be overridden
-  void addPointmainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
       TracingInitial stateOfGame, BuildContext context) {
     PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
   }
 
-  int get getdrawingShapeCurrentIndex;
-  set setdrawingShapeCurrentIndex(int index);
+  int get getDrawingShapeCurrentIndex;
+  set setDrawingShapeCurrentIndex(int index);
 }
 
 class SPhonetics extends MainDataOfChapters {
@@ -236,7 +236,7 @@ class SPhonetics extends MainDataOfChapters {
   late List<PathProviderModel> pathsModels;
 
   @override
-  int get getdrawingShapeCurrentIndex => drawingShapecurrentIndex;
+  int get getDrawingShapeCurrentIndex => drawingShapecurrentIndex;
 
   @override
   bool? isArabic;
@@ -250,7 +250,7 @@ class SPhonetics extends MainDataOfChapters {
       };
 
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
 }
@@ -329,7 +329,7 @@ class APhonetics extends MainDataOfChapters {
   late List<PathProviderModel> pathsModels;
 
   @override
-  int get getdrawingShapeCurrentIndex => drawingShapecurrentIndex;
+  int get getDrawingShapeCurrentIndex => drawingShapecurrentIndex;
 
   @override
   bool? isArabic;
@@ -343,7 +343,7 @@ class APhonetics extends MainDataOfChapters {
       };
 
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
 }
@@ -365,9 +365,9 @@ class FPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -452,7 +452,7 @@ class MPhonetics extends MainDataOfChapters {
   late List<PathProviderModel> pathsModels;
 
   @override
-  int get getdrawingShapeCurrentIndex => drawingShapecurrentIndex;
+  int get getDrawingShapeCurrentIndex => drawingShapecurrentIndex;
 
   @override
   bool? isArabic;
@@ -466,7 +466,7 @@ class MPhonetics extends MainDataOfChapters {
       };
 
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
 }
@@ -482,9 +482,9 @@ class KPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -520,9 +520,9 @@ class QPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -558,9 +558,9 @@ class VPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -596,9 +596,9 @@ class XPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -634,9 +634,9 @@ class YPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -672,9 +672,9 @@ class ZPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -755,7 +755,7 @@ class TPhonetics extends MainDataOfChapters {
   late List<PathProviderModel> pathsModels;
 
   @override
-  int get getdrawingShapeCurrentIndex => drawingShapecurrentIndex;
+  int get getDrawingShapeCurrentIndex => drawingShapecurrentIndex;
 
   @override
   bool? isArabic;
@@ -769,7 +769,7 @@ class TPhonetics extends MainDataOfChapters {
       };
 
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
 }
@@ -792,9 +792,9 @@ class CPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -830,9 +830,9 @@ class RPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -868,9 +868,9 @@ class IPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -906,9 +906,9 @@ class PPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -944,9 +944,9 @@ class HPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -982,9 +982,9 @@ class JPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1020,9 +1020,9 @@ class UPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1058,9 +1058,9 @@ class LPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1096,9 +1096,9 @@ class BPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1134,9 +1134,9 @@ class OPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1172,9 +1172,9 @@ class GPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1210,9 +1210,9 @@ class DPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1223,7 +1223,6 @@ class DPhonetics extends MainDataOfChapters {
     gameData = mineGameData;
   }
 
-  @override
   int? countOfPartsOfLettersForTracing;
 
   @override
@@ -1248,9 +1247,9 @@ class WPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1286,9 +1285,9 @@ class EPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1324,9 +1323,9 @@ class NPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1362,9 +1361,9 @@ class ShortVowels extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1405,9 +1404,9 @@ class UpVowels extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1436,9 +1435,9 @@ class ConnectionWithoutSortingCups extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1479,9 +1478,9 @@ class ConnectionSortingCups extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1521,9 +1520,9 @@ class RedPhonetics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1559,9 +1558,9 @@ class BlueUnit extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1597,9 +1596,9 @@ class GreenUnit extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1635,9 +1634,9 @@ class YellowUnit extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1673,9 +1672,9 @@ class VioletUnit extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1711,9 +1710,9 @@ class OrangeUnit extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1749,9 +1748,9 @@ class MathProgram extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1787,9 +1786,9 @@ class FirstUnitArabic extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1825,9 +1824,9 @@ class RUnitArabic extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1864,9 +1863,9 @@ class RUnitPhonics extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
@@ -1909,9 +1908,9 @@ class ConsonantVowels extends MainDataOfChapters {
   @override
   BasicOfGameData? gameData;
   @override
-  int get getdrawingShapeCurrentIndex => 0;
+  int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setdrawingShapeCurrentIndex(int index) {
+  set setDrawingShapeCurrentIndex(int index) {
     // TODO: implement setdrawingShapeCurrentIndex
   }
   @override

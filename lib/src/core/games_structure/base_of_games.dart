@@ -178,24 +178,6 @@ GemPhonetics,
                 gameType: subGame.toLowerCase(), audioFlag: audioFlag));
       }
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
-          // return GemPhonetics(
-          // mineGameData: BasicOfGameData.getTheGameType(
-          //     gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-      return SPhonetics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-
-      // return TPhonetics(
-      //     mineGameData: BasicOfGameData.getTheGameType(
-      //         gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-
-      // return APhonetics(
-      //     mineGameData: BasicOfGameData.getTheGameType(
-      //         gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-          //   return MPhonetics(
-          // mineGameData: BasicOfGameData.getTheGameType(
-          //     gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
       return SPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
