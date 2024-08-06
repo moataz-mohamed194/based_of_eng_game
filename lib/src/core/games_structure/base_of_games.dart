@@ -199,7 +199,7 @@ abstract class HandlingActionsAndDataOfChapters {
             isArabicSub:
                 BasicOfGameData.enumValues.contains(programName.toLowerCase()),
             subBackGround: detectTheArabicChapter(
-                programName: lessonName,
+                programName: unitName,
                 gameData: BasicOfGameData.getTheGameType(
                     gameType: subGame.toLowerCase(), audioFlag: audioFlag)),
             mineGameData: BasicOfGameData.getTheGameType(
