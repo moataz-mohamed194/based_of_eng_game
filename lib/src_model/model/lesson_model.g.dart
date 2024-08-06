@@ -18,6 +18,7 @@ LessonGameFinalModel _$LessonGameFinalModelFromJson(
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       type: json['type'] as String?,
+      mobLessonName: json['mob_lesson_name'] as String?,
       unit: json['unit'] == null
           ? null
           : UserCourseGameFinalModel.fromJson(
@@ -36,5 +37,6 @@ Map<String, dynamic> _$LessonGameFinalModelToJson(
       'name': instance.name,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
+      'mob_lesson_name': instance.mobLessonName,
       'unit': instance.unit?.toJson(),
     };
