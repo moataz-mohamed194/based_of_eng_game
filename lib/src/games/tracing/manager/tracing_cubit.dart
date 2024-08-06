@@ -22,8 +22,7 @@ class TracingCubit extends Cubit<TracingInitial> {
     emit(state.clearData());
 
     TalkTts.startTalk(text: state.gameData.inst ?? '');
-    emit(state.copyWith(
-    ));
+
   }
 
   // Future<List<Offset>> getOffsetsFromPath(Path path) {

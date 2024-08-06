@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:svg_path_parser/svg_path_parser.dart';
-import '../../../core/phonetics_color.dart';
+import '../../../../core/phonetics_color.dart';
 import 'package:based_of_eng_game/src/games/tracing/model/path_provider_model.dart';
 
 class FlipBookPainterLetterS4Test extends CustomPainter {

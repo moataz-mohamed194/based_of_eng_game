@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:based_of_eng_game/src/core/phonetics_color.dart';
 import 'package:based_of_eng_game/src/games/tracing/model/path_provider_model.dart';
-import 'package:based_of_eng_game/src/games/tracing/widget/letter_s4.dart';
+import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_s4.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_path_parser/svg_path_parser.dart';
 

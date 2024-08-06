@@ -7,11 +7,10 @@ import 'package:based_of_eng_game/src/games/tracing/svg_strings/svg_strings.dart
 import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_a_paint.dart';
 import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_t_paint.dart';
 import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/m_letter_paint.dart';
-import 'package:based_of_eng_game/src/games/tracing/widget/letter_s4.dart';
+import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_s4.dart';
 import 'package:flutter/material.dart';
+import 'package:svg_path_parser/svg_path_parser.dart';
 
-import '../../games/tracing/widget/letter_m.dart';
-import '../../games/tracing/widget/letter_s3.dart';
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
 import '../game_types/assets_images_math.dart';
@@ -179,12 +178,8 @@ abstract class MainDataOfChapters {
   set setDrawingShapeCurrentIndex(int index);
 }
 
-class SPhonetics extends MainDataOfChapters {
+class SPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
-
-
-
-
 
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -261,9 +256,15 @@ class SPhonetics extends MainDataOfChapters {
   set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
+
+  @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 }
 
-class APhonetics extends MainDataOfChapters {
+class APhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
 
   @override
@@ -287,7 +288,6 @@ class APhonetics extends MainDataOfChapters {
           endOffset: Offset(102.5, 46.6),
           fillDirection: Direction.xPositive,
           index: 0,
-          
           path: SvgStrings.a1,
           startPoint: Offset(0, 0),
           strokeWidth: 150,
@@ -298,15 +298,13 @@ class APhonetics extends MainDataOfChapters {
               dottedPathColor: AppColorPhonetics.white),
           exteraFillPoint: null),
       PathProviderModel(
-          startPointOfShape:           Offset(102.5, 46.6)
-,
+          startPointOfShape: Offset(102.5, 46.6),
           endOffset: Offset(127.5, 179.2),
           exteraFillPoint: Offset(15.8, 110.5),
-       indexPathModel: IndexPathModel(
-              indexPathPath: SvgStrings.a1Index, indexPathColor: Colors.white),          fillDirection: Direction.xNegative,
-
+          indexPathModel: IndexPathModel(
+              indexPathPath: SvgStrings.a1Index, indexPathColor: Colors.white),
+          fillDirection: Direction.xNegative,
           dottedPathModel: DottedPathModel(
-
               dottedPath: SvgStrings.a2Doted,
               dottedPathColor: AppColorPhonetics.white),
           index: 1,
@@ -317,11 +315,10 @@ class APhonetics extends MainDataOfChapters {
           startPointOfShape: Offset(168.7, 16.6),
           endOffset: Offset(174.0, 201.0),
           exteraFillPoint: null,
-          indexPathModel: IndexPathModel(indexPathPath: SvgStrings.a2Index,indexPathColor:  Colors.white),
+          indexPathModel: IndexPathModel(
+              indexPathPath: SvgStrings.a2Index, indexPathColor: Colors.white),
           fillDirection: Direction.yNegative,
-
           dottedPathModel: DottedPathModel(
-
               dottedPath: SvgStrings.a3Dotted,
               dottedPathColor: AppColorPhonetics.white),
           index: 1,
@@ -354,19 +351,19 @@ class APhonetics extends MainDataOfChapters {
   set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
+
+  @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 }
 
-class FPhonetics extends MainDataOfChapters {
+class FPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
   @override
   String background = AppImagesPhonetics.backGroundOfA;
 
@@ -376,7 +373,7 @@ class FPhonetics extends MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -387,13 +384,16 @@ class FPhonetics extends MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing;
+  bool? isArabic;
 
   @override
-  bool? isArabic;
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 }
 
-class MPhonetics extends MainDataOfChapters {
+class MPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
 
   @override
@@ -477,6 +477,12 @@ class MPhonetics extends MainDataOfChapters {
   set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
+
+  @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 }
 
 class KPhonetics implements MainDataOfChapters {
@@ -493,7 +499,7 @@ class KPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -504,21 +510,11 @@ class KPhonetics implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing = 16;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-         throw UnimplementedError();
-          };
-
-  @override
   bool? isArabic;
 
   @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit, TracingInitial stateOfGame, BuildContext context) {
-    // TODO: implement addPointMainAddPoint
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
   }
 }
 
@@ -536,7 +532,7 @@ class QPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -547,14 +543,10 @@ class QPhonetics implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing = 16;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-           throw UnimplementedError();
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   bool? isArabic;
@@ -569,12 +561,17 @@ class VPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfV;
 
   @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
+
+  @override
   BasicOfGameData? gameData;
   @override
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -583,16 +580,6 @@ class VPhonetics implements MainDataOfChapters {
   VPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing = 16;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-           throw UnimplementedError();
-          };
 
   @override
   bool? isArabic;
@@ -604,6 +591,12 @@ class XPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
+
+  @override
   String background = AppImagesPhonetics.backGroundOfX;
 
   @override
@@ -612,7 +605,7 @@ class XPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -621,16 +614,6 @@ class XPhonetics implements MainDataOfChapters {
   XPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing = 16;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-           throw UnimplementedError();
-          };
 
   @override
   bool? isArabic;
@@ -642,6 +625,12 @@ class YPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
+
+  @override
   String background = AppImagesPhonetics.backGroundOfY;
 
   @override
@@ -650,7 +639,7 @@ class YPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -659,16 +648,6 @@ class YPhonetics implements MainDataOfChapters {
   YPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing = 16;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-           throw UnimplementedError();
-          };
 
   @override
   bool? isArabic;
@@ -680,6 +659,12 @@ class ZPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
+
+  @override
   String background = AppImagesPhonetics.backGroundOfZ;
 
   @override
@@ -688,7 +673,7 @@ class ZPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -699,21 +684,12 @@ class ZPhonetics implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing = 16;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-           throw UnimplementedError();
-          };
-
-  @override
   bool? isArabic;
 }
 
 class TPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
+
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
@@ -771,9 +747,7 @@ class TPhonetics implements MainDataOfChapters {
 
   @override
   bool? isArabic;
-}
 
-class CPhonetics implements MainDataOfChapters {
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter =>
       (List<Offset> points) {
@@ -786,19 +760,24 @@ class CPhonetics implements MainDataOfChapters {
   set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
+
+  @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 }
 
-class CPhonetics extends MainDataOfChapters {
+class CPhonetics implements MainDataOfChapters {
+  @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
+
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
 
   @override
   String background = AppImagesPhonetics.backGroundOfC;
@@ -808,9 +787,6 @@ class CPhonetics extends MainDataOfChapters {
   @override
   int get getDrawingShapeCurrentIndex => 0;
   @override
-  set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
-  }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
   @override
@@ -820,10 +796,12 @@ class CPhonetics extends MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing;
+  bool? isArabic;
 
   @override
-  bool? isArabic;
+  set setDrawingShapeCurrentIndex(int index) {
+
+  }
 }
 
 class RPhonetics implements MainDataOfChapters {
@@ -832,14 +810,13 @@ class RPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  String background = AppImagesPhonetics.backGroundOfR;
 
   @override
-  String background = AppImagesPhonetics.backGroundOfR;
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   BasicOfGameData? gameData;
@@ -847,7 +824,7 @@ class RPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -856,9 +833,6 @@ class RPhonetics implements MainDataOfChapters {
   RPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -870,11 +844,10 @@ class IPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   String background = AppImagesPhonetics.backGroundOfI;
@@ -885,7 +858,7 @@ class IPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -894,9 +867,6 @@ class IPhonetics implements MainDataOfChapters {
   IPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -911,11 +881,10 @@ class PPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfP;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   BasicOfGameData? gameData;
@@ -923,7 +892,7 @@ class PPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -932,9 +901,6 @@ class PPhonetics implements MainDataOfChapters {
   PPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -949,11 +915,10 @@ class HPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfH;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   BasicOfGameData? gameData;
@@ -961,7 +926,7 @@ class HPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -970,9 +935,6 @@ class HPhonetics implements MainDataOfChapters {
   HPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -984,11 +946,10 @@ class JPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   String background = AppImagesPhonetics.backGroundOfJ;
@@ -999,7 +960,7 @@ class JPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1008,9 +969,6 @@ class JPhonetics implements MainDataOfChapters {
   JPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -1022,11 +980,10 @@ class UPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   String background = AppImagesPhonetics.backGroundOfU;
@@ -1037,7 +994,7 @@ class UPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1046,9 +1003,6 @@ class UPhonetics implements MainDataOfChapters {
   UPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -1060,11 +1014,10 @@ class LPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   String background = AppImagesPhonetics.backGroundOfL;
@@ -1075,7 +1028,7 @@ class LPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1084,9 +1037,6 @@ class LPhonetics implements MainDataOfChapters {
   LPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -1101,11 +1051,10 @@ class BPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfB;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   BasicOfGameData? gameData;
@@ -1113,7 +1062,7 @@ class BPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1122,9 +1071,6 @@ class BPhonetics implements MainDataOfChapters {
   BPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -1136,11 +1082,10 @@ class OPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = Colors.white.withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   String background = AppImagesPhonetics.backGroundOfO;
@@ -1151,7 +1096,7 @@ class OPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1160,9 +1105,6 @@ class OPhonetics implements MainDataOfChapters {
   OPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -1174,11 +1116,10 @@ class GPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   String background = AppImagesPhonetics.backGroundOfG;
@@ -1189,7 +1130,7 @@ class GPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1198,9 +1139,6 @@ class GPhonetics implements MainDataOfChapters {
   GPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -1212,11 +1150,10 @@ class DPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   String background = AppImagesPhonetics.backGroundOfD;
@@ -1227,7 +1164,7 @@ class DPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1249,11 +1186,10 @@ class WPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   String background = AppImagesPhonetics.backGroundOfW;
@@ -1264,7 +1200,7 @@ class WPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1273,9 +1209,6 @@ class WPhonetics implements MainDataOfChapters {
   WPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -1287,11 +1220,10 @@ class EPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   String background = AppImagesPhonetics.backGroundOfE;
@@ -1302,7 +1234,7 @@ class EPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1311,9 +1243,6 @@ class EPhonetics implements MainDataOfChapters {
   EPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -1328,11 +1257,10 @@ class NPhonetics implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfN;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   BasicOfGameData? gameData;
@@ -1340,7 +1268,7 @@ class NPhonetics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1349,9 +1277,6 @@ class NPhonetics implements MainDataOfChapters {
   NPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 
   @override
   bool? isArabic;
@@ -1366,11 +1291,10 @@ class ShortVowels implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfShortVowels;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   BasicOfGameData? gameData;
@@ -1378,7 +1302,7 @@ class ShortVowels implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1394,9 +1318,6 @@ class ShortVowels implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing;
-
-  @override
   bool? isArabic;
 }
 
@@ -1409,11 +1330,10 @@ class UpVowels implements MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfShortVowels;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   BasicOfGameData? gameData;
@@ -1421,7 +1341,7 @@ class UpVowels implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1432,13 +1352,10 @@ class UpVowels implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing;
-
-  @override
   bool? isArabic;
 }
 
-class ConnectionWithoutSortingCups extends MainDataOfChapters {
+class ConnectionWithoutSortingCups implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
@@ -1447,12 +1364,18 @@ class ConnectionWithoutSortingCups extends MainDataOfChapters {
   String background = AppImagesPhonetics.backGroundOfConnect;
 
   @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
+
+  @override
   BasicOfGameData? gameData;
   @override
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1468,16 +1391,6 @@ class ConnectionWithoutSortingCups extends MainDataOfChapters {
   }
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
-
-  @override
-  int? countOfPartsOfLettersForTracing;
-
-  @override
   bool? isArabic;
 }
 
@@ -1485,6 +1398,12 @@ class ConnectionSortingCups implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   String background = AppImagesPhonetics.backGroundOfConnect;
@@ -1495,7 +1414,7 @@ class ConnectionSortingCups implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1511,16 +1430,6 @@ class ConnectionSortingCups implements MainDataOfChapters {
     background = subBackGround ?? background;
     isArabic = isArabicSub;
   }
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
-
-  @override
-  int? countOfPartsOfLettersForTracing;
 }
 
 class RedPhonetics implements MainDataOfChapters {
@@ -1532,12 +1441,18 @@ class RedPhonetics implements MainDataOfChapters {
   String background = AppImagesArabic.bgOfRedUnit;
 
   @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
+
+  @override
   BasicOfGameData? gameData;
   @override
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1546,16 +1461,6 @@ class RedPhonetics implements MainDataOfChapters {
   RedPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing = 14;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
 
   @override
   bool? isArabic;
@@ -1575,7 +1480,7 @@ class BlueUnit implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1586,14 +1491,10 @@ class BlueUnit implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing = 14;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   bool? isArabic;
@@ -1613,7 +1514,7 @@ class GreenUnit implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1624,14 +1525,10 @@ class GreenUnit implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing = 14;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   bool? isArabic;
@@ -1651,7 +1548,7 @@ class YellowUnit implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1662,14 +1559,10 @@ class YellowUnit implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing = 14;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   bool? isArabic;
@@ -1689,7 +1582,7 @@ class VioletUnit implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1700,14 +1593,10 @@ class VioletUnit implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing = 14;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   bool? isArabic;
@@ -1727,7 +1616,7 @@ class OrangeUnit implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1736,19 +1625,14 @@ class OrangeUnit implements MainDataOfChapters {
   OrangeUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-  @override
-  int? countOfPartsOfLettersForTracing = 14;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
-
   @override
   bool? isArabic;
+
+  @override
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 }
 
 class MathProgram implements MainDataOfChapters {
@@ -1770,17 +1654,28 @@ class MathProgram implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing = 14;
-
-  @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   bool? isArabic;
+
+  @override
+  int get getDrawingShapeCurrentIndex => throw UnimplementedError();
+
+  @override
+  CustomPainter? Function(List<Offset> points)? get newTracingLetter =>
+      throw UnimplementedError();
+
+  @override
+  set setDrawingShapeCurrentIndex(int index) {
+
+  }
+
+  @override
+  late List<PathProviderModel> pathsModels;
 }
 
 class FirstUnitArabic implements MainDataOfChapters {
@@ -1797,7 +1692,7 @@ class FirstUnitArabic implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1808,14 +1703,10 @@ class FirstUnitArabic implements MainDataOfChapters {
   }
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
-
-  @override
-  int? countOfPartsOfLettersForTracing;
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   bool? isArabic = true;
@@ -1835,7 +1726,7 @@ class RUnitArabic implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1847,14 +1738,10 @@ class RUnitArabic implements MainDataOfChapters {
   }
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
-
-  @override
-  int? countOfPartsOfLettersForTracing;
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   bool? isArabic = true;
@@ -1874,7 +1761,7 @@ class RUnitPhonics implements MainDataOfChapters {
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1885,14 +1772,10 @@ class RUnitPhonics implements MainDataOfChapters {
   }
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
-
-  @override
-  int? countOfPartsOfLettersForTracing;
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 
   @override
   bool? isArabic = true;
@@ -1907,19 +1790,12 @@ class ConsonantVowels implements MainDataOfChapters {
   String background = AppImagesPhonetics.ec3Bg;
 
   @override
-  CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
-      get tracingOfLetter =>
-          (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return null;
-          };
-
-  @override
   BasicOfGameData? gameData;
   @override
   int get getDrawingShapeCurrentIndex => 0;
   @override
   set setDrawingShapeCurrentIndex(int index) {
-    // TODO: implement setdrawingShapeCurrentIndex
+
   }
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -1930,8 +1806,11 @@ class ConsonantVowels implements MainDataOfChapters {
   }
 
   @override
-  int? countOfPartsOfLettersForTracing;
+  bool? isArabic;
 
   @override
-  bool? isArabic;
+  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
+      TracingInitial stateOfGame, BuildContext context) {
+    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
+  }
 }
