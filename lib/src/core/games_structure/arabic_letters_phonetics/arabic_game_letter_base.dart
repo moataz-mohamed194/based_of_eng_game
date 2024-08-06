@@ -9,7 +9,6 @@ import 'package:based_of_eng_game/src/games/tracing/svg_strings/arabic_svg.dart'
 import 'package:based_of_eng_game/src/games/tracing/svg_strings/svg_strings.dart';
 import 'package:based_of_eng_game/src/games/tracing/widget/arabic_alphabets_paints/letter_gem_paint.dart';
 import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_a_paint.dart';
-import 'package:based_of_eng_game/src/games/tracing/widget/letter_s4.dart';
 import 'package:based_of_eng_game/src/games/tracing/widget/path_helper/arabic_path_helper/arabic_path_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_path_parser/svg_path_parser.dart';
