@@ -1,4 +1,3 @@
-import 'package:based_of_eng_game/src/core/audio_player_letters.dart';
 import 'package:based_of_eng_game/src/core/theme_text.dart';
 import 'package:based_of_eng_game/src/games/choose_the_correct_letter_or_image/manager/choose_the_correct_letter_or_image_cubit.dart';
 import 'package:based_of_eng_game/src/games/choose_the_correct_letter_or_image/widgets/image_item.dart';
@@ -11,9 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../src_model/export_models.dart';
 import '../../../core/assets_images_phonetics.dart';
-import '../../../core/games_structure/basic_of_game_data.dart';
 import '../../../core/phonetics_color.dart';
-import '../../../core/talk_tts.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
 
 class ChooseTheCorrectLetterOrImageGame extends StatefulWidget {

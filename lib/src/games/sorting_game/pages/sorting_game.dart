@@ -78,7 +78,7 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                 Expanded(
                     child: Container(
                   height: 0.8.sh,
-                  padding: EdgeInsets.symmetric(horizontal: 3),
+                  padding: const EdgeInsets.symmetric(horizontal: 3),
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(gameState.woodenBackground!),
@@ -99,6 +99,8 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                             ),
                           ),
                       itemBuilder: (context, index) {
+                        final letterLength =
+                            gameState.gameData.gameLetters?.length ?? 1;
                         return Container(
                             height: 0.8.sw,
                             width: MediaQuery.of(context).size.longestSide /
@@ -127,62 +129,64 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                                       isDisabled: false,
                                       fontSize: 0.04.sw,
                                     ),
-                                    7.ph,
-                                    SizedBox(
-                                        child: GridView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: gameState
-                                                .correctAnswersData
-                                                .where((element) =>
-                                                    element.gameLetterId ==
-                                                    gameState.gameData
-                                                        .gameLetters![index].id)
-                                                .toList()
-                                                .length,
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            padding: EdgeInsets.zero,
-                                            gridDelegate:
-                                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 2,
-                                                    crossAxisSpacing: 1,
-                                                    mainAxisSpacing: 1),
-                                            itemBuilder: (context, i) {
-                                              try {
-                                                String image = gameState
-                                                        .correctAnswersData
-                                                        .where((element) =>
-                                                            element
-                                                                .gameLetterId ==
-                                                            gameState
-                                                                .gameData
-                                                                .gameLetters![
-                                                                    index]
-                                                                .id)
-                                                        .toList()[i]
-                                                        .image ??
-                                                    '';
+                                    const SizedBox(height: 7),
+                                    Expanded(
+                                      child: GridView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: gameState.correctAnswersData
+                                            .where((element) =>
+                                                element.gameLetterId ==
+                                                gameState.gameData
+                                                    .gameLetters![index].id)
+                                            .toList()
+                                            .length,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        padding: EdgeInsets.zero,
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount:
+                                              letterLength > 2 ? 2 : 3,
+                                          crossAxisSpacing: 1,
+                                          mainAxisSpacing: 1,
+                                          childAspectRatio:
+                                              1.0, // Adjust aspect ratio if needed
+                                        ),
+                                        itemBuilder: (context, i) {
+                                          try {
+                                            String image = gameState
+                                                    .correctAnswersData
+                                                    .where((element) =>
+                                                        element.gameLetterId ==
+                                                        gameState
+                                                            .gameData
+                                                            .gameLetters![index]
+                                                            .id)
+                                                    .toList()[i]
+                                                    .image ??
+                                                '';
 
-                                                return CachedNetworkImage(
-                                                  imageUrl: image,
-                                                  placeholder: (context, url) =>
-                                                      const Center(
-                                                    child:
-                                                        CupertinoActivityIndicator(),
-                                                  ),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          const Icon(
-                                                    Icons.error,
-                                                    color: Colors.red,
-                                                  ),
-                                                  // height: ,
-                                                );
-                                              } catch (e) {
-                                                return const SizedBox();
-                                              }
-                                            })),
-                                    20.ph,
+                                            return CachedNetworkImage(
+                                              imageUrl: image,
+                                              placeholder: (context, url) =>
+                                                  const Center(
+                                                child:
+                                                    CupertinoActivityIndicator(),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(
+                                                Icons.error,
+                                                color: Colors.red,
+                                              ),
+                                            );
+                                          } catch (e) {
+                                            return const SizedBox();
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(height: 20),
                                   ],
                                 );
                               },

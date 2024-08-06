@@ -166,16 +166,24 @@ class _FamilyWordGameScreen extends State<FamilyWordGameScreen> {
                                                                   .id)
                                                           .toList()[i];
 
-                                                  return Text(
-                                                    image.word ?? '',
-                                                    style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        fontFamily: AppTheme
-                                                            .getFontFamily5(),
-                                                        color: AppColorPhonetics
-                                                            .darkBorderColor),
-                                                    textAlign: TextAlign.center,
-                                                    maxLines: 1,
+                                                  return Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: FittedBox(
+                                                      child: Text(
+                                                        image.word ?? '',
+                                                        style: TextStyle(
+                                                            fontSize: 10.sp,
+                                                            fontFamily: AppTheme
+                                                                .getFontFamily5(),
+                                                            color: AppColorPhonetics
+                                                                .darkBorderColor),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        maxLines: 1,
+                                                      ),
+                                                    ),
                                                   );
                                                 } catch (e) {
                                                   return const SizedBox();
