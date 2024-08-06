@@ -157,15 +157,17 @@ class _ListenAndChooseScreen extends State<ListenAndChooseScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CachedNetworkImage(
-                  imageUrl: gameState.images.first.image ?? '',
-                  height: 0.31.sh,
-                  placeholder: (context, url) => const Center(
-                    child: CupertinoActivityIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => const Icon(
-                    Icons.error,
-                    color: Colors.red,
+                Expanded(
+                  child: CachedNetworkImage(
+                    imageUrl: gameState.images.first.image ?? '',
+                    height: 0.31.sh,
+                    placeholder: (context, url) => const Center(
+                      child: CupertinoActivityIndicator(),
+                    ),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
                   ),
                 ),
                 20.w.pw,
