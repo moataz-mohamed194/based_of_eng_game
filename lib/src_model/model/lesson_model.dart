@@ -15,6 +15,7 @@ class LessonGameFinalModel extends Equatable {
   final String? name;
   final String? createdAt;
   final String? updatedAt;
+  final String? mobLessonName;
   final UserCourseGameFinalModel? unit;
   const LessonGameFinalModel(
       {this.id,
@@ -26,6 +27,7 @@ class LessonGameFinalModel extends Equatable {
       this.createdAt,
       this.updatedAt,
       this.type,
+      this.mobLessonName,
       this.unit});
 
   factory LessonGameFinalModel.fromJson(Map<String, dynamic> json) {
@@ -46,6 +48,7 @@ class LessonGameFinalModel extends Equatable {
         createdAt,
         updatedAt,
         stars,
+        mobLessonName,
         type,
       ];
 }
