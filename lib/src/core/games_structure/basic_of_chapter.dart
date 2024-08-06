@@ -12,8 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:svg_path_parser/svg_path_parser.dart';
 
-import '../../games/tracing/widget/letter_m.dart';
-import '../../games/tracing/widget/letter_s3.dart';
+
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
 import '../game_types/assets_images_math.dart';
@@ -503,7 +502,7 @@ class KPhonetics extends MainDataOfChapters {
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+         throw UnimplementedError();
           };
 
   @override
@@ -541,7 +540,7 @@ class QPhonetics extends MainDataOfChapters {
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+           throw UnimplementedError();
           };
 
   @override
@@ -579,7 +578,7 @@ class VPhonetics extends MainDataOfChapters {
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+           throw UnimplementedError();
           };
 
   @override
@@ -617,7 +616,7 @@ class XPhonetics extends MainDataOfChapters {
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+           throw UnimplementedError();
           };
 
   @override
@@ -655,7 +654,7 @@ class YPhonetics extends MainDataOfChapters {
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+           throw UnimplementedError();
           };
 
   @override
@@ -693,7 +692,7 @@ class ZPhonetics extends MainDataOfChapters {
   CustomPainter? Function(List<Color?>? colorsOfPaths, List<Offset> points)
       get tracingOfLetter =>
           (List<Color?>? colorsOfPaths, List<Offset> points) {
-            return FlipBookPainterLetterM(colorsOfPaths: colorsOfPaths);
+           throw UnimplementedError();
           };
 
   @override

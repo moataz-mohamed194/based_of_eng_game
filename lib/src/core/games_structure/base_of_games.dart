@@ -178,12 +178,12 @@ GemPhonetics,
                 gameType: subGame.toLowerCase(), audioFlag: audioFlag));
       }
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
-          return GemPhonetics(
+          // return GemPhonetics(
+          // mineGameData: BasicOfGameData.getTheGameType(
+          //     gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+      return SPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-      // return SPhonetics(
-      //     mineGameData: BasicOfGameData.getTheGameType(
-      //         gameType: subGame.toLowerCase(), audioFlag: audioFlag));
 
       // return TPhonetics(
       //     mineGameData: BasicOfGameData.getTheGameType(

@@ -105,7 +105,7 @@ class _TracingGame extends State<TracingGame> {
                                             .secondWayToCheckIfIsTheLastQuestionOfGame(
                                                 queations: 3);
                                         print('isLastQuestion:$isLastQuestion');
-                                        if (isLastQuestion) {
+                                        if (isLastQuestion != true) {
                                           Future.delayed(
                                               const Duration(seconds: 2),
                                               () async {
