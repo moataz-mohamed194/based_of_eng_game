@@ -162,9 +162,15 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                               await context
                                   .read<CurrentGamePhoneticsCubit>()
                                   .addSuccessAnswer(
+                                    isArabic: gameState.isArabic,
+                                    questions: gameState.allGames.length,
+                                    correctAnswers: (gameState.index) + 1,
+                                    subAction: () => TalkTts.startTalk(
+                                      text:
+                                          "${gameState.gameData?.gameImages?.first.word ?? ''}  ",
                                       isArabic: gameState.isArabic,
-                                      questions: gameState.allGames.length,
-                                      correctAnswers: (gameState.index) + 1)
+                                    ),
+                                  )
                                   .whenComplete(() async {
                                 bool isLastQuestion = context
                                     .read<CurrentGamePhoneticsCubit>()
@@ -212,7 +218,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
               ? null
               : () {
                   TalkTts.startTalk(
-                      text: gameState.gameData?.correctAns ?? '',
+                      text: gameState.gameData?.gameImages?.first.word ?? '',
                       isArabic: gameState.isArabic);
                 },
           child: CachedNetworkImage(
