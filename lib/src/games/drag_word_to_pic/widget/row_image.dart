@@ -22,12 +22,12 @@ class RowImage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: List.generate(
-          (gameImages.length) ?? 0,
+          gameImages.length,
           (index) => Column(
                 children: [
                   CachedNetworkImage(
                     height: 70.h,
-                    // width: 50.w,
+                    width: 50.w,
                     imageUrl: gameImages[index].image ?? '',
                     placeholder: (context, url) => const Center(
                       child: CupertinoActivityIndicator(),
@@ -108,7 +108,8 @@ class RowImage extends StatelessWidget {
                             }
                           }
                         });
-                      })
+                      }),
+                  10.ph
                 ],
               )),
     );
