@@ -15,6 +15,7 @@ class MatchCubit extends Cubit<MatchInitial> {
           // listGameData: listGameData,
           answers: [],
           idsOfCorrectAnswers: [],
+    idsOfImagesCorrectAnswers: [],
           positions: [],
           countQuestions: gameData.gameImages?.length ?? 0,
           widgetKey: [],
@@ -51,22 +52,12 @@ class MatchCubit extends Cubit<MatchInitial> {
     positions.insert((countOfCorrect - 1), [startPosition, endPosition]);
     emit(state.copyWith(
         countCorrectAnswers: countOfCorrect, positions: positions));
-    // List<GameLettersGameFinalModel> answers = state.answers;
-    List<GameImagesGameFinalModel> imageAnswers = state.imageAnswers;
-    // GameLettersGameFinalModel answer2 =
-    //     answers.where((test) => test.id == answerId).first;
-    List<int> idsOfCorrectAnswers =
-        state.idsOfCorrectAnswers; //.indexOf(answer2);
+    List<int> idsOfCorrectAnswers = state.idsOfCorrectAnswers; //.indexOf(answer2);
+    List<int> idsOfImagesCorrectAnswers = state.idsOfImagesCorrectAnswers; //.indexOf(answer2);
     idsOfCorrectAnswers.add(answerId);
-    // answers[indexAnswer] = GameLettersGameFinalModel(letter: answers[indexAnswer].letter);
-    GameImagesGameFinalModel answerImageAnswers2 =
-        imageAnswers.where((test) => test.id == imageAnswerId).first;
-    int indexImageAnswers = imageAnswers.indexOf(answerImageAnswers2);
-    imageAnswers[indexImageAnswers] = GameImagesGameFinalModel(
-        word: imageAnswers[indexImageAnswers].word,
-        image: imageAnswers[indexImageAnswers].image);
+    idsOfImagesCorrectAnswers.add(imageAnswerId);
     emit(state.copyWith(
-      imageAnswers: imageAnswers,
+      idsOfImagesCorrectAnswers: idsOfImagesCorrectAnswers,
       idsOfCorrectAnswers: idsOfCorrectAnswers,
     ));
     return countOfCorrect;

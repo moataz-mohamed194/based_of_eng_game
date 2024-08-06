@@ -8,7 +8,7 @@ class MatchInitial extends Equatable {
   final int countQuestions;
   final List<GameLettersGameFinalModel> answers;
   final List<int> idsOfCorrectAnswers;
-  // final Offset? end;
+  final List<int> idsOfImagesCorrectAnswers;
   final List<GameImagesGameFinalModel> imageAnswers;
   // final int index;
   final List<GlobalKey> widgetKey;
@@ -20,6 +20,7 @@ class MatchInitial extends Equatable {
       required this.countQuestions,
       required this.idsOfCorrectAnswers,
       required this.answers,
+      required this.idsOfImagesCorrectAnswers,
       required this.widgetKey,
       required this.positions,
       // this.start,
@@ -33,6 +34,7 @@ class MatchInitial extends Equatable {
       int? countQuestions,
       List<GlobalKey>? widgetKey,
       List<int>? idsOfCorrectAnswers,
+      List<int>? idsOfImagesCorrectAnswers,
       List<GameLettersGameFinalModel>? answers,
       List<GameImagesGameFinalModel>? imageAnswers}) {
     return MatchInitial(
@@ -41,6 +43,7 @@ class MatchInitial extends Equatable {
         idsOfCorrectAnswers: idsOfCorrectAnswers ?? this.idsOfCorrectAnswers,
         countQuestions: countQuestions ?? this.countQuestions,
         countCorrectAnswers: countCorrectAnswers ?? this.countCorrectAnswers,
+        idsOfImagesCorrectAnswers: idsOfImagesCorrectAnswers ?? this.idsOfImagesCorrectAnswers,
         answers: answers ?? this.answers,
         widgetKey: widgetKey ?? this.widgetKey,
         imageAnswers: imageAnswers ?? this.imageAnswers);
@@ -53,7 +56,7 @@ class MatchInitial extends Equatable {
         widgetKey,
         idsOfCorrectAnswers,
         answers,
-        positions,
+        positions,idsOfImagesCorrectAnswers,
         countCorrectAnswers
       ];
 }

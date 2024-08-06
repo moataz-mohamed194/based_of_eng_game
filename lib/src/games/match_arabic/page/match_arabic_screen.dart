@@ -151,8 +151,8 @@ class _MatchArabicScreen extends State<MatchArabicScreen> {
                                     gestureDetector.onPanStart!(
                                       DragStartDetails(
                                         localPosition: Offset(
-                                            (offset.dx) - 70.w,
-                                            ((offset.dy) - 40.h)),
+                                            (offset.dx) - 60.w,
+                                            ((offset.dy) - 50.h)),
                                       ),
                                     );
                                   },

@@ -13,6 +13,7 @@ class MatchArabicCubit extends Cubit<MatchArabicInitial> {
   }) : super(MatchArabicInitial(
           gameData: gameData,
           idsOfCorrectAnswers: [],
+    idsOfImagesCorrectAnswers: [],
           answers: gameData.gameLetters ?? [],
           positions: [],
           countQuestions: gameData.gameImages?.length ?? 0,
@@ -48,22 +49,23 @@ class MatchArabicCubit extends Cubit<MatchArabicInitial> {
     emit(state.copyWith(
         countCorrectAnswers: countOfCorrect, positions: positions));
     // List<GameLettersGameFinalModel> answers = state.answers;
-    List<GameImagesGameFinalModel> imageAnswers = state.imageAnswers;
+    // List<GameImagesGameFinalModel> imageAnswers = state.imageAnswers;
     // GameLettersGameFinalModel answer2 =
     //     answers.where((test) => test.id == answerId).first;
-    List<int> idsOfCorrectAnswers =
-        state.idsOfCorrectAnswers; //.indexOf(answer2);
+    List<int> idsOfCorrectAnswers = state.idsOfCorrectAnswers; //.indexOf(answer2);
+    List<int> idsOfImagesCorrectAnswers = state.idsOfImagesCorrectAnswers; //.indexOf(answer2);
     idsOfCorrectAnswers.add(answerId);
+    idsOfImagesCorrectAnswers.add(imageAnswerId);
     // answers[indexAnswer] =
     //     GameLettersGameFinalModel(letter: answers[indexAnswer].letter);
-    GameImagesGameFinalModel answerImageAnswers2 =
-        imageAnswers.where((test) => test.id == imageAnswerId).first;
-    int indexImageAnswers = imageAnswers.indexOf(answerImageAnswers2);
-    imageAnswers[indexImageAnswers] = GameImagesGameFinalModel(
-        word: imageAnswers[indexImageAnswers].word,
-        image: imageAnswers[indexImageAnswers].image);
+    // GameImagesGameFinalModel answerImageAnswers2 =
+    //     imageAnswers.where((test) => test.id == imageAnswerId).first;
+    // int indexImageAnswers = imageAnswers.indexOf(answerImageAnswers2);
+    // imageAnswers[indexImageAnswers] = GameImagesGameFinalModel(
+    //     word: imageAnswers[indexImageAnswers].word,
+    //     image: imageAnswers[indexImageAnswers].image);
     emit(state.copyWith(
-      imageAnswers: imageAnswers,
+      idsOfImagesCorrectAnswers: idsOfImagesCorrectAnswers,
       idsOfCorrectAnswers: idsOfCorrectAnswers,
     ));
     return countOfCorrect;

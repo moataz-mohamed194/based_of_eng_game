@@ -169,52 +169,68 @@ class _MatchScreen extends State<MatchScreen> {
                                           );
                                         },
                                         key: gameState.widgetKey[index],
-                                        childWhenDragging: Container(
-                                            height: 60.h,
-                                            width: ((MediaQuery.of(context)
-                                                            .size
-                                                            .width -
-                                                        (100.w)) /
+                                        childWhenDragging:  Container(
+                                          height: 60.h,
+                                          width: ((MediaQuery.of(context)
+                                              .size
+                                              .width -
+                                              (100.w)) /
+                                              6) *
+                                              2,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: (((MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                    (100.w)) /
                                                     6) *
-                                                2,
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 5),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: (((MediaQuery.of(context)
-                                                                      .size
-                                                                      .width -
-                                                                  (100.w)) /
-                                                              6) *
-                                                          2) -
-                                                      (20 + 17),
-                                                  child: Text(
-                                                    gameState.answers[index]
-                                                            .letter ??
-                                                        '',
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontFamily: AppTheme
-                                                            .getFontFamily5(),
-                                                        color: AppColorPhonetics
-                                                            .darkBorderColor),
-                                                    textAlign: TextAlign.start,
+                                                    2) -
+                                                    (20 + 17),
+                                                height: 70.h,
+
+                                                child: FittedBox(
+                                                  fit: BoxFit.scaleDown,
+                                                  // clipBehavior: Clip.,
+                                                  child: Container(
+                                                    height: 70.h,
+                                                    alignment: Alignment.center,
+                                                    width: MediaQuery.of(context)
+                                                        .size
+                                                        .width/3,
+                                                    child: Text(
+                                                      gameState.answers[index]
+                                                          .letter ??
+                                                          '',
+                                                      style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontFamily: AppTheme
+                                                              .getFontFamily5(),
+                                                          color: AppColorPhonetics
+                                                              .darkBorderColor),
+                                                      textAlign: TextAlign.start,
+                                                      maxLines: 2,
+                                                      // overflow: TextOv,
+                                                    ),
                                                   ),
                                                 ),
-                                                20.pw,
-                                                Container(
-                                                  height: 17,
-                                                  width: 17,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              17),
-                                                      color: AppColorPhonetics
-                                                          .lightYellowColor),
-                                                )
-                                              ],
-                                            )),
+                                              ),
+                                              20.pw,
+                                              Container(
+                                                height: 17,
+                                                width: 17,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        17),
+                                                    color: AppColorPhonetics
+                                                        .lightYellowColor),
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                         child: Container(
                                           height: 60.h,
                                           width: ((MediaQuery.of(context)
@@ -235,17 +251,32 @@ class _MatchScreen extends State<MatchScreen> {
                                                             6) *
                                                         2) -
                                                     (20 + 17),
-                                                child: Text(
-                                                  gameState.answers[index]
-                                                          .letter ??
-                                                      '',
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontFamily: AppTheme
-                                                          .getFontFamily5(),
-                                                      color: AppColorPhonetics
-                                                          .darkBorderColor),
-                                                  textAlign: TextAlign.start,
+                                                height: 70.h,
+
+                                                child: FittedBox(
+                                                  fit: BoxFit.scaleDown,
+                                                  // clipBehavior: Clip.,
+                                                  child: Container(
+                                                    height: 70.h,
+                                                    alignment: Alignment.center,
+                                                    width: MediaQuery.of(context)
+                                                        .size
+                                                        .width/3,
+                                                  child: Text(
+                                                      gameState.answers[index]
+                                                              .letter ??
+                                                          '',
+                                                      style: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          fontFamily: AppTheme
+                                                              .getFontFamily5(),
+                                                          color: AppColorPhonetics
+                                                              .darkBorderColor),
+                                                      textAlign: TextAlign.start,
+                                                      maxLines: 2,
+                                                      // overflow: TextOv,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                               20.pw,
@@ -346,25 +377,28 @@ class _MatchScreen extends State<MatchScreen> {
                                             }
                                           },
                                     builder: (context, onAccepted, onRejected) {
-                                      return FittedBox(
-                                        child: CachedNetworkImage(
-                                          imageUrl: gameState
-                                                  .imageAnswers[index].image ??
-                                              '',
-                                          height: (MediaQuery.of(context)
-                                                  .size
-                                                  .height) /
-                                              5,
+                                      return Container(
+                                        margin: EdgeInsets.only(bottom: 10),
+                                        child: FittedBox(
+                                          child: CachedNetworkImage(
+                                            imageUrl: gameState
+                                                    .imageAnswers[index].image ??
+                                                '',
+                                            height: (MediaQuery.of(context)
+                                                    .size
+                                                    .height) /
+                                                5,
 
-                                          // height: 0.33.sh,
-                                          placeholder: (context, url) =>
-                                              const Center(
-                                            child: CupertinoActivityIndicator(),
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(
-                                            Icons.error,
-                                            color: Colors.red,
+                                            // height: 0.33.sh,
+                                            placeholder: (context, url) =>
+                                                const Center(
+                                              child: CupertinoActivityIndicator(),
+                                            ),
+                                            errorWidget: (context, url, error) =>
+                                                const Icon(
+                                              Icons.error,
+                                              color: Colors.red,
+                                            ),
                                           ),
                                         ),
                                       );
