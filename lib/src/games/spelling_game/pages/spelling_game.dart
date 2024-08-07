@@ -64,6 +64,7 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                         ],
                       ),
                     )),
+                20.pw,
                 _buildLetters(gameState),
               ],
             ),

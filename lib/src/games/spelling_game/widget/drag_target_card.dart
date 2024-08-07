@@ -13,8 +13,8 @@ class DragTargetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50.h,
-      width: 30.w,
+      height: 70.h,
+      width: 40.w,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
           color: AppColorPhonetics.dragContainerColor,
@@ -27,7 +27,7 @@ class DragTargetWidget extends StatelessWidget {
                   title,
                   style: TextStyle(
                       color: AppColorPhonetics.darkBlueColor,
-                      fontSize: 0.04.sw,
+                      fontSize: 0.05.sw,
                       fontWeight: FontWeight.w900),
                 ),
               ),
@@ -37,7 +37,7 @@ class DragTargetWidget extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: AppColorPhonetics.darkBlueColor,
-                    fontSize: 0.04.sw,
+                    fontSize: 0.05.sw,
                     fontFamily: AppTheme.getFontFamily5(),
                     fontWeight: FontWeight.w900),
               ),
