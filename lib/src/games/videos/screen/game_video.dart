@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import '../../../../src_model/export_models.dart';
 import 'package:video_player/video_player.dart';
 
@@ -28,7 +29,7 @@ class _GameVideo extends State<GameVideo> {
   void initState() {
     super.initState();
     final GameFinalModel gameData = context.read<VideoCubit>().state.gameData;
-
+    WakelockPlus.enable();
     try {
       _controller =
           VideoPlayerController.networkUrl(Uri.parse(gameData.video ?? ''))
@@ -100,6 +101,12 @@ class _GameVideo extends State<GameVideo> {
   void deactivate() {
     _controller.dispose();
     super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WakelockPlus.disable();
   }
 
   @override
