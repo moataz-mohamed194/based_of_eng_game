@@ -33,7 +33,10 @@ class ChooseNumberScreen extends StatelessWidget {
             builder: (context, gameState) {
               return FittedBox(
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height -
+                  height:((gameState.basicData
+                  as MathChooseNumberSticksOrBeadsOrBlocks)
+                      .tools ==
+                      ToolsOfMath.domino)?null: MediaQuery.of(context).size.height -
                       (90.h + 50.h + 5 + 20.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

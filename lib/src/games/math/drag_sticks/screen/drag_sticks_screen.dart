@@ -174,8 +174,8 @@ class DragSticksScreen extends StatelessWidget {
               print('isLastQuestion:$isLastQuestion');
               if (isLastQuestion != true) {
                 Future.delayed(const Duration(seconds: 2), () async {
-                  await mainBloc.updateIndexOfCurrentGame();
-                  bloc.updateTheCurrentGame(newIndex: mainBloc.state.index);
+                  // await mainBloc.updateIndexOfCurrentGame();
+                  bloc.updateTheCurrentGame();
                 });
               }
             }

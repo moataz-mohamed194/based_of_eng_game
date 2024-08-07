@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
 import '../game_types/assets_images_math.dart';
+import '../phontics_constants/shape_paths.dart';
+import '../phontics_constants/shape_points_manger.dart';
 import 'basic_of_game_data.dart';
 
 enum MainDataOfChaptersTypes {
@@ -170,54 +172,6 @@ abstract class MainDataOfChapters {
 
 }
 
-class PhonticsGame implements MainDataOfChapters {
-  @override
-  Color backGroundOfStarBar;
-
-  @override
-  String background;
-
-  @override
-  BasicOfGameData? gameData;
-
-  @override
-  bool? isArabic;
-
-  @override
-  String letterAssets;
-
-  @override
-  String letterPath;
-
-  @override
-  Color pointColor;
-
-  @override
-  String pointsJsonFile;
-
-
-
-  @override
-  Color strokeColor;
-
-  @override
-  String tracingAssets;
-
-  // Constructor accepting parameters
-  PhonticsGame({
-    required this.backGroundOfStarBar,
-    required this.background,
-    this.gameData,
-    this.isArabic,
-    
-    required this.letterAssets,
-    required this.letterPath,
-    required this.pointColor,
-    required this.pointsJsonFile,
-    required this.strokeColor,
-    required this.tracingAssets,
-  });
-}
 
 
 class SPhonetics implements MainDataOfChapters {
@@ -235,9 +189,6 @@ class SPhonetics implements MainDataOfChapters {
     required this.mineGameData,
   }) {
     gameData = mineGameData;
-
-
-   
   }
   
   @override
@@ -245,19 +196,19 @@ class SPhonetics implements MainDataOfChapters {
   
   @override
   // TODO: implement letterAssets
-  String get letterAssets => throw UnimplementedError();
+  String get letterAssets => '';
   
   @override
   // TODO: implement letterPath
-  String get letterPath => throw UnimplementedError();
+  String get letterPath => ShapePaths.snew;
   
   @override
   // TODO: implement pointColor
-  Color get pointColor => throw UnimplementedError();
+  Color get pointColor => Colors.red;
   
   @override
   // TODO: implement pointsJsonFile
-  String get pointsJsonFile => throw UnimplementedError();
+  String get pointsJsonFile => ShapePointsManger.sShape;
   
   @override
   // TODO: implement strokeAssets
@@ -265,11 +216,11 @@ class SPhonetics implements MainDataOfChapters {
   
   @override
   // TODO: implement strokeColor
-  Color get strokeColor => throw UnimplementedError();
+  Color get strokeColor => Colors.blue.withOpacity(.2);
   
   @override
   // TODO: implement tracingAssets
-  String get tracingAssets => throw UnimplementedError();
+  String get tracingAssets => '';
 
  
 }
@@ -447,7 +398,7 @@ class MPhonetics implements MainDataOfChapters {
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
   @override
-  String background = AppImagesPhonetics.backGroundOfS;
+  String background = AppImagesPhonetics.backGroundOfM;
 
   @override
   BasicOfGameData? gameData;
@@ -524,35 +475,34 @@ class MPhonetics implements MainDataOfChapters {
   set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
-  
+
   @override
   // TODO: implement letterAssets
-  String get letterAssets => throw UnimplementedError();
-  
+  String get letterAssets => '';
+
   @override
   // TODO: implement letterPath
-  String get letterPath => throw UnimplementedError();
-  
+  String get letterPath => ShapePaths.mshape;
+
   @override
   // TODO: implement pointColor
-  Color get pointColor => throw UnimplementedError();
-  
+  Color get pointColor => Colors.red;
+
   @override
   // TODO: implement pointsJsonFile
-  String get pointsJsonFile => throw UnimplementedError();
-  
+  String get pointsJsonFile => ShapePointsManger.mShape;
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
-  Color get strokeColor => throw UnimplementedError();
-  
+  Color get strokeColor => Colors.blue.withOpacity(.2);
+
   @override
   // TODO: implement tracingAssets
-  String get tracingAssets => throw UnimplementedError();
-
+  String get tracingAssets => '';
 
 }
 

@@ -53,7 +53,7 @@ class SortingBeadsScreen extends StatelessWidget {
                             10.pw,
                             FittedBox(
                               child: Container(
-                                width: MediaQuery.of(context).size.width / 2.4,
+                                width: MediaQuery.of(context).size.width / 2.3,
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -74,7 +74,7 @@ class SortingBeadsScreen extends StatelessWidget {
                                     ),
                                     GetTheBeads(
                                       countOfBalls: int.parse(gameState
-                                              .gameLetters?[index].letter ??
+                                              .gameLetters?[index].secLetter ??
                                           '0'), // size: 65.h,
                                     ),
                                   ],
@@ -172,36 +172,42 @@ class SortingBeadsScreen extends StatelessWidget {
               ),
               Expanded(
                 child: FittedBox(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                        gameState.gameImages?.length ?? 0,
-                        (index) => gameState.correctAnswers
-                                .where((element) =>
-                                    element.id ==
-                                    (gameState.gameImages?[index].id ?? 0))
-                                .isNotEmpty
-                            ? Opacity(
-                                opacity: .5,
-                                child: GetTheBeads(
-                                  countOfBalls: int.parse(
-                                      gameState.gameImages?[index].word ?? '0'),
-                                  // size: 65.h,
-                                ),
-                              )
-                            : Draggable<GameImagesGameFinalModel>(
-                                maxSimultaneousDrags: 1,
-                                feedback: GetTheBeads(
-                                  countOfBalls: int.parse(
-                                      "${gameState.gameImages?[index].word ?? 0}"),
-                                ),
-                                // childWhenDragging: ,
-                                data: gameState.gameImages?[index],
-                                child: GetTheBeads(
-                                  // isSolid: true,
-                                  countOfBalls: int.parse(
-                                      "${gameState.gameImages?[index].word ?? 0}"),
-                                ))),
+
+                  child: Container(
+                    height: MediaQuery.of(context).size.height -
+                        (90.h + 50.h + 5 + 20.h),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                      children: List.generate(
+                          gameState.gameImages?.length ?? 0,
+                          (index) => gameState.correctAnswers
+                                  .where((element) =>
+                                      element.id ==
+                                      (gameState.gameImages?[index].id ?? 0))
+                                  .isNotEmpty
+                              ? Opacity(
+                                  opacity: .5,
+                                  child: GetTheBeads(
+                                    countOfBalls: int.parse(
+                                        gameState.gameImages?[index].word ?? '0'),
+                                    // size: 65.h,
+                                  ),
+                                )
+                              : Draggable<GameImagesGameFinalModel>(
+                                  maxSimultaneousDrags: 1,
+                                  feedback: GetTheBeads(
+                                    countOfBalls: int.parse(
+                                        "${gameState.gameImages?[index].word ?? 0}"),
+                                  ),
+                                  // childWhenDragging: ,
+                                  data: gameState.gameImages?[index],
+                                  child: GetTheBeads(
+                                    // isSolid: true,
+                                    countOfBalls: int.parse(
+                                        "${gameState.gameImages?[index].word ?? 0}"),
+                                  ))),
+                    ),
                   ),
                 ),
               )

@@ -171,7 +171,7 @@ class ChooseSubScreen extends StatelessWidget {
       children: [
         CardOfSelected(
           onTap: () async {
-            if (mainBloc.ableButton()) {
+            if (mainBloc.ableButton()&& gameState.isCorrect!=true) {
               bool stateOfAnswer = bloc.addAnswer(userChoose: answer);
               if (stateOfAnswer == true) {
                 await mainBloc
