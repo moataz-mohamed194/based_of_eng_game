@@ -51,86 +51,90 @@ class ChooseOeScreen extends StatelessWidget {
                                               .tools ==
                                           ToolsOfMath.domino) ...{
                                         Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
-                                            CardOfSelected(
-                                              onTap: () async {
-                                                if (context
-                                                        .read<
-                                                            CurrentGamePhoneticsCubit>()
-                                                        .ableButton() &&
-                                                    gameState.isCorrect !=
-                                                        true) {
-                                                  bool stateOfAnswer = context
-                                                      .read<ChooseOeCubit>()
-                                                      .addAnswer(
-                                                          userChoose: gameState
-                                                                  .gameChoices?[
-                                                              index]);
-                                                  if (stateOfAnswer == true) {
-                                                    await context
-                                                        .read<
-                                                            CurrentGamePhoneticsCubit>()
-                                                        .addSuccessAnswer(
-                                                            questions: gameState
-                                                                .allGameData
-                                                                .length,
-                                                            correctAnswers:
-                                                                gameState
-                                                                        .correctAnswers +
-                                                                    1)
-                                                        .whenComplete(() {
-                                                      bool isLastQuestion = context
+                                            Padding(
+                                              padding: EdgeInsets.only(top: 50.h),
+                                              child: CardOfSelected(
+                                                onTap: () async {
+                                                  if (context
                                                           .read<
                                                               CurrentGamePhoneticsCubit>()
-                                                          .checkIfIsTheLastQuestionOfGame(
-                                                              queations: gameState
+                                                          .ableButton() &&
+                                                      gameState.isCorrect !=
+                                                          true) {
+                                                    bool stateOfAnswer = context
+                                                        .read<ChooseOeCubit>()
+                                                        .addAnswer(
+                                                            userChoose: gameState
+                                                                    .gameChoices?[
+                                                                index]);
+                                                    if (stateOfAnswer == true) {
+                                                      await context
+                                                          .read<
+                                                              CurrentGamePhoneticsCubit>()
+                                                          .addSuccessAnswer(
+                                                              questions: gameState
                                                                   .allGameData
-                                                                  .length);
+                                                                  .length,
+                                                              correctAnswers:
+                                                                  gameState
+                                                                          .correctAnswers +
+                                                                      1)
+                                                          .whenComplete(() {
+                                                        bool isLastQuestion = context
+                                                            .read<
+                                                                CurrentGamePhoneticsCubit>()
+                                                            .checkIfIsTheLastQuestionOfGame(
+                                                                queations: gameState
+                                                                    .allGameData
+                                                                    .length);
 
-                                                      if (isLastQuestion) {
-                                                        // Future.delayed(const Duration(seconds: 2),
-                                                        //     () async {
-                                                        //   Navigator.of(context).pop();
-                                                        // });
-                                                      } else {
-                                                        Future.delayed(
-                                                            const Duration(
-                                                                seconds: 2),
-                                                            () async {
-                                                          await context
-                                                              .read<
-                                                                  CurrentGamePhoneticsCubit>()
-                                                              .updateIndexOfCurrentGame();
-                                                          context
-                                                              .read<
-                                                                  ChooseOeCubit>()
-                                                              .updateTheCurrentGame(
-                                                                  index: context
-                                                                      .read<
-                                                                          CurrentGamePhoneticsCubit>()
-                                                                      .state
-                                                                      .index);
-                                                        });
-                                                      }
-                                                    });
-                                                  } else {
-                                                    await context
-                                                        .read<
-                                                            CurrentGamePhoneticsCubit>()
-                                                        .addWrongAnswer(
-                                                            actionOfWrongAnswer:
-                                                                () async {});
+                                                        if (isLastQuestion) {
+                                                          // Future.delayed(const Duration(seconds: 2),
+                                                          //     () async {
+                                                          //   Navigator.of(context).pop();
+                                                          // });
+                                                        } else {
+                                                          Future.delayed(
+                                                              const Duration(
+                                                                  seconds: 2),
+                                                              () async {
+                                                            await context
+                                                                .read<
+                                                                    CurrentGamePhoneticsCubit>()
+                                                                .updateIndexOfCurrentGame();
+                                                            context
+                                                                .read<
+                                                                    ChooseOeCubit>()
+                                                                .updateTheCurrentGame(
+                                                                    index: context
+                                                                        .read<
+                                                                            CurrentGamePhoneticsCubit>()
+                                                                        .state
+                                                                        .index);
+                                                          });
+                                                        }
+                                                      });
+                                                    } else {
+                                                      await context
+                                                          .read<
+                                                              CurrentGamePhoneticsCubit>()
+                                                          .addWrongAnswer(
+                                                              actionOfWrongAnswer:
+                                                                  () async {});
+                                                    }
                                                   }
-                                                }
-                                              },
-                                              itsId: gameState
-                                                      .gameChoices?[index].id ??
-                                                  0,
-                                              isCorrect: (gameState.isCorrect ==
-                                                      true) &&
-                                                  (gameState.gameChoices?[index]
-                                                          .isCorrect ==
-                                                      1),
+                                                },
+                                                itsId: gameState
+                                                        .gameChoices?[index].id ??
+                                                    0,
+                                                isCorrect: (gameState.isCorrect ==
+                                                        true) &&
+                                                    (gameState.gameChoices?[index]
+                                                            .isCorrect ==
+                                                        1),
+                                              ),
                                             ),
                                             10.pw,
                                             Column(

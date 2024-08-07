@@ -113,8 +113,8 @@ class ChooseAddLineScreen extends StatelessWidget {
         },
         5.ph,
         Container(
-          width: 20.w,
-          height: 20.w,
+          width: 12.w,
+          height: 12.w,
           padding: const EdgeInsets.all(5),
           decoration: const BoxDecoration(
               image: DecorationImage(
@@ -191,8 +191,8 @@ class ChooseAddLineScreen extends StatelessWidget {
             },
             5.ph,
             Container(
-              width: 20.w,
-              height: 20.w,
+              width: 12.w,
+              height: 12.w,
               padding: const EdgeInsets.all(5),
               decoration: const BoxDecoration(
                   image: DecorationImage(

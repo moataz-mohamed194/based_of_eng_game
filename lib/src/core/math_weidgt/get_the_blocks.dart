@@ -8,13 +8,14 @@ import 'paint_of_blocks.dart';
 class GetTheBlocks extends StatelessWidget {
   final int countOfBoxes;
   final bool? isHide;
+  final bool? isTransparent;
   final List<ColorModel> colors = [
     ColorModel(colorMain: '#EE1D23', colorBoarder: '#930B0F'),
     ColorModel(colorMain: '#406AB4', colorBoarder: '#173372'),
   ];
 
   GetTheBlocks(
-      {super.key, this.isHide, required this.countOfBoxes});
+      {super.key, this.isHide, this.isTransparent,required this.countOfBoxes});
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -23,7 +24,7 @@ class GetTheBlocks extends StatelessWidget {
     return countOfBoxes <= 10
         ? SvgPicture.asset(
             _svgOfBlock(number: countOfBoxes),
-            color: isHide == true ? Colors.grey : null,
+            color:isTransparent==true?Colors.transparent: isHide == true ? Colors.grey : null,
           )
         : SizedBox(
             height: sizeOfOne.height,

@@ -39,7 +39,7 @@ class ChooseNumberOEScreen extends StatelessWidget {
                   gameState.gameChoices?.length ?? 0,
                   (index) => GestureDetector(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Column(
                           children: [
@@ -60,6 +60,7 @@ class ChooseNumberOEScreen extends StatelessWidget {
                             ),
                           ],
                         ),
+                        10.ph,
                         CardOfSelected(
                           onTap: () async {
                             if (context

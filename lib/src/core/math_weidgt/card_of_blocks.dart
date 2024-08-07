@@ -11,12 +11,14 @@ class CardOfBlocks extends StatelessWidget {
   final ToolsOfMath tools;
   final double? size;
   final double? newWidth;
+  final double? scale;
   final AlignmentGeometry? alignment;
 
   const CardOfBlocks(
       {super.key,
       required this.number,
       this.size,
+      this.scale,
       this.alignment,
       required this.tools,
       this.newWidth});
@@ -54,14 +56,19 @@ class CardOfBlocks extends StatelessWidget {
           ),
           child: number == 0
               ? SizedBox()
-              : FittedBox(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 7.w),
-                    child: GetTheBlocks(
-                      countOfBoxes: number,
+              : Transform.scale(
+    scale: scale??1,
+    child:Container(
+      padding: EdgeInsets.only(right:scale==null?0:15.w ),
+      child: FittedBox(
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 7.w),
+                      child: GetTheBlocks(
+                        countOfBoxes: number,
+                      ),
                     ),
                   ),
-                )),
+    ))),
     );
   }
 }

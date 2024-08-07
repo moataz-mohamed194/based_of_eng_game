@@ -15,7 +15,7 @@ class DragSticksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: MediaQuery.of(context).size.height -
-            (90.h + 50.h + 5 + 20.h), // < 760
+            (90.h + 50.h ), // < 760
         width: (MediaQuery.of(context).size.width - 40.w),
         margin: EdgeInsets.only(bottom: 20.h),
         alignment: Alignment.center,
@@ -32,8 +32,8 @@ class DragSticksScreen extends StatelessWidget {
                 children: [
                   5.ph,
                   Container(
-                    width: (25.w) * (gameState.gameLetters?.length ?? 0),
-                    height: 100.h,
+                    width: (31.w) * (gameState.gameLetters?.length ?? 0),
+                    height: .25.sh,
                     clipBehavior: Clip.antiAlias,
                     decoration: ShapeDecoration(
                       color: Colors.white,
@@ -51,8 +51,12 @@ class DragSticksScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                    child: FittedBox(
-                      child: Row(
+                    alignment: Alignment.center,
+                    child: Transform.scale(
+                        scale: 1,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                             (gameState.gameLetters?.length ?? 0),
                             (index) => _tableOfGame(
@@ -64,7 +68,6 @@ class DragSticksScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  5.ph,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: List.generate(
@@ -105,8 +108,8 @@ class DragSticksScreen extends StatelessWidget {
       List<dynamic> rejected,
     ) {
       return Container(
-          width: (25.w),
-          height: 100.h,
+          width: (30.w),
+          height:.25.sh,
           decoration: BoxDecoration(
               border: ((gameState.gameLetters?.length ?? 0) - 1) == index
                   ? null
@@ -135,9 +138,11 @@ class DragSticksScreen extends StatelessWidget {
               ),
               const Divider(color: AppColorPhonetics.darkBlueColor),
               Expanded(
-                  child: SizedBox(
+                  child: FittedBox(
+                      child:Container(
                 width: (25.w),
                 height: 45.h,
+                alignment: Alignment.center,
                 child: ((gameState.gameAnswers != null) &&
                             (gameState.gameAnswers?.isNotEmpty ?? false) &&
                             gameState.gameAnswers!
@@ -145,14 +150,17 @@ class DragSticksScreen extends StatelessWidget {
                                     ele.id == gameState.gameLetters?[index].id)
                                 .isNotEmpty ??
                         false)
-                    ? FittedBox(
-                        child: Slick(
-                            count: int.parse(
-                                gameState.gameLetters?[index].letter ?? '0'),
-                            mainAxisAlignment: MainAxisAlignment.center),
-                      )
+                    ?  Padding(
+                          padding: const EdgeInsets.only(bottom: 3.0),
+                          child: FittedBox(
+                            child: Slick(
+                                count: int.parse(
+                                    gameState.gameLetters?[index].letter ?? '0'),
+                                mainAxisAlignment: MainAxisAlignment.center),
+                          ),
+                        )
                     : null,
-              ))
+              )))
             ],
           ));
     }, onAcceptWithDetails: (item) async {

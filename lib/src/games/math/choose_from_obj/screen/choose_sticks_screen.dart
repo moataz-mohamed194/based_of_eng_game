@@ -20,9 +20,8 @@ class ChooseSticksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height -
-            (90.h + 50.h + 5 + 20.h), // < 760
-        margin: EdgeInsets.only(left: 40.w, right: 40.w, bottom: 20.h),
+        height: MediaQuery.of(context).size.height - (90.h + 50.h), // < 760
+        margin: EdgeInsets.only(left: 40.w, right: 40.w),
         alignment: Alignment.center,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -33,259 +32,311 @@ class ChooseSticksScreen extends StatelessWidget {
             listener: (context, state) {},
             builder: (context, gameState) {
               return FittedBox(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height -
-                      (90.h + 50.h + 5 + 20.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      10.ph,
-                      CardOfNumber(
-                        number: "${gameState.mainNumber ?? ''}",
+                child: Transform.scale(
+                    scale: 1.2,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height:
+                          MediaQuery.of(context).size.height - (90.h + 50.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          10.ph,
+                          Transform.scale(
+                            scale: 1.3,
+                            child: CardOfNumber(
+                              number: "${gameState.mainNumber ?? ''}",
+                            ),
+                          ),
+                          // 10.pw,
+                          if (((gameState.basicData
+                                      as MathChooseSticksOrBeadsOrBlocks)
+                                  .tools !=
+                              ToolsOfMath.domino)) ...{
+                            Transform.scale(
+                                scale: (MediaQuery.of(context).size.height > 450
+                                    ? 1.5
+                                    : 1.1),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: List.generate(
+                                        gameState.gameChoices?.length ?? 0,
+                                        (index) => Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    CardOfSelected(
+                                                      onTap: () async {
+                                                        if (context
+                                                                .read<
+                                                                    CurrentGamePhoneticsCubit>()
+                                                                .ableButton() &&
+                                                            gameState
+                                                                    .isCorrect !=
+                                                                true) {
+                                                          bool stateOfAnswer = context
+                                                              .read<
+                                                                  ChooseSticksCubit>()
+                                                              .addAnswer(
+                                                                  userChoose: int.parse(gameState
+                                                                          .gameChoices?[
+                                                                              index]
+                                                                          .choice ??
+                                                                      '0'));
+                                                          if (stateOfAnswer ==
+                                                              true) {
+                                                            await context
+                                                                .read<
+                                                                    CurrentGamePhoneticsCubit>()
+                                                                .addSuccessAnswer(
+                                                                    questions: gameState
+                                                                        .allGameData
+                                                                        .length,
+                                                                    correctAnswers:
+                                                                        gameState.correctAnswers +
+                                                                            1)
+                                                                .whenComplete(
+                                                                    () {
+                                                              bool isLastQuestion = context
+                                                                  .read<
+                                                                      CurrentGamePhoneticsCubit>()
+                                                                  .checkIfIsTheLastQuestionOfGame(
+                                                                      queations: gameState
+                                                                          .allGameData
+                                                                          .length);
+
+                                                              if (isLastQuestion) {
+                                                                // Future.delayed(const Duration(seconds: 2),
+                                                                //     () async {
+                                                                //   Navigator.of(context).pop();
+                                                                // });
+                                                              } else {
+                                                                Future.delayed(
+                                                                    const Duration(
+                                                                        seconds:
+                                                                            2),
+                                                                    () async {
+                                                                  await context
+                                                                      .read<
+                                                                          CurrentGamePhoneticsCubit>()
+                                                                      .updateIndexOfCurrentGame();
+                                                                  context.read<ChooseSticksCubit>().updateTheCurrentGame(
+                                                                      index: context
+                                                                          .read<
+                                                                              CurrentGamePhoneticsCubit>()
+                                                                          .state
+                                                                          .index);
+                                                                });
+                                                              }
+                                                            });
+                                                          } else {
+                                                            await context
+                                                                .read<
+                                                                    CurrentGamePhoneticsCubit>()
+                                                                .addWrongAnswer(
+                                                                    actionOfWrongAnswer:
+                                                                        () async {});
+                                                          }
+                                                        }
+                                                      },
+                                                      itsId: gameState
+                                                              .gameChoices?[
+                                                                  index]
+                                                              .id ??
+                                                          0,
+                                                      isCorrect: (gameState
+                                                                  .isCorrect ==
+                                                              true) &&
+                                                          (gameState
+                                                                      .gameChoices?[
+                                                                          index]
+                                                                      .choice)
+                                                                  .toString() ==
+                                                              gameState
+                                                                  .mainNumber
+                                                                  .toString(),
+                                                    ),
+                                                    ((gameState
+                                                        .basicData
+                                                    as MathChooseSticksOrBeadsOrBlocks)
+                                                        .tools ==
+                                                        ToolsOfMath.blocks)?(MediaQuery.of(context)
+                                                                .size
+                                                                .height >
+                                                            450
+                                                        ? 65.pw
+                                                        : 25.pw):25.pw,
+                                                    if ((gameState.basicData
+                                                                as MathChooseSticksOrBeadsOrBlocks)
+                                                            .tools ==
+                                                        ToolsOfMath.sticks) ...{
+                                                      Slick(
+                                                        count: int.parse(gameState
+                                                                .gameChoices?[
+                                                                    index]
+                                                                .choice ??
+                                                            '0'),
+                                                      )
+                                                    } else if ((gameState
+                                                                    .basicData
+                                                                as MathChooseSticksOrBeadsOrBlocks)
+                                                            .tools ==
+                                                        ToolsOfMath.beads) ...{
+                                                    GetTheBeads(
+                                                        countOfBalls: int.parse(
+                                                            gameState
+                                                                    .gameChoices?[
+                                                                        index]
+                                                                    .choice ??
+                                                                '0'),
+                                                      )
+                                                    } else if ((gameState
+                                                                    .basicData
+                                                                as MathChooseSticksOrBeadsOrBlocks)
+                                                            .tools ==
+                                                        ToolsOfMath.blocks) ...{
+                                                      Transform.scale(
+                                                          scale: (MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height >
+                                                                  450
+                                                              ? 1.5
+                                                              : 1.1),
+                                                          child: GetTheBlocks(
+                                                            countOfBoxes: int
+                                                                .parse(gameState
+                                                                        .gameChoices?[
+                                                                            index]
+                                                                        .choice ??
+                                                                    '0'),
+                                                          ))
+                                                    }
+                                                  ],
+                                                ),
+                                                5.ph,
+                                              ],
+                                            )))),
+                            SizedBox(),
+                          } else if ((gameState.basicData
+                                      as MathChooseSticksOrBeadsOrBlocks)
+                                  .tools ==
+                              ToolsOfMath.domino) ...{
+                            Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: List.generate(
+                                    gameState.gameChoices?.length ?? 0,
+                                    (index) => Row(
+                                          children: [
+                                            CardOfSelected(
+                                              onTap: () async {
+                                                if (context
+                                                        .read<
+                                                            CurrentGamePhoneticsCubit>()
+                                                        .ableButton() &&
+                                                    gameState.isCorrect !=
+                                                        true) {
+                                                  bool stateOfAnswer = context
+                                                      .read<ChooseSticksCubit>()
+                                                      .addAnswer(
+                                                          userChoose: int.parse(
+                                                              gameState
+                                                                      .gameChoices?[
+                                                                          index]
+                                                                      .choice ??
+                                                                  '0'));
+                                                  if (stateOfAnswer == true) {
+                                                    await context
+                                                        .read<
+                                                            CurrentGamePhoneticsCubit>()
+                                                        .addSuccessAnswer(
+                                                            questions: gameState
+                                                                .allGameData
+                                                                .length,
+                                                            correctAnswers:
+                                                                gameState
+                                                                        .correctAnswers +
+                                                                    1)
+                                                        .whenComplete(() {
+                                                      bool isLastQuestion = context
+                                                          .read<
+                                                              CurrentGamePhoneticsCubit>()
+                                                          .checkIfIsTheLastQuestionOfGame(
+                                                              queations: gameState
+                                                                  .allGameData
+                                                                  .length);
+
+                                                      if (isLastQuestion) {
+                                                        // Future.delayed(const Duration(seconds: 2),
+                                                        //     () async {
+                                                        //   Navigator.of(context).pop();
+                                                        // });
+                                                      } else {
+                                                        Future.delayed(
+                                                            const Duration(
+                                                                seconds: 2),
+                                                            () async {
+                                                          await context
+                                                              .read<
+                                                                  CurrentGamePhoneticsCubit>()
+                                                              .updateIndexOfCurrentGame();
+                                                          context
+                                                              .read<
+                                                                  ChooseSticksCubit>()
+                                                              .updateTheCurrentGame(
+                                                                  index: context
+                                                                      .read<
+                                                                          CurrentGamePhoneticsCubit>()
+                                                                      .state
+                                                                      .index);
+                                                        });
+                                                      }
+                                                    });
+                                                  } else {
+                                                    await context
+                                                        .read<
+                                                            CurrentGamePhoneticsCubit>()
+                                                        .addWrongAnswer(
+                                                            actionOfWrongAnswer:
+                                                                () async {});
+                                                  }
+                                                }
+                                              },
+                                              itsId: gameState
+                                                      .gameChoices?[index].id ??
+                                                  0,
+                                              isCorrect: (gameState.isCorrect ==
+                                                      true) &&
+                                                  (gameState.gameChoices?[index]
+                                                              .choice)
+                                                          .toString() ==
+                                                      gameState.mainNumber
+                                                          .toString(),
+                                            ),
+                                            10.pw,
+                                            if ((gameState.basicData
+                                                        as MathChooseSticksOrBeadsOrBlocks)
+                                                    .tools ==
+                                                ToolsOfMath.domino) ...{
+                                              DominoWidget(
+                                                count: int.parse(gameState
+                                                        .gameChoices?[index]
+                                                        .choice ??
+                                                    '0'),
+                                              )
+                                            },
+                                            20.pw
+                                          ],
+                                        ))),
+                          },
+                          10.ph,
+                        ],
                       ),
-                      10.pw,
-                      if (((gameState.basicData
-                                  as MathChooseSticksOrBeadsOrBlocks)
-                              .tools !=
-                          ToolsOfMath.domino)) ...{
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: List.generate(
-                                gameState.gameChoices?.length ?? 0,
-                                (index) => Row(
-                                      children: [
-                                        CardOfSelected(
-                                          onTap: () async {
-                                            if (context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .ableButton() &&
-                                                gameState.isCorrect != true) {
-                                              bool stateOfAnswer = context
-                                                  .read<ChooseSticksCubit>()
-                                                  .addAnswer(
-                                                      userChoose: int.parse(
-                                                          gameState
-                                                                  .gameChoices?[
-                                                                      index]
-                                                                  .choice ??
-                                                              '0'));
-                                              if (stateOfAnswer == true) {
-                                                await context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .addSuccessAnswer(
-                                                        questions: gameState
-                                                            .allGameData.length,
-                                                        correctAnswers: gameState
-                                                                .correctAnswers +
-                                                            1)
-                                                    .whenComplete(() {
-                                                  bool isLastQuestion = context
-                                                      .read<
-                                                          CurrentGamePhoneticsCubit>()
-                                                      .checkIfIsTheLastQuestionOfGame(
-                                                          queations: gameState
-                                                              .allGameData
-                                                              .length);
-
-                                                  if (isLastQuestion) {
-                                                    // Future.delayed(const Duration(seconds: 2),
-                                                    //     () async {
-                                                    //   Navigator.of(context).pop();
-                                                    // });
-                                                  } else {
-                                                    Future.delayed(
-                                                        const Duration(
-                                                            seconds: 2),
-                                                        () async {
-                                                      await context
-                                                          .read<
-                                                              CurrentGamePhoneticsCubit>()
-                                                          .updateIndexOfCurrentGame();
-                                                      context
-                                                          .read<
-                                                              ChooseSticksCubit>()
-                                                          .updateTheCurrentGame(
-                                                              index: context
-                                                                  .read<
-                                                                      CurrentGamePhoneticsCubit>()
-                                                                  .state
-                                                                  .index);
-                                                    });
-                                                  }
-                                                });
-                                              } else {
-                                                await context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .addWrongAnswer(
-                                                        actionOfWrongAnswer:
-                                                            () async {});
-                                              }
-                                            }
-                                          },
-                                          itsId: gameState
-                                                  .gameChoices?[index].id ??
-                                              0,
-                                          isCorrect:
-                                              (gameState.isCorrect == true) &&
-                                                  (gameState.gameChoices?[index]
-                                                              .choice)
-                                                          .toString() ==
-                                                      gameState.mainNumber
-                                                          .toString(),
-                                        ),
-                                        10.pw,
-                                        if ((gameState.basicData
-                                                    as MathChooseSticksOrBeadsOrBlocks)
-                                                .tools ==
-                                            ToolsOfMath.sticks) ...{
-                                          Slick(
-                                            count: int.parse(gameState
-                                                    .gameChoices?[index]
-                                                    .choice ??
-                                                '0'),
-                                          )
-                                        } else if ((gameState.basicData
-                                                    as MathChooseSticksOrBeadsOrBlocks)
-                                                .tools ==
-                                            ToolsOfMath.beads) ...{
-                                          GetTheBeads(
-                                            countOfBalls: int.parse(gameState
-                                                    .gameChoices?[index]
-                                                    .choice ??
-                                                '0'),
-                                          )
-                                        } else if ((gameState.basicData
-                                                    as MathChooseSticksOrBeadsOrBlocks)
-                                                .tools ==
-                                            ToolsOfMath.blocks) ...{
-                                          GetTheBlocks(
-                                            countOfBoxes: int.parse(gameState
-                                                    .gameChoices?[index]
-                                                    .choice ??
-                                                '0'),
-                                          )
-                                        }
-                                      ],
-                                    ))),
-                        SizedBox(),
-                      } else if ((gameState.basicData
-                                  as MathChooseSticksOrBeadsOrBlocks)
-                              .tools ==
-                          ToolsOfMath.domino) ...{
-                        Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: List.generate(
-                                gameState.gameChoices?.length ?? 0,
-                                (index) => Row(
-                                      children: [
-                                        CardOfSelected(
-                                          onTap: () async {
-                                            if (context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .ableButton() &&
-                                                gameState.isCorrect != true) {
-                                              bool stateOfAnswer = context
-                                                  .read<ChooseSticksCubit>()
-                                                  .addAnswer(
-                                                      userChoose: int.parse(
-                                                          gameState
-                                                                  .gameChoices?[
-                                                                      index]
-                                                                  .choice ??
-                                                              '0'));
-                                              if (stateOfAnswer == true) {
-                                                await context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .addSuccessAnswer(
-                                                        questions: gameState
-                                                            .allGameData.length,
-                                                        correctAnswers: gameState
-                                                                .correctAnswers +
-                                                            1)
-                                                    .whenComplete(() {
-                                                  bool isLastQuestion = context
-                                                      .read<
-                                                          CurrentGamePhoneticsCubit>()
-                                                      .checkIfIsTheLastQuestionOfGame(
-                                                          queations: gameState
-                                                              .allGameData
-                                                              .length);
-
-                                                  if (isLastQuestion) {
-                                                    // Future.delayed(const Duration(seconds: 2),
-                                                    //     () async {
-                                                    //   Navigator.of(context).pop();
-                                                    // });
-                                                  } else {
-                                                    Future.delayed(
-                                                        const Duration(
-                                                            seconds: 2),
-                                                        () async {
-                                                      await context
-                                                          .read<
-                                                              CurrentGamePhoneticsCubit>()
-                                                          .updateIndexOfCurrentGame();
-                                                      context
-                                                          .read<
-                                                              ChooseSticksCubit>()
-                                                          .updateTheCurrentGame(
-                                                              index: context
-                                                                  .read<
-                                                                      CurrentGamePhoneticsCubit>()
-                                                                  .state
-                                                                  .index);
-                                                    });
-                                                  }
-                                                });
-                                              } else {
-                                                await context
-                                                    .read<
-                                                        CurrentGamePhoneticsCubit>()
-                                                    .addWrongAnswer(
-                                                        actionOfWrongAnswer:
-                                                            () async {});
-                                              }
-                                            }
-                                          },
-                                          itsId: gameState
-                                                  .gameChoices?[index].id ??
-                                              0,
-                                          isCorrect:
-                                              (gameState.isCorrect == true) &&
-                                                  (gameState.gameChoices?[index]
-                                                              .choice)
-                                                          .toString() ==
-                                                      gameState.mainNumber
-                                                          .toString(),
-                                        ),
-                                        10.pw,
-                                        if ((gameState.basicData
-                                                    as MathChooseSticksOrBeadsOrBlocks)
-                                                .tools ==
-                                            ToolsOfMath.domino) ...{
-                                          DominoWidget(
-                                            count: int.parse(gameState
-                                                    .gameChoices?[index]
-                                                    .choice ??
-                                                '0'),
-                                          )
-                                        },
-                                        20.pw
-                                      ],
-                                    ))),
-                      },
-                      10.ph,
-                    ],
-                  ),
-                ),
+                    )),
               );
             }));
   }

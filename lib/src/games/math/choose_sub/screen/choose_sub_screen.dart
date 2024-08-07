@@ -55,7 +55,9 @@ class ChooseSubScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Row(
+              Transform.scale(
+                scale: MediaQuery.of(context).size.height < 450? 1:1.3,
+                child:Row(
                           children: [
                             CardOfNumber(
                               size: 70.h,
@@ -77,22 +79,27 @@ class ChooseSubScreen extends StatelessWidget {
                             ),
                           ],
                         )
+                        )
                       ],
                     )),
+                25.ph,
                 Expanded(
                     child: FittedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: List.generate(
-                        gameState.gameChoices?.length ?? 0,
-                        (index) => _answer(
-                              answer: gameState.gameChoices![index],
-                              tools: gameState.tools,
-                              gameState: gameState,
-                              mainBloc:
-                                  context.read<CurrentGamePhoneticsCubit>(),
-                              bloc: context.read<ChooseSubCubit>(),
-                            )),
+                  child: Container(
+                    width: MediaQuery.of(context).size.height < 450?MediaQuery.of(context).size.width/1.5:MediaQuery.of(context).size.width/2.5,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: List.generate(
+                          gameState.gameChoices?.length ?? 0,
+                          (index) => _answer(
+                                answer: gameState.gameChoices![index],
+                                tools: gameState.tools,
+                                gameState: gameState,
+                                mainBloc:
+                                    context.read<CurrentGamePhoneticsCubit>(),
+                                bloc: context.read<ChooseSubCubit>(),
+                              )),
+                    ),
                   ),
                 )),
               ],

@@ -36,117 +36,125 @@ class DragSubScreen extends StatelessWidget {
                 border: Border.all(
                     color: AppColorPhonetics.darkBlueColor, width: 5)),
             child: FittedBox(
-              child: Column(
-                children: [
-                  Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _question(
-                              showX: true,
-                              tools: gameState.tools,
-                              question: gameState.mainQuestion),
-                          _question(
-                              tools: gameState.tools,
-                              question: gameState.subQuestion),
-                        ],
-                      ),
-                      10.ph,
-                      DragTarget<GameChoicesGameFinalModel>(builder: (
-                        BuildContext context,
-                        List<dynamic> accepted,
-                        List<dynamic> rejected,
-                      ) {
-                        return CardOfBlocks(
-                          alignment: Alignment.centerRight,
-                          newWidth: MediaQuery.of(context).size.width / 2,
-                          number: gameState.isCorrect == true
-                              ? (int.parse(
-                                      gameState.subQuestion?.letter ?? '0') -
-                                  int.parse(
-                                      gameState.mainQuestion?.letter ?? '0'))
-                              : 0,
-                          tools: ToolsOfMath.blocks,
-                        );
-                      }, onAcceptWithDetails: (item) async {
-                        if (context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .ableButton() &&
-                            gameState.isCorrect != true) {
-                          bool stateOfAnswer = context
-                              .read<DragSubCubit>()
-                              .addAnswer(userChoose: item.data);
-                          if (stateOfAnswer == true) {
-                            await context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .addSuccessAnswer(
-                                    questions: gameState.allGameData.length,
-                                    correctAnswers:
-                                        gameState.correctAnswers + 1)
-                                .whenComplete(() {
-                              bool isLastQuestion = context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .checkIfIsTheLastQuestionOfGame(
-                                      queations: gameState.allGameData.length);
-
-                              if (isLastQuestion) {
-                                // Future.delayed(const Duration(seconds: 2),
-                                //     () async {
-                                //   Navigator.of(context).pop();
-                                // });
-                              } else {
-                                Future.delayed(const Duration(seconds: 2),
-                                    () async {
-                                  await context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .updateIndexOfCurrentGame();
-                                  context
-                                      .read<DragSubCubit>()
-                                      .updateTheCurrentGame(
-                                          index: context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .state
-                                              .index);
-                                });
-                              }
-                            });
-                          } else {
-                            await context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .addWrongAnswer(
-                                    actionOfWrongAnswer: () async {});
-                          }
-                        }
-                      })
-                    ],
-                  ),
-                  10.ph,
-                  SizedBox(
-                    // width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                SizedBox(
+                height: MediaQuery.of(context).size.height < 450?null:MediaQuery.of(context).size.height/2,
+                child:Column(
                       mainAxisSize: MainAxisSize.max,
-                      children: List.generate(
-                          gameState.gameChoices?.length ?? 0,
-                          (index) => Row(
-                                children: [
-                                  _answer(
-                                    answer: gameState.gameChoices![index],
-                                    tools: gameState.tools,
-                                    gameState: gameState,
-                                    mainBloc: context
-                                        .read<CurrentGamePhoneticsCubit>(),
-                                    bloc: context.read<DragSubCubit>(),
-                                  ),
-                                  20.pw
-                                ],
-                              )),
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _question(
+                                showX: true,
+                                tools: gameState.tools,
+                                question: gameState.mainQuestion),
+                            _question(
+                                tools: gameState.tools,
+                                question: gameState.subQuestion),
+                          ],
+                        ),
+                        10.ph,
+                        DragTarget<GameChoicesGameFinalModel>(builder: (
+                          BuildContext context,
+                          List<dynamic> accepted,
+                          List<dynamic> rejected,
+                        ) {
+                          return CardOfBlocks(
+                            alignment: Alignment.centerRight,
+                            newWidth: MediaQuery.of(context).size.width / 2,
+                            number: gameState.isCorrect == true
+                                ? (int.parse(
+                                        gameState.subQuestion?.letter ?? '0') -
+                                    int.parse(
+                                        gameState.mainQuestion?.letter ?? '0'))
+                                : 0,
+                            tools: ToolsOfMath.blocks,
+                            scale: MediaQuery.of(context).size.height < 450?1: 1.5,
+                          );
+                        }, onAcceptWithDetails: (item) async {
+                          if (context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .ableButton() &&
+                              gameState.isCorrect != true) {
+                            bool stateOfAnswer = context
+                                .read<DragSubCubit>()
+                                .addAnswer(userChoose: item.data);
+                            if (stateOfAnswer == true) {
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .addSuccessAnswer(
+                                      questions: gameState.allGameData.length,
+                                      correctAnswers:
+                                          gameState.correctAnswers + 1)
+                                  .whenComplete(() {
+                                bool isLastQuestion = context
+                                    .read<CurrentGamePhoneticsCubit>()
+                                    .checkIfIsTheLastQuestionOfGame(
+                                        queations: gameState.allGameData.length);
+
+                                if (isLastQuestion) {
+                                  // Future.delayed(const Duration(seconds: 2),
+                                  //     () async {
+                                  //   Navigator.of(context).pop();
+                                  // });
+                                } else {
+                                  Future.delayed(const Duration(seconds: 2),
+                                      () async {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .updateIndexOfCurrentGame();
+                                    context
+                                        .read<DragSubCubit>()
+                                        .updateTheCurrentGame(
+                                            index: context
+                                                .read<CurrentGamePhoneticsCubit>()
+                                                .state
+                                                .index);
+                                  });
+                                }
+                              });
+                            } else {
+                              await context
+                                  .read<CurrentGamePhoneticsCubit>()
+                                  .addWrongAnswer(
+                                      actionOfWrongAnswer: () async {});
+                            }
+                          }
+                        })
+                      ],
+                    )),
+                    10.ph,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: List.generate(
+                            gameState.gameChoices?.length ?? 0,
+                            (index) => Row(
+                                  children: [
+                                    _answer(
+                                      answer: gameState.gameChoices![index],
+                                      tools: gameState.tools,
+                                      gameState: gameState,
+                                      mainBloc: context
+                                          .read<CurrentGamePhoneticsCubit>(),
+                                      bloc: context.read<DragSubCubit>(), scale: MediaQuery.of(context).size.height < 450?1: 1.5,
+                                    ),
+                                    20.pw
+                                  ],
+                                )),
+                      ),
                     ),
-                  ),
-                  5.ph
-                ],
+                    5.ph
+                  ],
+                ),
               ),
             ),
           );
@@ -189,9 +197,11 @@ class DragSubScreen extends StatelessWidget {
             if (tools == ToolsOfMath.blocks) ...{
               // Stack(
               //   children: [
-              GetTheBlocks(
+            Transform.scale(
+            scale: 1.5,
+            child:GetTheBlocks(
                 countOfBoxes: int.parse("${question?.letter ?? 0}"),
-              ),
+              )),
 
               //   ],
               // )
@@ -218,6 +228,7 @@ class DragSubScreen extends StatelessWidget {
     required DragSubInitial gameState,
     required CurrentGamePhoneticsCubit mainBloc,
     required DragSubCubit bloc,
+    required double scale,
   }) {
     return Draggable<GameChoicesGameFinalModel>(
         data: answer,
@@ -238,8 +249,11 @@ class DragSubScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 if (tools == ToolsOfMath.blocks) ...{
-                  GetTheBlocks(
+                Transform.scale(
+                scale: scale,
+                child:GetTheBlocks(
                     countOfBoxes: int.parse("${answer?.choice ?? 0}"),
+                  )
                   )
                 } else if (tools == ToolsOfMath.beads) ...{
                   GetTheBeads(

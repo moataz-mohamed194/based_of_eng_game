@@ -180,7 +180,9 @@ class DragOeScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: List.generate(
           gameState.gameChoices?.length ?? 0,
-          (index) => Draggable<GameChoicesGameFinalModel>(
+          (index) => Transform.scale(
+        scale: 1.3,
+        child:Draggable<GameChoicesGameFinalModel>(
               maxSimultaneousDrags: gameState.correctAnswers
                       .where((element) =>
                           element.id == gameState.gameChoices![index].id)
@@ -196,7 +198,7 @@ class DragOeScreen extends StatelessWidget {
                       .where((element) =>
                           element.id == gameState.gameChoices![index].id)
                       .isNotEmpty,
-                  data: gameState.gameChoices![index]))),
+                  data: gameState.gameChoices![index])))),
     );
   }
 
@@ -204,30 +206,34 @@ class DragOeScreen extends StatelessWidget {
       {required GameChoicesGameFinalModel data, required bool isDisable, bool? showSpace}) {
     return Opacity(
       opacity: isDisable ? (.1) : 1,
-      child: Row(
-        children: [
-          Column(
-            children: [
-              Text(
-                data.choice ?? '0',
-                style: TextStyle(
-                  color: AppColorPhonetics.darkBlueColor,
-                  fontSize: 20.sp,
-                  fontFamily: AppTheme.getFontFamily5(),
-                  fontWeight: FontWeight.w400,
-                  height: 0,
-                  decoration: TextDecoration.none,
+      child: FittedBox(
+        child: Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  data.choice ?? '0',
+                  style: TextStyle(
+                    color: AppColorPhonetics.darkBlueColor,
+                    fontSize: 20.sp,
+                    fontFamily: AppTheme.getFontFamily5(),
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
-              ),
-              DominoWidget(
-                count: int.parse(data.choice ?? '0'),
-              ),
-            ],
-          ),
-          if(showSpace==true)...{
-            10.pw
-          }
-        ],
+                DominoWidget(
+                  count: int.parse(data.choice ?? '0'),
+                ),
+              ],
+            ),
+            if(showSpace==true)...{
+              10.pw
+            }
+          ],
+        ),
       ),
     );
   }

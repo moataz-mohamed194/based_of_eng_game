@@ -74,7 +74,9 @@ class BasedOfMath extends StatelessWidget {
         alignment: Alignment.topRight,
         children: [
           Positioned(
-              top: 60.h,
+              top: MediaQuery.of(context).size.height > 450
+                  ? 70.h
+                  : 60.h,
               // start: 0,
               // start: 55.w,
               width: MediaQuery.of(context).size.width,
@@ -503,7 +505,11 @@ class BasedOfMath extends StatelessWidget {
                           : Container(
                               margin: EdgeInsets.only(left: 7.w),
                               child: SizedBox(
-                                  height: 90.h,
+                                height:
+                                MediaQuery.of(context).size.height > 450
+                                    ? 150.h
+                                    : 90.h,
+                                // width: 80.w,
                                   // width: 50.w,
                                   child: Rive(
                                     artboard:

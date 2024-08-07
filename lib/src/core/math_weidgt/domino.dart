@@ -11,7 +11,8 @@ class DominoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 30.w,
-      height: height ?? 130.h,
+      height:
+          height ?? (MediaQuery.of(context).size.height > 450 ? 170.h : 130.h),
       clipBehavior: Clip.antiAlias,
       alignment: Alignment.center,
       decoration: ShapeDecoration(
@@ -21,46 +22,48 @@ class DominoWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      child:
-          SizedBox(
-            // widthh: 30.w,
-            // height: height != null ? ((height ?? 0) - 10) : 130.h,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (count % 2 == 0) ...{
-                  _listOfCreateBots()
-                } else ...{
-                  _listOfCreateBots(),
-                  Container(
+      child: SizedBox(
+        // widthh: 30.w,
+        // height: height != null ? ((height ?? 0) - 10) : 130.h,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (count % 2 == 0) ...{
+              Transform.scale(scale: (MediaQuery.of(context).size.height > 450 ? 1.2:1), child: _listOfCreateBots())
+            } else ...{
+              Transform.scale(scale: (MediaQuery.of(context).size.height > 450 ? 1.2:1), child: _listOfCreateBots()),
+              Transform.scale(
+                  scale: (MediaQuery.of(context).size.height > 450 ? 1.2:1),
+                  child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 4.5.w),
                     child: _redBot(),
-                  )
-                }
-              ],
-            ),
-          ),
-
+                  ))
+            }
+          ],
+        ),
+      ),
     );
   }
 
   _listOfCreateBots() {
     return Column(
-      children: List.generate( ((count ~/ 2)), (index)=>Column(
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _redBot(),
-              _redBot(),
-            ],
-          ),
-          index == (count ~/ 2) ? 0.ph : 10.ph
-        ],
-      ))
+        children: List.generate(
+            ((count ~/ 2)),
+            (index) => Column(
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        _redBot(),
+                        _redBot(),
+                      ],
+                    ),
+                    index == (count ~/ 2) ? 0.ph : 10.ph
+                  ],
+                ))
         // SizedBox(
         //   // height: ((count ~/ 2) * 25),
         //   child: ListView.separated(
@@ -82,8 +85,8 @@ class DominoWidget extends StatelessWidget {
         //       },
         //       itemCount: count ~/ 2),
         // ),
-      // ],
-    );
+        // ],
+        );
   }
 
   _redBot() {

@@ -35,114 +35,134 @@ class DragAddScreen extends StatelessWidget {
             listener: (context, state) {},
             builder: (context, gameState) {
               return FittedBox(
-                child: Column(
-                  children: [
-                    5.ph,
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width - 100.w,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _question(
-                              question: gameState.mainQuestion,
-                              tools: gameState.tools,
-                              isUp: true),
-                          10.ph,
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              _question(
-                                  question: gameState.subQuestion,
-                                  tools: gameState.tools,
-                                  isUp: false),
-                              DragTarget<GameChoicesGameFinalModel>(builder: (
-                                BuildContext context,
-                                List<dynamic> accepted,
-                                List<dynamic> rejected,
-                              ) {
-                                return _question(
-                                    question: gameState.correctAnswer,
+                child: Container(
+                  height: MediaQuery.of(context).size.height - (90.h + 40.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      5.ph,
+                      Transform.scale(
+                          scale: MediaQuery.of(context).size.height < 450
+                              ? 1
+                              : 1.5,
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.height < 450
+                                    ? 0
+                                    : 30.w),
+                            width: MediaQuery.of(context).size.width - 100.w,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _question(
+                                    question: gameState.mainQuestion,
                                     tools: gameState.tools,
-                                    isUp: false,
-                                    isHide: gameState.isCorrect != true);
-                              },
-                                  onAcceptWithDetails: (item) async {
-                                if (context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .ableButton()) {
-                                  bool stateOfAnswer = context
-                                      .read<DragAddCubit>()
-                                      .addAnswer(userChoose: item.data);
-                                  if (stateOfAnswer == true) {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addSuccessAnswer(
-                                            questions:
-                                                gameState.allGameData.length,
-                                            correctAnswers:
-                                                gameState.correctAnswers + 1)
-                                        .whenComplete(() {
-                                      bool isLastQuestion = context
+                                    isUp: true),
+                                10.ph,
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    _question(
+                                        question: gameState.subQuestion,
+                                        tools: gameState.tools,
+                                        isUp: false),
+                                    DragTarget<GameChoicesGameFinalModel>(
+                                        builder: (
+                                      BuildContext context,
+                                      List<dynamic> accepted,
+                                      List<dynamic> rejected,
+                                    ) {
+                                      return _question(
+                                          question: gameState.correctAnswer,
+                                          tools: gameState.tools,
+                                          isUp: false,
+                                          isHide: gameState.isCorrect != true);
+                                    }, onAcceptWithDetails: (item) async {
+                                      if (context
                                           .read<CurrentGamePhoneticsCubit>()
-                                          .checkIfIsTheLastQuestionOfGame(
-                                              queations:
-                                                  gameState.allGameData.length);
-
-                                      if (isLastQuestion) {
-                                        // Future.delayed(const Duration(seconds: 2),
-                                        //     () async {
-                                        //   Navigator.of(context).pop();
-                                        // });
-                                      } else {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                            () async {
+                                          .ableButton()) {
+                                        bool stateOfAnswer = context
+                                            .read<DragAddCubit>()
+                                            .addAnswer(userChoose: item.data);
+                                        if (stateOfAnswer == true) {
                                           await context
                                               .read<CurrentGamePhoneticsCubit>()
-                                              .updateIndexOfCurrentGame();
-                                          context
-                                              .read<DragAddCubit>()
-                                              .updateTheCurrentGame(
-                                                  index: context
-                                                      .read<
-                                                          CurrentGamePhoneticsCubit>()
-                                                      .state
-                                                      .index);
-                                        });
+                                              .addSuccessAnswer(
+                                                  questions: gameState
+                                                      .allGameData.length,
+                                                  correctAnswers:
+                                                      gameState.correctAnswers +
+                                                          1)
+                                              .whenComplete(() {
+                                            bool isLastQuestion = context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .checkIfIsTheLastQuestionOfGame(
+                                                    queations: gameState
+                                                        .allGameData.length);
+
+                                            if (isLastQuestion) {
+                                              // Future.delayed(const Duration(seconds: 2),
+                                              //     () async {
+                                              //   Navigator.of(context).pop();
+                                              // });
+                                            } else {
+                                              Future.delayed(
+                                                  const Duration(seconds: 2),
+                                                  () async {
+                                                await context
+                                                    .read<
+                                                        CurrentGamePhoneticsCubit>()
+                                                    .updateIndexOfCurrentGame();
+                                                context
+                                                    .read<DragAddCubit>()
+                                                    .updateTheCurrentGame(
+                                                        index: context
+                                                            .read<
+                                                                CurrentGamePhoneticsCubit>()
+                                                            .state
+                                                            .index);
+                                              });
+                                            }
+                                          });
+                                        } else {
+                                          await context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .addWrongAnswer(
+                                                  actionOfWrongAnswer:
+                                                      () async {});
+                                        }
                                       }
-                                    });
-                                  } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                            actionOfWrongAnswer: () async {});
-                                  }
-                                }
-                              })
-                            ],
-                          )
-                        ],
+                                    })
+                                  ],
+                                )
+                              ],
+                            ),
+                          )),
+                      5.ph,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: List.generate(
+                                gameState.gameChoices?.length ?? 0,
+                                (index) => _answer(
+                                    gameState: gameState,
+                                    scale:
+                                        MediaQuery.of(context).size.height < 450
+                                            ? 1
+                                            : 1.5,
+                                    question: gameState.gameChoices![index],
+                                    mainBloc: context
+                                        .read<CurrentGamePhoneticsCubit>(),
+                                    bloc: context.read<DragAddCubit>(),
+                                    tools: gameState.tools))),
                       ),
-                    ),
-                    5.ph,
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: List.generate(
-                              gameState.gameChoices?.length ?? 0,
-                              (index) => _answer(
-                                  gameState: gameState,
-                                  question: gameState.gameChoices![index],
-                                  mainBloc:
-                                      context.read<CurrentGamePhoneticsCubit>(),
-                                  bloc: context.read<DragAddCubit>(),
-                                  tools: gameState.tools))),
-                    ),
-                    5.ph,
-                  ],
+                      5.ph,
+                    ],
+                  ),
                 ),
               );
             }));
@@ -185,7 +205,7 @@ class DragAddScreen extends StatelessWidget {
         if (tools == ToolsOfMath.blocks) ...{
           GetTheBlocks(
               countOfBoxes: int.parse("${question?.letter ?? 0}"),
-              isHide: isHide)
+              isTransparent: isHide)
         } else if (tools == ToolsOfMath.beads) ...{
           GetTheBeads(
             countOfBalls: int.parse("${question?.letter ?? 0}"),
@@ -230,82 +250,86 @@ class DragAddScreen extends StatelessWidget {
     required CurrentGamePhoneticsCubit mainBloc,
     required DragAddCubit bloc,
     required ToolsOfMath tools,
+    double? scale,
   }) {
-    return Draggable<GameChoicesGameFinalModel>(
-      data: question,
-      feedback: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          if (tools == ToolsOfMath.blocks) ...{
-            GetTheBlocks(
-              countOfBoxes: int.parse("${question?.choice ?? 0}"),
-            ),
-          } else if (tools == ToolsOfMath.beads) ...{
-            GetTheBeads(
-              countOfBalls: int.parse("${question?.choice ?? 0}"),
-            )
-          },
-          5.ph,
-          Container(
-            width: 15.w,
-            height: 15.w,
-            padding: const EdgeInsets.all(5),
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppImagesMath.woodBgNumber))),
-            child: FittedBox(
-              child: Text(
-                "${question?.choice ?? 0}",
-                style: TextStyle(
-                  color: int.parse("${question?.choice ?? 0}") % 2 != 0
-                      ? AppColorPhonetics.redColor
-                      : AppColorPhonetics.darkBlueColor,
-                  fontSize: 20.sp,
-                  fontFamily: AppTheme.getFontFamily5(),
-                  fontWeight: FontWeight.w400,
-                  height: 0,
+    return Transform.scale(
+      scale: scale,
+      child: Draggable<GameChoicesGameFinalModel>(
+        data: question,
+        feedback: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            if (tools == ToolsOfMath.blocks) ...{
+              GetTheBlocks(
+                countOfBoxes: int.parse("${question?.choice ?? 0}"),
+              ),
+            } else if (tools == ToolsOfMath.beads) ...{
+              GetTheBeads(
+                countOfBalls: int.parse("${question?.choice ?? 0}"),
+              )
+            },
+            5.ph,
+            Container(
+              width: 15.w,
+              height: 15.w,
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(AppImagesMath.woodBgNumber))),
+              child: FittedBox(
+                child: Text(
+                  "${question?.choice ?? 0}",
+                  style: TextStyle(
+                    color: int.parse("${question?.choice ?? 0}") % 2 != 0
+                        ? AppColorPhonetics.redColor
+                        : AppColorPhonetics.darkBlueColor,
+                    fontSize: 20.sp,
+                    fontFamily: AppTheme.getFontFamily5(),
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          if (tools == ToolsOfMath.blocks) ...{
-            GetTheBlocks(
-              countOfBoxes: int.parse("${question?.choice ?? 0}"),
-            ),
-          } else if (tools == ToolsOfMath.beads) ...{
-            GetTheBeads(
-              countOfBalls: int.parse("${question?.choice ?? 0}"),
-            )
-          },
-          5.ph,
-          Container(
-            width: 15.w,
-            height: 15.w,
-            padding: const EdgeInsets.all(5),
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppImagesMath.woodBgNumber))),
-            child: FittedBox(
-              child: Text(
-                "${question?.choice ?? 0}",
-                style: TextStyle(
-                  color: int.parse("${question?.choice ?? 0}") % 2 != 0
-                      ? AppColorPhonetics.redColor
-                      : AppColorPhonetics.darkBlueColor,
-                  fontSize: 20.sp,
-                  fontFamily: AppTheme.getFontFamily5(),
-                  fontWeight: FontWeight.w400,
-                  height: 0,
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            if (tools == ToolsOfMath.blocks) ...{
+              GetTheBlocks(
+                countOfBoxes: int.parse("${question?.choice ?? 0}"),
+              ),
+            } else if (tools == ToolsOfMath.beads) ...{
+              GetTheBeads(
+                countOfBalls: int.parse("${question?.choice ?? 0}"),
+              )
+            },
+            5.ph,
+            Container(
+              width: 15.w,
+              height: 15.w,
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(AppImagesMath.woodBgNumber))),
+              child: FittedBox(
+                child: Text(
+                  "${question?.choice ?? 0}",
+                  style: TextStyle(
+                    color: int.parse("${question?.choice ?? 0}") % 2 != 0
+                        ? AppColorPhonetics.redColor
+                        : AppColorPhonetics.darkBlueColor,
+                    fontSize: 20.sp,
+                    fontFamily: AppTheme.getFontFamily5(),
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

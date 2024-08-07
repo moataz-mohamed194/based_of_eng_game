@@ -43,9 +43,11 @@ class ChooseAddScreen extends StatelessWidget {
                   Expanded(
                       child: FittedBox(
                         child: Container(
+                          height: MediaQuery.of(context).size.height/2,
                           padding: EdgeInsets.symmetric(vertical: 5),
                           child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
                           _question(
                               question: gameState.mainQuestion,
@@ -63,6 +65,8 @@ class ChooseAddScreen extends StatelessWidget {
                   Expanded(
                       child: FittedBox(
                     child: Container(
+                      height: MediaQuery.of(context).size.height/2,
+
                       padding: EdgeInsets.symmetric(vertical: 5.h),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,8 +106,8 @@ class ChooseAddScreen extends StatelessWidget {
       children: [
         if(showDown!=true)...{
           Container(
-            width: 20.w,
-            height: 20.w,
+            width: 12.w,
+            height: 12.w,
             padding: const EdgeInsets.all(5),
             decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -139,8 +143,8 @@ class ChooseAddScreen extends StatelessWidget {
 
           5.ph,
           Container(
-            width: 20.w,
-            height: 20.w,
+            width: 12.w,
+            height: 12.w,
             padding: const EdgeInsets.all(5),
             decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -221,8 +225,8 @@ class ChooseAddScreen extends StatelessWidget {
             },
             5.ph,
             Container(
-              width: 20.w,
-              height: 20.w,
+              width: 12.w,
+              height: 12.w,
               padding: const EdgeInsets.all(5),
               decoration: const BoxDecoration(
                   image: DecorationImage(

@@ -32,16 +32,22 @@ class ChooseNumberScreen extends StatelessWidget {
             listener: (context, state) {},
             builder: (context, gameState) {
               return FittedBox(
-                child: SizedBox(
-                  height:((gameState.basicData
+                child:Transform.scale(
+                    scale:((gameState.basicData
+                    as MathChooseNumberSticksOrBeadsOrBlocks)
+                        .tools ==
+                        ToolsOfMath.domino)?1: 1.3,
+                    child: SizedBox(
+                  height:(((gameState.basicData
                   as MathChooseNumberSticksOrBeadsOrBlocks)
                       .tools ==
-                      ToolsOfMath.domino)?null: MediaQuery.of(context).size.height -
+                      ToolsOfMath.domino)&& MediaQuery.of(context).size.height < 450)?null: MediaQuery.of(context).size.height -
                       (90.h + 50.h + 5 + 20.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.max,
                     children: [
+                      5.ph,
                       5.ph,
                       if ((gameState.basicData
                                   as MathChooseNumberSticksOrBeadsOrBlocks)
@@ -54,23 +60,28 @@ class ChooseNumberScreen extends StatelessWidget {
                                   as MathChooseNumberSticksOrBeadsOrBlocks)
                               .tools ==
                           ToolsOfMath.beads) ...{
-                        GetTheBeads(
+                      Transform.scale(
+                      scale: 1.4,
+                      child:GetTheBeads(
                           countOfBalls:
                               int.parse("${gameState.mainNumber ?? '0'}"),
-                        )
+                        ))
                       } else if ((gameState.basicData
                                   as MathChooseNumberSticksOrBeadsOrBlocks)
                               .tools ==
                           ToolsOfMath.blocks) ...{
-                        GetTheBlocks(
+                      Transform.scale(
+                      scale: 1.4,
+                      child:GetTheBlocks(
                           countOfBoxes:
                               int.parse("${gameState.mainNumber ?? '0'}"),
+                        )
                         )
                       } else if ((gameState.basicData
                                   as MathChooseNumberSticksOrBeadsOrBlocks)
                               .tools ==
                           ToolsOfMath.domino) ...{
-                        DominoWidget(
+                      DominoWidget(
                           height: 120.h,
                           count: int.parse("${gameState.mainNumber ?? '0'}"),
                         )
@@ -154,7 +165,7 @@ class ChooseNumberScreen extends StatelessWidget {
                       5.ph,
                     ],
                   ),
-                ),
+                )),
               );
             }));
   }
