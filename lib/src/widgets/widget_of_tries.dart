@@ -37,7 +37,7 @@ widgetOfTries(
               child: Center(
                 child: FittedBox(
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width/1.3, //300.w,
+                    width: MediaQuery.of(context).size.width/1.1, //300.w,
                     height: MediaQuery.of(context).size.height / 2.5, //300.w,
                     // height: 300.h,
                     // decoration: const BoxDecoration(
