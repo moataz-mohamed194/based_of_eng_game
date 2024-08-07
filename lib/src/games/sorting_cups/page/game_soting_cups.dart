@@ -41,7 +41,7 @@ class _GamesSortingCups extends State<GamesSortingCups> {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.only(right: 15.w, bottom: 10.h, top: 10.h),
+        margin: EdgeInsets.only(right: 15.w, bottom: 10.h, top: 35.h),
         width: MediaQuery.of(context).size.width - 40.w,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -56,10 +56,10 @@ class _GamesSortingCups extends State<GamesSortingCups> {
                 stateOfStringWillSay: state.chooseWord?.letter ?? '');
           }, builder: (context, gameState) {
             return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                20.ph,
+                5.ph,
                 ...List.generate(
                     ((gameState.cardsLetters?.length ?? 0) / 10).ceil(),
                     (rowIndex) {
