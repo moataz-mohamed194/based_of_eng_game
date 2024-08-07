@@ -207,8 +207,7 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
           width: 45.w,
           child: Center(
             child: StrokedText(
-              fontSize:
-                  MediaQuery.of(context).size.height > 650 ? 35.sp : 25.sp,
+              fontSize: 25.sp,
               text: letter,
               isDisabled:
                   viewModel.state.correctIndexes?.contains(index) ?? false,
