@@ -59,30 +59,31 @@ class _XOutGameScreen extends State<XOutGameScreen> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             const SizedBox(),
-            Container(
-                margin: const EdgeInsets.only(bottom: 15),
-                child: Draggable<String>(
-                  maxSimultaneousDrags: 1,
-                  data: state.gameData?.mainLetter ?? '',
-                  childWhenDragging: SizedBox(
-                    // height: 50.h,//(MediaQuery.of(context).size.height / 2.8).h,
-                    width: 40.w,
-                  ),
-                  feedback: Image.asset(
-                    AppImagesPhonetics.outX,
-                    // height: (MediaQuery.of(context).size.height / 2.8).h,
-                    width: 40.w,
-                  ),
-                  child: ((stateOfCurrentGamePhoneticsCubit.stateOfAvatar ==
-                          BasicOfGameData.stateOfWin))
-                      ? SizedBox(
-                          width: 40.w,
-                        )
-                      : Image.asset(
-                          AppImagesPhonetics.X,
-                          width: 40.w,
-                        ),
-                )),
+            if (context.read<CurrentGamePhoneticsCubit>().ableButton())
+              Container(
+                  margin: const EdgeInsets.only(bottom: 15),
+                  child: Draggable<String>(
+                    maxSimultaneousDrags: 1,
+                    data: state.gameData?.mainLetter ?? '',
+                    childWhenDragging: SizedBox(
+                      // height: 50.h,//(MediaQuery.of(context).size.height / 2.8).h,
+                      width: 40.w,
+                    ),
+                    feedback: Image.asset(
+                      AppImagesPhonetics.outX,
+                      // height: (MediaQuery.of(context).size.height / 2.8).h,
+                      width: 40.w,
+                    ),
+                    child: ((stateOfCurrentGamePhoneticsCubit.stateOfAvatar ==
+                            BasicOfGameData.stateOfWin))
+                        ? SizedBox(
+                            width: 40.w,
+                          )
+                        : Image.asset(
+                            AppImagesPhonetics.X,
+                            width: 40.w,
+                          ),
+                  )),
             const SizedBox(),
             Container(
               alignment: Alignment.center,
