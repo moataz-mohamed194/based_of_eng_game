@@ -72,14 +72,16 @@ class DragSticksCubit extends Cubit<DragSticksInitial> {
         gameLetters: gameLetters));
   }
 
-  updateTheCurrentGame({required int newIndex}) {
+  updateTheCurrentGame() {
     TalkTts.reBackTheDefaultValue();
     try {
-      emit(state.copyWith(index: newIndex));
+      int currentIndex = state.index;
+      currentIndex = currentIndex + 1;
+      emit(state.copyWith(index: currentIndex));
       reFormatGameData();
       TalkTts.reStopTheDefaultValue();
     } catch (e) {
-      reFormatGameData();
+      // reFormatGameData();
       TalkTts.reStopTheDefaultValue();
     }
   }
