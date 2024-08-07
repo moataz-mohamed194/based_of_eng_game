@@ -16,7 +16,7 @@ class LetterItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double circleDiameter =
-        MediaQuery.of(context).size.width * 0.10; // Adjust this value as needed
+        MediaQuery.of(context).size.width * 0.12; // Adjust this value as needed
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: Container(

@@ -1,4 +1,5 @@
 import 'package:based_of_eng_game/based_of_eng_game.dart';
+import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_a_paint.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,12 +40,12 @@ class _BingoArabicGameScreen extends State<BingoArabicGameScreen> {
         margin: EdgeInsets.only(right: 15.w),
         width: MediaQuery.of(context).size.width - (100.w),
         // height: MediaQuery.of(context).size.height - 150.h,
-        padding: const EdgeInsets.all(1),
+        padding: EdgeInsets.zero,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8.r),
-            border:
-                Border.all(color: AppColorPhonetics.darkBorderColor, width: 5)),
+            border: Border.all(
+                color: AppColorPhonetics.darkBorderColor, width: 2.w)),
         child: BlocConsumer<BingoArabicCubit, BingoArabicState>(
             listener: (context, state) {
           context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
@@ -54,6 +55,13 @@ class _BingoArabicGameScreen extends State<BingoArabicGameScreen> {
           return Column(
             children: [
               _buildBingoWord(gameState: gameState),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: Divider(
+                  color: const Color(0xFF91D4F0),
+                  thickness: 5.h,
+                ),
+              ),
               _buildGridViewOfLetters(gameState: gameState, context: context),
             ],
           );
@@ -62,7 +70,7 @@ class _BingoArabicGameScreen extends State<BingoArabicGameScreen> {
 
   Widget _buildGridViewOfLetters(
       {required BingoArabicState gameState, required BuildContext context}) {
-        print('here');
+    print('here');
     final cardsLetters = gameState.cardsLetters ?? [];
     final correctIndexes = gameState.correctAnswersIds;
     final chooseWord = gameState.chooseWord;
@@ -135,11 +143,7 @@ class _BingoArabicGameScreen extends State<BingoArabicGameScreen> {
 
   Widget _buildBingoWord({required BingoArabicState gameState}) {
     return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.blue.withOpacity(0.5), width: 1),
-        borderRadius: BorderRadius.circular(8.r),
-      ),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: 'Bingo'.split('').asMap().entries.map((entry) {
@@ -147,6 +151,8 @@ class _BingoArabicGameScreen extends State<BingoArabicGameScreen> {
           int index = entry.key;
           return StrokeText(
               text: letter,
+              fontSize: 45,
+              strokeWidth: 3,
               isDisabled: false,
               color: index + 1 <= gameState.countOfBingoLetters
                   ? Colors.green

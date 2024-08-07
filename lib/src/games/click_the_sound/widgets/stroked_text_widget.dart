@@ -45,10 +45,7 @@ class StrokedText extends StatelessWidget {
             fontSize: fontSize ?? 39,
             fontWeight: FontWeight.w900,
             fontFamily: AppTheme.getFontFamily5(),
-            foreground: Paint()
-              ..color = isDisabled
-                  ? backgroundColor.withOpacity(0.5)
-                  : backgroundColor,
+            foreground: Paint()..color = backgroundColor,
           ),
         ),
         Text(
@@ -58,9 +55,7 @@ class StrokedText extends StatelessWidget {
             fontSize: fontSize ?? 39,
             foreground: Paint()
               ..strokeWidth = strokeWidth ?? 1.7
-              ..color = isDisabled
-                  ? AppColorPhonetics.lightGreyColor4.withOpacity(0.5)
-                  : strokeColor
+              ..color = strokeColor
               ..style = PaintingStyle.stroke,
           ),
         ),

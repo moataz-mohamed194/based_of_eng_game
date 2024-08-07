@@ -31,6 +31,7 @@ class ArabicBingoLetter extends StatelessWidget {
           // width: maxWidth / 3,
           // height: maxHeight / 3,
           // padding: const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 36),
+
           decoration: BoxDecoration(
             color: isCorrect == false
                 ? Colors.white
@@ -40,16 +41,16 @@ class ArabicBingoLetter extends StatelessWidget {
             // ),
             border: Border(
               right: (index == 0 || index == 3 || index == 6)
-                  ? const BorderSide(width: 2, color: Color(0xFF91D4F0))
+                  ? BorderSide(width: 2.w, color: const Color(0xFF91D4F0))
                   : const BorderSide(color: Colors.white),
               left: (index == 2 || index == 5 || index == 8)
-                  ? const BorderSide(width: 2, color: Color(0xFF91D4F0))
+                  ? BorderSide(width: 2.w, color: const Color(0xFF91D4F0))
                   : const BorderSide(color: Colors.white),
               top: (index == 6 || index == 7 || index == 8)
-                  ? const BorderSide(width: 2, color: Color(0xFF91D4F0))
+                  ? BorderSide(width: 2.w, color: const Color(0xFF91D4F0))
                   : const BorderSide(color: Colors.white),
               bottom: (index == 0 || index == 1 || index == 2)
-                  ? const BorderSide(width: 2, color: Color(0xFF91D4F0))
+                  ? BorderSide(width: 2.w, color: const Color(0xFF91D4F0))
                   : const BorderSide(color: Colors.white),
             ),
           ),

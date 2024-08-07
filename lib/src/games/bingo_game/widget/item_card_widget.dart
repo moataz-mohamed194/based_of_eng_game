@@ -60,10 +60,13 @@ class ItemCardWidget extends StatelessWidget {
                       color: AppColorPhonetics.darkBorderColor),
                 )
               : StrokeText(
-            height:0,text: body, isDisabled: false,
-            fontSize: MediaQuery.of(context).size.height < 760
-              ? 20.sp
-              : 40.sp,),
+                  height: 0,
+                  text: body,
+                  isDisabled: false,
+                  strokeWidth: 1.w,
+                  fontSize:
+                      MediaQuery.of(context).size.height < 760 ? 20.sp : 40.sp,
+                ),
         ),
       ),
     );

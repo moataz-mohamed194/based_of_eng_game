@@ -56,7 +56,6 @@ class BasedOfGameConnect extends StatelessWidget {
                     : Alignment.topLeft
                 : Alignment.topRight,
             children: [
-             
               /////////////////////game//////////////////
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -117,9 +116,9 @@ class BasedOfGameConnect extends StatelessWidget {
                   }
                 ],
               ),
- if (stateOfGame.basicData!.gameData!.isRound) ...{
+              if (stateOfGame.basicData!.gameData!.isRound) ...{
                 PositionedDirectional(
-                  top: -10,
+                  top: MediaQuery.of(context).size.height > 750 ? 30.h : -10.h,
                   start: 90.w,
                   child: GestureDetector(
                     onTap: context
@@ -165,7 +164,9 @@ class BasedOfGameConnect extends StatelessWidget {
                                 width: 80.w,
                               )
                             : SizedBox(
-                                height: 110.h,
+                                height: MediaQuery.of(context).size.height > 750
+                                    ? 130.h
+                                    : 100.h,
                                 // width: 70.w,
                                 child: Rive(
                                   artboard: stateOfGame.avatarCurrentArtboard!,
@@ -178,7 +179,16 @@ class BasedOfGameConnect extends StatelessWidget {
               },
               /////////////////////game title//////////////////
               Positioned(
-                top: 0,
+                top: MediaQuery.of(context).size.height > 750
+                    ? stateOfGame.basicData?.gameData is BingoArabicGame
+                        ? null
+                        : 50.h
+                    : stateOfGame.basicData?.gameData is BingoArabicGame
+                        ? null
+                        : -10.h,
+                bottom: stateOfGame.basicData?.gameData is BingoArabicGame
+                    ? 35.h
+                    : null,
                 left: isArabic
                     ? stateOfGame.basicData?.gameData is BingoArabicGame
                         ? 0
@@ -224,7 +234,10 @@ class BasedOfGameConnect extends StatelessWidget {
                             )
                           : Container(
                               width: 0.4.sw,
-                              height: stateOfGame.basicData?.gameData is XOutGame? 0.5.sh:0.41.sh,
+                              height:
+                                  stateOfGame.basicData?.gameData is XOutGame
+                                      ? 0.5.sh
+                                      : 0.41.sh,
                               padding: EdgeInsets.only(
                                   left: isArabic
                                       ? stateOfGame.basicData?.gameData
@@ -245,7 +258,10 @@ class BasedOfGameConnect extends StatelessWidget {
                                     top: stateOfGame.basicData?.gameData
                                             is BingoArabicGame
                                         ? null
-                                        : 0,
+                                        : MediaQuery.of(context).size.height >
+                                                650
+                                            ? -20.h
+                                            : 0,
                                     bottom: stateOfGame.basicData?.gameData
                                             is BingoArabicGame
                                         ? 0
@@ -324,7 +340,22 @@ class BasedOfGameConnect extends StatelessWidget {
                                                               : 7.w
                                                           : 0.w),
                                                   child: SizedBox(
-                                                      height: 120.h,
+                                                      height: stateOfGame
+                                                                  .basicData
+                                                                  ?.gameData
+                                                              is BingoArabicGame
+                                                          ? MediaQuery.of(context)
+                                                                      .size
+                                                                      .height >
+                                                                  650
+                                                              ? 220.h
+                                                              : 170.h
+                                                          : MediaQuery.of(context)
+                                                                      .size
+                                                                      .height >
+                                                                  650
+                                                              ? 170.h
+                                                              : 120.h,
                                                       // width: 65.w,
                                                       child: Rive(
                                                         artboard: stateOfGame
@@ -342,7 +373,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                     const SizedBox()
                                   else
                                     PositionedDirectional(
-                                      top:71.h,
+                                      top: 71.h,
                                       child: Image.asset(
                                         isArabic
                                             ? stateOfGame.basicData?.gameData

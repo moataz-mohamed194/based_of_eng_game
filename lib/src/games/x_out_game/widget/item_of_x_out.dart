@@ -11,6 +11,7 @@ import '../../../cubit/current_game_phonetics_cubit.dart';
 class XOutItemWidget extends StatelessWidget {
   const XOutItemWidget({
     super.key,
+    required this.index,
     required this.imageName,
     required this.isSelected,
     required this.isCorrect,
@@ -20,7 +21,7 @@ class XOutItemWidget extends StatelessWidget {
     required this.onDrag,
     required this.onTap,
   });
-
+  final int index;
   final String imageName;
   final String word;
   final bool isSelected;
@@ -40,12 +41,59 @@ class XOutItemWidget extends StatelessWidget {
             List<dynamic> accepted,
             List<dynamic> rejected,
           ) {
+            bool isLtr = Directionality.of(context) == TextDirection.ltr;
             return Container(
               padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.h),
               decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(
-                    color: AppColorPhonetics.skyBlueColor, width: 1.5.w),
+                borderRadius: index == 3
+                    ? BorderRadius.only(
+                        bottomLeft: isLtr
+                            ? Radius.circular(0.r)
+                            : Radius.circular(15.r),
+                        bottomRight: isLtr
+                            ? Radius.circular(15.r)
+                            : Radius.circular(0.r))
+                    : index == 2
+                        ? BorderRadius.only(
+                            bottomRight: isLtr
+                                ? Radius.circular(0.r)
+                                : Radius.circular(15.r),
+                            bottomLeft: isLtr
+                                ? Radius.circular(15.r)
+                                : Radius.circular(0.r))
+                        : null,
+                border: (index == 0 || index == 2)
+                    ? Border(
+                        top: BorderSide(
+                            color: AppColorPhonetics.skyBlueColor,
+                            width: 1.5.w),
+                        left: isLtr
+                            ? BorderSide.none
+                            : BorderSide(
+                                color: AppColorPhonetics.skyBlueColor,
+                                width: 0.75.w),
+                        right: isLtr
+                            ? BorderSide(
+                                color: AppColorPhonetics.skyBlueColor,
+                                width: 0.75.w)
+                            : BorderSide.none,
+                      )
+                    : Border(
+                        top: BorderSide(
+                            color: AppColorPhonetics.skyBlueColor,
+                            width: 1.5.w),
+                        left: isLtr
+                            ? BorderSide(
+                                color: AppColorPhonetics.skyBlueColor,
+                                width: 1.5.w)
+                            : BorderSide.none,
+                        right: isLtr
+                            ? BorderSide.none
+                            : BorderSide(
+                                color: AppColorPhonetics.skyBlueColor,
+                                width: 1.5.w),
+                      ),
               ),
               child: Stack(
                 alignment: Alignment.center,

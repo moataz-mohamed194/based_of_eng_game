@@ -45,7 +45,7 @@ class _BingoGameScreen extends State<BingoGameScreen> {
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(12.r),
             border:
                 Border.all(color: AppColorPhonetics.darkBorderColor, width: 5)),
         child:

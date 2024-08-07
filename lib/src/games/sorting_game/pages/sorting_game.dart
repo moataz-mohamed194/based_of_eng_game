@@ -38,43 +38,43 @@ class _SortingGameScreen extends State<SortingGameScreen> {
           return Padding(
             padding: const EdgeInsets.only(bottom: 10, left: 30),
             child: Row(
-              crossAxisAlignment: MediaQuery.of(context).size.height < 760
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(right: 15.w),
-                    width: MediaQuery.of(context).size.width * 0.37,
-                    // height:
-                    //     ((((MediaQuery.of(context).size.height * 0.6) / 6) *
-                    //             4) +
-                    //         10),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(
-                            color: AppColorPhonetics.darkBorderColor,
-                            width: 5)),
-                    child: GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.zero,
-                        itemCount: 4,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, childAspectRatio: 1.5),
-                        itemBuilder: (context, index) {
-                          try {
-                            return ItemCardWidget(
-                              data: gameState.currentImages[index],
-                              body: gameState.currentImages[index],
-                              index: gameState.currentImages[index].id ?? 0,
-                            );
-                          } catch (e) {
-                            return const SizedBox();
-                          }
-                        })),
+                Expanded(
+                  child: Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(right: 15.w),
+                      height: MediaQuery.of(context).size.height -
+                          (MediaQuery.of(context).size.height > 750
+                              ? 220.h
+                              : 130.h),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                              color: AppColorPhonetics.darkBorderColor,
+                              width: 5)),
+                      child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.zero,
+                          itemCount: 4,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, childAspectRatio: 1.5),
+                          itemBuilder: (context, index) {
+                            try {
+                              return ItemCardWidget(
+                                data: gameState.currentImages[index],
+                                body: gameState.currentImages[index],
+                                index: gameState.currentImages[index].id ?? 0,
+                              );
+                            } catch (e) {
+                              return const SizedBox();
+                            }
+                          })),
+                ),
+                20.pw,
                 Expanded(
                     child: Container(
                   height: 0.8.sh,
@@ -105,7 +105,7 @@ class _SortingGameScreen extends State<SortingGameScreen> {
                             height: 0.8.sw,
                             width: MediaQuery.of(context).size.longestSide /
                                 ((gameState.gameData.gameLetters?.length ?? 1) *
-                                    2),
+                                    2.5),
                             padding: EdgeInsets.only(top: .07.sh),
                             child: DragTarget<GameImagesGameFinalModel>(
                               builder: (

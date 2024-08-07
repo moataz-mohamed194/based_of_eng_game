@@ -86,13 +86,19 @@ class _ChooseTheCorrectLetterOrImageGame
         context.read<ChooseTheCorrectLetterOrImageCubit>();
     final isLetter = gameState.isLetter;
     return Positioned(
-      top: 0.w,
+      top: -2.5.w,
       left: -2.5.w,
       child: Container(
         alignment: (gameState.gameData.mainLetter ?? '') == 's'
             ? Alignment.center
             : Alignment.center,
-        height: isLetter ? 100.h : 130.h,
+        height: isLetter
+            ? MediaQuery.of(context).size.height > 750
+                ? 130.h
+                : 100.h
+            : MediaQuery.of(context).size.height > 750
+                ? 160.h
+                : 130.h,
         width: isLetter ? 50.w : 65.w,
         decoration: const BoxDecoration(
           image: DecorationImage(

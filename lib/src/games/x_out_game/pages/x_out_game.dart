@@ -86,33 +86,37 @@ class _XOutGameScreen extends State<XOutGameScreen> {
             const SizedBox(),
             Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.only(right: 15.w),
+              margin: EdgeInsets.only(
+                  right: state.isArabic == true ? 0.w : 15.w,
+                  left: state.isArabic == false ? 0.w : 15.w),
               width: screenWidth,
               height: screenHeight,
-              padding: EdgeInsets.only(left: 10.h, right: 10.h, bottom: 10.h),
               decoration: BoxDecoration(
                 color: AppColorPhonetics.darkBorderColor,
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(12.r),
                 border: Border.all(
-                    color: AppColorPhonetics.darkBorderColor, width: 5),
+                    color: AppColorPhonetics.darkBorderColor, width: 1.w),
               ),
               child: Column(
                 children: [
-                  Text(
-                    state.gameData?.mainLetter ?? '',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: AppTheme.getFontFamily5(),
-                          color: Colors.white,
-                          height: 0,
-                          letterSpacing: 0.50,
-                        ),
-                    textAlign: TextAlign.center,
+                  Flexible(
+                    flex: 1,
+                    child: FittedBox(
+                      child: Text(
+                        state.gameData?.mainLetter ?? '',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: AppTheme.getFontFamily5(),
+                              color: Colors.white,
+                            ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
-                  5.ph,
                   if (state.gameImages?.isNotEmpty ?? false) ...{
                     Expanded(
+                      flex: MediaQuery.of(context).size.height > 750 ? 7 : 4,
                       child: GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -131,6 +135,7 @@ class _XOutGameScreen extends State<XOutGameScreen> {
                           return gameHasData
                               ? const SizedBox()
                               : XOutItemWidget(
+                                  index: index,
                                   imageId: state.gameImages?[index].id ?? 0,
                                   imageName:
                                       state.gameImages?[index].image ?? "",

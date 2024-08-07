@@ -6,6 +6,8 @@ class ReTryButtton extends StatelessWidget {
   final void Function() dataFunction;
   final String title;
   final double width;
+  final Widget? leading;
+
   // final bool? disableAnimation;
   // final bool? playButton;
   final double? fontSize;
@@ -17,6 +19,7 @@ class ReTryButtton extends StatelessWidget {
       required this.title,
       // this.playButton,
       this.fontSize,
+      this.leading,
       // this.applyFontFamily5,
       required this.width});
 
@@ -56,16 +59,26 @@ class ReTryButtton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               alignment: Alignment.center,
-              child: Text(
-                title,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontSize: fontSize ?? 24,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      fontFamily: AppTheme.getFontFamily5(),
-                      height: 0,
-                      letterSpacing: 0.50,
-                    ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (leading != null) ...[
+                    const SizedBox(width: 8),
+                    leading!,
+                    const SizedBox(width: 8),
+                  ],
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontSize: fontSize ?? 24,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontFamily: AppTheme.getFontFamily5(),
+                          height: 0,
+                          letterSpacing: 0.50,
+                        ),
+                  ),
+                ],
               ),
             ),
           ],

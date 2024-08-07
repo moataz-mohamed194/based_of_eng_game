@@ -26,10 +26,10 @@ class ItemCardWidget extends StatelessWidget {
       data: body,
       maxSimultaneousDrags: 1,
       feedback: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.w),
         child: Container(
-          height: maxHeight+20,
-          width: maxWidth+20,
+          height: maxWidth,
+          width: maxWidth,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             color: AppColorPhonetics.darkBlueColor,
@@ -46,30 +46,26 @@ class ItemCardWidget extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(5),
+        padding: EdgeInsets.all(5.w),
         child: Container(
-          height: maxHeight,
+          height: maxWidth,
           width: maxWidth,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             color: AppColorPhonetics.darkBlueColor,
           ),
           alignment: Alignment.center,
-          child: Center(
-            child: Text(
-              body,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 0.025.sw,
-                  fontFamily: AppTheme.getFontFamily5(),
-                  fontWeight: FontWeight.w900),
-              textAlign: TextAlign.center,
-
-            ),
+          child: Text(
+            body,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 0.05.sw,
+                fontFamily: AppTheme.getFontFamily5(),
+                fontWeight: FontWeight.w900),
+            textAlign: TextAlign.center,
           ),
         ),
       ),
