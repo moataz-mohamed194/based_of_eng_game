@@ -52,6 +52,7 @@ abstract class BasicOfGameData {
     } else if (gameType == GameTypes.dice.text()) {
       return DiceGame();
     } else if (gameType == GameTypes.tracing.text()) {
+      print('tracingg');
       return Tracking();
     } else if (gameType == GameTypes.video.text()) {
       return Video();

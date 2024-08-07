@@ -24,6 +24,7 @@ class BasedOfAllGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       // alignment: Alignment.center,
       children: [

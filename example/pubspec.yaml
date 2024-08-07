@@ -82,6 +82,8 @@ flutter:
     - assets/phonetics/
     - assets/arabic/
     - assets/svg/parent_account/
+    - assets/phontics_assets_points/english_phontics/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

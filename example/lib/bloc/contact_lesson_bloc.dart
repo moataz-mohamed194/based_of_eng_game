@@ -48,5 +48,5 @@ Future<ContactLessonState> _eitherLoadedOrErrorState(
 }
 
 String _mapFailureToMessage(Failure failure) {
-  return 'Unexpected error';
+  return 'Unexpected error $failure';
 }
