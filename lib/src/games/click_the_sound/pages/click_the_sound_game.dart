@@ -1,4 +1,7 @@
+import 'package:audioplayers/audioplayers.dart';
+import 'package:based_of_eng_game/src/core/audio_player_game.dart';
 import 'package:based_of_eng_game/src/core/game_types/assets_images_arabic.dart';
+import 'package:based_of_eng_game/src/core/talk_tts.dart';
 import 'package:based_of_eng_game/src/widgets/empty_space.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -108,8 +111,9 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
                     ? null
                     : () async {
                         if (context
-                            .read<CurrentGamePhoneticsCubit>()
-                            .ableButton()) {
+                                .read<CurrentGamePhoneticsCubit>()
+                                .ableButton() &&
+                            AudioPlayerGame.data == StateOfTalk.stopped) {
                           print(
                               '###:${(context.read<CurrentGamePhoneticsCubit>().ableButton())}');
                           if (currentAnswer == null
@@ -182,32 +186,38 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
     required ClickTheSoundCubit viewModel,
   }) {
     final isArabic = viewModel.state.isArabic;
-    return InkWell(
-      onTap: onPress,
-      child: Container(
-        // width: 104.w,
-        height: MediaQuery.of(context).size.height > 650 ? 150.h : 104.h,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  isArabic
-                      ? viewModel.state.correctIndexes?.contains(index) ?? false
-                          ? AppImagesArabic.correctBalon
-                          : AppImagesArabic.regularBalon
-                      : viewModel.state.correctIndexes?.contains(index) ?? false
-                          ? AppImagesPhonetics.bubbleDisabled
-                          : AppImagesPhonetics.bubble,
-                ),
-                fit: BoxFit.contain)),
-        child: StrokedText(
-          fontSize: MediaQuery.of(context).size.height > 650 ? 35.sp : 25.sp,
-          text: letter,
-          isDisabled: viewModel.state.correctIndexes?.contains(index) ?? false,
-          backgroundColor: isArabic
-              ? AppColorPhonetics.darkBlueColor
-              : AppColorPhonetics.white,
-          strokeColor: AppColorPhonetics.darkBlueColor,
+    return Container(
+      height: MediaQuery.of(context).size.height > 650 ? 150.h : 104.h,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(
+                isArabic
+                    ? viewModel.state.correctIndexes?.contains(index) ?? false
+                        ? AppImagesArabic.correctBalon
+                        : AppImagesArabic.regularBalon
+                    : viewModel.state.correctIndexes?.contains(index) ?? false
+                        ? AppImagesPhonetics.bubbleDisabled
+                        : AppImagesPhonetics.bubble,
+              ),
+              fit: BoxFit.contain)),
+      child: InkWell(
+        onTap: onPress,
+        child: SizedBox(
+          width: 45.w,
+          child: Center(
+            child: StrokedText(
+              fontSize:
+                  MediaQuery.of(context).size.height > 650 ? 35.sp : 25.sp,
+              text: letter,
+              isDisabled:
+                  viewModel.state.correctIndexes?.contains(index) ?? false,
+              backgroundColor: isArabic
+                  ? AppColorPhonetics.darkBlueColor
+                  : AppColorPhonetics.white,
+              strokeColor: AppColorPhonetics.darkBlueColor,
+            ),
+          ),
         ),
       ),
     );
