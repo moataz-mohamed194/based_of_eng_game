@@ -64,8 +64,7 @@ abstract class HandlingActionsAndDataOfChapters {
     ZPhonetics,
     // SpellTheWord,
     ConnectionSortingCups,
-    ConnectionWithoutSortingCups,
-    PhonticsGame ];
+    ConnectionWithoutSortingCups];
 
   static bool isPhonetics({required Type chapter}) {
 
@@ -213,20 +212,8 @@ abstract class HandlingActionsAndDataOfChapters {
             mineGameData: BasicOfGameData.getTheGameType(
                 gameType: subGame.toLowerCase(), audioFlag: audioFlag));
       }
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
-      
-      return PhonticsGame(
-          gameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag), 
-              backGroundOfStarBar: const Color(0xffFFFFFF).withOpacity(.1),
-               background: AppImagesPhonetics.backGroundOfS,
-                letterAssets: '', 
-                letterPath: ShapePaths.mshape,
-                  pointsJsonFile: ShapePointsManger.mShape,
-                  strokeColor: Colors.blue.withOpacity(.2),
-              pointColor: Colors.red,
-                    tracingAssets: '', );
-    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
+    }
+    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
       return SPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
@@ -263,19 +250,9 @@ abstract class HandlingActionsAndDataOfChapters {
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.m.text()) {
-  
-
-                return PhonticsGame(
-          gameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag), 
-              backGroundOfStarBar: const Color(0xffFFFFFF).withOpacity(.1),
-               background:  AppImagesPhonetics.backGroundOfS,
-                letterAssets: '', 
-                letterPath: ShapePaths.mshape,
-                  pointsJsonFile: ShapePointsManger.sShape,
-                  strokeColor: Colors.blue.withOpacity(.2),
-              pointColor: Colors.red,
-                    tracingAssets: '', );
+      return MPhonetics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.t.text()) {
       return TPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
