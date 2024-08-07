@@ -86,11 +86,14 @@ class _DragOutGame extends State<DragOutGame> {
                   Container(
                     margin: EdgeInsets.only(
                         bottom: MediaQuery.of(context).size.height > 500
-                            ? 250.h
+                            ? 150.h
                             : (15 + 50),
-                        top: 50),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 30.h),
+                        top: 50.h),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: MediaQuery.of(context).size.height > 500
+                            ? 80.h
+                            : 30.h),
                     width: MediaQuery.of(context).size.width - 100.w,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
