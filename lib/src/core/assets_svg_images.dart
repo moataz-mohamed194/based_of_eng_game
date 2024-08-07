@@ -7,9 +7,6 @@ abstract class AppSvgImages {
   static const String iconLogout = "${mainPathOfSvg}logout.svg";
   static const String iconPartLesson1 = "${mainPathOfSvg}part_lesson1.svg";
   static const String iconPartLesson2 = "${mainPathOfSvg}part_lesson2.svg";
-
-  static const String popUpBackgroundLandscape =
-      '${mainPathOfSvg}pop_up_background_landscape.svg';
   static const String iconCurrentChapter2 =
       '${mainPathOfSvg}current_chapter2.svg';
   static const String bgChooseWhoAmI = '${mainPathOfSvg}bg_choose_who_am_i.svg';
@@ -48,7 +45,9 @@ abstract class AppSvgImages {
   static const String popUpBackground = '${mainPathOfSvg}pop_up_background.svg';
   static const String exitButton = '${mainPathOfSvg}exit_button.svg';
   static const String reloading = '${mainPathOfSvg}reloading.svg';
-
+  static const String retryIcon = '${mainPathOfSvg}retry_icon.svg';
+  static const String popUpBackgroundLandscape =
+      '${mainPathOfSvg}pop_up_background_landscape.svg';
   static const String iconCurrentChapter1 =
       '${mainPathOfSvg}current_chapter1.svg';
 }
