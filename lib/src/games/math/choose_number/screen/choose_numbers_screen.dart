@@ -111,7 +111,8 @@ class ChooseNumberScreen extends StatelessWidget {
                                         //   Navigator.of(context).pop();
                                         // });
                                       } else {
-                                        Future.delayed(const Duration(seconds: 2),
+                                        Future.delayed(
+                                            const Duration(seconds: 2),
                                             () async {
                                           await context
                                               .read<CurrentGamePhoneticsCubit>()

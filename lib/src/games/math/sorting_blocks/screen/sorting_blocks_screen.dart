@@ -40,120 +40,131 @@ class SortingBeadsScreen extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: FittedBox(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(
-                      gameState.gameLetters?.length ?? 0,
-                      (index) => Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              GetTheBeads(
-                                countOfBalls: int.parse(
-                                    gameState.gameLetters?[index].letter ??
-                                        '0'),
-                                // size: 65.h,
-                              ),
-                              Text(
-                                '+',
-                                style: TextStyle(
-                                  color: AppColorPhonetics.darkBlueColor,
-                                  fontSize: 20.sp,
-                                  fontFamily: AppTheme.getFontFamily5(),
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                        gameState.gameLetters?.length ?? 0,
+                        (index) => Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            10.pw,
+                            FittedBox(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width / 2.4,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    GetTheBeads(
+                                      countOfBalls: int.parse(gameState
+                                              .gameLetters?[index].letter ??
+                                          '0'), // size: 65.h,
+                                    ),
+                                    Text(
+                                      '+',
+                                      style: TextStyle(
+                                        color: AppColorPhonetics.darkBlueColor,
+                                        fontSize: 20.sp,
+                                        fontFamily: AppTheme.getFontFamily5(),
+                                        fontWeight: FontWeight.w400,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    GetTheBeads(
+                                      countOfBalls: int.parse(gameState
+                                              .gameLetters?[index].letter ??
+                                          '0'), // size: 65.h,
+                                    ),
+                                  ],
                                 ),
                               ),
-                              GetTheBeads(
-                                countOfBalls: int.parse(
-                                    gameState.gameLetters?[index].secLetter ??
-                                        '0'),
-                                // size: 65.h,
-                              ),
-                            ],
-                          ),
-                          DragTarget<GameImagesGameFinalModel>(builder: (
-                            BuildContext context,
-                            List<dynamic> accepted,
-                            List<dynamic> rejected,
-                          ) {
-                            return CardOfBeads(
-                              number: gameState.correctAnswers
-                                      .where((ele) =>
-                                          ele.gameLetterId ==
-                                          gameState.gameLetters?[index].id)
-                                      .toList()
-                                      .isNotEmpty
-                                  ? (int.parse(gameState
-                                              .gameLetters?[index].letter ??
-                                          '0') +
-                                      int.parse(gameState
-                                              .gameLetters?[index].secLetter ??
-                                          '0'))
-                                  : 0,
-                              tools: ToolsOfMath.beads,
-                            );
-                          }, onAcceptWithDetails: (item) async {
-                            if (context
-                                .read<CurrentGamePhoneticsCubit>()
-                                .ableButton()) {
-                              bool stateOfAnswer = context
-                                  .read<SortingBeadsCubit>()
-                                  .addAnswer(
-                                      userChoose:
-                                          gameState.gameLetters?[index].id ?? 0,
-                                      secondChoose: item.data);
-                              if (stateOfAnswer == true) {
-                                await context
+                            ),
+                            FittedBox(
+                              child: DragTarget<GameImagesGameFinalModel>(
+                                  builder: (
+                                BuildContext context,
+                                List<dynamic> accepted,
+                                List<dynamic> rejected,
+                              ) {
+                                return CardOfBeads(
+                                  number: gameState.correctAnswers
+                                          .where((ele) =>
+                                              ele.gameLetterId ==
+                                              gameState.gameLetters?[index].id)
+                                          .toList()
+                                          .isNotEmpty
+                                      ? (int.parse(gameState
+                                                  .gameLetters?[index].letter ??
+                                              '0') +
+                                          int.parse(gameState
+                                                  .gameLetters?[index]
+                                                  .secLetter ??
+                                              '0'))
+                                      : 0,
+                                  tools: ToolsOfMath.beads,
+                                );
+                              }, onAcceptWithDetails: (item) async {
+                                if (context
                                     .read<CurrentGamePhoneticsCubit>()
-                                    .addSuccessAnswer(
-                                        questions: gameState
-                                                .gameData.gameLetters?.length ??
-                                            0,
-                                        correctAnswers:
-                                            gameState.correctAnswers.length)
-                                    .whenComplete(() {
-                                  bool isLastQuestion = context
-                                      .read<CurrentGamePhoneticsCubit>()
-                                      .checkIfIsTheLastQuestionOfGame(
-                                          queations: gameState.gameData
-                                                  .gameLetters?.length ??
-                                              0);
-                                  if (isLastQuestion) {
-                                    // Future.delayed(const Duration(seconds: 2),
-                                    //     () async {
-                                    //   Navigator.of(context).pop();
-                                    // });
+                                    .ableButton()) {
+                                  bool stateOfAnswer = context
+                                      .read<SortingBeadsCubit>()
+                                      .addAnswer(
+                                          userChoose: gameState
+                                                  .gameLetters?[index].id ??
+                                              0,
+                                          secondChoose: item.data);
+                                  if (stateOfAnswer == true) {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addSuccessAnswer(
+                                            questions: gameState.gameData
+                                                    .gameLetters?.length ??
+                                                0,
+                                            correctAnswers:
+                                                gameState.correctAnswers.length)
+                                        .whenComplete(() {
+                                      bool isLastQuestion = context
+                                          .read<CurrentGamePhoneticsCubit>()
+                                          .checkIfIsTheLastQuestionOfGame(
+                                              queations: gameState.gameData
+                                                      .gameLetters?.length ??
+                                                  0);
+                                      if (isLastQuestion) {
+                                        // Future.delayed(const Duration(seconds: 2),
+                                        //     () async {
+                                        //   Navigator.of(context).pop();
+                                        // });
+                                      } else {
+                                        // Future.delayed(const Duration(seconds: 2),
+                                        //     () async {
+                                        //   await context
+                                        //       .read<CurrentGamePhoneticsCubit>()
+                                        //       .updateIndexOfCurrentGame();
+                                        //   context
+                                        //       .read<SortingBeadsCubit>()
+                                        //       .updateTheCurrentGame(
+                                        //           index: context
+                                        //               .read<
+                                        //                   CurrentGamePhoneticsCubit>()
+                                        //               .state
+                                        //               .index);
+                                        // });
+                                      }
+                                    });
                                   } else {
-                                    // Future.delayed(const Duration(seconds: 2),
-                                    //     () async {
-                                    //   await context
-                                    //       .read<CurrentGamePhoneticsCubit>()
-                                    //       .updateIndexOfCurrentGame();
-                                    //   context
-                                    //       .read<SortingBeadsCubit>()
-                                    //       .updateTheCurrentGame(
-                                    //           index: context
-                                    //               .read<
-                                    //                   CurrentGamePhoneticsCubit>()
-                                    //               .state
-                                    //               .index);
-                                    // });
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .addWrongAnswer(
+                                            actionOfWrongAnswer: () async {});
                                   }
-                                });
-                              } else {
-                                await context
-                                    .read<CurrentGamePhoneticsCubit>()
-                                    .addWrongAnswer(
-                                        actionOfWrongAnswer: () async {});
-                              }
-                            }
-                          })
-                        ],
+                                }
+                              }),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

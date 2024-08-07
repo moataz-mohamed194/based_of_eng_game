@@ -40,17 +40,20 @@ class ChooseAddLineScreen extends StatelessWidget {
                   10.pw,
                   Expanded(
                       child: FittedBox(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _question(
-                            question: gameState.mainQuestion,
-                            tools: gameState.tools),
-                        10.pw,
-                        _question(
-                            question: gameState.subQuestion,
-                            tools: gameState.tools),
-                      ],
+                    child: Container(
+                      height: MediaQuery.of(context).size.height / 2,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _question(
+                              question: gameState.mainQuestion,
+                              tools: gameState.tools),
+                          10.pw,
+                          _question(
+                              question: gameState.subQuestion,
+                              tools: gameState.tools),
+                        ],
+                      ),
                     ),
                   )),
                   10.pw,
@@ -72,8 +75,11 @@ class ChooseAddLineScreen extends StatelessWidget {
                                               gameState.gameChoices![index],
                                           mainBloc: context.read<
                                               CurrentGamePhoneticsCubit>(),
-                                          checkIfIsTheLastQuestionOfGame:()=> context.read<CurrentGamePhoneticsCubit>().checkIfIsTheLastQuestionOfGame(
-                                              queations: gameState.allGameData.length),
+                                          checkIfIsTheLastQuestionOfGame: () => context
+                                              .read<CurrentGamePhoneticsCubit>()
+                                              .checkIfIsTheLastQuestionOfGame(
+                                                  queations: gameState
+                                                      .allGameData.length),
                                           bloc: context
                                               .read<ChooseAddLineCubit>(),
                                           tools: gameState.tools),
@@ -139,7 +145,6 @@ class ChooseAddLineScreen extends StatelessWidget {
     required ChooseAddLineCubit bloc,
     required ToolsOfMath tools,
     required bool Function() checkIfIsTheLastQuestionOfGame,
-
   }) {
     return Row(
       children: [
@@ -155,7 +160,7 @@ class ChooseAddLineScreen extends StatelessWidget {
                     .whenComplete(() {
                   bool isLastQuestion = checkIfIsTheLastQuestionOfGame();
 
-                  if (isLastQuestion!=true){
+                  if (isLastQuestion != true) {
                     Future.delayed(const Duration(seconds: 2), () async {
                       await mainBloc.updateIndexOfCurrentGame();
                       bloc.updateTheCurrentGame(index: mainBloc.state.index);

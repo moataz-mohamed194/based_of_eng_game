@@ -22,7 +22,10 @@ class GetTheBlocks extends StatelessWidget {
 
     final sizeOfOne = Size(width / 15, (width / 22).toDouble());
     return countOfBoxes <= 10
-        ? SvgPicture.asset(_svgOfBlock(number: countOfBoxes), color:isHide==true? Colors.transparent:null,)
+        ? SvgPicture.asset(
+            _svgOfBlock(number: countOfBoxes),
+            color: isHide == true ? Colors.transparent : null,
+          )
         : SizedBox(
             height: sizeOfOne.height,
             width: countOfBoxes == 1
