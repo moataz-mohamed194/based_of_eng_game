@@ -94,27 +94,7 @@ class SortingBlocksScreen extends StatelessWidget {
                                                 queations: gameState.gameData
                                                         .gameChoices?.length ??
                                                     0);
-                                        if (isLastQuestion) {
-                                          // Future.delayed(const Duration(seconds: 2),
-                                          //     () async {
-                                          //   Navigator.of(context).pop();
-                                          // });
-                                        } else {
-                                          // Future.delayed(const Duration(seconds: 2),
-                                          //     () async {
-                                          //   await context
-                                          //       .read<CurrentGamePhoneticsCubit>()
-                                          //       .updateIndexOfCurrentGame();
-                                          //   context
-                                          //       .read<SortingBlocksCubit>()
-                                          //       .updateTheCurrentGame(
-                                          //           index: context
-                                          //               .read<
-                                          //                   CurrentGamePhoneticsCubit>()
-                                          //               .state
-                                          //               .index);
-                                          // });
-                                        }
+
                                       });
                                     } else {
                                       await context
@@ -137,15 +117,16 @@ class SortingBlocksScreen extends StatelessWidget {
                         (90.h + 50.h + 5 + 20.h), // < 760
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-
                       children: List.generate(
                           gameState.secondGameChoices?.length ?? 0,
                           (index) => gameState.correctAnswers.contains(
                                   gameState.secondGameChoices?[index].id ?? 0)
-                              ? GetTheBlocks(
-                                  isSolid: true,
-                                  countOfBoxes: int.parse(
-                                      "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                              ? Opacity(
+                                  opacity: .2,
+                                  child: GetTheBlocks(
+                                    countOfBoxes: int.parse(
+                                        "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                                  ),
                                 )
                               : Draggable<int>(
                                   maxSimultaneousDrags: 1,
