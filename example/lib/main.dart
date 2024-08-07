@@ -7,6 +7,7 @@ import 'injection/injection_container.dart' as di;
 import 'bloc/contact_lesson_bloc.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await di.init();
 
   runApp(const MyApp());
@@ -51,17 +52,17 @@ class MyApp extends StatelessWidget {
                       } else if (state is LogOutLoadingState) {
                         Navigator.of(context).pop();
                       } else if (state is GetContactInitial) {
-                        try {
+                        // try {
                           MainDataOfChapters? dataType =
                               state.getMainContactData(index: 0, );
 
                           debugPrint('dataType:$dataType');
-                        } catch (e) {
-                          print('error data type'+e.toString());
-                          context
-                              .read<ContactLessonBloc>()
-                              .add(ThisTypeNotSupportedRequest());
-                        }
+                        // } catch (e) {
+                        //   print('error data type'+e.toString());
+                        //   context
+                        //       .read<ContactLessonBloc>()
+                        //       .add(ThisTypeNotSupportedRequest());
+                        // }
                       }
                     },
                     builder: (context, stateOfGameData) {

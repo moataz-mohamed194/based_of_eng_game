@@ -1,15 +1,11 @@
 import 'package:based_of_eng_game/src/core/phonetics_color.dart';
-import 'package:based_of_eng_game/src/games/tracing/manager/tracing_cubit.dart';
 import 'package:based_of_eng_game/src/games/tracing/model/path_provider_model.dart';
-import 'package:based_of_eng_game/src/games/tracing/widget/path_helper/a_shape_path_helper/a_shape_path_helper.dart';
-import 'package:based_of_eng_game/src/games/tracing/widget/path_helper/path_helper.dart';
+
 import 'package:based_of_eng_game/src/games/tracing/svg_strings/svg_strings.dart';
 import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_a_paint.dart';
 import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_t_paint.dart';
 import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/m_letter_paint.dart';
-import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_s4.dart';
 import 'package:flutter/material.dart';
-import 'package:svg_path_parser/svg_path_parser.dart';
 
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
@@ -162,21 +158,67 @@ abstract class MainDataOfChapters {
 
   // To get the current swipe index
   bool? isArabic = false;
+  final String letterPath;
+  final Color strokeColor;
+  final Color pointColor;
+  final String letterAssets;
+  final String tracingAssets;
+  final String pointsJsonFile;
 
-  // Provide a default implementation that returns null
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  MainDataOfChapters({required this.letterPath, required this.strokeColor, required this.pointColor, required this.letterAssets, required this.tracingAssets,  required this.pointsJsonFile}); // Added for points JSON file
 
-  late List<PathProviderModel> pathsModels;
 
-  // Define the addPoint function as abstract so it can be overridden
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
-
-  int get getDrawingShapeCurrentIndex;
-  set setDrawingShapeCurrentIndex(int index);
 }
+
+class PhonticsGame implements MainDataOfChapters {
+  @override
+  Color backGroundOfStarBar;
+
+  @override
+  String background;
+
+  @override
+  BasicOfGameData? gameData;
+
+  @override
+  bool? isArabic;
+
+  @override
+  String letterAssets;
+
+  @override
+  String letterPath;
+
+  @override
+  Color pointColor;
+
+  @override
+  String pointsJsonFile;
+
+
+
+  @override
+  Color strokeColor;
+
+  @override
+  String tracingAssets;
+
+  // Constructor accepting parameters
+  PhonticsGame({
+    required this.backGroundOfStarBar,
+    required this.background,
+    this.gameData,
+    this.isArabic,
+    
+    required this.letterAssets,
+    required this.letterPath,
+    required this.pointColor,
+    required this.pointsJsonFile,
+    required this.strokeColor,
+    required this.tracingAssets,
+  });
+}
+
 
 class SPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
@@ -189,79 +231,47 @@ class SPhonetics implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  late Path dottedPath;
   SPhonetics({
     required this.mineGameData,
   }) {
     gameData = mineGameData;
 
-    dottedPath = parseSvgPath(SvgStrings.dottedS);
 
-    pathsModels = [
-      PathProviderModel(
-          startPointOfShape: Offset(221.2, 65.3),
-          indexPathModel: IndexPathModel(indexPathPath: SvgStrings.sIndex1),
-          endOffset: Offset(37.7, 85.0),
-          fillDirection: Direction.xPositive,
-          index: 0,
-          path: SvgStrings.s1,
-          startPoint: Offset(0, 0),
-          strokeWidth: 150,
-          dottedPathModel: DottedPathModel(dottedPath: SvgStrings.dotteds1),
-          exteraFillPoint: null),
-      PathProviderModel(
-          startPointOfShape: Offset(54.8, 127.5),
-          endOffset: Offset(195.0, 182.7),
-          exteraFillPoint: Offset(15.8, 110.5),
-          fillDirection: Direction.xNegative,
-          dottedPathModel: DottedPathModel(dottedPath: SvgStrings.dotteds2),
-          index: 1,
-          path: SvgStrings.s2,
-          startPoint: Offset(0, 0),
-          strokeWidth: 150),
-      PathProviderModel(
-          startPointOfShape: Offset(222.8, 199.5),
-          indexPathModel: IndexPathModel(indexPathPath: SvgStrings.sIndex2),
-          endOffset: Offset(51.0, 255.0),
-          exteraFillPoint: Offset(232.8, 200.5),
-          fillDirection: Direction.xPositive,
-          dottedPathModel: DottedPathModel(dottedPath: SvgStrings.dotteds3),
-          index: 2,
-          path: SvgStrings.s3,
-          startPoint: Offset(0, 0),
-          strokeWidth: 150),
-    ];
+   
   }
-
-  int drawingShapecurrentIndex = 0;
-
-  @override
-  late List<PathProviderModel> pathsModels;
-
-  @override
-  int get getDrawingShapeCurrentIndex => drawingShapecurrentIndex;
-
+  
   @override
   bool? isArabic;
-
+  
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter =>
-      (List<Offset> points) {
-        return FlipBookPainterLetterS4Test(
-            customPaths: pathsModels,
-            currentPathIndex: drawingShapecurrentIndex);
-      };
-
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  set setDrawingShapeCurrentIndex(int index) {
-    drawingShapecurrentIndex = index;
-  }
-
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
   @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
+ 
 }
 
 class APhonetics implements MainDataOfChapters {
@@ -347,16 +357,37 @@ class APhonetics implements MainDataOfChapters {
             currentPathIndex: drawingShapecurrentIndex);
       };
 
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
-    drawingShapecurrentIndex = index;
-  }
 
+  
   @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
+
 }
 
 class FPhonetics implements MainDataOfChapters {
@@ -369,16 +400,36 @@ class FPhonetics implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
+
   FPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -386,11 +437,7 @@ class FPhonetics implements MainDataOfChapters {
   @override
   bool? isArabic;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 }
 
 class MPhonetics implements MainDataOfChapters {
@@ -477,12 +524,36 @@ class MPhonetics implements MainDataOfChapters {
   set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
-
+  
   @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
+
 }
 
 class KPhonetics implements MainDataOfChapters {
@@ -495,16 +566,35 @@ class KPhonetics implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   KPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -512,10 +602,7 @@ class KPhonetics implements MainDataOfChapters {
   @override
   bool? isArabic;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-  }
+
 }
 
 class QPhonetics implements MainDataOfChapters {
@@ -528,25 +615,40 @@ class QPhonetics implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   QPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   bool? isArabic;
@@ -560,16 +662,13 @@ class VPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfV;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   BasicOfGameData? gameData;
   @override
   int get getDrawingShapeCurrentIndex => 0;
+  
   @override
   set setDrawingShapeCurrentIndex(int index) {
   }
@@ -583,6 +682,34 @@ class VPhonetics implements MainDataOfChapters {
 
   @override
   bool? isArabic;
+  
+  @override
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
 }
 
 class XPhonetics implements MainDataOfChapters {
@@ -590,27 +717,42 @@ class XPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfX;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   XPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -624,27 +766,42 @@ class YPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfY;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   YPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -658,27 +815,42 @@ class ZPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfZ;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   ZPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -688,6 +860,35 @@ class ZPhonetics implements MainDataOfChapters {
 }
 
 class TPhonetics implements MainDataOfChapters {
+
+  @override
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   final BasicOfGameData mineGameData;
 
   @override
@@ -761,19 +962,39 @@ class TPhonetics implements MainDataOfChapters {
     drawingShapecurrentIndex = index;
   }
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 }
 
 class CPhonetics implements MainDataOfChapters {
+
   @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
 
   final BasicOfGameData mineGameData;
   @override
@@ -786,6 +1007,7 @@ class CPhonetics implements MainDataOfChapters {
   BasicOfGameData? gameData;
   @override
   int get getDrawingShapeCurrentIndex => 0;
+  
   @override
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -812,24 +1034,39 @@ class RPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfR;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   RPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -843,27 +1080,42 @@ class IPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfI;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   IPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -880,24 +1132,39 @@ class PPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfP;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   PPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -914,24 +1181,39 @@ class HPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfH;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   HPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -945,27 +1227,42 @@ class JPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfJ;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   JPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -979,27 +1276,42 @@ class UPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfU;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   UPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1013,27 +1325,42 @@ class LPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfL;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   LPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1050,24 +1377,39 @@ class BPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfB;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   BPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1081,27 +1423,42 @@ class OPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = Colors.white.withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfO;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   OPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1115,27 +1472,42 @@ class GPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfG;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   GPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1149,27 +1521,42 @@ class DPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfD;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   DPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1185,27 +1572,42 @@ class WPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfW;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   WPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1219,27 +1621,42 @@ class EPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfE;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   EPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1256,24 +1673,39 @@ class NPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfN;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   NPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1290,24 +1722,39 @@ class ShortVowels implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfShortVowels;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   ShortVowels(
       {required this.mineGameData,
       required bool isArabicSub,
@@ -1329,24 +1776,39 @@ class UpVowels implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfShortVowels;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   UpVowels({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1363,24 +1825,39 @@ class ConnectionWithoutSortingCups implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfConnect;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   ConnectionWithoutSortingCups(
       {required this.mineGameData,
       required bool isArabicSub,
@@ -1399,27 +1876,42 @@ class ConnectionSortingCups implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   String background = AppImagesPhonetics.backGroundOfConnect;
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   @override
   bool? isArabic;
   ConnectionSortingCups(
@@ -1440,24 +1932,39 @@ class RedPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesArabic.bgOfRedUnit;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   RedPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1476,25 +1983,40 @@ class BlueUnit implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   BlueUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   bool? isArabic;
@@ -1510,25 +2032,40 @@ class GreenUnit implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   GreenUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   bool? isArabic;
@@ -1544,25 +2081,40 @@ class YellowUnit implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   YellowUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   bool? isArabic;
@@ -1578,25 +2130,40 @@ class VioletUnit implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   VioletUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   bool? isArabic;
@@ -1612,27 +2179,42 @@ class OrangeUnit implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   OrangeUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
   @override
   bool? isArabic;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 }
 
 class MathProgram implements MainDataOfChapters {
@@ -1653,11 +2235,7 @@ class MathProgram implements MainDataOfChapters {
     this.background = background ?? AppImagesMath.mathBg;
   }
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   bool? isArabic;
@@ -1676,6 +2254,34 @@ class MathProgram implements MainDataOfChapters {
 
   @override
   late List<PathProviderModel> pathsModels;
+  
+  @override
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
 }
 
 class FirstUnitArabic implements MainDataOfChapters {
@@ -1688,25 +2294,40 @@ class FirstUnitArabic implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   FirstUnitArabic({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   bool? isArabic = true;
@@ -1722,26 +2343,41 @@ class RUnitArabic implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   RUnitArabic({required this.mineGameData, required String? subBackGround}) {
     gameData = mineGameData;
     background = subBackGround ?? background;
   }
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   bool? isArabic = true;
@@ -1757,25 +2393,40 @@ class RUnitPhonics implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   RUnitPhonics({required this.mineGameData}) {
     gameData = mineGameData;
   }
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 
   @override
   bool? isArabic = true;
@@ -1791,16 +2442,35 @@ class ConsonantVowels implements MainDataOfChapters {
 
   @override
   BasicOfGameData? gameData;
-  @override
-  int get getDrawingShapeCurrentIndex => 0;
-  @override
-  set setDrawingShapeCurrentIndex(int index) {
 
-  }
   @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
+  // TODO: implement letterAssets
+  String get letterAssets => throw UnimplementedError();
+  
   @override
-  late List<PathProviderModel> pathsModels;
+  // TODO: implement letterPath
+  String get letterPath => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+  
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => throw UnimplementedError();
+  
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => throw UnimplementedError();
+
   ConsonantVowels({required this.mineGameData}) {
     gameData = mineGameData;
   }
@@ -1808,9 +2478,5 @@ class ConsonantVowels implements MainDataOfChapters {
   @override
   bool? isArabic;
 
-  @override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit,
-      TracingInitial stateOfGame, BuildContext context) {
-    PathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
 }

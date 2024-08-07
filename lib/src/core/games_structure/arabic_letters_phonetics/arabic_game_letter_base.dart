@@ -7,9 +7,7 @@ import 'package:based_of_eng_game/src/games/tracing/manager/tracing_cubit.dart';
 import 'package:based_of_eng_game/src/games/tracing/model/path_provider_model.dart';
 import 'package:based_of_eng_game/src/games/tracing/svg_strings/arabic_svg.dart';
 import 'package:based_of_eng_game/src/games/tracing/svg_strings/svg_strings.dart';
-import 'package:based_of_eng_game/src/games/tracing/widget/arabic_alphabets_paints/letter_gem_paint.dart';
 import 'package:based_of_eng_game/src/games/tracing/widget/english_alphabets_paints/letter_a_paint.dart';
-import 'package:based_of_eng_game/src/games/tracing/widget/path_helper/arabic_path_helper/arabic_path_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_path_parser/svg_path_parser.dart';
 
@@ -21,15 +19,12 @@ class GemPhonetics extends MainDataOfChapters {
 
   @override
   String background = AppImagesPhonetics.backGroundOfS;
-@override
-  void addPointMainAddPoint(DragUpdateDetails details, TracingCubit cubit, TracingInitial stateOfGame, BuildContext context) {
-    ArabicShapePathHelper.mainAddPoint(details, cubit, stateOfGame, context);
-  }
+
   @override
   BasicOfGameData? gameData;
   late Path dottedPath;
   GemPhonetics({
-    required this.mineGameData,
+    required this.mineGameData, required super.letterPath, required super.strokeColor, required super.pointColor, required super.letterAssets, required super.tracingAssets,  required super.pointsJsonFile,
   }) {
     gameData = mineGameData;
 
@@ -107,13 +102,6 @@ class GemPhonetics extends MainDataOfChapters {
   @override
   bool? isArabic;
 
-  @override
-  CustomPainter? Function(List<Offset> points)? get newTracingLetter =>
-      (List<Offset> points) {
-        return GemLetterPaint(
-            customPaths: pathsModels,
-            currentPathIndex: drawingShapecurrentIndex);
-      };
 
   @override
   set setDrawingShapeCurrentIndex(int index) {
