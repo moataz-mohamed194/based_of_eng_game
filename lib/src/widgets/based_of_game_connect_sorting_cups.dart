@@ -49,7 +49,7 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
           ),
 
           Positioned(
-            top: -10,
+            top: MediaQuery.of(context).size.height < 750 ? 5.h : -10.h,
             left: isArabic ? null : 0,
             right: isArabic ? 0 : null,
             child: Container(
@@ -60,7 +60,8 @@ class BasedOfGameConnectSortingCups extends StatelessWidget {
                   isArabic
                       ? stateOfGame.basicData?.gameData?.titleImageAr ?? ''
                       : stateOfGame.basicData?.gameData?.titleImageEn ?? '',
-                  height: 50.h,
+                  height:
+                      MediaQuery.of(context).size.height > 750 ? 80.h : 50.h,
                   width: 120.w,
                   fit: isArabic ? BoxFit.contain : BoxFit.fill,
                 )),
