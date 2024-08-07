@@ -1,3 +1,5 @@
+import 'package:audioplayers/audioplayers.dart';
+import 'package:based_of_eng_game/src/core/audio_player_game.dart';
 import 'package:based_of_eng_game/src/core/talk_tts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +27,7 @@ class BasedOfGames extends StatelessWidget {
                 .actionWhenTriesBeZero(stateOfGame.countOfStar ?? 0);
           }
           await TalkTts.stopTalk();
+          await AudioPlayerGame.forceStopSound();
         },
         canPop: false,
         child: Container(
