@@ -1,3 +1,5 @@
+import 'package:based_of_eng_game/src/core/assets_images_culture.dart';
+
 import '../assets_images_phonetics.dart';
 import '../game_types/assets_images_arabic.dart';
 import '../game_types/assets_images_math.dart';
@@ -187,6 +189,15 @@ abstract class BasicOfGameData {
     } else if (gameType.toLowerCase() ==
         GameTypes.dragBeadType.text().toLowerCase()) {
       return DragTypeRodNumberLineGame(tools: ToolsOfMath.beads);
+    } else if (gameType.toLowerCase() ==
+        GameTypes.chooseSenses.text().toLowerCase()) {
+      return ChooseSenses();
+    } else if (gameType.toLowerCase() ==
+        GameTypes.chooseYourAge.text().toLowerCase()) {
+      return ChooseYourAge();
+    } else if (gameType.toLowerCase() ==
+        GameTypes.chooseYourGender.text().toLowerCase()) {
+      return ChooseYourGender();
     }
   }
 
@@ -292,6 +303,66 @@ class ClickPicture implements BasicOfGameData {
 
   @override
   String? titleImageAr = AppImagesArabic.titleOfClickThePicture;
+
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class ChooseSenses implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = AppImagesCulture.clickToChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 2;
+}
+
+class ChooseYourAge implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = AppImagesCulture.clickToChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
+
+  @override
+  int countOfMinimizeStar = 1;
+}
+
+class ChooseYourGender implements BasicOfGameData {
+  @override
+  bool isRound = false;
+
+  @override
+  String titleImageEn = AppImagesCulture.clickToChoose;
+
+  @override
+  String? completeBasket;
+
+  @override
+  bool isConnect = false;
+
+  @override
+  String? titleImageAr;
 
   @override
   int countOfMinimizeStar = 1;
