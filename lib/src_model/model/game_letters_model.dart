@@ -7,6 +7,7 @@ class GameLettersGameFinalModel extends Equatable {
   final int? id;
   final String? letter;
   final String? secLetter;
+  final String? image;
   final int? number;
   final int? warmupId;
   final int? unitId;
@@ -21,6 +22,7 @@ class GameLettersGameFinalModel extends Equatable {
       {this.id,
       this.letter,
       this.secLetter,
+      this.image,
       this.number,
       this.mainQuestion,
       this.gameId,
@@ -43,6 +45,7 @@ class GameLettersGameFinalModel extends Equatable {
         id,
         letter,
         secLetter,
+        image,
         mainQuestion,
         number,
         warmupId,
