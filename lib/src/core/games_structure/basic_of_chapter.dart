@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/core/assets_images_culture.dart';
 import 'package:based_of_eng_game/src/core/phonetics_color.dart';
 import 'package:based_of_eng_game/src/games/tracing/model/path_provider_model.dart';
 
@@ -58,6 +59,7 @@ enum MainDataOfChaptersTypes {
   mathEc1,
   mathEc3,
   mathEc2,
+  culture
 }
 
 extension TypeExtension on MainDataOfChaptersTypes {
@@ -149,6 +151,8 @@ extension TypeExtension on MainDataOfChaptersTypes {
         return "EC2".toLowerCase();
       case MainDataOfChaptersTypes.mathEc3:
         return "EC3".toLowerCase();
+      case MainDataOfChaptersTypes.culture:
+        return "culture".toLowerCase();
     }
   }
 }
@@ -167,12 +171,63 @@ abstract class MainDataOfChapters {
   final String tracingAssets;
   final String pointsJsonFile;
 
-  MainDataOfChapters({required this.letterPath, required this.strokeColor, required this.pointColor, required this.letterAssets, required this.tracingAssets,  required this.pointsJsonFile}); // Added for points JSON file
-
-
+  MainDataOfChapters(
+      {required this.letterPath,
+      required this.strokeColor,
+      required this.pointColor,
+      required this.letterAssets,
+      required this.tracingAssets,
+      required this.pointsJsonFile}); // Added for points JSON file
 }
 
+class Culture implements MainDataOfChapters {
+  final BasicOfGameData mineGameData;
 
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesCulture.background;
+
+  @override
+  BasicOfGameData? gameData;
+  Culture({
+    required this.mineGameData,
+  }) {
+    gameData = mineGameData;
+  }
+
+  @override
+  bool? isArabic;
+
+  @override
+  // TODO: implement letterAssets
+  String get letterAssets => '';
+
+  @override
+  // TODO: implement letterPath
+  String get letterPath => ShapePaths.snew;
+
+  @override
+  // TODO: implement pointColor
+  Color get pointColor => Colors.red;
+
+  @override
+  // TODO: implement pointsJsonFile
+  String get pointsJsonFile => ShapePointsManger.sShape;
+
+  @override
+  // TODO: implement strokeAssets
+  String get strokeAssets => throw UnimplementedError();
+
+  @override
+  // TODO: implement strokeColor
+  Color get strokeColor => Colors.blue.withOpacity(.2);
+
+  @override
+  // TODO: implement tracingAssets
+  String get tracingAssets => '';
+}
 
 class SPhonetics implements MainDataOfChapters {
   final BasicOfGameData mineGameData;
@@ -190,39 +245,37 @@ class SPhonetics implements MainDataOfChapters {
   }) {
     gameData = mineGameData;
   }
-  
+
   @override
   bool? isArabic;
-  
+
   @override
   // TODO: implement letterAssets
   String get letterAssets => '';
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => ShapePaths.snew;
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => Colors.red;
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => ShapePointsManger.sShape;
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => Colors.blue.withOpacity(.2);
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => '';
-
- 
 }
 
 class APhonetics implements MainDataOfChapters {
@@ -308,37 +361,33 @@ class APhonetics implements MainDataOfChapters {
             currentPathIndex: drawingShapecurrentIndex);
       };
 
-
-  
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
-
-
 }
 
 class FPhonetics implements MainDataOfChapters {
@@ -355,31 +404,30 @@ class FPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
-
 
   FPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
@@ -387,8 +435,6 @@ class FPhonetics implements MainDataOfChapters {
 
   @override
   bool? isArabic;
-
-
 }
 
 class MPhonetics implements MainDataOfChapters {
@@ -503,7 +549,6 @@ class MPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => '';
-
 }
 
 class KPhonetics implements MainDataOfChapters {
@@ -520,27 +565,27 @@ class KPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -551,8 +596,6 @@ class KPhonetics implements MainDataOfChapters {
 
   @override
   bool? isArabic;
-
-
 }
 
 class QPhonetics implements MainDataOfChapters {
@@ -569,27 +612,27 @@ class QPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -597,8 +640,6 @@ class QPhonetics implements MainDataOfChapters {
   QPhonetics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-
 
   @override
   bool? isArabic;
@@ -612,16 +653,13 @@ class VPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfV;
 
-
-
   @override
   BasicOfGameData? gameData;
   @override
   int get getDrawingShapeCurrentIndex => 0;
-  
+
   @override
-  set setDrawingShapeCurrentIndex(int index) {
-  }
+  set setDrawingShapeCurrentIndex(int index) {}
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
   @override
@@ -632,31 +670,31 @@ class VPhonetics implements MainDataOfChapters {
 
   @override
   bool? isArabic;
-  
+
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -667,8 +705,6 @@ class XPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfX;
 
@@ -678,27 +714,27 @@ class XPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -716,8 +752,6 @@ class YPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfY;
 
@@ -727,27 +761,27 @@ class YPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -765,8 +799,6 @@ class ZPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfZ;
 
@@ -776,27 +808,27 @@ class ZPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -810,31 +842,30 @@ class ZPhonetics implements MainDataOfChapters {
 }
 
 class TPhonetics implements MainDataOfChapters {
-
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -911,40 +942,36 @@ class TPhonetics implements MainDataOfChapters {
   set setDrawingShapeCurrentIndex(int index) {
     drawingShapecurrentIndex = index;
   }
-
-
 }
 
 class CPhonetics implements MainDataOfChapters {
-
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
-
 
   final BasicOfGameData mineGameData;
   @override
@@ -957,7 +984,7 @@ class CPhonetics implements MainDataOfChapters {
   BasicOfGameData? gameData;
   @override
   int get getDrawingShapeCurrentIndex => 0;
-  
+
   @override
   @override
   CustomPainter? Function(List<Offset> points)? get newTracingLetter => null;
@@ -971,9 +998,7 @@ class CPhonetics implements MainDataOfChapters {
   bool? isArabic;
 
   @override
-  set setDrawingShapeCurrentIndex(int index) {
-
-  }
+  set setDrawingShapeCurrentIndex(int index) {}
 }
 
 class RPhonetics implements MainDataOfChapters {
@@ -984,35 +1009,33 @@ class RPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfR;
 
-
-
   @override
   BasicOfGameData? gameData;
 
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1030,8 +1053,6 @@ class IPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfI;
 
@@ -1041,27 +1062,27 @@ class IPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1082,35 +1103,33 @@ class PPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfP;
 
-
-
   @override
   BasicOfGameData? gameData;
 
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1131,35 +1150,33 @@ class HPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfH;
 
-
-
   @override
   BasicOfGameData? gameData;
 
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1177,8 +1194,6 @@ class JPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfJ;
 
@@ -1188,27 +1203,27 @@ class JPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1226,8 +1241,6 @@ class UPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfU;
 
@@ -1237,27 +1250,27 @@ class UPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1275,8 +1288,6 @@ class LPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfL;
 
@@ -1286,27 +1297,27 @@ class LPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1327,35 +1338,33 @@ class BPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfB;
 
-
-
   @override
   BasicOfGameData? gameData;
 
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1373,8 +1382,6 @@ class OPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = Colors.white.withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfO;
 
@@ -1384,27 +1391,27 @@ class OPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1422,8 +1429,6 @@ class GPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfG;
 
@@ -1433,27 +1438,27 @@ class GPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1471,8 +1476,6 @@ class DPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfD;
 
@@ -1482,27 +1485,27 @@ class DPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1522,8 +1525,6 @@ class WPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfW;
 
@@ -1533,27 +1534,27 @@ class WPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1571,8 +1572,6 @@ class EPhonetics implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfE;
 
@@ -1582,27 +1581,27 @@ class EPhonetics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1623,35 +1622,33 @@ class NPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfN;
 
-
-
   @override
   BasicOfGameData? gameData;
 
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1672,35 +1669,33 @@ class ShortVowels implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfShortVowels;
 
-
-
   @override
   BasicOfGameData? gameData;
 
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1726,35 +1721,33 @@ class UpVowels implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfShortVowels;
 
-
-
   @override
   BasicOfGameData? gameData;
 
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1775,35 +1768,33 @@ class ConnectionWithoutSortingCups implements MainDataOfChapters {
   @override
   String background = AppImagesPhonetics.backGroundOfConnect;
 
-
-
   @override
   BasicOfGameData? gameData;
 
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1826,8 +1817,6 @@ class ConnectionSortingCups implements MainDataOfChapters {
   @override
   Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
 
-
-
   @override
   String background = AppImagesPhonetics.backGroundOfConnect;
 
@@ -1837,27 +1826,27 @@ class ConnectionSortingCups implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1882,35 +1871,33 @@ class RedPhonetics implements MainDataOfChapters {
   @override
   String background = AppImagesArabic.bgOfRedUnit;
 
-
-
   @override
   BasicOfGameData? gameData;
 
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1937,27 +1924,27 @@ class BlueUnit implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -1965,8 +1952,6 @@ class BlueUnit implements MainDataOfChapters {
   BlueUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-
 
   @override
   bool? isArabic;
@@ -1986,27 +1971,27 @@ class GreenUnit implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -2014,8 +1999,6 @@ class GreenUnit implements MainDataOfChapters {
   GreenUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-
 
   @override
   bool? isArabic;
@@ -2035,27 +2018,27 @@ class YellowUnit implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -2063,8 +2046,6 @@ class YellowUnit implements MainDataOfChapters {
   YellowUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-
 
   @override
   bool? isArabic;
@@ -2084,27 +2065,27 @@ class VioletUnit implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -2112,8 +2093,6 @@ class VioletUnit implements MainDataOfChapters {
   VioletUnit({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-
 
   @override
   bool? isArabic;
@@ -2133,27 +2112,27 @@ class OrangeUnit implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -2163,8 +2142,6 @@ class OrangeUnit implements MainDataOfChapters {
   }
   @override
   bool? isArabic;
-
-
 }
 
 class MathProgram implements MainDataOfChapters {
@@ -2185,8 +2162,6 @@ class MathProgram implements MainDataOfChapters {
     this.background = background ?? AppImagesMath.mathBg;
   }
 
-
-
   @override
   bool? isArabic;
 
@@ -2198,37 +2173,35 @@ class MathProgram implements MainDataOfChapters {
       throw UnimplementedError();
 
   @override
-  set setDrawingShapeCurrentIndex(int index) {
-
-  }
+  set setDrawingShapeCurrentIndex(int index) {}
 
   @override
   late List<PathProviderModel> pathsModels;
-  
+
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -2248,27 +2221,27 @@ class FirstUnitArabic implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -2276,8 +2249,6 @@ class FirstUnitArabic implements MainDataOfChapters {
   FirstUnitArabic({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-
 
   @override
   bool? isArabic = true;
@@ -2297,27 +2268,27 @@ class RUnitArabic implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -2326,8 +2297,6 @@ class RUnitArabic implements MainDataOfChapters {
     gameData = mineGameData;
     background = subBackGround ?? background;
   }
-
-
 
   @override
   bool? isArabic = true;
@@ -2347,27 +2316,27 @@ class RUnitPhonics implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -2375,8 +2344,6 @@ class RUnitPhonics implements MainDataOfChapters {
   RUnitPhonics({required this.mineGameData}) {
     gameData = mineGameData;
   }
-
-
 
   @override
   bool? isArabic = true;
@@ -2396,27 +2363,27 @@ class ConsonantVowels implements MainDataOfChapters {
   @override
   // TODO: implement letterAssets
   String get letterAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement letterPath
   String get letterPath => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointColor
   Color get pointColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement pointsJsonFile
   String get pointsJsonFile => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeAssets
   String get strokeAssets => throw UnimplementedError();
-  
+
   @override
   // TODO: implement strokeColor
   Color get strokeColor => throw UnimplementedError();
-  
+
   @override
   // TODO: implement tracingAssets
   String get tracingAssets => throw UnimplementedError();
@@ -2427,6 +2394,4 @@ class ConsonantVowels implements MainDataOfChapters {
 
   @override
   bool? isArabic;
-
-
 }
