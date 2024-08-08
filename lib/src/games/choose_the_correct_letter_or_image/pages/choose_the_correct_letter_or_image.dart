@@ -57,7 +57,15 @@ class _ChooseTheCorrectLetterOrImageGame
       alignment: Alignment.center,
       child: BlocConsumer<ChooseTheCorrectLetterOrImageCubit,
           ChooseTheCorrectLetterOrImageState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          final isLetter = state.isLetter;
+          context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
+              stateOfStringIsWord:
+                  isLetter ? StateOfSubWord.isLetter : StateOfSubWord.isWord,
+              stateOfStringWillSay: isLetter
+                  ? state.gameData.mainLetter ?? ''
+                  : state.gameData.gameImages?.first.word ?? '');
+        },
         builder: (context, gameState) {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.start,
