@@ -81,6 +81,7 @@ flutter:
     - assets/main_games/
     - assets/phonetics/
     - assets/arabic/
+    - assets/culture/
     - assets/svg/parent_account/
     - assets/phontics_assets_points/english_phontics/
 
