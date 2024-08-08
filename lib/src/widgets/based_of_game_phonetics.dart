@@ -170,8 +170,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
                                   height:
                                       MediaQuery.of(context).size.height > 450
                                           ? 250.h
-                                          : 180.h,
-                                  width: 80.w,
+                                          : 140.h,
+                                  width: 60.w,
                                   child: Rive(
                                     artboard:
                                         stateOfGame.avatarCurrentArtboard!,
