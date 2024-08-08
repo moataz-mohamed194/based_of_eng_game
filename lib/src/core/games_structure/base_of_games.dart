@@ -64,10 +64,9 @@ abstract class HandlingActionsAndDataOfChapters {
     ZPhonetics,
     // SpellTheWord,
     ConnectionSortingCups,
-    ConnectionWithoutSortingCups];
-
+    ConnectionWithoutSortingCups
+  ];
   static bool isPhonetics({required Type chapter}) {
-
     return listOfChapterOfPhonetics.contains(chapter);
   }
 
@@ -84,7 +83,7 @@ abstract class HandlingActionsAndDataOfChapters {
     return listOfChapterOfArabic.contains(chapter);
   }
 
-  static String? detectTheArabicChapter(
+  static String? getArabicChapterBackground(
       {required String programName, required BasicOfGameData gameData}) {
     if (programName
         .toLowerCase()
@@ -131,6 +130,15 @@ abstract class HandlingActionsAndDataOfChapters {
   }) {
     print(
         'subLetter:$subLetter , subGame:$subGame , unitName:$unitName , programName:$programName , audioFlag:$audioFlag , ${(unitName.contains(MainDataOfChaptersTypes.consonant.text()))}');
+    if (programName.toLowerCase() == MainDataOfChaptersTypes.culture.text().toLowerCase()) {
+      return Culture(
+        mineGameData: BasicOfGameData.getTheGameType(
+          gameType: subGame.toLowerCase(),
+          audioFlag: audioFlag,
+          gameName: gameName,
+        ),
+      );
+    } else
     if (programName.toLowerCase() ==
         MainDataOfChaptersTypes.math.text().toLowerCase()) {
       // if (stageName == MainDataOfChaptersTypes.mathEc1.text().toLowerCase()) {
@@ -170,7 +178,7 @@ abstract class HandlingActionsAndDataOfChapters {
       return ShortVowels(
           isArabicSub:
               BasicOfGameData.enumValues.contains(programName.toLowerCase()),
-          subBackGround: detectTheArabicChapter(
+          subBackGround: getArabicChapterBackground(
               programName: mobLessonName,
               gameData: BasicOfGameData.getTheGameType(
                   gameType: subGame.toLowerCase(), audioFlag: audioFlag)),
@@ -198,22 +206,21 @@ abstract class HandlingActionsAndDataOfChapters {
         return ConnectionSortingCups(
             isArabicSub:
                 BasicOfGameData.enumValues.contains(programName.toLowerCase()),
-            subBackGround: detectTheArabicChapter(
+            subBackGround: getArabicChapterBackground(
                 programName: mobLessonName, gameData: SortingCupsGame()),
             mineGameData: SortingCupsGame());
       } else {
         return ConnectionWithoutSortingCups(
             isArabicSub:
                 BasicOfGameData.enumValues.contains(programName.toLowerCase()),
-            subBackGround: detectTheArabicChapter(
+            subBackGround: getArabicChapterBackground(
                 programName: mobLessonName,
                 gameData: BasicOfGameData.getTheGameType(
                     gameType: subGame.toLowerCase(), audioFlag: audioFlag)),
             mineGameData: BasicOfGameData.getTheGameType(
                 gameType: subGame.toLowerCase(), audioFlag: audioFlag));
       }
-    }
-    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
+    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
       return SPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
@@ -402,7 +409,7 @@ abstract class HandlingActionsAndDataOfChapters {
             .toLowerCase()
             .contains(MainDataOfChaptersTypes.rUnitArabic.text())) {
       return RUnitArabic(
-          subBackGround: detectTheArabicChapter(
+          subBackGround: getArabicChapterBackground(
               programName: mobLessonName,
               gameData: BasicOfGameData.getTheGameType(
                   gameType: subGame.toLowerCase(),
@@ -417,7 +424,7 @@ abstract class HandlingActionsAndDataOfChapters {
               gameType: subGame.toLowerCase(),
               audioFlag: audioFlag,
               gameName: gameName));
-    }
+    } 
     return null;
   }
 }
