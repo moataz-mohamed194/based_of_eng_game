@@ -202,7 +202,7 @@ class _CustomDialogLandscape extends StatelessWidget {
         child: Stack(
           children: [
             _buildBackground(),
-            _buildExitButton(context),
+            _buildExitButton(context, onDonePressed),
             _buildContent(context),
           ],
         ),
@@ -314,12 +314,13 @@ class _CustomDialogLandscape extends StatelessWidget {
     );
   }
 
-  PositionedDirectional _buildExitButton(BuildContext context) {
+  PositionedDirectional _buildExitButton(
+      BuildContext context, void Function()? onDonePressed) {
     return PositionedDirectional(
       top: MediaQuery.of(context).size.height > 750 ? 100.h : 60.h,
       start: 55.w,
       child: GestureDetector(
-        onTap: Navigator.of(context).pop,
+        onTap: onDonePressed,
         child: SvgPicture.asset(
           AppSvgImages.exitButton,
           width: MediaQuery.of(context).size.height > 750 ? 50.w : 40.w,
