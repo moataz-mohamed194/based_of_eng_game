@@ -322,6 +322,7 @@ class BasedOfGameConnect extends StatelessWidget {
                                                   width: 80.w,
                                                 )
                                               : Container(
+                                                  height: 150.h,
                                                   width: 75.w,
                                                   alignment: Alignment.center,
                                                   margin: EdgeInsets.only(
