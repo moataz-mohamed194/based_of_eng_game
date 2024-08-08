@@ -12,7 +12,7 @@ class DominoWidget extends StatelessWidget {
     return Container(
       width: 30.w,
       height:
-          height ?? (MediaQuery.of(context).size.height > 450 ? 170.h : 130.h),
+          height ?? (MediaQuery.of(context).size.height > 450 ? 180.h : 130.h),
       clipBehavior: Clip.antiAlias,
       alignment: Alignment.center,
       decoration: ShapeDecoration(
@@ -30,11 +30,15 @@ class DominoWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (count % 2 == 0) ...{
-              Transform.scale(scale: (MediaQuery.of(context).size.height > 450 ? 1.2:1), child: _listOfCreateBots())
-            } else ...{
-              Transform.scale(scale: (MediaQuery.of(context).size.height > 450 ? 1.2:1), child: _listOfCreateBots()),
               Transform.scale(
-                  scale: (MediaQuery.of(context).size.height > 450 ? 1.2:1),
+                  scale: (MediaQuery.of(context).size.height > 450 ? 1 : 1),
+                  child: _listOfCreateBots())
+            } else ...{
+              Transform.scale(
+                  scale: (MediaQuery.of(context).size.height > 450 ? 1 : 1),
+                  child: _listOfCreateBots()),
+              Transform.scale(
+                  scale: (MediaQuery.of(context).size.height > 450 ? 1 : 1),
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 4.5.w),
                     child: _redBot(),

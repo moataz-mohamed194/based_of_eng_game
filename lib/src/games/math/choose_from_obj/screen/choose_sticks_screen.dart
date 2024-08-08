@@ -158,16 +158,18 @@ class ChooseSticksScreen extends StatelessWidget {
                                                                   .mainNumber
                                                                   .toString(),
                                                     ),
-                                                    ((gameState
-                                                        .basicData
-                                                    as MathChooseSticksOrBeadsOrBlocks)
-                                                        .tools ==
-                                                        ToolsOfMath.blocks)?(MediaQuery.of(context)
-                                                                .size
-                                                                .height >
-                                                            450
-                                                        ? 65.pw
-                                                        : 25.pw):25.pw,
+                                                    ((gameState.basicData
+                                                                    as MathChooseSticksOrBeadsOrBlocks)
+                                                                .tools ==
+                                                            ToolsOfMath.blocks)
+                                                        ? (MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height >
+                                                                450
+                                                            ? 65.pw
+                                                            : 25.pw)
+                                                        : 25.pw,
                                                     if ((gameState.basicData
                                                                 as MathChooseSticksOrBeadsOrBlocks)
                                                             .tools ==
@@ -184,7 +186,7 @@ class ChooseSticksScreen extends StatelessWidget {
                                                                 as MathChooseSticksOrBeadsOrBlocks)
                                                             .tools ==
                                                         ToolsOfMath.beads) ...{
-                                                    GetTheBeads(
+                                                      GetTheBeads(
                                                         countOfBalls: int.parse(
                                                             gameState
                                                                     .gameChoices?[
@@ -205,13 +207,22 @@ class ChooseSticksScreen extends StatelessWidget {
                                                                   450
                                                               ? 1.5
                                                               : 1.1),
-                                                          child: GetTheBlocks(
-                                                            countOfBoxes: int
-                                                                .parse(gameState
-                                                                        .gameChoices?[
-                                                                            index]
-                                                                        .choice ??
-                                                                    '0'),
+                                                          child: Container(
+                                                            padding: EdgeInsets.only(
+                                                                left: MediaQuery.of(context)
+                                                                            .size
+                                                                            .height <
+                                                                        450
+                                                                    ? 0
+                                                                    : 20),
+                                                            child: GetTheBlocks(
+                                                              countOfBoxes: int
+                                                                  .parse(gameState
+                                                                          .gameChoices?[
+                                                                              index]
+                                                                          .choice ??
+                                                                      '0'),
+                                                            ),
                                                           ))
                                                     }
                                                   ],

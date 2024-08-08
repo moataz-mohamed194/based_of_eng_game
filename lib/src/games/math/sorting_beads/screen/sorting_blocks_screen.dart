@@ -39,8 +39,7 @@ class SortingBlocksScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height -
-                        (90.h + 50.h ),
+                    height: MediaQuery.of(context).size.height - (90.h + 50.h),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: List.generate(
@@ -52,7 +51,8 @@ class SortingBlocksScreen extends StatelessWidget {
                                 children: [
                                   CardOfNumber(
                                     number:
-                                        gameState.gameChoices?[index].choice ?? '0',
+                                        gameState.gameChoices?[index].choice ??
+                                            '0',
                                     size: 65.h,
                                   ),
                                   10.pw,
@@ -63,7 +63,9 @@ class SortingBlocksScreen extends StatelessWidget {
                                   ) {
                                     return CardOfBlocks(
                                       number: gameState.correctAnswers.contains(
-                                              gameState.gameChoices?[index].id ?? 0)
+                                              gameState
+                                                      .gameChoices?[index].id ??
+                                                  0)
                                           ? int.parse(gameState
                                                   .gameChoices?[index].choice ??
                                               '0')
@@ -88,22 +90,24 @@ class SortingBlocksScreen extends StatelessWidget {
                                                 questions: gameState.gameData
                                                         .gameChoices?.length ??
                                                     0,
-                                                correctAnswers:
-                                                    gameState.correctAnswers.length)
+                                                correctAnswers: gameState
+                                                    .correctAnswers.length)
                                             .whenComplete(() {
                                           bool isLastQuestion = context
                                               .read<CurrentGamePhoneticsCubit>()
                                               .checkIfIsTheLastQuestionOfGame(
-                                                  queations: gameState.gameData
-                                                          .gameChoices?.length ??
+                                                  queations: gameState
+                                                          .gameData
+                                                          .gameChoices
+                                                          ?.length ??
                                                       0);
-
                                         });
                                       } else {
                                         await context
                                             .read<CurrentGamePhoneticsCubit>()
                                             .addWrongAnswer(
-                                                actionOfWrongAnswer: () async {});
+                                                actionOfWrongAnswer:
+                                                    () async {});
                                       }
                                     }
                                   })
@@ -116,7 +120,11 @@ class SortingBlocksScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  Container(
+                    padding: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.height < 450
+                            ? 0
+                            : 25.w),
                     height: MediaQuery.of(context).size.height -
                         (90.h + 50.h + 5 + 20.h), // < 760
                     child: Column(
@@ -126,34 +134,41 @@ class SortingBlocksScreen extends StatelessWidget {
                           (index) => gameState.correctAnswers.contains(
                                   gameState.secondGameChoices?[index].id ?? 0)
                               ? Transform.scale(
-                            scale: 1.8,
-                            child:Opacity(
-                                  opacity: .2,
-                                  child: GetTheBlocks(
-                                    countOfBoxes: int.parse(
-                                        "${gameState.secondGameChoices?[index].choice ?? 0}"),
-                                  ),
-                                ))
+                                  scale:
+                                      MediaQuery.of(context).size.height < 450
+                                          ? 1
+                                          : 1.8,
+                                  child: Opacity(
+                                    opacity: .2,
+                                    child: GetTheBlocks(
+                                      countOfBoxes: int.parse(
+                                          "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                                    ),
+                                  ))
                               : FittedBox(
-                                child: Transform.scale(
-                                  scale: 1.8,
-                                  child: Draggable<int>(
-                                      maxSimultaneousDrags: 1,
-                                      feedbackOffset:Offset(40.h, 0),
-                                      feedback: GetTheBlocks(
-                                        countOfBoxes: int.parse(
-                                            "${gameState.secondGameChoices?[index].choice ?? 0}"),
-                                      ),
-                                      // childWhenDragging: ,
-                                      data:
-                                          gameState.secondGameChoices?[index].id ?? 0,
-                                      child: GetTheBlocks(
-                                        // isSolid: true,
-                                        countOfBoxes: int.parse(
-                                            "${gameState.secondGameChoices?[index].choice ?? 0}"),
-                                      )),
-                                ),
-                              )),
+                                  child: Transform.scale(
+                                    scale:
+                                        MediaQuery.of(context).size.height < 450
+                                            ? 1
+                                            : 1.8,
+                                    child: Draggable<int>(
+                                        maxSimultaneousDrags: 1,
+                                        feedbackOffset: Offset(40.h, 0),
+                                        feedback: GetTheBlocks(
+                                          countOfBoxes: int.parse(
+                                              "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                                        ),
+                                        // childWhenDragging: ,
+                                        data: gameState
+                                                .secondGameChoices?[index].id ??
+                                            0,
+                                        child: GetTheBlocks(
+                                          // isSolid: true,
+                                          countOfBoxes: int.parse(
+                                              "${gameState.secondGameChoices?[index].choice ?? 0}"),
+                                        )),
+                                  ),
+                                )),
                     ),
                   )
                 ],

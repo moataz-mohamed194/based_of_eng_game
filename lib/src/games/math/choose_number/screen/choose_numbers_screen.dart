@@ -32,140 +32,153 @@ class ChooseNumberScreen extends StatelessWidget {
             listener: (context, state) {},
             builder: (context, gameState) {
               return FittedBox(
-                child:Transform.scale(
-                    scale:((gameState.basicData
-                    as MathChooseNumberSticksOrBeadsOrBlocks)
-                        .tools ==
-                        ToolsOfMath.domino)?1: 1.3,
+                child: Transform.scale(
+                    scale: ((gameState.basicData
+                                    as MathChooseNumberSticksOrBeadsOrBlocks)
+                                .tools ==
+                            ToolsOfMath.domino)
+                        ? 1
+                        : 1.3,
                     child: SizedBox(
-                  height:(((gameState.basicData
-                  as MathChooseNumberSticksOrBeadsOrBlocks)
-                      .tools ==
-                      ToolsOfMath.domino)&& MediaQuery.of(context).size.height < 450)?null: MediaQuery.of(context).size.height -
-                      (90.h + 50.h + 5 + 20.h),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      5.ph,
-                      5.ph,
-                      if ((gameState.basicData
-                                  as MathChooseNumberSticksOrBeadsOrBlocks)
-                              .tools ==
-                          ToolsOfMath.sticks) ...{
-                        Slick(
-                          count: int.parse("${gameState.mainNumber ?? '0'}"),
-                        )
-                      } else if ((gameState.basicData
-                                  as MathChooseNumberSticksOrBeadsOrBlocks)
-                              .tools ==
-                          ToolsOfMath.beads) ...{
-                      Transform.scale(
-                      scale: 1.4,
-                      child:GetTheBeads(
-                          countOfBalls:
-                              int.parse("${gameState.mainNumber ?? '0'}"),
-                        ))
-                      } else if ((gameState.basicData
-                                  as MathChooseNumberSticksOrBeadsOrBlocks)
-                              .tools ==
-                          ToolsOfMath.blocks) ...{
-                      Transform.scale(
-                      scale: 1.4,
-                      child:GetTheBlocks(
-                          countOfBoxes:
-                              int.parse("${gameState.mainNumber ?? '0'}"),
-                        )
-                        )
-                      } else if ((gameState.basicData
-                                  as MathChooseNumberSticksOrBeadsOrBlocks)
-                              .tools ==
-                          ToolsOfMath.domino) ...{
-                      DominoWidget(
-                          height: 120.h,
-                          count: int.parse("${gameState.mainNumber ?? '0'}"),
-                        )
-                      },
-                      5.ph,
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: List.generate(
-                            gameState.gameChoices?.length ?? 0,
-                            (index) => GestureDetector(
-                              onTap: () async {
-                                if (context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .ableButton() &&
-                                    gameState.isCorrect != true) {
-                                  bool stateOfAnswer = context
-                                      .read<ChooseNumberCubit>()
-                                      .addAnswer(
-                                          userChoose: int.parse(gameState
-                                                  .gameChoices?[index].choice ??
-                                              '0'));
-                                  if (stateOfAnswer == true) {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addSuccessAnswer(
-                                            questions:
-                                                gameState.allGameData.length,
-                                            correctAnswers:
-                                                gameState.correctAnswers + 1)
-                                        .whenComplete(() {
-                                      bool isLastQuestion = context
-                                          .read<CurrentGamePhoneticsCubit>()
-                                          .checkIfIsTheLastQuestionOfGame(
-                                              queations:
-                                                  gameState.allGameData.length);
-                                      if (isLastQuestion) {
-                                        // Future.delayed(const Duration(seconds: 2),
-                                        //     () async {
-                                        //   Navigator.of(context).pop();
-                                        // });
-                                      } else {
-                                        Future.delayed(
-                                            const Duration(seconds: 2),
-                                            () async {
-                                          await context
+                      height: (((gameState.basicData
+                                          as MathChooseNumberSticksOrBeadsOrBlocks)
+                                      .tools ==
+                                  ToolsOfMath.domino) &&
+                              MediaQuery.of(context).size.height < 450)
+                          ? null
+                          : MediaQuery.of(context).size.height -
+                              (90.h + 50.h + 5 + 20.h),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          5.ph,
+                          5.ph,
+                          if ((gameState.basicData
+                                      as MathChooseNumberSticksOrBeadsOrBlocks)
+                                  .tools ==
+                              ToolsOfMath.sticks) ...{
+                            Slick(
+                              count:
+                                  int.parse("${gameState.mainNumber ?? '0'}"),
+                            )
+                          } else if ((gameState.basicData
+                                      as MathChooseNumberSticksOrBeadsOrBlocks)
+                                  .tools ==
+                              ToolsOfMath.beads) ...{
+                            Transform.scale(
+                                scale: 1.4,
+                                child: GetTheBeads(
+                                  countOfBalls: int.parse(
+                                      "${gameState.mainNumber ?? '0'}"),
+                                ))
+                          } else if ((gameState.basicData
+                                      as MathChooseNumberSticksOrBeadsOrBlocks)
+                                  .tools ==
+                              ToolsOfMath.blocks) ...{
+                            Transform.scale(
+                                scale: MediaQuery.of(context).size.height < 450
+                                    ? 1
+                                    : 1.4,
+                                child: GetTheBlocks(
+                                  countOfBoxes: int.parse(
+                                      "${gameState.mainNumber ?? '0'}"),
+                                ))
+                          } else if ((gameState.basicData
+                                      as MathChooseNumberSticksOrBeadsOrBlocks)
+                                  .tools ==
+                              ToolsOfMath.domino) ...{
+                            DominoWidget(
+                              height: 120.h,
+                              count:
+                                  int.parse("${gameState.mainNumber ?? '0'}"),
+                            )
+                          },
+                          5.ph,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 2,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: List.generate(
+                                gameState.gameChoices?.length ?? 0,
+                                (index) => GestureDetector(
+                                  onTap: () async {
+                                    if (context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .ableButton() &&
+                                        gameState.isCorrect != true) {
+                                      bool stateOfAnswer = context
+                                          .read<ChooseNumberCubit>()
+                                          .addAnswer(
+                                              userChoose: int.parse(gameState
+                                                      .gameChoices?[index]
+                                                      .choice ??
+                                                  '0'));
+                                      if (stateOfAnswer == true) {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addSuccessAnswer(
+                                                questions: gameState
+                                                    .allGameData.length,
+                                                correctAnswers:
+                                                    gameState.correctAnswers +
+                                                        1)
+                                            .whenComplete(() {
+                                          bool isLastQuestion = context
                                               .read<CurrentGamePhoneticsCubit>()
-                                              .updateIndexOfCurrentGame();
-                                          context
-                                              .read<ChooseNumberCubit>()
-                                              .updateTheCurrentGame(
-                                                  index: context
-                                                      .read<
-                                                          CurrentGamePhoneticsCubit>()
-                                                      .state
-                                                      .index);
+                                              .checkIfIsTheLastQuestionOfGame(
+                                                  queations: gameState
+                                                      .allGameData.length);
+                                          if (isLastQuestion) {
+                                            // Future.delayed(const Duration(seconds: 2),
+                                            //     () async {
+                                            //   Navigator.of(context).pop();
+                                            // });
+                                          } else {
+                                            Future.delayed(
+                                                const Duration(seconds: 2),
+                                                () async {
+                                              await context
+                                                  .read<
+                                                      CurrentGamePhoneticsCubit>()
+                                                  .updateIndexOfCurrentGame();
+                                              context
+                                                  .read<ChooseNumberCubit>()
+                                                  .updateTheCurrentGame(
+                                                      index: context
+                                                          .read<
+                                                              CurrentGamePhoneticsCubit>()
+                                                          .state
+                                                          .index);
+                                            });
+                                          }
                                         });
+                                      } else {
+                                        await context
+                                            .read<CurrentGamePhoneticsCubit>()
+                                            .addWrongAnswer(
+                                                actionOfWrongAnswer:
+                                                    () async {});
                                       }
-                                    });
-                                  } else {
-                                    await context
-                                        .read<CurrentGamePhoneticsCubit>()
-                                        .addWrongAnswer(
-                                            actionOfWrongAnswer: () async {});
-                                  }
-                                }
-                              },
-                              child: CardOfNumber(
-                                isCorrect: gameState.isCorrect == true &&
-                                    gameState.gameChoices?[index].choice ==
-                                        gameState.mainNumber.toString(),
-                                number:
-                                    gameState.gameChoices?[index].choice ?? '0',
-                                size: 70.h,
+                                    }
+                                  },
+                                  child: CardOfNumber(
+                                    isCorrect: gameState.isCorrect == true &&
+                                        gameState.gameChoices?[index].choice ==
+                                            gameState.mainNumber.toString(),
+                                    number:
+                                        gameState.gameChoices?[index].choice ??
+                                            '0',
+                                    size: 70.h,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                          5.ph,
+                        ],
                       ),
-                      5.ph,
-                    ],
-                  ),
-                )),
+                    )),
               );
             }));
   }

@@ -27,7 +27,7 @@ class ChooseSubScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height -
                 (90.h + 50.h + 5 + 20.h), // < 760
             margin: EdgeInsets.only(left: 40.w, right: 40.w, bottom: 20.h),
-            padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -55,38 +55,41 @@ class ChooseSubScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-              Transform.scale(
-                scale: MediaQuery.of(context).size.height < 450? 1:1.3,
-                child:Row(
-                          children: [
-                            CardOfNumber(
-                              size: 70.h,
-                              number: gameState.subQuestion?.letter ?? '0',
-                            ),
-                            Text(
-                              '-',
-                              style: TextStyle(
-                                color: AppColorPhonetics.darkBlueColor,
-                                fontSize: 30.sp,
-                                fontFamily: AppTheme.getFontFamily5(),
-                                fontWeight: FontWeight.w400,
-                                height: 0,
-                              ),
-                            ),
-                            CardOfNumber(
-                              size: 70.h,
-                              number: gameState.mainQuestion?.letter ?? '0',
-                            ),
-                          ],
-                        )
-                        )
+                        Transform.scale(
+                            scale: MediaQuery.of(context).size.height < 450
+                                ? 1
+                                : 1.3,
+                            child: Row(
+                              children: [
+                                CardOfNumber(
+                                  size: 70.h,
+                                  number: gameState.subQuestion?.letter ?? '0',
+                                ),
+                                Text(
+                                  '-',
+                                  style: TextStyle(
+                                    color: AppColorPhonetics.darkBlueColor,
+                                    fontSize: 30.sp,
+                                    fontFamily: AppTheme.getFontFamily5(),
+                                    fontWeight: FontWeight.w400,
+                                    height: 0,
+                                  ),
+                                ),
+                                CardOfNumber(
+                                  size: 70.h,
+                                  number: gameState.mainQuestion?.letter ?? '0',
+                                ),
+                              ],
+                            ))
                       ],
                     )),
                 25.ph,
                 Expanded(
                     child: FittedBox(
                   child: Container(
-                    width: MediaQuery.of(context).size.height < 450?MediaQuery.of(context).size.width/1.5:MediaQuery.of(context).size.width/2.5,
+                    width: MediaQuery.of(context).size.height < 450
+                        ? MediaQuery.of(context).size.width / 1.5
+                        : MediaQuery.of(context).size.width / 2.0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: List.generate(
@@ -178,7 +181,7 @@ class ChooseSubScreen extends StatelessWidget {
       children: [
         CardOfSelected(
           onTap: () async {
-            if (mainBloc.ableButton()&& gameState.isCorrect!=true) {
+            if (mainBloc.ableButton() && gameState.isCorrect != true) {
               bool stateOfAnswer = bloc.addAnswer(userChoose: answer);
               if (stateOfAnswer == true) {
                 await mainBloc
