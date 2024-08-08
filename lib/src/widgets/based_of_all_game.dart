@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/src/widgets/based_of_culture_games.dart';
 import 'package:based_of_eng_game/src/widgets/based_of_full_board_games_ar.dart';
 import 'package:based_of_eng_game/src/widgets/based_of_game_arabic.dart';
 import 'package:flutter/material.dart';
@@ -24,19 +25,23 @@ class BasedOfAllGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       // alignment: Alignment.center,
       children: [
         GameBar(stateOfGame: stateOfGame),
-        if (stateOfGame.countOfTries == 0 || stateOfGame.showAlert==true)
+        if (stateOfGame.countOfTries == 0 || stateOfGame.showAlert == true)
           ...{}
         else ...{
           SizedBox(
             height: (MediaQuery.of(context).size.height - (50.h + 5)),
             child: Column(
               children: [
-                if (stateOfGame.basicData is ShortVowels) ...{
+                if (stateOfGame.basicData is Culture) ...{
+                  BasedOfCultureGames(
+                    stateOfGame: stateOfGame,
+                    gamesData: gamesData,
+                  )
+                } else if (stateOfGame.basicData is ShortVowels) ...{
                   if (stateOfGame.basicData?.gameData?.isConnect == true) ...{
                     BasedOfGameShortVowelsTextNextRive(
                       stateOfGame: stateOfGame,
