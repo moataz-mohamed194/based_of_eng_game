@@ -63,28 +63,27 @@ class _ClickTheSoundGame extends State<ClickTheSoundGame> {
         child: SizedBox(
             // width: MediaQuery.of(context).size.width,
             child: BlocConsumer<ClickTheSoundCubit, ClickTheSoundInitial>(
-                listener: (context, state) {},
-                builder: (context, stateOfGame) {
-                  int count =
-                      ((stateOfGame.gameData.gameLetters?.length ?? 0) / 2)
-                          .round();
-                  List<GameLettersGameFinalModel> firstLetters =
-                      stateOfGame.letters?.sublist(0, count) ?? [];
-                  List<GameLettersGameFinalModel> secondLetters =
-                      stateOfGame.letters?.sublist(count,
-                              stateOfGame.gameData.gameLetters?.length) ??
-                          [];
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _subRow(firstLetters, stateOfGame),
-                      MediaQuery.of(context).size.height > 650
-                          ? 110.h.ph
-                          : 20.ph,
-                      _subRow(secondLetters, stateOfGame),
-                    ],
-                  );
-                })),
+                listener: (context, state) {
+          context.read<CurrentGamePhoneticsCubit>().saveTheStringWillSay(
+              stateOfStringIsWord: StateOfSubWord.isLetter,
+              stateOfStringWillSay: state.gameData.mainLetter ?? '');
+        }, builder: (context, stateOfGame) {
+          int count =
+              ((stateOfGame.gameData.gameLetters?.length ?? 0) / 2).round();
+          List<GameLettersGameFinalModel> firstLetters =
+              stateOfGame.letters?.sublist(0, count) ?? [];
+          List<GameLettersGameFinalModel> secondLetters = stateOfGame.letters
+                  ?.sublist(count, stateOfGame.gameData.gameLetters?.length) ??
+              [];
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _subRow(firstLetters, stateOfGame),
+              MediaQuery.of(context).size.height > 650 ? 110.h.ph : 20.ph,
+              _subRow(secondLetters, stateOfGame),
+            ],
+          );
+        })),
       ),
     );
   }
