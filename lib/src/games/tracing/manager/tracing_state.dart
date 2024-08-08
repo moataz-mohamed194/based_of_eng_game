@@ -1,134 +1,77 @@
-
 part of 'tracing_cubit.dart';
 
+enum DrawingStates { error, initial, loading, loaded, gameFinished }
 
-enum DrawingStates{
-  initial,
-  loading,
-  loaded,
-  gameFinished
-}
-
+// ignore: must_be_immutable
 class TracingState extends Equatable {
   final GameFinalModel gameData;
   final CurrentGamePhoneticsState stateOfGame;
- 
-final DrawingStates drawingStates;
- final List<Path> paths;
-  final Path currentDrawingPath;
-final  List<List<Offset>> allStrokePoints; // List of all stroke points
- final Offset? anchorPos;
+  final TracePhonetics tracePhontics;
+  final DrawingStates drawingStates;
+  final List<LetterPathsModel> letterPathsModels;
+  final int activeIndex; // Track the active letter index
 
- final bool letterTracingFinished;
- final bool hasFinishedOneStroke;
- final int currentStroke;
- final int currentStrokeProgress;
+ final Size viewSize;
 
- final   Path? letterImage;
- final      ui.Image? traceImage;
- final      ui.Image? anchorImage;
-  final Size? viewSize;
 
-  TracingState( {
-     this.viewSize,
-    this.drawingStates=DrawingStates.initial,
+  TracingState({
+    this.viewSize= const Size(0,0), 
+    required this.letterPathsModels,
+    required this.tracePhontics,
+    this.drawingStates = DrawingStates.initial,
     required this.gameData,
     required this.stateOfGame,
-    List<Path>? paths,
-    Path? currentDrawingPath,
-    List<List<Offset>>? allStrokePoints,
-   
-    this.anchorPos,
-    this.letterTracingFinished = false,
-    this.hasFinishedOneStroke = false,
-    this.currentStroke = 0,
-    this.currentStrokeProgress = -1,
-    this.letterImage,
-    this.traceImage,
-    this.anchorImage,
-  }) : paths = paths ?? [],
-        currentDrawingPath = currentDrawingPath ?? Path(),
-        allStrokePoints = allStrokePoints ?? [];
+    this.activeIndex = 0,
+  });
 
   TracingState copyWith({
     Size? viewSize,
     DrawingStates? drawingStates,
     GameFinalModel? gameData,
     CurrentGamePhoneticsState? stateOfGame,
-    List<Path>? paths,
-    Path? currentDrawingPath,
-    List<List<Offset>>? allStrokePoints,
-    Offset? anchorPos,
-    bool? letterTracingFinished,
-    bool? hasFinishedOneStroke,
-    int? currentStroke,
-    int? currentStrokeProgress,
-    Path? letterImage,
-      ui.Image? traceImage,   // Updated to ui.Image
-    ui.Image? anchorImage,  // Updated to ui.Image
-
+    // Updated to ui.Image
+    List<LetterPathsModel>? letterPathsModels,
+    TracePhonetics? tracePhontics,
+    int? activeIndex,
   }) {
     return TracingState(
-      viewSize: viewSize?? this.viewSize,
-            drawingStates: drawingStates ?? this.drawingStates,
-
       gameData: gameData ?? this.gameData,
       stateOfGame: stateOfGame ?? this.stateOfGame,
-      paths: paths ?? this.paths,
-      currentDrawingPath: currentDrawingPath ?? this.currentDrawingPath,
-      allStrokePoints: allStrokePoints ?? this.allStrokePoints,
-      anchorPos: anchorPos ?? this.anchorPos,
-      letterTracingFinished: letterTracingFinished ?? this.letterTracingFinished,
-      hasFinishedOneStroke: hasFinishedOneStroke ?? this.hasFinishedOneStroke,
-      currentStroke: currentStroke ?? this.currentStroke,
-      currentStrokeProgress: currentStrokeProgress ?? this.currentStrokeProgress,
-      letterImage: letterImage ?? this.letterImage,
-      traceImage: traceImage ?? this.traceImage,
-      anchorImage: anchorImage ?? this.anchorImage,
+      letterPathsModels: letterPathsModels ?? this.letterPathsModels,
+      tracePhontics: tracePhontics ?? this.tracePhontics,
+      activeIndex: activeIndex ?? this.activeIndex,
+      drawingStates: drawingStates ?? this.drawingStates,
     );
   }
 
   TracingState clearPosition() {
     return TracingState(
-      viewSize:viewSize ,
+      letterPathsModels: letterPathsModels,
       drawingStates: DrawingStates.initial,
       gameData: gameData,
       stateOfGame: stateOfGame,
-      paths: paths,
-      allStrokePoints: const [],
-      anchorPos: Offset.zero,
+      tracePhontics: tracePhontics,
     );
   }
 
   TracingState clearData() {
-    return TracingState( 
-            viewSize:viewSize ,
-
-           drawingStates: DrawingStates.initial,
-
+    return TracingState(
+      letterPathsModels: letterPathsModels,
+      drawingStates: DrawingStates.initial,
       gameData: gameData,
       stateOfGame: stateOfGame,
-      paths: paths,
-      allStrokePoints: const [],
-      anchorPos: Offset.zero,
-      letterTracingFinished: false,
-      hasFinishedOneStroke: false,
-      currentStroke: 0,
-      currentStrokeProgress: -1,
+      tracePhontics: tracePhontics,
     );
   }
 
   @override
   List<Object?> get props => [
-    drawingStates,
+        drawingStates,
+        viewSize,
         gameData,
         stateOfGame,
-        paths,
-        allStrokePoints,
-        anchorPos,
-        letterTracingFinished,
-        hasFinishedOneStroke,
-        currentStroke,
-        currentStrokeProgress,
+        tracePhontics,
+        letterPathsModels.map((model) => model.copyWith()).toList(),
+        activeIndex
       ];
 }

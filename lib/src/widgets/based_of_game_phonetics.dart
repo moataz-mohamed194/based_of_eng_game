@@ -1,3 +1,4 @@
+import 'package:based_of_eng_game/based_of_eng_game.dart';
 import 'package:based_of_eng_game/src/games/videos/cubit/video_cubit.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:flutter/cupertino.dart';
@@ -95,6 +96,7 @@ class BasedOfGamePhonetics extends StatelessWidget {
                       create: (_) {
                         print('createdd');
                         return TracingCubit(
+                          tracePhontics: stateOfGame.basicData as TracePhonetics ,
                           gameData: gamesData[stateOfGame.index],
                           stateOfGame: stateOfGame,
                         );

@@ -79,7 +79,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.3.3+1"
+    version: "0.3.3+2"
   bloc:
     dependency: transitive
     description:

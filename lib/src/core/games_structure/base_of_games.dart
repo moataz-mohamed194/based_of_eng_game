@@ -62,6 +62,9 @@ abstract class HandlingActionsAndDataOfChapters {
     XPhonetics,
     YPhonetics,
     ZPhonetics,
+// arabic
+GemPhontics,
+
     // SpellTheWord,
     ConnectionSortingCups,
     ConnectionWithoutSortingCups];
@@ -214,6 +217,11 @@ abstract class HandlingActionsAndDataOfChapters {
       }
     }
     else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
+
+         return GemPhontics(
+          mineGameData: BasicOfGameData.getTheGameType(
+              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
+              // TODO RETURN THIS
       return SPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
@@ -250,6 +258,7 @@ abstract class HandlingActionsAndDataOfChapters {
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.m.text()) {
+      
       return MPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));

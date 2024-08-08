@@ -83,6 +83,7 @@ flutter:
     - assets/arabic/
     - assets/svg/parent_account/
     - assets/phontics_assets_points/english_phontics/
+    - assets/phontics_assets_points/arabic_phontics/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
