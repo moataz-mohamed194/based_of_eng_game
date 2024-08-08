@@ -78,7 +78,10 @@ enum GameTypes {
   dragBeadsBoard,
   subRodsChooseNumber,
   addRodDragNumber,
-  dragBeadType
+  dragBeadType,
+  chooseYourAge,
+  chooseYourGender,
+  chooseSenses
 }
 
 extension TypeExtension on GameTypes {
@@ -244,6 +247,12 @@ extension TypeExtension on GameTypes {
         return 'اختر الكلمة التي بها مد';
       case GameTypes.completeTheStretchedLetter:
         return 'أكمل الحرف الممدود';
+      case GameTypes.chooseYourAge:
+        return 'Choose_Your_Age';
+      case GameTypes.chooseYourGender:
+        return 'Choose_Your_Gender';
+      case GameTypes.chooseSenses:
+        return 'Choose_Senses';
     }
   }
 }
