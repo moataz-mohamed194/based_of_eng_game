@@ -160,35 +160,38 @@ class _SpellingGameScreen extends State<SpellingGameScreen> {
                             if (await context
                                 .read<SpellingCubit>()
                                 .checkIsCorrectAnswer()) {
-                              await context
-                                  .read<CurrentGamePhoneticsCubit>()
-                                  .addSuccessAnswer(
-                                    isArabic: gameState.isArabic,
-                                    questions: gameState.allGames.length,
-                                    correctAnswers: (gameState.index) + 1,
-                                    subAction: () => TalkTts.startTalk(
-                                      text:
-                                          "${gameState.gameData?.gameImages?.first.word ?? ''}  ",
-                                      isArabic: gameState.isArabic,
-                                    ),
-                                  )
-                                  .whenComplete(() async {
-                                bool isLastQuestion = context
+                              await TalkTts.startTalk(
+                                text:
+                                    "${gameState.gameData?.gameImages?.first.word ?? ''}  ",
+                                isArabic: gameState.isArabic,
+                              ).whenComplete(() async {
+                                await context
                                     .read<CurrentGamePhoneticsCubit>()
-                                    .checkIfIsTheLastQuestionOfGame(
-                                        queations: gameState.allGames.length);
-                                if (!isLastQuestion) {
-                                  await context
+                                    .addSuccessAnswer(
+                                      isArabic: gameState.isArabic,
+                                      questions: gameState.allGames.length,
+                                      correctAnswers: (gameState.index) + 1,
+                                      // subAction: () => ,
+                                    )
+                                    .whenComplete(() async {
+                                  bool isLastQuestion = context
                                       .read<CurrentGamePhoneticsCubit>()
-                                      .updateIndexOfCurrentGame();
-                                  await context
-                                      .read<SpellingCubit>()
-                                      .updateTheCurrentGame(
-                                          index: context
-                                              .read<CurrentGamePhoneticsCubit>()
-                                              .state
-                                              .index);
-                                }
+                                      .checkIfIsTheLastQuestionOfGame(
+                                          queations: gameState.allGames.length);
+                                  if (!isLastQuestion) {
+                                    await context
+                                        .read<CurrentGamePhoneticsCubit>()
+                                        .updateIndexOfCurrentGame();
+                                    await context
+                                        .read<SpellingCubit>()
+                                        .updateTheCurrentGame(
+                                            index: context
+                                                .read<
+                                                    CurrentGamePhoneticsCubit>()
+                                                .state
+                                                .index);
+                                  }
+                                });
                               });
                             } else {
                               await context
