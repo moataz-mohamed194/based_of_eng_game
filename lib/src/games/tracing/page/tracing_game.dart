@@ -63,50 +63,54 @@ class _TracingGameState extends State<TracingGame> {
             : state.letterPathsModels.length == 2
                 ? MediaQuery.sizeOf(context).width * .0013
                 : MediaQuery.sizeOf(context).width * .0007;
-        return Column(
-          children: [
-            Transform(
-              transform: Matrix4.identity()..scale(s),
-              child: Container(
-                // color: ,
-                height: viewSize.height * s,
-                width: viewSize.width * (state.letterPathsModels.length) + 50.w,
-                margin: REdgeInsets.only(right: 80),
-                // margin: EdgeInsets.only(bottom: 30),
+        return Directionality(
+          textDirection: state.letterPathsModels.length == 2
+              ? TextDirection.rtl
+              : TextDirection.ltr,
+          child: Column(
+            children: [
+              Transform(
+                transform: Matrix4.identity()..scale(s),
                 child: Container(
-                  // color: Colors.amber,
-                  child: Center(
-                    child: Column(
-                      children: [
-                        // SizedBox(height: 100.h),
-                        Container(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: List.generate(
-                              state.letterPathsModels.length,
-                              (index) {
-                                return GestureDetector(
-                                  onPanStart: (details) {
-                                    print('wwww');
-                                    if (index == state.activeIndex) {
-                                      tracingCubit.handlePanStart(
-                                          details.localPosition);
-                                    }
-                                  },
-                                  onPanUpdate: (details) {
-                                    print('636363');
+                  // color: ,
+                  height: viewSize.height * s,
+                  width:
+                      viewSize.width * (state.letterPathsModels.length) + 50.w,
+                  margin: REdgeInsets.only(right: 80),
+                  // margin: EdgeInsets.only(bottom: 30),
+                  child: Container(
+                    // color: Colors.amber,
+                    child: Center(
+                      child: Column(
+                        children: [
+                          // SizedBox(height: 100.h),
+                          Container(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: List.generate(
+                                state.letterPathsModels.length,
+                                (index) {
+                                  return GestureDetector(
+                                    onPanStart: (details) {
+                                      print('wwww');
+                                      if (index == state.activeIndex) {
+                                        tracingCubit.handlePanStart(
+                                            details.localPosition);
+                                      }
+                                    },
+                                    onPanUpdate: (details) {
+                                      print('636363');
 
-                                    if (index == state.activeIndex) {
-                                      tracingCubit.handlePanUpdate(
-                                          details.localPosition);
-                                    }
-                                  },
-                                  onPanEnd: (details) {},
-                                  child: Container(
-                                    // height: 1000,
+                                      if (index == state.activeIndex) {
+                                        tracingCubit.handlePanUpdate(
+                                            details.localPosition);
+                                      }
+                                    },
+                                    onPanEnd: (details) {},
+                                    child: Container(
+                                      // height: 1000,
 
-                                    // color: Colors.red,
-                                    child: AbsorbPointer(
+                                      // color: Colors.red,
                                       child: Stack(
                                         children: [
                                           CustomPaint(
@@ -189,22 +193,22 @@ class _TracingGameState extends State<TracingGame> {
                                         ],
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 50.h,
-            )
-          ],
+              SizedBox(
+                height: 50.h,
+              )
+            ],
+          ),
         );
       },
     );

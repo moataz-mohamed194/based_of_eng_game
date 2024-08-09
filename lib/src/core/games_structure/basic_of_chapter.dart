@@ -1680,17 +1680,6 @@ class SenPhontics extends ArabicPhonetics {
     gameData = mineGameData;
     lettersModel = [
       LetterModel(
-          dottedPath: ArabicShapePaths.senDotted3,
-          dottedColor: AppColorPhonetics.white,
-          indexColor: AppColorPhonetics.phonticGrey,
-          indexPath: ArabicShapePaths.senIndex2,
-          letterPath: ArabicShapePaths.sen2Small,
-          poitionIndexPath: Size(5, 0),
-          scaleIndexPath: 1.1,
-          pointsJsonFile: ShapePointsManger.sensmallShape,
-          innerPaintColor: AppColorPhonetics.lightBlueColor4,
-          outerPaintColor: AppColorPhonetics.lightBlueColor2),
-      LetterModel(
           dottedPath: ArabicShapePaths.senBigDotted,
           dottedColor: AppColorPhonetics.white,
           indexColor: AppColorPhonetics.phonticGrey,
@@ -1699,6 +1688,19 @@ class SenPhontics extends ArabicPhonetics {
           poitionIndexPath: Size(5, 5),
           scaleIndexPath: 1.1,
           pointsJsonFile: ShapePointsManger.senBigShape,
+          innerPaintColor: AppColorPhonetics.lightBlueColor4,
+          outerPaintColor: AppColorPhonetics.lightBlueColor2),
+      LetterModel(
+          dottedPath: ArabicShapePaths.senDotted3,
+          dottedColor: AppColorPhonetics.white,
+          indexColor: AppColorPhonetics.phonticGrey,
+          indexPath: ArabicShapePaths.senIndex2,
+          letterPath: ArabicShapePaths.sen2Small,
+          poitionIndexPath: Size(5, 0),
+          poitionDottedPath: Size(0, 5),
+          scaleIndexPath: 1.1,
+          scaledottedPath: .95,
+          pointsJsonFile: ShapePointsManger.sensmallShape,
           innerPaintColor: AppColorPhonetics.lightBlueColor4,
           outerPaintColor: AppColorPhonetics.lightBlueColor2),
     ];
