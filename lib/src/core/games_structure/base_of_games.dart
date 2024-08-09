@@ -63,14 +63,17 @@ abstract class HandlingActionsAndDataOfChapters {
     YPhonetics,
     ZPhonetics,
 // arabic
-GemPhontics,
+    GemPhontics,
+
+    SenPhontics,
+    LamPhontics,
 
     // SpellTheWord,
     ConnectionSortingCups,
-    ConnectionWithoutSortingCups];
+    ConnectionWithoutSortingCups
+  ];
 
   static bool isPhonetics({required Type chapter}) {
-
     return listOfChapterOfPhonetics.contains(chapter);
   }
 
@@ -215,14 +218,11 @@ GemPhontics,
             mineGameData: BasicOfGameData.getTheGameType(
                 gameType: subGame.toLowerCase(), audioFlag: audioFlag));
       }
-    }
-    else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
-
-         return GemPhontics(
-          mineGameData: BasicOfGameData.getTheGameType(
-              gameType: subGame.toLowerCase(), audioFlag: audioFlag));
-              // TODO RETURN THIS
-      return SPhonetics(
+    } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.s.text()) {
+      // Zeyad
+    
+  
+      return SenPhontics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.k.text()) {
@@ -258,7 +258,6 @@ GemPhontics,
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));
     } else if (subLetter.toLowerCase() == MainDataOfChaptersTypes.m.text()) {
-      
       return MPhonetics(
           mineGameData: BasicOfGameData.getTheGameType(
               gameType: subGame.toLowerCase(), audioFlag: audioFlag));

@@ -14,7 +14,22 @@ class LetterModel {
   final Color dottedColor;
   final Color indexColor;
   final double strokeWidth;
+
+final PaintingStyle? indexPathPaintStyle;
+final PaintingStyle? dottedPathPaintStyle;
+
+final Size? poitionIndexPath;
+final Size? poitionDottedPath;
+final double? scaleIndexPath;
+final double? scaledottedPath;
+
   LetterModel({
+    this.scaledottedPath,
+    this.scaleIndexPath,
+    this.poitionIndexPath,    this.poitionDottedPath,
+
+    this.indexPathPaintStyle,
+    this.dottedPathPaintStyle,
     this.strokeWidth=55,
      this.indexColor = Colors.black,
     this.outerPaintColor = Colors.red,

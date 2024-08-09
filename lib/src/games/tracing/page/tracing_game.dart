@@ -1,12 +1,9 @@
-import 'dart:developer';
 import 'dart:math';
-
+import 'package:based_of_eng_game/src/core/assets_images_phonetics.dart';
 import 'package:based_of_eng_game/src/games/tracing/svg_strings/phonetics_paint_widget/phonetics_painter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/assets_images_phonetics.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
 import '../manager/tracing_cubit.dart';
 
@@ -19,7 +16,7 @@ class TracingGame extends StatefulWidget {
 
 class _TracingGameState extends State<TracingGame> {
   late TracingCubit tracingCubit;
-  Size viewSize = Size(200, 250);
+  Size viewSize = Size(200, 200);
 
   @override
   void initState() {
@@ -59,110 +56,155 @@ class _TracingGameState extends State<TracingGame> {
       builder: (context, state) {
         if (state.drawingStates == DrawingStates.loading ||
             state.drawingStates == DrawingStates.initial) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         }
+        final s = state.letterPathsModels.length == 1
+            ? MediaQuery.sizeOf(context).width * .0017
+            : state.letterPathsModels.length == 2
+                ? MediaQuery.sizeOf(context).width * .0013
+                : MediaQuery.sizeOf(context).width * .0007;
+        return Column(
+          children: [
+            Transform(
+              transform: Matrix4.identity()..scale(s),
+              child: Container(
+                // color: ,
+                height: viewSize.height * s,
+                width: viewSize.width * (state.letterPathsModels.length) + 50.w,
+                margin: REdgeInsets.only(right: 80),
+                // margin: EdgeInsets.only(bottom: 30),
+                child: Container(
+                  // color: Colors.amber,
+                  child: Center(
+                    child: Column(
+                      children: [
+                        // SizedBox(height: 100.h),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: List.generate(
+                              state.letterPathsModels.length,
+                              (index) {
+                                return GestureDetector(
+                                  onPanStart: (details) {
+                                    print('wwww');
+                                    if (index == state.activeIndex) {
+                                      tracingCubit.handlePanStart(
+                                          details.localPosition);
+                                    }
+                                  },
+                                  onPanUpdate: (details) {
+                                    print('636363');
 
-        // Size of the drawing area
-        double baseSize = 200.0; // The base size of your view
+                                    if (index == state.activeIndex) {
+                                      tracingCubit.handlePanUpdate(
+                                          details.localPosition);
+                                    }
+                                  },
+                                  onPanEnd: (details) {},
+                                  child: Container(
+                                    // height: 1000,
 
-        // Calculate the scale factor
-        double letterCount = state.letterPathsModels.length.toDouble();
-        double maxLetters = 3.0; // Maximum number of letters
-        double scaleFactor = baseSize / (letterCount * (baseSize / maxLetters));
-        final s =
-            min(1.2, scaleFactor * (MediaQuery.sizeOf(context).width * .0005));
-        return Transform.scale(
-          scale: s,
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  Container(
-                    color: Colors.red.withOpacity(.2),
-                    // padding: REdgeInsets.only(bottom: 40),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: List.generate(state.letterPathsModels.length,
-                          (index) {
-                        return GestureDetector(
-                          onPanStart: (details) {
-                            if (index == state.activeIndex) {
-                              tracingCubit
-                                  .handlePanStart(details.localPosition);
-                              print(details.localPosition);
-                              print('/// anchor');
-                              print(state.letterPathsModels[index].anchorPos);
-                            }
-                          },
-                          onPanUpdate: (details) {
-                            // if (index == state.activeIndex) {
-                            print(details.localPosition);
-                            print('/// anchor');
-                            print(state.letterPathsModels[index].anchorPos);
-                            tracingCubit.handlePanUpdate(details.localPosition);
-                            // }
-                          },
-                          onPanEnd: (details) {},
-                          child: Stack(
-                            children: [
-                              CustomPaint(
-                                size: viewSize,
-                                painter: PhoneticsPainter(
-                                    indexPath: state
-                                        .letterPathsModels[index].letterIndex,
-                                    dottedPath: state
-                                        .letterPathsModels[index].dottedIndex,
-                                    letterColor: state.letterPathsModels[index]
-                                        .outerPaintColor,
-                                    letterImage: state
-                                        .letterPathsModels[index].letterImage!,
-                                    paths: state.letterPathsModels[index].paths,
-                                    currentDrawingPath: state
-                                        .letterPathsModels[index]
-                                        .currentDrawingPath,
-                                    pathPoints: state.letterPathsModels[index]
-                                        .allStrokePoints
-                                        .expand((p) => p)
-                                        .toList(),
-                                    strokeColor: state.letterPathsModels[index]
-                                        .innerPaintColor,
-                                    anchorPos: state
-                                        .letterPathsModels[index].anchorPos!,
-                                    viewSize: state
-                                        .letterPathsModels[index].viewSize!,
-                                    strokePoints: state.letterPathsModels[index]
-                                            .allStrokePoints[
-                                        state.letterPathsModels[index]
-                                            .currentStroke],
-                                    strokeWidth: null,
-                                    dottedColor: state
-                                        .letterPathsModels[index].dottedColor,
-                                    indexColor: state
-                                        .letterPathsModels[index].indexColor),
-                              ),
-                            ],
+                                    // color: Colors.red,
+                                    child: AbsorbPointer(
+                                      child: Stack(
+                                        children: [
+                                          CustomPaint(
+                                            size: Size(
+                                                state.letterPathsModels[index]
+                                                        .viewSize.width +
+                                                    20.w,
+                                                state.letterPathsModels[index]
+                                                    .viewSize.height),
+                                            painter: PhoneticsPainter(
+                                              indexPath: state
+                                                  .letterPathsModels[index]
+                                                  .letterIndex,
+                                              dottedPath: state
+                                                  .letterPathsModels[index]
+                                                  .dottedIndex,
+                                              letterColor: state
+                                                  .letterPathsModels[index]
+                                                  .outerPaintColor,
+                                              letterImage: state
+                                                  .letterPathsModels[index]
+                                                  .letterImage!,
+                                              paths: state
+                                                  .letterPathsModels[index]
+                                                  .paths,
+                                              currentDrawingPath: state
+                                                  .letterPathsModels[index]
+                                                  .currentDrawingPath,
+                                              pathPoints: state
+                                                  .letterPathsModels[index]
+                                                  .allStrokePoints
+                                                  .expand((p) => p)
+                                                  .toList(),
+                                              strokeColor: state
+                                                  .letterPathsModels[index]
+                                                  .innerPaintColor,
+                                              viewSize: state
+                                                  .letterPathsModels[index]
+                                                  .viewSize!,
+                                              strokePoints: state
+                                                      .letterPathsModels[index]
+                                                      .allStrokePoints[
+                                                  state.letterPathsModels[index]
+                                                      .currentStroke],
+                                              strokeWidth: state
+                                                  .letterPathsModels[index]
+                                                  .strokeWidth,
+                                              dottedColor: state
+                                                  .letterPathsModels[index]
+                                                  .dottedColor,
+                                              indexColor: state
+                                                  .letterPathsModels[index]
+                                                  .indexColor,
+                                              indexPathPaintStyle: state
+                                                  .letterPathsModels[index]
+                                                  .indexPathPaintStyle,
+                                              dottedPathPaintStyle: state
+                                                  .letterPathsModels[index]
+                                                  .dottedPathPaintStyle,
+                                            ),
+                                          ),
+                                          if (state.activeIndex == index)
+                                            Positioned(
+                                              top: state
+                                                  .letterPathsModels[
+                                                      state.activeIndex]
+                                                  .anchorPos!
+                                                  .dy,
+                                              left: state
+                                                  .letterPathsModels[
+                                                      state.activeIndex]
+                                                  .anchorPos!
+                                                  .dx,
+                                              child: Image.asset(
+                                                AppImagesPhonetics
+                                                    .position2Finger,
+                                                height: 60.h,
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                        );
-                      }),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 40.h,
-                  )
-                ],
-              ),
-              Positioned(
-                top: state.letterPathsModels[state.activeIndex].anchorPos!.dy,
-                left:
-                    (state.letterPathsModels[state.activeIndex].anchorPos!.dx +
-                        200 * state.activeIndex),
-                child: Image.asset(
-                  AppImagesPhonetics.position2Finger,
-                  height: 70.h,
                 ),
               ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 50.h,
+            )
+          ],
         );
       },
     );

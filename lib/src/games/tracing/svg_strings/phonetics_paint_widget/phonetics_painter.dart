@@ -7,11 +7,10 @@ import 'package:flutter/services.dart';
 
 class PhoneticsPainter extends CustomPainter {
   final Path letterImage;
-  final List<ui.Path> paths;
-  final ui.Path currentDrawingPath;
+  final List<Path> paths; // List of paths for strokes
+  final Path currentDrawingPath;
   final List<Offset> pathPoints;
   final Color strokeColor;
-  final Offset anchorPos;
   final Size viewSize;
   final List<Offset> strokePoints;
   final double? strokeWidth;
@@ -22,7 +21,12 @@ class PhoneticsPainter extends CustomPainter {
   final Color dottedColor;
   final Color indexColor;
 
+  final PaintingStyle? indexPathPaintStyle;
+  final PaintingStyle? dottedPathPaintStyle;
+
   PhoneticsPainter({
+    this.indexPathPaintStyle,
+    this.dottedPathPaintStyle,
     this.dottedPath,
     this.indexPath,
     required this.dottedColor,
@@ -34,7 +38,6 @@ class PhoneticsPainter extends CustomPainter {
     required this.currentDrawingPath,
     required this.pathPoints,
     required this.strokeColor,
-    required this.anchorPos,
     required this.viewSize,
     required this.letterColor,
     this.letterShader,
@@ -42,13 +45,6 @@ class PhoneticsPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Print debug information
-    print('letterImage: $letterImage');
-    print('currentDrawingPath: $currentDrawingPath');
-    print('pathPoints: $pathPoints');
-    print('anchorPos: $anchorPos');
-    print('viewSize: $viewSize');
-
     // Paint for the letter path
     final letterPaint = Paint()
       ..color = letterColor
@@ -62,20 +58,20 @@ class PhoneticsPainter extends CustomPainter {
     // Draw the letter path with color
     canvas.drawPath(letterImage, letterPaint);
 
-    if (dottedPath != null) {
-      final debugPaint = Paint()
-        ..color = dottedColor
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1.0;
-      canvas.drawPath(dottedPath!, debugPaint);
-    }
-
     if (indexPath != null) {
       final debugPaint = Paint()
         ..color = indexColor
-        ..style = PaintingStyle.stroke
+        ..style = indexPathPaintStyle ?? PaintingStyle.stroke
         ..strokeWidth = 0.0;
       canvas.drawPath(indexPath!, debugPaint);
+    }
+
+    if (dottedPath != null) {
+      final debugPaint = Paint()
+        ..color = dottedColor
+        ..style = this.dottedPathPaintStyle ?? PaintingStyle.stroke
+        ..strokeWidth = 1.0;
+      canvas.drawPath(dottedPath!, debugPaint);
     }
 
     // Clip the canvas to the letter path to prevent drawing outside
@@ -90,7 +86,12 @@ class PhoneticsPainter extends CustomPainter {
       ..strokeJoin = StrokeJoin.round
       ..strokeWidth = strokeWidth ?? 55;
 
-    // Draw the current drawing path
+    // Draw all paths
+    for (var path in paths) {
+      canvas.drawPath(path, strokePaint);
+    }
+
+    // Draw the current drawing path (if needed)
     canvas.drawPath(currentDrawingPath, strokePaint);
 
     // Restore the canvas state after clipping

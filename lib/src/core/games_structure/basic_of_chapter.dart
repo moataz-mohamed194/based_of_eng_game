@@ -168,7 +168,9 @@ abstract class TracePhonetics implements MainDataOfChapters {
   late List<LetterModel> lettersModel;
 }
 
-class SPhonetics implements TracePhonetics {
+abstract class EnglishTracePhontics implements TracePhonetics {}
+
+class SPhonetics implements EnglishTracePhontics {
   final BasicOfGameData mineGameData;
 
   @override
@@ -186,11 +188,17 @@ class SPhonetics implements TracePhonetics {
 
     lettersModel = [
       LetterModel(
+          indexPathPaintStyle: PaintingStyle.fill,
+          dottedPathPaintStyle: PaintingStyle.fill,
           dottedPath: ShapePaths.sDotted,
           dottedColor: AppColorPhonetics.white,
           indexColor: AppColorPhonetics.phonticGrey,
           indexPath: ShapePaths.sIndex,
-          letterPath: ShapePaths.snew,
+          strokeWidth: 75,
+          scaleIndexPath: .7,
+          poitionIndexPath: Size(-10, 0),
+          scaledottedPath: .8,
+          letterPath: ShapePaths.s3,
           pointsJsonFile: ShapePointsManger.sShape,
           innerPaintColor: AppColorPhonetics.lightBlueColor4,
           outerPaintColor: AppColorPhonetics.lightBlueColor2),
@@ -201,7 +209,7 @@ class SPhonetics implements TracePhonetics {
   bool? isArabic;
 }
 
-class APhonetics implements TracePhonetics {
+class APhonetics implements EnglishTracePhontics {
   final BasicOfGameData mineGameData;
 
   @override
@@ -224,7 +232,13 @@ class APhonetics implements TracePhonetics {
           dottedColor: AppColorPhonetics.white,
           indexColor: AppColorPhonetics.phonticGrey,
           indexPath: ShapePaths.aIndex,
+          dottedPathPaintStyle: PaintingStyle.fill,
+          indexPathPaintStyle: PaintingStyle.fill,
+          scaleIndexPath: .3,
+          poitionIndexPath: Size(50, -60),
+          scaledottedPath: .9,
           letterPath: ShapePaths.aShape,
+          strokeWidth: 65,
           pointsJsonFile: ShapePointsManger.aShape,
           innerPaintColor: AppColorPhonetics.lightBlueColor4,
           outerPaintColor: AppColorPhonetics.lightBlueColor2),
@@ -285,7 +299,7 @@ class FPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class MPhonetics implements TracePhonetics {
+class MPhonetics implements EnglishTracePhontics {
   final BasicOfGameData mineGameData;
 
   @override
@@ -303,9 +317,12 @@ class MPhonetics implements TracePhonetics {
     lettersModel = [
       LetterModel(
           dottedPath: ShapePaths.mDotted,
+          strokeWidth: 70,
           dottedColor: AppColorPhonetics.white,
           indexColor: AppColorPhonetics.white,
           indexPath: ShapePaths.mIndex,
+          scaleIndexPath: .9,
+          scaledottedPath: .8,
           letterPath: ShapePaths.mshape,
           pointsJsonFile: ShapePointsManger.mShape,
           innerPaintColor: AppColorPhonetics.lightBlueColor4,
@@ -610,7 +627,7 @@ class ZPhonetics implements MainDataOfChapters {
   bool? isArabic;
 }
 
-class TPhonetics implements TracePhonetics {
+class TPhonetics implements EnglishTracePhontics {
   final BasicOfGameData mineGameData;
 
   @override
@@ -634,6 +651,12 @@ class TPhonetics implements TracePhonetics {
           indexColor: AppColorPhonetics.phonticGrey,
           indexPath: ShapePaths.tshapeIndex,
           letterPath: ShapePaths.tShape,
+          strokeWidth: 46,
+          scaledottedPath: .8,
+          scaleIndexPath: 1,
+          poitionDottedPath: Size(0, 5),
+          poitionIndexPath: Size(0, 10),
+          dottedPathPaintStyle: PaintingStyle.fill,
           pointsJsonFile: ShapePointsManger.tShape,
           innerPaintColor: AppColorPhonetics.lightBlueColor4,
           outerPaintColor: AppColorPhonetics.lightBlueColor2),
@@ -1605,21 +1628,127 @@ class GemPhontics extends ArabicPhonetics {
     gameData = mineGameData;
     lettersModel = [
       LetterModel(
+          poitionIndexPath: Size(-10, -25),
+          poitionDottedPath: Size(-5, -5),
+          scaledottedPath: .9,
+          scaleIndexPath: .8,
           dottedPath: ArabicShapePaths.gemDotted,
-          dottedColor: AppColorPhonetics.white,
-          indexColor: AppColorPhonetics.phonticGrey,
+          dottedColor: AppColorPhonetics.phonticGrey,
+          indexColor: AppColorPhonetics.white,
           indexPath: ArabicShapePaths.gemIndex,
-          letterPath: ArabicShapePaths.gem,
+          letterPath: ArabicShapePaths.gemmm,
           pointsJsonFile: ShapePointsManger.gemShape,
           innerPaintColor: AppColorPhonetics.lightBlueColor4,
           outerPaintColor: AppColorPhonetics.lightBlueColor2),
-           LetterModel(
-          dottedPath: ArabicShapePaths.gemDotted,
+      LetterModel(
+          poitionIndexPath: Size(0, -30),
+          poitionDottedPath: Size(-5, -15),
+          scaledottedPath: .8,
+          scaleIndexPath: .8,
+          dottedPath: ArabicShapePaths.gemsmallDoottedPath,
+          dottedColor: AppColorPhonetics.phonticGrey,
+          indexColor: AppColorPhonetics.white,
+          indexPath: ArabicShapePaths.gemSmallIndexPath,
+          letterPath: ArabicShapePaths.gemSmall2,
+          pointsJsonFile: ShapePointsManger.gemSmallShape,
+          innerPaintColor: AppColorPhonetics.lightBlueColor4,
+          outerPaintColor: AppColorPhonetics.lightBlueColor2),
+    ];
+  }
+
+  @override
+  bool? isArabic;
+
+  @override
+  late List<LetterModel> lettersModel;
+}
+
+class SenPhontics extends ArabicPhonetics {
+  final BasicOfGameData mineGameData;
+
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesArabic.bgOfRedUnit;
+
+  @override
+  BasicOfGameData? gameData;
+  SenPhontics({
+    required this.mineGameData,
+  }) {
+    gameData = mineGameData;
+    lettersModel = [
+      LetterModel(
+          dottedPath: ArabicShapePaths.senDotted3,
           dottedColor: AppColorPhonetics.white,
           indexColor: AppColorPhonetics.phonticGrey,
-          indexPath: ArabicShapePaths.gemIndex,
-          letterPath: ArabicShapePaths.gem,
-          pointsJsonFile: ShapePointsManger.gemShape,
+          indexPath: ArabicShapePaths.senIndex2,
+          letterPath: ArabicShapePaths.sen2Small,
+          poitionIndexPath: Size(5, 0),
+          scaleIndexPath: 1.1,
+          pointsJsonFile: ShapePointsManger.sensmallShape,
+          innerPaintColor: AppColorPhonetics.lightBlueColor4,
+          outerPaintColor: AppColorPhonetics.lightBlueColor2),
+      LetterModel(
+          dottedPath: ArabicShapePaths.senBigDotted,
+          dottedColor: AppColorPhonetics.white,
+          indexColor: AppColorPhonetics.phonticGrey,
+          indexPath: ArabicShapePaths.senBigIndex,
+          letterPath: ArabicShapePaths.senBig,
+          poitionIndexPath: Size(5, 5),
+          scaleIndexPath: 1.1,
+          pointsJsonFile: ShapePointsManger.senBigShape,
+          innerPaintColor: AppColorPhonetics.lightBlueColor4,
+          outerPaintColor: AppColorPhonetics.lightBlueColor2),
+    ];
+  }
+
+  @override
+  bool? isArabic;
+
+  @override
+  late List<LetterModel> lettersModel;
+}
+
+class LamPhontics extends ArabicPhonetics {
+  final BasicOfGameData mineGameData;
+
+  @override
+  Color backGroundOfStarBar = const Color(0xffFFFFFF).withOpacity(.1);
+
+  @override
+  String background = AppImagesArabic.bgOfRedUnit;
+
+  @override
+  BasicOfGameData? gameData;
+  LamPhontics({
+    required this.mineGameData,
+  }) {
+    gameData = mineGameData;
+    lettersModel = [
+      LetterModel(
+          dottedPath: ArabicShapePaths.lamBigDottted2,
+          dottedColor: AppColorPhonetics.white,
+          indexColor: AppColorPhonetics.phonticGrey,
+          indexPath: ArabicShapePaths.lamBigIndex2,
+          poitionIndexPath: Size(8, 20),
+          poitionDottedPath: Size(5, 15),
+          scaledottedPath: .8,
+          letterPath: ArabicShapePaths.lambig2,
+          pointsJsonFile: ShapePointsManger.lamBigShape,
+          innerPaintColor: AppColorPhonetics.lightBlueColor4,
+          outerPaintColor: AppColorPhonetics.lightBlueColor2),
+      LetterModel(
+          dottedPath: ArabicShapePaths.lamSmallDotted,
+          dottedColor: AppColorPhonetics.white,
+          indexColor: AppColorPhonetics.phonticGrey,
+          indexPath: ArabicShapePaths.lamSmallIndex,
+          letterPath: ArabicShapePaths.lamsmall,
+          poitionIndexPath: Size(20, 25),
+          poitionDottedPath: Size(0, 15),
+          scaledottedPath: .7,
+          pointsJsonFile: ShapePointsManger.lamsmallShape,
           innerPaintColor: AppColorPhonetics.lightBlueColor4,
           outerPaintColor: AppColorPhonetics.lightBlueColor2),
     ];

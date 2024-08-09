@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LetterPathsModel {
@@ -26,8 +27,12 @@ double strokeWidth;
   final Color innerPaintColor;
   final Color dottedColor;
   final Color indexColor;
+final PaintingStyle? indexPathPaintStyle;
+final PaintingStyle? dottedPathPaintStyle;
 
   LetterPathsModel({
+    this.indexPathPaintStyle,
+    this.dottedPathPaintStyle,
     this.strokeWidth=55,
     this.indexColor = Colors.black,
     this.outerPaintColor = Colors.red,
@@ -66,6 +71,11 @@ double strokeWidth;
     int? currentStroke,
     int? currentStrokeProgress,
     bool? isLoaded,
+
+
+    PaintingStyle? dottedPathPaintStyle,
+    PaintingStyle? indexPathPaintStyle,
+
   }) {
     return LetterPathsModel(
       letterImage: letterImage ?? this.letterImage,
@@ -83,6 +93,8 @@ double strokeWidth;
       currentStroke: currentStroke ?? this.currentStroke,
       currentStrokeProgress:
           currentStrokeProgress ?? this.currentStrokeProgress,
+          dottedPathPaintStyle:  dottedPathPaintStyle ?? this.dottedPathPaintStyle ,
+          indexPathPaintStyle: indexPathPaintStyle ?? this.indexPathPaintStyle ,
     );
   }
 }
