@@ -25,6 +25,9 @@ abstract class AppImagesArabic {
   static const String basicAvatarNormal =
       "${mainPathOfImages}basicAvatarNormal.png";
 
+  static const String tracingWithFinger =
+      "${mainPathOfImages}tracing_with_finger.png";
+
   static const String titleOfXOut = '${mainPathOfImages}title_of_x_out.png';
   static const String clickTheSound =
       '${mainPathOfImages}click_the_sound_ar.png';

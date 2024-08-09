@@ -97,6 +97,8 @@ class BasedOfGamePhonetics extends StatelessWidget {
                         return TracingCubit(
                           gameData: gamesData[stateOfGame.index],
                           stateOfGame: stateOfGame,
+                          traceLetter:
+                              stateOfGame.basicData?.lettersModel ?? [], isArabic: false,
                         );
                       },
                       child: const TracingGame()),

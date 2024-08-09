@@ -385,7 +385,7 @@ class Tracking implements BasicOfGameData {
   bool isConnect = false;
 
   @override
-  String? titleImageAr;
+  String? titleImageAr = AppImagesArabic.tracingWithFinger;
 
   @override
   int countOfMinimizeStar = 1;

@@ -7,39 +7,44 @@ import 'package:flutter/services.dart';
 
 class PhoneticsPainter extends CustomPainter {
   final Path letterImage;
-  // final ui.Image anchorImage;
-  final List<ui.Path> paths;
-  final ui.Path currentDrawingPath;
+  final List<Path> paths; // List of paths for strokes
+  final Path currentDrawingPath;
   final List<Offset> pathPoints;
   final Color strokeColor;
-  final Color pointColor;
-  final Offset anchorPos;
   final Size viewSize;
   final List<Offset> strokePoints;
   final double? strokeWidth;
-  // New parameter for letter color
   final Color letterColor;
-  final Shader? letterShader; // Optional gradient shader
+  final Shader? letterShader;
+  final Path? dottedPath;
+  final Path? indexPath;
+  final Color dottedColor;
+  final Color indexColor;
+
+  final PaintingStyle? indexPathPaintStyle;
+  final PaintingStyle? dottedPathPaintStyle;
 
   PhoneticsPainter({
+    this.indexPathPaintStyle,
+    this.dottedPathPaintStyle,
+    this.dottedPath,
+    this.indexPath,
+    required this.dottedColor,
+    required this.indexColor,
     required this.strokeWidth,
     required this.strokePoints,
     required this.letterImage,
-    // required this.anchorImage,
     required this.paths,
     required this.currentDrawingPath,
     required this.pathPoints,
     required this.strokeColor,
-    required this.pointColor,
-    required this.anchorPos,
     required this.viewSize,
-    required this.letterColor, // Pass the letter color
-    this.letterShader, // Optional gradient shader
+    required this.letterColor,
+    this.letterShader,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    // print('qqq');
     // Paint for the letter path
     final letterPaint = Paint()
       ..color = letterColor
@@ -53,6 +58,22 @@ class PhoneticsPainter extends CustomPainter {
     // Draw the letter path with color
     canvas.drawPath(letterImage, letterPaint);
 
+    if (indexPath != null) {
+      final debugPaint = Paint()
+        ..color = indexColor
+        ..style = indexPathPaintStyle ?? PaintingStyle.stroke
+        ..strokeWidth = 0.0;
+      canvas.drawPath(indexPath!, debugPaint);
+    }
+
+    if (dottedPath != null) {
+      final debugPaint = Paint()
+        ..color = dottedColor
+        ..style = this.dottedPathPaintStyle ?? PaintingStyle.stroke
+        ..strokeWidth = 1.0;
+      canvas.drawPath(dottedPath!, debugPaint);
+    }
+
     // Clip the canvas to the letter path to prevent drawing outside
     canvas.save();
     canvas.clipPath(letterImage);
@@ -63,51 +84,20 @@ class PhoneticsPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = strokeWidth ?? 80;
+      ..strokeWidth = strokeWidth ?? 55;
 
-    // Draw the stroked paths within the clipped area
-    // for (var path in paths) {
-    //   canvas.drawPath(path, strokePaint);
-    // }
+    // Draw all paths
+    for (var path in paths) {
+      canvas.drawPath(path, strokePaint);
+    }
 
-    // Draw the current drawing path
+    // Draw the current drawing path (if needed)
     canvas.drawPath(currentDrawingPath, strokePaint);
 
     // Restore the canvas state after clipping
     canvas.restore();
-
-    // Draw the trace image if needed
-    // if (traceImage != null) {
-    //   paintImage(
-    //     canvas: canvas,
-    //     image: traceImage!,
-    //     rect: Rect.fromLTWH(0, 0, size.width, size.height),
-    //     fit: BoxFit.fill,
-    //   );
-    // }
-
-    // Paint for the path points
-    final pointPaint = Paint()
-      ..color = pointColor
-      ..style = PaintingStyle.fill;
-
-    // Draw the points on the path
-    // for (var point in pathPoints) {
-    //   canvas.drawCircle(point, 10, pointPaint);
-    // }
-
-    // Paint for the anchor image
-
-    // Draw the anchor image
-    // canvas.drawImageRect(
-    //   anchorImage,
-    //   Rect.fromLTWH(
-    //       0, 0, anchorImage.width.toDouble(), anchorImage.height.toDouble()),
-    //   Rect.fromCenter(center: anchorPos, width: 50, height: 50),
-    //   anchorPaint,
-    // );
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }

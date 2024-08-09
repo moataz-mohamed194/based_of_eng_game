@@ -32,10 +32,10 @@ class MyApp extends StatelessWidget {
             builder: (_, child) {
               return BlocProvider<ContactLessonBloc>(
                   create: (_) => di.sl<ContactLessonBloc>()
-                  //arabic
+                    //arabic
 // ..add(GetContactLessonRequest(lessonId: 151, gameId: 1951)),
 // ..add(GetContactLessonRequest(lessonId: 151, gameId: 1955)),
-..add(GetContactLessonRequest(lessonId: 4, gameId: 167)),
+                    ..add(GetContactLessonRequest(lessonId: 4, gameId: 167)),
 // ..add(GetContactLessonRequest(lessonId: 151, gameId: 1955)),
 // ..add(GetContactLessonRequest(lessonId: 151, gameId: 1936)),
 
@@ -53,10 +53,11 @@ class MyApp extends StatelessWidget {
                         Navigator.of(context).pop();
                       } else if (state is GetContactInitial) {
                         // try {
-                          MainDataOfChapters? dataType =
-                              state.getMainContactData(index: 0, );
+                        MainDataOfChapters? dataType = state.getMainContactData(
+                          index: 0,
+                        );
 
-                          debugPrint('dataType:$dataType');
+                        debugPrint('dataType:$dataType');
                         // } catch (e) {
                         //   print('error data type'+e.toString());
                         //   context
@@ -69,8 +70,9 @@ class MyApp extends StatelessWidget {
                       if (stateOfGameData is GetContactInitial) {
                         return MainScreenOfGames(
                           stateOfGameData: stateOfGameData.data,
-                          dataOfBasesGame:
-                              stateOfGameData.getMainContactData(index: 0,  ),
+                          dataOfBasesGame: stateOfGameData.getMainContactData(
+                            index: 0,
+                          ),
                           actionOfCompleteGame: (int countOfStars) {
                             // List<int> listOfIds = stateOfGameData.data;
                             List<int> listOfIds = stateOfGameData.data

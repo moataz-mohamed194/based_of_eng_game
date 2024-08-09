@@ -1,11 +1,6 @@
-import 'package:based_of_eng_game/src/core/assets_images_phonetics.dart';
-import 'package:based_of_eng_game/src/core/games_structure/arabic_letters_phonetics/arabic_game_letter_base.dart';
-import 'package:based_of_eng_game/src/core/phontics_constants/shape_paths.dart';
-import 'package:based_of_eng_game/src/core/phontics_constants/shape_points_manger.dart';
-import 'package:flutter/material.dart';
-
 import '../game_types/assets_images_math.dart';
 import '../game_types/game_phonatics_types.dart';
+import '../phontics_constants/enum_of_arabic_letters.dart';
 import 'basic_of_chapter.dart';
 import 'basic_of_game_data.dart';
 
@@ -130,7 +125,8 @@ abstract class HandlingActionsAndDataOfChapters {
   }) {
     print(
         'subLetter:$subLetter , subGame:$subGame , unitName:$unitName , programName:$programName , audioFlag:$audioFlag , ${(unitName.contains(MainDataOfChaptersTypes.consonant.text()))}');
-    if (programName.toLowerCase() == MainDataOfChaptersTypes.culture.text().toLowerCase()) {
+    if (programName.toLowerCase() ==
+        MainDataOfChaptersTypes.culture.text().toLowerCase()) {
       return Culture(
         mineGameData: BasicOfGameData.getTheGameType(
           gameType: subGame.toLowerCase(),
@@ -138,8 +134,7 @@ abstract class HandlingActionsAndDataOfChapters {
           gameName: gameName,
         ),
       );
-    } else
-    if (programName.toLowerCase() ==
+    } else if (programName.toLowerCase() ==
         MainDataOfChaptersTypes.math.text().toLowerCase()) {
       // if (stageName == MainDataOfChaptersTypes.mathEc1.text().toLowerCase()) {
       return MathProgram(
@@ -331,7 +326,9 @@ abstract class HandlingActionsAndDataOfChapters {
               gameType: subGame.toLowerCase(),
               audioFlag: audioFlag,
               programName: programName,
-              gameName: gameName));
+              gameName: gameName),
+          lettersModel: TypeExtensionArabic()
+              .getTracingData(letter: subLetter.toLowerCase()));
     } else if (unitName.toLowerCase().contains(MainDataOfChaptersTypes.orangeUnit.text()) ||
         lessonName.contains(MainDataOfChaptersTypes.orangeUnit.text())) {
       return OrangeUnit(
@@ -424,7 +421,7 @@ abstract class HandlingActionsAndDataOfChapters {
               gameType: subGame.toLowerCase(),
               audioFlag: audioFlag,
               gameName: gameName));
-    } 
+    }
     return null;
   }
 }

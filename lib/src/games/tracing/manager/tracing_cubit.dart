@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'dart:async';
+import 'package:based_of_eng_game/based_of_eng_game.dart';
+import 'package:based_of_eng_game/src_model/model/letter_paths_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:based_of_eng_game/src/games/tracing/model/path_provider_model.dart';
 import 'package:bloc/bloc.dart';
@@ -9,6 +12,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:svg_path_parser/svg_path_parser.dart';
 import '../../../../src_model/export_models.dart';
+import '../../../../src_model/model/trace_model.dart';
 import '../../../core/phonetics_color.dart';
 import '../../../core/talk_tts.dart';
 import '../../../cubit/current_game_phonetics_cubit.dart';
@@ -19,74 +23,133 @@ class TracingCubit extends Cubit<TracingState> {
   TracingCubit({
     required GameFinalModel gameData,
     required CurrentGamePhoneticsState stateOfGame,
+    required List<TraceModel> traceLetter,
+    required bool isArabic,
   }) : super(TracingState(
-          gameData: gameData,
-          stateOfGame: stateOfGame,
-          paths: [],
-        )) {
+            gameData: gameData,
+            stateOfGame: stateOfGame,
+            traceLetter: traceLetter,
+            letterPathsModels: [],
+            isArabic: isArabic)) {
+    print('inits');
+    _initialize();
+  }
+
+  void _initialize() {
     emit(state.clearData());
     TalkTts.startTalk(text: state.gameData.inst ?? '');
   }
 
-  Future<void> loadAssets({
-    // required String letterPath,
-    // required String tracingAssets,
-    // required bool needInstruction,
-    // required String pointsJsonFile,
-    required Size viewSize,
-  }) async {
+  Future<void> loadAssets(Size viewSize) async {
     emit(state.copyWith(drawingStates: DrawingStates.loading));
-    try {
-      // Load and parse the SVG path
-      Path parsedPath = parseSvgPath(state.stateOfGame.basicData!.letterPath);
+    print('111');
+    for (var e in state.traceLetter) {
+      final letterModel = e;
+      final parsedPath = parseSvgPath(letterModel.letterPath);
 
-      // Compute the SVG bounding box size
-      final originalSize =
-          _getOriginalSvgSize(state.stateOfGame.basicData!.letterPath);
+      final dottedIndexPath = parseSvgPath(letterModel.indexPath);
+      final dottedPath = parseSvgPath(letterModel.dottedPath);
 
-      // Calculate scale factors
-      final scaleX = viewSize.width / originalSize.width;
-      final scaleY = viewSize.height / originalSize.height;
-      final scale = math.min(scaleX, scaleY);
+      final transformedPath = _applyTransformation(
+        parsedPath,
+        viewSize,
+      );
 
-      // Create a transformation matrix
-      final matrix = Matrix4.identity()
-        ..scale(scale)
-        ..translate(
-          (viewSize.width - (originalSize.width * scale)) / 2,
-          (viewSize.height - (originalSize.height * scale)) / 2,
-        );
+      final letterIndex = _applyTransformationForOtherPaths(dottedPath,
+          viewSize, letterModel.poitionDottedPath, letterModel.scaledottedPath);
+      final dottedIndex = _applyTransformationForOtherPaths(dottedIndexPath,
+          viewSize, letterModel.poitionIndexPath, letterModel.scaleIndexPath);
 
-      // Apply the transformation to the path
-      final transformedPath = _applyTransformation(parsedPath, matrix);
-
-      ui.Image? traceImage;
-      // if (needInstruction) {
-      //   traceImage = await _loadImage(tracingAssets);
-      // }
-      final allStrokePoints = await _loadPointsFromJson(
-          state.stateOfGame.basicData!.pointsJsonFile, viewSize);
-
+      final allStrokePoints =
+          await _loadPointsFromJson(letterModel.pointsJsonFile, viewSize);
       final anchorPos =
           allStrokePoints.isNotEmpty ? allStrokePoints[0][0] : Offset.zero;
-      emit(state.copyWith(
-        paths: [],
-        traceImage: traceImage,
-        anchorImage: null,
-        letterImage: transformedPath,
-        allStrokePoints: allStrokePoints,
-        anchorPos: anchorPos,
-        viewSize: viewSize,
-        drawingStates: DrawingStates.loaded,
-      ));
-    } catch (e) {
-      debugPrint('Error loading assets: $e');
+
+      state.letterPathsModels.add(LetterPathsModel(
+          strokeWidth: state.traceLetter[state.activeIndex].strokeWidth,
+          dottedIndex: dottedIndex,
+          letterIndex: letterIndex,
+          dottedColor: state.traceLetter[state.activeIndex].dottedColor,
+          indexColor: state.traceLetter[state.activeIndex].indexColor,
+          innerPaintColor: state.traceLetter[state.activeIndex].innerPaintColor,
+          outerPaintColor: state.traceLetter[state.activeIndex].outerPaintColor,
+          allStrokePoints: allStrokePoints,
+          letterImage: transformedPath,
+          anchorPos: anchorPos,
+          indexPathPaintStyle:
+              state.traceLetter[state.activeIndex].indexPathPaintStyle,
+          dottedPathPaintStyle:
+              state.traceLetter[state.activeIndex].dottedPathPaintStyle));
     }
+
+    emit(state.copyWith(
+      drawingStates: DrawingStates.loaded,
+    ));
   }
 
-  Path _applyTransformation(Path path, Matrix4 matrix) {
-    final Float64List matrix4Storage = matrix.storage;
-    return path.transform(matrix4Storage);
+  Path _applyTransformation(
+    Path path,
+    Size viewSize,
+  ) {
+    // Get the bounds of the original path
+    final Rect originalBounds = path.getBounds();
+    final Size originalSize = Size(originalBounds.width, originalBounds.height);
+
+    // Calculate the scale factor to fit the SVG within the view size
+    final double scaleX = viewSize.width / originalSize.width;
+    final double scaleY = viewSize.height / originalSize.height;
+    double scale = math.min(scaleX, scaleY);
+    // Calculate the translation needed to center the path within the view size
+    final double translateX =
+        (viewSize.width - originalSize.width * scale) / 2 -
+            originalBounds.left * scale;
+    final double translateY =
+        (viewSize.height - originalSize.height * scale) / 2 -
+            originalBounds.top * scale;
+
+    // Create a matrix for the transformation
+
+    Matrix4 matrix = Matrix4.identity()
+      ..scale(scale, scale)
+      ..translate(translateX, translateY);
+
+    // Apply the transformation to the path
+    return path.transform(matrix.storage);
+  }
+
+  Path _applyTransformationForOtherPaths(
+      Path path, Size viewSize, Size? size, double? pathscale) {
+    // Get the bounds of the original path
+    final Rect originalBounds = path.getBounds();
+    final Size originalSize = Size(originalBounds.width, originalBounds.height);
+
+    // Calculate the scale factor to fit the SVG within the view size
+    final double scaleX = viewSize.width / originalSize.width;
+    final double scaleY = viewSize.height / originalSize.height;
+    double scale = math.min(scaleX, scaleY);
+    scale = pathscale == null ? scale : scale * pathscale;
+
+    // Calculate the translation needed to center the path within the view size
+    final double translateX =
+        (viewSize.width - originalSize.width * scale) / 2 -
+            originalBounds.left * scale;
+    final double translateY =
+        (viewSize.height - originalSize.height * scale) / 2 -
+            originalBounds.top * scale;
+
+    // Create a matrix for the transformation
+
+    Matrix4 matrix = Matrix4.identity()
+      ..scale(scale, scale)
+      ..translate(translateX, translateY);
+
+    if (size != null) {
+      matrix = Matrix4.identity()
+        ..scale(scale, scale)
+        ..translate(translateX + size.width, translateY + size.height);
+    }
+    // Apply the transformation to the path
+    return path.transform(matrix.storage);
   }
 
   Size _getOriginalSvgSize(String svgPath) {
@@ -106,60 +169,13 @@ class TracingCubit extends Cubit<TracingState> {
     return completer.future;
   }
 
-
-//   Future<List<List<Offset>>> _loadPointsFromJson(
-//       String path, Size viewSize) async {
-
-//     print('qqqqq');
-//     // final jsonString =
-//     //     await rootBundle.loadString('packages/based_of_eng_game/' + path);
-//         final jsonString =
-     
-//      jsonDecode('''{
-//   "id" : "9CACB3FA-1EAF-40E7-A06B-73117DDDC659",
-//   "style" : "default",
-//   "char" : "S",
-//   "strokes":[
-//     {"points":["0.0775,0.14","0.09,0.3175","0.1025,0.465","0.1075,0.62","0.1075,0.7675"]
-
-// },
-  
-// {"points":["0.285,0.21","0.455,0.195","0.4925,0.3675","0.4975,0.55","0.4925,0.745"]},
-
-// {
-//   "points":["0.615,0.2525","0.7925,0.18","0.885,0.2825","0.8975,0.4375","0.8925,0.595","0.89,0.7475"]}
-
-// ]}
-
-// ''');
-    
-//     final jsonData = jsonString;
-//     print(jsonData.toString());
-//     final List<List<Offset>> strokePointsList = [];
-
-//     for (var stroke in jsonData['strokes']) {
-//       final List<dynamic> strokePointsData = stroke['points'];
-//       final points = strokePointsData.map<Offset>((pointString) {
-//         final coords =
-//             pointString.split(',').map((e) => double.parse(e)).toList();
-//         return Offset(coords[0] * viewSize.width, coords[1] * viewSize.height);
-//       }).toList();
-//       strokePointsList.add(points);
-//     }
-
-//     return strokePointsList;
-//   }
-
-
   Future<List<List<Offset>>> _loadPointsFromJson(
       String path, Size viewSize) async {
-
-    final jsonString =
-        await rootBundle.loadString( path);
+    final jsonString = await rootBundle.loadString(path);
     //     final jsonString =
-     
+
     //  jsonDecode();
-    
+
     final jsonData = jsonDecode(jsonString);
     final List<List<Offset>> strokePointsList = [];
 
@@ -176,85 +192,191 @@ class TracingCubit extends Cubit<TracingState> {
     return strokePointsList;
   }
 
-
-
   void handlePanStart(Offset position) {
     if (!isTracingStartPoint(position)) return;
 
-    if (state.currentStrokeProgress == -1 && state.anchorPos != null) {
-      final newDrawingPath = Path()
-        ..moveTo(state.anchorPos!.dx, state.anchorPos!.dy);
-      emit(state.copyWith(
-        currentDrawingPath: newDrawingPath,
-        currentStrokeProgress: 1,
-      ));
+    final currentStrokePoints =
+        state.letterPathsModels[state.activeIndex].allStrokePoints[
+            state.letterPathsModels[state.activeIndex].currentStroke];
+    if (state.letterPathsModels[state.activeIndex].currentStrokeProgress >= 0 &&
+        state.letterPathsModels[state.activeIndex].currentStrokeProgress <
+            currentStrokePoints.length) {
+      if (currentStrokePoints.length == 1) {
+        // Special case for single-point strokes
+        final singlePoint = currentStrokePoints[0];
+        if (isValidPoint(singlePoint, position)) {
+          // Update path and complete stroke immediately
+          final newDrawingPath = state
+              .letterPathsModels[state.activeIndex].currentDrawingPath
+            ..lineTo(
+                currentStrokePoints.first.dx, currentStrokePoints.first.dy);
+
+          state.letterPathsModels[state.activeIndex].anchorPos = singlePoint;
+          state.letterPathsModels[state.activeIndex].currentDrawingPath =
+              newDrawingPath;
+
+          completeStroke();
+          return;
+        }
+      }
+    } else if (state
+            .letterPathsModels[state.activeIndex].currentStrokeProgress ==
+        -1) {
+      final currentStrokePoints =
+          state.letterPathsModels[state.activeIndex].allStrokePoints[
+              state.letterPathsModels[state.activeIndex].currentStroke];
+
+      if (currentStrokePoints.length == 1) {
+        // Handle the case where there's only one point in the current stroke
+        final singlePoint = currentStrokePoints[0];
+        if (isValidPoint(singlePoint, position)) {
+          // Fill stroke immediately
+          final newDrawingPath = Path()..moveTo(singlePoint.dx, singlePoint.dy);
+          state.letterPathsModels[state.activeIndex].currentDrawingPath =
+              newDrawingPath..lineTo(singlePoint.dx, singlePoint.dy);
+          state.letterPathsModels[state.activeIndex].currentStrokeProgress = 1;
+          completeStroke();
+        }
+      } else {
+        // Handle the case for multiple points
+        if (state.letterPathsModels[state.activeIndex].anchorPos != null) {
+          final newDrawingPath = Path()
+            ..moveTo(state.letterPathsModels[state.activeIndex].anchorPos!.dx,
+                state.letterPathsModels[state.activeIndex].anchorPos!.dy);
+
+          state.letterPathsModels[state.activeIndex].currentDrawingPath =
+              newDrawingPath;
+          state.letterPathsModels[state.activeIndex].currentStrokeProgress = 1;
+          emit(state.copyWith(
+            letterPathsModels: state.letterPathsModels,
+          ));
+        }
+      }
     }
   }
-void handlePanUpdate(Offset position) {
-    if (state.currentStrokeProgress >= 0 &&
-        state.currentStrokeProgress <
-            state.allStrokePoints[state.currentStroke].length &&
-        isOverlapped(position)) {
-        
+
+  void handlePanUpdate(Offset position) {
+    final currentStrokePoints =
+        state.letterPathsModels[state.activeIndex].allStrokePoints[
+            state.letterPathsModels[state.activeIndex].currentStroke];
+
+    if (state.letterPathsModels[state.activeIndex].currentStrokeProgress >= 0 &&
+        state.letterPathsModels[state.activeIndex].currentStrokeProgress <
+            currentStrokePoints.length) {
+      if (currentStrokePoints.length == 1) {
+        // Special case for single-point strokes
+        final singlePoint = currentStrokePoints[0];
+        if (isValidPoint(singlePoint, position)) {
+          // Update path and complete stroke immediately
+          final newDrawingPath = state
+              .letterPathsModels[state.activeIndex].currentDrawingPath
+            ..lineTo(
+                currentStrokePoints.first.dx, currentStrokePoints.first.dy);
+
+          state.letterPathsModels[state.activeIndex].anchorPos = singlePoint;
+          state.letterPathsModels[state.activeIndex].currentDrawingPath =
+              newDrawingPath;
+
+          completeStroke();
+          return;
+        }
+      } else {
+        // Handle multiple points normally
         if (isValidPoint(
-            state.allStrokePoints[state.currentStroke]
-                [state.currentStrokeProgress],
+            currentStrokePoints[state
+                .letterPathsModels[state.activeIndex].currentStrokeProgress],
             position)) {
+          state.letterPathsModels[state.activeIndex].currentStrokeProgress =
+              state.letterPathsModels[state.activeIndex].currentStrokeProgress +
+                  1;
 
-            emit(state.copyWith(
-                currentStrokeProgress: state.currentStrokeProgress + 1));
+          final point = currentStrokePoints[
+              state.letterPathsModels[state.activeIndex].currentStrokeProgress -
+                  1];
+
+          final newDrawingPath = state
+              .letterPathsModels[state.activeIndex].currentDrawingPath
+            ..lineTo(point.dx, point.dy);
+
+          state.letterPathsModels[state.activeIndex].anchorPos = point;
+          state.letterPathsModels[state.activeIndex].currentDrawingPath =
+              newDrawingPath;
+
+          emit(state.copyWith(letterPathsModels: state.letterPathsModels));
         }
-
-        if (state.currentStrokeProgress > 0) {
-            final point = state.allStrokePoints[state.currentStroke]
-                [state.currentStrokeProgress - 1];
-
-            final newDrawingPath = state.currentDrawingPath
-              ..lineTo(point.dx, point.dy);
-
-            emit(state.copyWith(
-              anchorPos: point,
-              currentDrawingPath: newDrawingPath,
-            ));
-        }
+      }
     }
 
-    if (state.currentStrokeProgress >=
-        state.allStrokePoints[state.currentStroke].length) {
-        completeStroke();
+    if (state.letterPathsModels[state.activeIndex].currentStrokeProgress >=
+        currentStrokePoints.length) {
+      completeStroke();
     }
-}
+  }
 
-void completeStroke() {
-    if (state.currentStroke < state.allStrokePoints.length - 1) {
-        // Instead of resetting the path, keep the current one
+  void completeStroke() {
+    final currentModel = state.letterPathsModels[state.activeIndex];
+    final currentStrokeIndex = currentModel.currentStroke;
+
+    if (currentStrokeIndex < currentModel.allStrokePoints.length - 1) {
+      // Instead of resetting the path, add the current one to paths
+      currentModel.paths.add(currentModel.currentDrawingPath);
+
+      // Update to the next stroke
+      currentModel.currentStroke = currentStrokeIndex + 1;
+      currentModel.currentStrokeProgress = 0;
+
+      // Start the new stroke path from the end point of the previous stroke
+      final previousStrokePoints =
+          currentModel.allStrokePoints[currentStrokeIndex];
+      final endPointOfPreviousStroke = previousStrokePoints.isNotEmpty
+          ? currentModel.allStrokePoints[currentStrokeIndex].first
+          : Offset.zero;
+
+      final newStrokePoints =
+          currentModel.allStrokePoints[currentModel.currentStroke];
+      final newDrawingPath = Path()
+        ..moveTo(endPointOfPreviousStroke.dx, endPointOfPreviousStroke.dy);
+      currentModel.currentDrawingPath = newDrawingPath;
+      currentModel.anchorPos =
+          currentModel.allStrokePoints[currentModel.currentStroke].first;
+      print('33444');
+      // Emit updated state
+      emit(state.copyWith(letterPathsModels: state.letterPathsModels));
+    } else if (!currentModel.letterTracingFinished) {
+      // Finish tracing if it's the last stroke
+      currentModel.letterTracingFinished = true;
+      currentModel.hasFinishedOneStroke = true;
+      if (state.activeIndex < state.letterPathsModels.length - 1) {
         emit(state.copyWith(
-          paths: state.paths..add(state.currentDrawingPath),
-          currentStroke: state.currentStroke + 1,
-          currentStrokeProgress: 0, // Reset stroke progress to start new stroke
-          anchorPos: state.allStrokePoints[state.currentStroke + 1][0],
-          hasFinishedOneStroke: true,
+          activeIndex: (state.activeIndex + 1),
+          letterPathsModels: state.letterPathsModels,
         ));
-    } else if (!state.letterTracingFinished) {
+      } else {
         emit(state.copyWith(
-            letterTracingFinished: true,
-            hasFinishedOneStroke: true,
+            activeIndex: (state.activeIndex),
+            letterPathsModels: state.letterPathsModels,
             drawingStates: DrawingStates.gameFinished));
-        // Call any final actions like widget.onFinish() or widget.onTraceFinished() if needed.
+      }
+      // Call any final actions like widget.onFinish() or widget.onTraceFinished() if needed.
     }
-}
+  }
 
   bool isTracingStartPoint(Offset position) {
-    if (state.anchorPos != null) {
-      final anchorRect =
-          Rect.fromCenter(center: state.anchorPos!, width: 50, height: 50);
+    final currentStrokePoints =
+        state.letterPathsModels[state.activeIndex].allStrokePoints[
+            state.letterPathsModels[state.activeIndex].currentStroke];
+
+    // If there's only one point, we can immediately proceed without further checks
+    if (currentStrokePoints.length == 1) {
+      return true; // Let handlePanStart handle the logic
+    } else if (state.letterPathsModels[state.activeIndex].anchorPos != null) {
+      final anchorRect = Rect.fromCenter(
+          center: state.letterPathsModels[state.activeIndex].anchorPos!,
+          width: 50,
+          height: 50);
       return anchorRect.contains(position);
     }
     return false;
-  }
-
-  bool isOverlapped(Offset position) {
-    return true; // Implement actual logic
   }
 
   bool isValidPoint(Offset point, Offset position) {

@@ -22,6 +22,8 @@ import '../games/match/manager/match_cubit.dart';
 import '../games/match/page/match_screen.dart';
 import '../games/match_arabic/manager/match_arabic_cubit.dart';
 import '../games/match_arabic/page/match_arabic_screen.dart';
+import '../games/tracing/manager/tracing_cubit.dart';
+import '../games/tracing/page/tracing_game.dart';
 
 class BasedOfGameArabic extends StatelessWidget {
   const BasedOfGameArabic(
@@ -114,6 +116,18 @@ class BasedOfGameArabic extends StatelessWidget {
                                       0),
                           isArabic: true),
                       child: const ClickPictureGame())
+                } else if (stateOfGame.basicData?.gameData is Tracking) ...{
+                  BlocProvider<TracingCubit>(
+                      create: (_) {
+                        print('createdd');
+                        return TracingCubit(
+                            gameData: gamesData[stateOfGame.index],
+                            stateOfGame: stateOfGame,
+                            traceLetter:
+                                stateOfGame.basicData?.lettersModel ?? [],
+                            isArabic: true);
+                      },
+                      child: const TracingGame()),
                 }
               ],
             ))),
